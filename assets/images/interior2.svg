@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-label="Bar detail">
+  <rect width="1200" height="800" fill="#f0e7dc" />
+  <rect x="80" y="200" width="1040" height="400" fill="#3b3a36" opacity="0.05" />
+  <rect x="140" y="520" width="920" height="120" fill="#3b3a36" opacity="0.12" />
+  <circle cx="260" cy="320" r="110" fill="#c9b89c" opacity="0.5" />
+  <circle cx="720" cy="320" r="150" fill="#d7bfa3" opacity="0.4" />
+</svg>

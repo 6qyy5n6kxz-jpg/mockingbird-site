@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en" data-base="..">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Private Parties | Mockingbird</title>
+  <meta name="description" content="Book private parties at Mockingbird with simple inquiry and deposit options.">
+  <meta property="og:title" content="Private Parties | Mockingbird">
+  <meta property="og:description" content="Reserve the dining room or patio with easy deposits via Stripe.">
+  <meta property="og:image" content="../assets/images/og.jpg">
+  <script src="../js/base.js"></script>
+  <link rel="icon" type="image/svg+xml" data-favicon="svg">
+  <link rel="alternate icon" data-favicon="ico">
+  <link rel="apple-touch-icon" data-favicon="apple">
+  <script>
+    (function() {
+      if (!window.withBase) return;
+      const svg = document.querySelector('link[data-favicon="svg"]');
+      const ico = document.querySelector('link[data-favicon="ico"]');
+      const apple = document.querySelector('link[data-favicon="apple"]');
+      if (svg) svg.href = withBase('/assets/images/favicon.svg');
+      if (ico) ico.href = withBase('/assets/images/favicon.png');
+      if (apple) apple.href = withBase('/assets/images/favicon.png');
+    })();
+  </script>
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+  <a class="sr-only" href="#main">Skip to main content</a>
+  <div class="announcement" role="status"></div>
+  <header>
+    <div class="container navbar">
+      <a class="logo" data-fill="name" data-nav="home">Mockingbird</a>
+      <button class="mobile-nav-toggle" aria-label="Toggle navigation">☰</button>
+      <nav aria-label="Primary">
+        <ul>
+          <li><a data-nav="menu">Menu</a></li>
+          <li><a data-nav="specials">Specials</a></li>
+          <li><a data-nav="events">Events</a></li>
+          <li><a data-nav="private-parties">Private Parties</a></li>
+          <li><a data-nav="wine-club">Wine Club</a></li>
+          <li><a data-nav="gift-cards">Gift Cards</a></li>
+          <li><a data-nav="gallery">Gallery</a></li>
+          <li><a data-nav="contact">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="nav-cta">
+        <a class="btn btn-secondary btn-small" data-cta="call" aria-label="Call">Call</a>
+        <a class="btn btn-primary btn-small" data-cta="directions" aria-label="Get directions">Directions</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" class="section">
+    <div class="container grid-2">
+      <div>
+        <p class="kicker">Private Parties</p>
+        <h1>Host your celebration</h1>
+        <p class="lead">Flexible spaces for birthdays, company mixers, showers, and rehearsal dinners. Responses within one business day.</p>
+        <form id="party-form" data-subject="Private Party Inquiry">
+          <label for="party-name">Name</label>
+          <input id="party-name" name="Name" placeholder="Full name" required>
+
+          <label for="party-email">Email</label>
+          <input id="party-email" name="Email" type="email" placeholder="you@example.com" required>
+
+          <label for="party-phone">Phone</label>
+          <input id="party-phone" name="Phone" type="tel" placeholder="555-123-4567">
+
+          <label for="party-date">Preferred date</label>
+          <input id="party-date" name="Preferred date" type="date">
+
+          <label for="party-size">Estimated headcount</label>
+          <input id="party-size" name="Headcount" type="number" min="1" placeholder="40">
+
+          <label for="party-occasion">Occasion</label>
+          <input id="party-occasion" name="Occasion" placeholder="Birthday, rehearsal dinner, company mixer">
+
+          <label for="party-budget">Budget or spend target</label>
+          <input id="party-budget" name="Budget" placeholder="$2,000">
+
+          <label for="party-notes">Notes</label>
+          <textarea id="party-notes" name="Notes" placeholder="Menu preferences, AV needs, timing, etc."></textarea>
+
+          <div class="inline-links" style="margin-top:12px;">
+            <button type="button" class="btn btn-primary" data-copy-form="party-form">Copy details &amp; email</button>
+            <a class="btn btn-secondary" data-fill="email-link">Email us</a>
+          </div>
+          <p class="note">We reply within one business day. Deposits secure your date; refundable within 48 hours of payment.</p>
+        </form>
+      </div>
+      <div>
+        <div class="info-block">
+          <p class="kicker">Deposit</p>
+          <h2>Secure your date</h2>
+          <div id="deposit-options" class="table-grid"></div>
+        </div>
+        <div class="info-block" style="margin-top:18px;">
+          <p class="kicker">What to expect</p>
+          <ul class="table-list">
+            <li>Pre-set or family-style menus tailored to your group</li>
+            <li>Bar packages with classic, low-proof, and no-proof options</li>
+            <li>Dedicated host to coordinate timeline and dietary needs</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <section class="section alt">
+    <div class="container">
+      <div class="final-cta">
+        <div>
+          <p class="kicker">Need something specific?</p>
+          <h2>Call us and we’ll craft the right experience.</h2>
+        </div>
+        <div class="hero-cta">
+          <a class="btn btn-primary" data-cta="call">Call</a>
+          <a class="btn btn-secondary" data-cta="directions">Directions</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="meta">
+        <strong data-fill="name">Mockingbird</strong>
+        <div data-fill="address">123 Mockingbird Lane</div>
+        <div data-fill="city">Yourtown, CA</div>
+        <div class="note" data-fill="hours">Hours</div>
+        <div><a data-fill="phone-link">555-123-4567</a> • <a data-fill="email-link">hello@mockingbird.example</a></div>
+        <div class="social">
+          <a data-fill="facebook">Facebook</a>
+          <a data-fill="instagram">Instagram</a>
+        </div>
+        <small>© Mockingbird</small>
+      </div>
+    </div>
+  </footer>
+
+  <div class="sticky-cta-bar" aria-label="Quick actions">
+    <a data-cta="call">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.1 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.81.37 1.6.72 2.34a2 2 0 0 1-.45 2.18L8.09 9.91a16 16 0 0 0 6 6l1.67-1.33a2 2 0 0 1 2.18-.45c.74.35 1.53.6 2.34.72A2 2 0 0 1 22 16.92z"/></svg>
+      Call
+    </a>
+    <a data-cta="menu">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      Menu
+    </a>
+    <a data-cta="directions">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2l7 7-7 13-7-13z"/><path d="M12 9v4"/></svg>
+      Directions
+    </a>
+  </div>
+
+  <button class="back-to-top" aria-label="Back to top">↑</button>
+
+  <script src="../js/main.js"></script>
+  <script>
+    (async function() {
+      const payments = await Mockingbird.fetchJSON('payments.json', {});
+      Mockingbird.renderDeposits(payments);
+    })();
+  </script>
+</body>
+</html>

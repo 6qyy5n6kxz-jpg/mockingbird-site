@@ -1,0 +1,26 @@
+{
+  "_comment": "Upcoming events. Remove past dates as needed.",
+  "events": [
+    {
+      "date": "2025-01-15T18:00:00",
+      "title": "Winemaker Dinner: Willamette Valley",
+      "description": "Four courses with pairings from a favorite producer. Limited seating.",
+      "price": "$95",
+      "payment_link_url": "https://buy.stripe.com/test_winemaker_dinner"
+    },
+    {
+      "date": "2025-01-22T17:00:00",
+      "title": "Neighborhood Happy Hour",
+      "description": "Extended happy hour with snacks, no tickets required.",
+      "price": "No cover",
+      "payment_link_url": ""
+    },
+    {
+      "date": "2025-02-05T19:00:00",
+      "title": "Jazz Night",
+      "description": "Live trio, snacks + cocktails available for purchase.",
+      "price": "$10 at the door",
+      "payment_link_url": "https://buy.stripe.com/test_jazznight"
+    }
+  ]
+}

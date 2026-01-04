@@ -1,0 +1,24 @@
+{
+  "_comment": "Update weekly specials. weekOf should be the Monday of the current week.",
+  "weekOf": "2025-01-06",
+  "items": [
+    {
+      "name": "Dungeness Crab Toast",
+      "description": "griddled sourdough, citrus aioli, chive",
+      "pairing": "Albariño by the glass",
+      "price": "$18"
+    },
+    {
+      "name": "Braised Short Rib",
+      "description": "polenta, mushroom gravy, gremolata",
+      "pairing": "Syrah, McMinnville 2020",
+      "price": "$32"
+    },
+    {
+      "name": "Crispy Brussels",
+      "description": "black garlic, pickled chili, sesame",
+      "pairing": "Local pale ale",
+      "price": "$12"
+    }
+  ]
+}

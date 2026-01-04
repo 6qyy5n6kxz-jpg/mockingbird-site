@@ -1,0 +1,41 @@
+{
+  "_comment": "Edit menu categories and items. Each item supports name, description, optional price, and optional tags array.",
+  "categories": [
+    {
+      "name": "Snacks",
+      "description": "",
+      "items": [
+        { "name": "House Focaccia", "description": "whipped ricotta, fennel pollen", "price": "$8", "tags": ["V"] },
+        { "name": "Marinated Olives", "description": "citrus, herbs, smoked chili", "price": "$7", "tags": ["GF", "V"] },
+        { "name": "Smoked Trout Dip", "description": "crispy potato chips, pickled shallot", "price": "$12" }
+      ]
+    },
+    {
+      "name": "Plates",
+      "description": "",
+      "items": [
+        { "name": "Crisp Market Salad", "description": "shaved vegetables, lemon vinaigrette, seeds", "price": "$14", "tags": ["V"] },
+        { "name": "Charred Carrots", "description": "tahini yogurt, toasted seeds, pomegranate", "price": "$14", "tags": ["V"] },
+        { "name": "Roasted Chicken", "description": "lemon pan sauce, winter greens", "price": "$26" },
+        { "name": "Seared Salmon", "description": "celery root, salsa verde, fried caper", "price": "$28", "tags": ["GF"] }
+      ]
+    },
+    {
+      "name": "Cocktails",
+      "description": "",
+      "items": [
+        { "name": "Bitter Boulevardier", "description": "rye, amaro blend, orange peel", "price": "$13" },
+        { "name": "Pear Spritz", "description": "pear shrub, prosecco, rosemary", "price": "$12" },
+        { "name": "Low-Proof Collins", "description": "vermouth, citrus, soda, mint", "price": "$11" }
+      ]
+    },
+    {
+      "name": "Non-Alcoholic",
+      "description": "",
+      "items": [
+        { "name": "Ginger Fizz", "description": "ginger, lime, bubbles", "price": "$7" },
+        { "name": "Citrus Cooler", "description": "grapefruit, tonic, rosemary", "price": "$7" }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-label="Dining room">
+  <rect width="1200" height="800" fill="#f7f2eb" />
+  <rect x="120" y="180" width="960" height="520" fill="#cdb89f" opacity="0.35" />
+  <rect x="240" y="260" width="280" height="340" fill="#3b3a36" opacity="0.06" />
+  <rect x="620" y="260" width="300" height="260" fill="#3b3a36" opacity="0.06" />
+  <circle cx="980" cy="260" r="90" fill="#d7bfa3" opacity="0.4" />
+</svg>

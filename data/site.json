@@ -1,0 +1,105 @@
+{
+  "_comment": "Update contact info, hours, social links, and image filenames here. All pages read from this file.",
+  "name": "The Mockingbird on Mill Road",
+  "shortName": "Mockingbird",
+  "tagline": "Neighborhood restaurant + bar",
+  "heroHeadline": "Seasonal suppers and cocktails on Mill Road",
+  "heroSubhead": "Graytown, OH hospitality with a cozy bar, weekly specials, and seasonal cooking for neighbors and friends.",
+  "description": "A cozy, seasonal restaurant serving Graytown with thoughtful cooking and drinks.",
+  "seoDescription": "The Mockingbird on Mill Road is a neighborhood restaurant and bar in Graytown, OH serving seasonal cooking, cocktails, and weekly specials.",
+  "locationShort": "Graytown, OH",
+  "images": {
+    "hero": { "src": "assets/images/hero.jpg", "fallback": "assets/images/hero.svg", "alt": "Dining room at The Mockingbird on Mill Road" },
+    "interior1": { "src": "assets/images/interior1.jpg", "fallback": "assets/images/interior1.svg", "alt": "Cozy dining room seating" },
+    "interior2": { "src": "assets/images/interior2.jpg", "fallback": "assets/images/interior2.svg", "alt": "Bar with seasonal cocktails" },
+    "interior3": { "src": "assets/images/interior3.jpg", "fallback": "assets/images/interior3.svg", "alt": "Patio and exterior seating" },
+    "food1": { "src": "assets/images/food1.jpg", "alt": "Seasonal plated dish" },
+    "food2": { "src": "assets/images/food2.jpg", "alt": "Shared plates on a table" },
+    "food3": { "src": "assets/images/food3.jpg", "alt": "Fresh salad with herbs" },
+    "bar1": { "src": "assets/images/bar1.jpg", "alt": "Cocktail poured at the bar" },
+    "ogImage": { "src": "assets/images/og.jpg", "fallback": "assets/images/hero.jpg", "alt": "Seasonal dishes and cocktails at The Mockingbird" },
+    "gallery": [
+      { "src": "assets/images/hero.jpg", "alt": "Dining room at The Mockingbird on Mill Road" },
+      { "src": "assets/images/interior1.jpg", "fallback": "assets/images/interior1.svg", "alt": "Cozy dining room seating" },
+      { "src": "assets/images/interior2.jpg", "fallback": "assets/images/interior2.svg", "alt": "Bar with seasonal cocktails" },
+      { "src": "assets/images/interior3.jpg", "fallback": "assets/images/interior3.svg", "alt": "Patio and exterior seating" },
+      { "src": "assets/images/food1.jpg", "alt": "Seasonal plated dish" },
+      { "src": "assets/images/food2.jpg", "alt": "Shared plates on a table" },
+      { "src": "assets/images/food3.jpg", "alt": "Fresh salad with herbs" },
+      { "src": "assets/images/bar1.jpg", "alt": "Cocktail poured at the bar" }
+    ]
+  },
+  "address": {
+    "line1": "4408 N. Elliston-Trowbridge Rd.",
+    "city": "Graytown",
+    "state": "OH",
+    "zip": "43432",
+    "country": "US",
+    "full": "4408 N. Elliston-Trowbridge Rd., Graytown, OH 43432"
+  },
+  "phone": "419-504-4900",
+  "email": "mockingbirddevin@gmail.com",
+  "mapsUrl": "https://www.google.com/maps/search/?api=1&query=4408+N.+Elliston-Trowbridge+Rd.,+Graytown,+OH+43432",
+  "hours": [
+    { "label": "Thu", "value": "4:00 PM – 10:00 PM" },
+    { "label": "Fri", "value": "4:00 PM – 10:00 PM" },
+    { "label": "Sat", "value": "4:00 PM – 10:00 PM" }
+  ],
+  "seasonalHoursNote": "Winter hours (February–May): Thu–Sat 5–10 PM",
+  "socials": {
+    "facebook": "https://www.facebook.com/themockingbirdonmillroad/",
+    "instagram": "https://www.instagram.com/mockingbirdonmillroad/"
+  },
+  "announcementBar": {
+    "enabled": false,
+    "message": "Now booking private parties and celebrations.",
+    "link": ""
+  },
+  "trust": {
+    "heading": "A local favorite on Mill Road",
+    "bullets": [
+      "Warm, welcoming atmosphere for neighbors and friends",
+      "Seasonal specials worth coming back for",
+      "Thoughtful cocktails, beer, and wine"
+    ],
+    "reviewLink": ""
+  },
+  "heroImage": "assets/images/hero.svg",
+  "gallery": [
+    "assets/images/interior1.svg",
+    "assets/images/interior2.svg",
+    "assets/images/interior3.svg"
+  ],
+  "defaultSEO": {
+    "title": "The Mockingbird on Mill Road",
+    "description": "Seasonal cooking and welcoming hospitality in Graytown, OH.",
+    "ogImage": "assets/images/hero.svg"
+  },
+  "whyBullets": [
+    "Locally owned gathering place with familiar faces",
+    "Seasonal cooking and specials driven by what’s fresh",
+    "Curated bar with cocktails, wines, and no-proof options"
+  ],
+  "featuredItems": [
+    {
+      "name": "Smoked Trout Dip",
+      "description": "crispy potato chips, pickled shallot",
+      "price": "$12"
+    },
+    {
+      "name": "Charred Carrots",
+      "description": "tahini yogurt, toasted seeds, pomegranate",
+      "price": "$14"
+    },
+    {
+      "name": "Roasted Chicken",
+      "description": "lemon pan sauce, winter greens",
+      "price": "$26"
+    },
+    {
+      "name": "Bitter Boulevardier",
+      "description": "rye, amaro blend, orange peel",
+      "price": "$13"
+    }
+  ]
+}
