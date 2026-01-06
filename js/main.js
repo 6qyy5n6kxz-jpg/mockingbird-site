@@ -178,12 +178,103 @@
 
   function setupNav() {
     const toggle = document.querySelector('.mobile-nav-toggle');
-    const navList = document.querySelector('nav ul');
-    if (!toggle || !navList) return;
+    const nav = document.getElementById('site-nav');
+    if (!toggle || !nav) return;
+
+    const focusableSelector = 'a[href], button:not([disabled])';
+
+    function getFocusables() {
+      return nav.querySelectorAll(focusableSelector);
+    }
+
+    function closeNav({ restoreFocus = false } = {}) {
+      nav.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+      document.removeEventListener('keydown', handleKey);
+      if (restoreFocus) toggle.focus();
+    }
+
+    function openNav() {
+      nav.classList.add('open');
+      toggle.setAttribute('aria-expanded', 'true');
+      document.addEventListener('keydown', handleKey);
+      const first = nav.querySelector('a');
+      if (first) first.focus();
+    }
+
+    function handleKey(event) {
+      if (!nav.classList.contains('open')) return;
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        closeNav({ restoreFocus: true });
+        return;
+      }
+      if (event.key !== 'Tab') return;
+      const focusables = Array.from(getFocusables());
+      if (!focusables.length) return;
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    }
 
     toggle.addEventListener('click', () => {
-      navList.classList.toggle('open');
+      const isOpen = nav.classList.contains('open');
+      if (isOpen) {
+        closeNav();
+      } else {
+        openNav();
+      }
     });
+
+    document.addEventListener('click', (event) => {
+      if (!nav.classList.contains('open')) return;
+      if (nav.contains(event.target) || toggle.contains(event.target)) return;
+      closeNav();
+    });
+
+    window.addEventListener('resize', () => {
+      if (window.innerWidth >= 960) closeNav();
+    });
+  }
+
+  function renderHeader() {
+    const header = document.getElementById('site-header');
+    if (!header) return;
+    header.innerHTML = `
+      <div class="container navbar">
+        <a class="logo" data-fill="name" data-nav="home">The Mockingbird on Mill Road</a>
+        <button class="mobile-nav-toggle" aria-label="Toggle navigation" aria-controls="site-nav" aria-expanded="false">☰</button>
+        <nav id="site-nav" class="nav-menu" aria-label="Primary">
+          <ul class="nav-primary">
+            <li><a data-nav="menu">Menu</a></li>
+            <li><a data-nav="drinks">Drinks</a></li>
+            <li><a data-nav="specials">Specials</a></li>
+            <li><a data-nav="events">Events</a></li>
+            <li><a data-nav="private-parties">Private Parties</a></li>
+          </ul>
+          <div class="nav-divider" aria-hidden="true"></div>
+          <ul class="nav-secondary" aria-label="Explore">
+            <li><a data-nav="wine-club">Wine Club</a></li>
+            <li><a data-nav="gift-cards">Gift Cards</a></li>
+            <li><a data-nav="gallery">Gallery</a></li>
+            <li><a data-nav="contact">Contact</a></li>
+          </ul>
+          <div class="nav-call-mobile">
+            <a class="btn btn-ghost btn-small" data-cta="call" aria-label="Call">Call</a>
+          </div>
+        </nav>
+        <div class="nav-cta">
+          <a class="btn btn-ghost btn-small call-desktop" data-cta="call" aria-label="Call">Call</a>
+          <a class="btn btn-primary btn-small" data-cta="directions" aria-label="Get directions">Directions</a>
+        </div>
+      </div>
+    `;
   }
 
   function setNavLinks() {
@@ -275,8 +366,140 @@
         list.appendChild(row);
       });
       section.appendChild(list);
+      if (cat.footer) {
+        const foot = document.createElement('p');
+        foot.className = 'note';
+        foot.textContent = cat.footer;
+        section.appendChild(foot);
+      }
       container.appendChild(section);
     });
+    if (menuData.notes?.length) {
+      const noteBlock = document.createElement('div');
+      noteBlock.className = 'note';
+      noteBlock.innerHTML = menuData.notes.map((n) => `<div>${n}</div>`).join('');
+      container.appendChild(noteBlock);
+    }
+    enableFadeIn();
+  }
+
+  function formatPrices(prices) {
+    if (!prices || typeof prices !== 'object') return '';
+    const labels = {
+      fullPour: 'Full Pour',
+      bottle: 'Bottle',
+      pour: 'Pour',
+      pitcher: 'Pitcher',
+      glass: 'Glass',
+      can: 'Can'
+    };
+    const formatted = [];
+    Object.entries(prices).forEach(([key, val]) => {
+      let displayValue = '';
+      if (typeof val === 'string') {
+        displayValue = val.trim();
+      } else if (typeof val === 'number' && Number.isFinite(val)) {
+        displayValue = `$${val.toFixed(2)}`;
+      }
+      if (!displayValue) return;
+      formatted.push(`${labels[key] || key}: ${displayValue}`);
+    });
+    return formatted.join(' | ');
+  }
+
+  function renderDrinks(drinks, site) {
+    const container = document.getElementById('drinks-container');
+    if (!container) return;
+    if (!drinks?.sections?.length) {
+      const phone = site?.phone ? `tel:${site.phone}` : null;
+      const call = phone ? `<a href="${phone}">call us</a>` : 'call us';
+      container.innerHTML = `<p class="note">Drinks menu is temporarily unavailable—please ${call} for today’s list.</p>`;
+      return;
+    }
+
+    const anchors = document.getElementById('drink-anchors');
+    if (anchors) {
+      const anchorLinks = [];
+      const allowedSections = new Set(['wine-flights', 'on-tap', 'beer-cans', 'bottled-wine']);
+      drinks.sections.forEach((sec) => {
+        if (sec.id && sec.title && allowedSections.has(sec.id)) anchorLinks.push({ id: sec.id, title: sec.title });
+        (sec.subsections || []).forEach((sub) => {
+          if (sub.title && sub.title.toLowerCase().startsWith('non-alcoholic')) {
+            const slug = sub.id || sub.title.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+            anchorLinks.push({ id: slug, title: sub.title });
+          }
+        });
+      });
+      anchors.innerHTML = anchorLinks
+        .map((a) => `<a class="btn btn-ghost btn-small" href="#${a.id}">${a.title}</a>`)
+        .join('');
+    }
+
+    container.innerHTML = '';
+    drinks.sections.forEach((section) => {
+      const secEl = document.createElement('section');
+      secEl.className = 'menu-category fade-in';
+      secEl.id = section.id || '';
+      let extraNote = '';
+      if (section.id === 'wine-flights' && drinks.notes?.pricingRules) {
+        extraNote = `<div class="note">${drinks.notes.pricingRules}</div>`;
+      }
+      if (section.id === 'bottled-wine') {
+        extraNote += `<div class="note">Bottled wines are not available for flights.</div>`;
+      }
+      secEl.innerHTML = `<div class="inline-links"><span class="kicker">${section.title}</span>${section.description ? `<span class="note">${section.description}</span>` : ''}</div>${extraNote}`;
+
+      const subsections = Array.isArray(section.subsections)
+        ? section.subsections
+        : Array.isArray(section.items)
+          ? [{ title: '', items: section.items }]
+          : [];
+
+      if (!subsections.length) {
+        if (section.id === 'bottled-wine') {
+          const emptyNote = document.createElement('p');
+          emptyNote.className = 'note';
+          emptyNote.textContent = 'Cooler list is being updated — ask your server for what’s available tonight.';
+          secEl.appendChild(emptyNote);
+        }
+        container.appendChild(secEl);
+        return;
+      }
+
+      subsections.forEach((sub) => {
+        const subEl = document.createElement('div');
+        subEl.className = 'card';
+        if (sub.title) {
+          subEl.id = sub.id || sub.title.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+        }
+        subEl.innerHTML = `<h3>${sub.title || ''}</h3>${sub.description ? `<p class="note">${sub.description}</p>` : ''}`;
+        const list = document.createElement('div');
+        (sub.items || []).forEach((item) => {
+          const row = document.createElement('div');
+          row.className = 'menu-item';
+          const priceText = formatPrices(item.prices);
+          const meta = item.meta ? `<span class="badge">${item.meta}</span>` : '';
+          row.innerHTML = `<div><h4>${item.name} ${meta}</h4><p>${item.description || ''}</p></div><div class="note">${priceText}</div>`;
+          list.appendChild(row);
+        });
+        subEl.appendChild(list);
+        if (sub.footer) {
+          const foot = document.createElement('p');
+          foot.className = 'note';
+          foot.textContent = sub.footer;
+          subEl.appendChild(foot);
+        }
+        secEl.appendChild(subEl);
+      });
+      container.appendChild(secEl);
+    });
+    const note = document.getElementById('drinks-note');
+    if (note) {
+      const cash = drinks.notes?.cashDiscount || '';
+      const rules = drinks.notes?.pricingRules || '';
+      const eligibility = drinks.notes?.eligibility || '';
+      note.innerHTML = [rules, eligibility, cash].filter(Boolean).join(' · ');
+    }
     enableFadeIn();
   }
 
@@ -293,10 +516,14 @@
     data.items.forEach((item) => {
       const card = document.createElement('div');
       card.className = 'card fade-in';
+      const notes = Array.isArray(item.notes) && item.notes.length
+        ? `<div class="note">${item.notes.join(' · ')}</div>`
+        : '';
       card.innerHTML = `
         <div class="inline-links"><span class="badge">Weekly special</span>${item.pairing ? `<span class="badge">Pairing: ${item.pairing}</span>` : ''}</div>
         <h3>${item.name}</h3>
         <p>${item.description}</p>
+        ${notes}
         ${item.price ? `<strong>${item.price}</strong>` : ''}
       `;
       container.appendChild(card);
@@ -329,18 +556,25 @@
     events.forEach((ev) => {
       const card = document.createElement('div');
       card.className = 'card fade-in';
-      let button = '';
-      if (ev.payment_link_url && !isPlaceholderUrl(ev.payment_link_url, ev.isPlaceholder)) {
-        button = `<a class="btn btn-primary btn-small" href="${ev.payment_link_url}">Buy Tickets</a>`;
-      } else if (emailFallback) {
-        button = `<a class="btn btn-secondary btn-small" href="mailto:${emailFallback}?subject=${encodeURIComponent(ev.title)}">RSVP / Learn More</a>`;
-      } else if (learnMoreUrl && !isPlaceholderUrl(learnMoreUrl)) {
-        button = `<a class="btn btn-secondary btn-small" href="${learnMoreUrl}">Learn More</a>`;
-      } else {
-        button = `<button class="btn btn-secondary btn-small" type="button" disabled>Details coming soon</button>`;
+
+      let img = '';
+      if (ev.image_url) {
+        const src = withBase(ev.image_url);
+        const alt = ev.image_alt || '';
+        img = `<div class="event-thumb"><img src="${src}" alt="${alt}" loading="lazy" onerror="this.parentElement.remove();"></div>`;
       }
+
+      let button = '';
+      if (ev.payment_link_url && String(ev.payment_link_url).trim() && !isPlaceholderUrl(ev.payment_link_url, ev.isPlaceholder)) {
+        const isExternal = /^https?:\/\//i.test(ev.payment_link_url);
+        const target = isExternal ? ' target="_blank" rel="noopener noreferrer"' : '';
+        button = `<a class="btn btn-primary btn-small" href="${ev.payment_link_url}"${target}>Buy Tickets</a>`;
+      }
+      const typeBadge = ev.type ? `<span class="badge badge-soft">${ev.type}</span>` : '';
+
       card.innerHTML = `
-        <div class="inline-links"><span class="badge">${formatDate(ev.date)}</span><span class="badge">${ev.price}</span></div>
+        ${img}
+        <div class="inline-links"><span class="badge">${formatDate(ev.date)}</span><span class="badge">${ev.price}</span>${typeBadge}</div>
         <h3>${ev.title}</h3>
         <p>${ev.description}</p>
         ${button}
@@ -354,6 +588,15 @@
     const container = document.getElementById('featured-items');
     if (!container) return;
     let items = Array.isArray(site?.featuredItems) ? site.featuredItems.slice(0, 4) : [];
+    if ((!items || !items.length) && menuData?.categories?.length) {
+      const featuredMenu = [];
+      menuData.categories.forEach((cat) => {
+        (cat.items || []).forEach((item) => {
+          if (item.featured) featuredMenu.push(item);
+        });
+      });
+      items = featuredMenu.slice(0, 4);
+    }
     if ((!items || !items.length) && menuData?.categories?.length) {
       const collected = [];
       menuData.categories.slice(0, 2).forEach((cat) => {
@@ -622,6 +865,7 @@
   });
 
   document.addEventListener('DOMContentLoaded', () => {
+    renderHeader();
     setupNav();
     setNavLinks();
     setupBackToTop();
@@ -645,6 +889,7 @@
     renderGiftCards,
     renderDeposits,
     renderWineClub,
-    renderGallery
+    renderGallery,
+    renderDrinks
   };
 })();

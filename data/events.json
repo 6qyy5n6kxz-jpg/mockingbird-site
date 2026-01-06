@@ -2,6 +2,16 @@
   "_comment": "Upcoming events. Remove past dates as needed.",
   "events": [
     {
+      "date": "2026-01-26T18:00:00",
+      "title": "Wine & Canvas: Northern Glow (Paint & Sip)",
+      "description": "Create the Northern Glow — an aurora borealis scene with evergreen silhouettes — during this guided Paint & Sip at The Mockingbird on Mill Road.\n\nA local artist (TBD) will lead you step by step; no experience needed. All supplies included (16×20 canvas).\n\nWine, beer, sangria, and no-proof drinks are available for purchase, along with our dinner-forward menu of boards, flatbreads, pressed sandwiches, and soup.\n\nTickets required; purchase through Wine & Canvas.",
+      "price": "Tickets via Wine & Canvas",
+      "payment_link_url": "https://wineandcanvas.com/toledo/event/graytown-paint-and-sip-party-northern-glow/",
+      "type": "Paint & Sip",
+      "image_url": "assets/events/northern-glow.jpg",
+      "image_alt": "Northern Glow painting with aurora borealis over evergreen trees"
+    },
+    {
       "date": "2025-01-15T18:00:00",
       "title": "Winemaker Dinner: Willamette Valley",
       "description": "Four courses with pairings from a favorite producer. Limited seating.",
@@ -18,9 +28,73 @@
     {
       "date": "2025-02-05T19:00:00",
       "title": "Jazz Night",
-      "description": "Live trio, snacks + cocktails available for purchase.",
+      "description": "Live trio, snacks plus wine and sangria available for purchase.",
       "price": "$10 at the door",
       "payment_link_url": "https://buy.stripe.com/test_jazznight"
+    },
+    {
+      "date": "2026-02-01T16:00:00",
+      "title": "Jazz Sunday: Bumblepuppy",
+      "description": "Live jazz with Bumblepuppy, 4–7 PM. Doors open at 3:30 PM. Space is limited.",
+      "price": "No cover",
+      "payment_link_url": ""
+    },
+    {
+      "date": "2026-02-07T18:00:00",
+      "title": "Live Music: Jake Pilewski",
+      "description": "Live music by Jake Pilewski, 6–9 PM.",
+      "price": "No cover",
+      "payment_link_url": ""
+    },
+    {
+      "date": "2026-02-08T11:00:00",
+      "title": "Galentine’s Day with Meregold Creations",
+      "description": "Galentine’s Day pop-up with Meregold Creations starting at 11 AM. Come early to enjoy dinner-forward bites and drinks.",
+      "price": "No cover",
+      "payment_link_url": ""
+    },
+    {
+      "date": "2026-02-11T18:30:00",
+      "title": "Ticketed Valentine’s Dinner + Live Music (Aaron & Peter)",
+      "description": "Ticketed Valentine’s dinner with live music by Aaron & Peter. Seating begins at 6:30 PM. Limited space. Ticket link/details coming soon.",
+      "price": "Ticketed event",
+      "payment_link_url": ""
+    },
+    {
+      "date": "2026-02-12T18:00:00",
+      "title": "Trivia Night",
+      "description": "Trivia starts at 6 PM. Limited space — first come, first served.",
+      "price": "No cover",
+      "payment_link_url": ""
+    },
+    {
+      "date": "2026-02-14T18:00:00",
+      "title": "Live Music: A Change of Plans (Mockingbird House Band)",
+      "description": "Live music by A Change of Plans, 6–9 PM.",
+      "price": "No cover",
+      "payment_link_url": ""
+    },
+    {
+      "date": "2026-02-19T18:30:00",
+      "title": "Book Club",
+      "description": "Book Club at 6:30 PM. Open to all. Come early to enjoy dinner and drinks before we get started.",
+      "price": "No cover",
+      "payment_link_url": ""
+    },
+    {
+      "date": "2026-02-21T18:00:00",
+      "title": "Live Music: Bruce Brodie",
+      "description": "Live music by Bruce Brodie, 6–9 PM.",
+      "price": "No cover",
+      "payment_link_url": ""
+    },
+    {
+      "date": "2026-02-28T18:00:00",
+      "title": "Live Music: Clay Kirchenbauer",
+      "description": "Live music by Clay Kirchenbauer, 6–9 PM.",
+      "price": "No cover",
+      "payment_link_url": ""
     }
   ]
+
 }

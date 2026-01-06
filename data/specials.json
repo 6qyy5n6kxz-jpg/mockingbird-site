@@ -1,24 +1,54 @@
 {
   "_comment": "Update weekly specials. weekOf should be the Monday of the current week.",
-  "weekOf": "2025-01-06",
+  "weekOf": "2026-02-05",
+  "dateRange": "February 5–7",
   "items": [
     {
-      "name": "Dungeness Crab Toast",
-      "description": "griddled sourdough, citrus aioli, chive",
-      "pairing": "Albariño by the glass",
-      "price": "$18"
+      "name": "Rustic Lentil & Barley Soup",
+      "description": "Slow-simmered green lentils and pearl barley in a savory vegetable broth with tomato paste, olive oil, and herbs",
+      "notes": [
+        "Available as cup or bowl",
+        "Included in Pick 2 & Pick 3 combos"
+      ]
     },
     {
-      "name": "Braised Short Rib",
-      "description": "polenta, mushroom gravy, gremolata",
-      "pairing": "Syrah, McMinnville 2020",
-      "price": "$32"
+      "name": "Chicken Giardiniera & White Bean Press",
+      "description": "Roasted chicken thigh, smashed white beans with olive oil and garlic, giardiniera mix, and mozzarella. Pressed crisp and served hot",
+      "notes": [
+        "Served with pickle + Chef’s Weekly Side",
+        "Available as a half in Pick 2 & Pick 3 combos"
+      ]
     },
     {
-      "name": "Crispy Brussels",
-      "description": "black garlic, pickled chili, sesame",
-      "pairing": "Local pale ale",
-      "price": "$12"
+      "name": "Creamy Polenta with Artichoke & Herb Oil",
+      "description": "Soft cornmeal polenta finished with evaporated milk, topped with chopped artichokes, oregano, basil, and olive oil",
+      "notes": [
+        "Served warm in a composed bowl"
+      ]
+    },
+    {
+      "name": "White Bean, Artichoke & Caper Antipasto",
+      "description": "Marinated white beans with artichokes, capers, olive oil, and champagne vinegar",
+      "notes": [
+        "Served chilled with crackers",
+        "Included in Pick 2 & Pick 3 combos"
+      ]
+    },
+    {
+      "name": "Chocolate Oat Bars",
+      "description": "Old fashioned oats baked with bittersweet and semi-sweet chocolate chips, brown sugar, and sweetened condensed milk",
+      "notes": [
+        "Cut fresh daily"
+      ]
+    },
+    {
+      "name": "Warm Farro, White Bean & Herb Bowl",
+      "description": "Farro and white beans tossed with olive oil, balsamic glaze, oregano, and black pepper",
+      "notes": [
+        "Served with all pressed sandwiches",
+        "Included in Pick 2 & Pick 3 combos",
+        "Available as an add-on"
+      ]
     }
   ]
 }

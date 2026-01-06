@@ -3,11 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gift Cards | Mockingbird</title>
-  <meta name="description" content="Buy Mockingbird gift cards with instant Stripe checkout.">
-  <meta property="og:title" content="Gift Cards | Mockingbird">
-  <meta property="og:description" content="Digital gift cards for food, drinks, and events at Mockingbird.">
+  <title>Drinks | The Mockingbird on Mill Road</title>
+  <meta name="description" content="Drink menu at The Mockingbird on Mill Road: wine flights, tap list, cans, and bottle cooler selections.">
+  <meta property="og:title" content="Drinks | The Mockingbird on Mill Road">
+  <meta property="og:description" content="Browse wine flights, tap list, beer, cans, and cooler bottles at The Mockingbird on Mill Road.">
   <meta property="og:image" content="../assets/images/og.jpg">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="../css/styles.css">
   <script src="../js/base.js"></script>
   <link rel="icon" type="image/svg+xml" data-favicon="svg">
   <link rel="alternate icon" data-favicon="ico">
@@ -23,7 +26,6 @@
       if (apple) apple.href = withBase('/assets/images/favicon.png');
     })();
   </script>
-  <link rel="stylesheet" href="../css/styles.css">
 </head>
 <body>
   <a class="sr-only" href="#main">Skip to main content</a>
@@ -32,28 +34,14 @@
 
   <main id="main" class="section">
     <div class="container">
-      <p class="kicker">Gift Cards</p>
-      <h1>Easy, digital gift cards</h1>
-      <p class="lead">Send instantly via Stripe checkout. Redeem for dinner, wine, beer, sangria, events, or wine club pickups.</p>
-      <div id="giftcard-options" class="list-flex"></div>
-      <p class="note">Need a custom amount? Email us and we’ll issue a custom link.</p>
+      <p class="kicker">Drinks</p>
+      <h1>Wine flights, taps, and bottles</h1>
+      <p class="lead">Browse wines on pour, beer and cans, bottled wine from the cooler, and non-alcoholic options.</p>
+      <div class="inline-links" id="drink-anchors"></div>
+      <div id="drinks-container" class="table-grid" style="margin-top:20px;"></div>
+      <p class="note" id="drinks-note"></p>
     </div>
   </main>
-
-  <section class="section alt">
-    <div class="container">
-      <div class="final-cta">
-        <div>
-          <p class="kicker">Treat them well</p>
-          <h2>Pair gift cards with tickets or wine club for the perfect night out.</h2>
-        </div>
-        <div class="hero-cta">
-          <a class="btn btn-primary" data-nav="events">Tickets</a>
-          <a class="btn btn-secondary" data-nav="wine-club">Wine Club</a>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <footer class="footer">
     <div class="container">
@@ -119,8 +107,11 @@
   <script src="../js/main.js"></script>
   <script>
     (async function() {
-      const payments = await Mockingbird.fetchJSON('payments.json', {});
-      Mockingbird.renderGiftCards(payments);
+      const [drinks, site] = await Promise.all([
+        Mockingbird.fetchJSON('drinks.json', {}),
+        Mockingbird.sitePromise
+      ]);
+      Mockingbird.renderDrinks(drinks, site);
     })();
   </script>
 </body>

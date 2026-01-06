@@ -1,40 +1,61 @@
 {
-  "_comment": "Edit menu categories and items. Each item supports name, description, optional price, and optional tags array.",
+  "_comment": "Edit menu categories and items. Each item supports name, description, optional price, featured, and optional tags array.",
+  "notes": [
+    "Flatbreads are served à la carte.",
+    "Pressed sandwiches and dinner combos are available all evening.",
+    "Weekly sides and cold plates change regularly."
+  ],
   "categories": [
     {
-      "name": "Snacks",
-      "description": "",
+      "name": "Boards & Shares",
       "items": [
-        { "name": "House Focaccia", "description": "whipped ricotta, fennel pollen", "price": "$8", "tags": ["V"] },
-        { "name": "Marinated Olives", "description": "citrus, herbs, smoked chili", "price": "$7", "tags": ["GF", "V"] },
-        { "name": "Smoked Trout Dip", "description": "crispy potato chips, pickled shallot", "price": "$12" }
+        { "name": "The Mockingbird Board", "description": "A curated selection of cheeses, cured meats, accompaniments, and crackers. Designed for 1–2 people.", "price": null, "featured": true },
+        { "name": "Mockingbird Sampler", "description": "A smaller tasting of the Mockingbird Board. Perfect for one or light sharing.", "price": null },
+        { "name": "Super Board", "description": "An expanded Mockingbird Board designed for the table. Ideal for sharing.", "price": null },
+        { "name": "Brie, Jam & Crackers", "description": "Brie, house jam, crackers", "price": null }
       ]
     },
     {
-      "name": "Plates",
-      "description": "",
+      "name": "Personal Flatbreads",
+      "description": "Crisp, oven-baked flatbreads topped generously and served hot.",
       "items": [
-        { "name": "Crisp Market Salad", "description": "shaved vegetables, lemon vinaigrette, seeds", "price": "$14", "tags": ["V"] },
-        { "name": "Charred Carrots", "description": "tahini yogurt, toasted seeds, pomegranate", "price": "$14", "tags": ["V"] },
-        { "name": "Roasted Chicken", "description": "lemon pan sauce, winter greens", "price": "$26" },
-        { "name": "Seared Salmon", "description": "celery root, salsa verde, fried caper", "price": "$28", "tags": ["GF"] }
+        { "name": "Red Sauce & Cheese", "description": "House red sauce, mozzarella, parmesan", "price": null },
+        { "name": "Pepperoni", "description": "House red sauce, pepperoni, mozzarella, parmesan", "price": null, "featured": true },
+        { "name": "Bacon Onion Jam", "description": "House bacon onion jam, cheese blend, balsamic finish", "price": null }
       ]
     },
     {
-      "name": "Cocktails",
-      "description": "",
+      "name": "Soup & Pressed Sandwiches",
       "items": [
-        { "name": "Bitter Boulevardier", "description": "rye, amaro blend, orange peel", "price": "$13" },
-        { "name": "Pear Spritz", "description": "pear shrub, prosecco, rosemary", "price": "$12" },
-        { "name": "Low-Proof Collins", "description": "vermouth, citrus, soda, mint", "price": "$11" }
+        { "name": "Soup of the Week", "description": "Made from scratch. Cup | Bowl.", "price": null },
+        { "name": "Weekly Pressed Sandwich", "description": "Chef’s featured sandwich, changing weekly.", "price": null },
+        { "name": "House Pressed Sandwich", "description": "Choose one: Red sauce & mozzarella OR Pepperoni & mozzarella.", "price": null },
+        { "name": "Italian Pressed Sandwich", "description": "Salami, pepperoni, mozzarella, olive oil, and herbs.", "price": null, "featured": true },
+        { "name": "Gourmet Grilled Cheese", "description": "", "price": null }
       ]
     },
     {
-      "name": "Non-Alcoholic",
-      "description": "",
+      "name": "Dinner Combos",
+      "description": "A complete way to enjoy Mockingbird.",
       "items": [
-        { "name": "Ginger Fizz", "description": "ginger, lime, bubbles", "price": "$7" },
-        { "name": "Citrus Cooler", "description": "grapefruit, tonic, rosemary", "price": "$7" }
+        { "name": "Pick 2", "description": "Half of a pressed sandwich or grilled cheese, a pickle, the chef’s weekly side, and your choice of a cup of soup or the weekly cold plate.", "price": null, "featured": true },
+        { "name": "Pick 3", "description": "Half of a pressed sandwich or grilled cheese, a pickle, the chef’s weekly side, a cup of soup, and the weekly cold plate.", "price": null }
+      ],
+      "footer": "Combos are curated meals; substitutions are limited."
+    },
+    {
+      "name": "Simple Add-Ons",
+      "items": [
+        { "name": "Cup of olives", "description": "", "price": null },
+        { "name": "Cup of pickles", "description": "", "price": null },
+        { "name": "Cup of crackers", "description": "", "price": null },
+        { "name": "Chef’s Weekly Side", "description": "", "price": null }
+      ]
+    },
+    {
+      "name": "Sweet Bite of the Day",
+      "items": [
+        { "name": "Ask your server about tonight’s dessert", "description": "", "price": null }
       ]
     }
   ]

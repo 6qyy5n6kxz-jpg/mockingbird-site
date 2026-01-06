@@ -28,28 +28,7 @@
 <body>
   <a class="sr-only" href="#main">Skip to main content</a>
   <div class="announcement" role="status"></div>
-  <header>
-    <div class="container navbar">
-      <a class="logo" data-fill="name" data-nav="home">Mockingbird</a>
-      <button class="mobile-nav-toggle" aria-label="Toggle navigation">☰</button>
-      <nav aria-label="Primary">
-        <ul>
-          <li><a data-nav="menu">Menu</a></li>
-          <li><a data-nav="specials">Specials</a></li>
-          <li><a data-nav="events">Events</a></li>
-          <li><a data-nav="private-parties">Private Parties</a></li>
-          <li><a data-nav="wine-club">Wine Club</a></li>
-          <li><a data-nav="gift-cards">Gift Cards</a></li>
-          <li><a data-nav="gallery">Gallery</a></li>
-          <li><a data-nav="contact">Contact</a></li>
-        </ul>
-      </nav>
-      <div class="nav-cta">
-        <a class="btn btn-secondary btn-small" data-cta="call" aria-label="Call">Call</a>
-        <a class="btn btn-primary btn-small" data-cta="directions" aria-label="Get directions">Directions</a>
-      </div>
-    </div>
-  </header>
+  <header id="site-header"></header>
 
   <main id="main" class="section">
     <div class="container">
@@ -58,7 +37,7 @@
       <p class="lead">Chef-driven dishes and pairings that change weekly. Updated in real time from our specials file.</p>
       <p class="note" id="specials-week"></p>
       <div id="specials-list" class="table-grid" style="margin-top:20px;"></div>
-      <p class="note">Pairings are suggestions—feel free to explore the full wine, beer, and cocktail list.</p>
+      <p class="note">Pairings are suggestions—feel free to explore the full wine, beer, and sangria list.</p>
     </div>
   </main>
 
@@ -89,6 +68,33 @@
           <a data-fill="facebook">Facebook</a>
           <a data-fill="instagram">Instagram</a>
         </div>
+        <div class="footer-links">
+          <div>
+            <p class="kicker">Visit</p>
+            <div class="inline-links">
+              <a data-nav="home">Home</a>
+              <a data-nav="menu">Menu</a>
+              <a data-nav="drinks">Drinks</a>
+              <a data-nav="specials">Specials</a>
+            </div>
+          </div>
+          <div>
+            <p class="kicker">Happenings</p>
+            <div class="inline-links">
+              <a data-nav="events">Events</a>
+              <a data-nav="private-parties">Private Parties</a>
+              <a data-nav="gallery">Gallery</a>
+            </div>
+          </div>
+          <div>
+            <p class="kicker">Explore</p>
+            <div class="inline-links">
+              <a data-nav="wine-club">Wine Club</a>
+              <a data-nav="gift-cards">Gift Cards</a>
+              <a data-nav="contact">Contact</a>
+            </div>
+          </div>
+        </div>
         <small>© Mockingbird</small>
       </div>
     </div>
@@ -116,9 +122,14 @@
     (async function() {
       const specials = await Mockingbird.fetchJSON('specials.json', { items: [] });
       Mockingbird.renderSpecials(specials);
-      if (specials.weekOf) {
-        const week = new Date(specials.weekOf);
-        document.getElementById('specials-week').textContent = `Week of ${week.toLocaleDateString()}`;
+      const weekEl = document.getElementById('specials-week');
+      if (weekEl) {
+        if (specials.dateRange) {
+          weekEl.textContent = specials.dateRange;
+        } else if (specials.weekOf) {
+          const week = new Date(specials.weekOf);
+          weekEl.textContent = `Week of ${week.toLocaleDateString()}`;
+        }
       }
     })();
   </script>

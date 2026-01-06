@@ -1,0 +1,306 @@
+{
+  "notes": {
+    "pricingRules": "Flight Board (any 4) $15 | Half Pour $5 | Taste $4",
+    "eligibility": "Only wines listed under ‘Wine Flights (On Pour)’ are eligible for flights. Cans/bottles are not available on flights.",
+    "cashDiscount": "Prices in the menu reflect a 4% discount for cash paying customers."
+  },
+  "sections": [
+    {
+      "id": "wine-flights",
+      "title": "Wine Flights (On Pour)",
+      "subsections": [
+        {
+          "title": "Whites & Rosé",
+          "description": "Full Pour $9 unless noted",
+          "items": [
+            { "name": "D’Altieri Moscato d'Asti", "meta": "(ITA)", "description": "Sweet, lightly fizzy, peach + floral", "prices": { "fullPour": "$9", "bottle": "$20.99" } },
+            { "name": "Innocent Bystander Pink Moscato", "meta": "(AUS)", "description": "Sweet + spritzy, strawberry + rose", "prices": { "fullPour": "$9", "bottle": "$20.99" } },
+            { "name": "Frisk Prickly Riesling", "meta": "(AUS)", "description": "Semi-sweet, bright citrus + green apple", "prices": { "fullPour": "$9", "bottle": "$17.49" } },
+            { "name": "Tattoo Girl Riesling", "meta": "(USA)", "description": "Lightly sweet, floral + crisp citrus", "prices": { "fullPour": "$9", "bottle": "$18.49" } },
+            { "name": "Cantina Colli Euganei Pinot Grigio", "meta": "(ITA)", "description": "Crisp pear, citrus + mineral finish", "prices": { "fullPour": "$9", "bottle": "$19.99" } },
+            { "name": "House Of Brown Chardonnay", "meta": "(USA)", "description": "Dry, round, pear + golden apple", "prices": { "fullPour": "$9", "bottle": "$26.49" } },
+            { "name": "Aves Del Sur Sauvignon Blanc", "meta": "(CHL)", "description": "Zesty, grapefruit + fresh herbs", "prices": { "fullPour": "$9", "bottle": "$16.49" } },
+            { "name": "Moonlight Soju (Blueberry, Lychee, Peach, Strawberry, Watermelon)", "meta": "(KOR)", "prices": { "fullPour": "$9", "bottle": "$12.99" } }
+          ]
+        },
+        {
+          "title": "Reds",
+          "items": [
+            { "name": "Voulet Malvasia d'Asti", "meta": "(ITA)", "description": "Sweet red, bubbly, rose petals + cherry", "prices": { "fullPour": "$9", "bottle": "$19.99" } },
+            { "name": "Old Patch Red Blend", "meta": "(USA)", "description": "Semi-sweet, jammy, black raspberry + spice", "prices": { "fullPour": "$9", "bottle": "$21.99" } },
+            { "name": "Aves Del Sur Merlot", "meta": "(CHL)", "description": "Smooth, plum + vanilla", "prices": { "fullPour": "$9", "bottle": "$16.49" } },
+            { "name": "Ghostrunner Red Blend", "meta": "(USA)", "description": "Full-bodied, ripe plum + cocoa", "prices": { "fullPour": "$9", "bottle": "$22.99" } },
+            { "name": "Honoro Vera Garnacha", "meta": "(ESP)", "description": "Juicy, bright cherry + gentle spice", "prices": { "fullPour": "$9", "bottle": "$16.49" } },
+            { "name": "Shoofly Shiraz", "meta": "(AUS)", "description": "Bold, blackberry + cracked pepper", "prices": { "fullPour": "$9", "bottle": "$19.99" } },
+            { "name": "St. Innocent Pinot Noir", "meta": "(USA)", "description": "Silky, raspberry + black tea", "prices": { "fullPour": "$12", "bottle": "$38.99" } },
+            { "name": "Masciarelli Montepulciano", "meta": "(ITA)", "description": "Rustic, earthy cherry + leather", "prices": { "fullPour": "$9", "bottle": "$19.99" } },
+            { "name": "Honoro Vera Monastrell", "meta": "(ESP)", "description": "Dark, earthy, dry with firm grip", "prices": { "fullPour": "$9", "bottle": "$16.49" } },
+            { "name": "The Stump Jump Cabernet Sauvignon", "meta": "(AUS)", "description": "Bold, dry, blackcurrant + mint", "prices": { "fullPour": "$9", "bottle": "$19.99" } }
+          ]
+        },
+        {
+          "title": "Tastes of the Month",
+          "items": [
+            { "name": "Marotti Campi Rubico", "meta": "(ITA)", "description": "Floral, medium-bodied Italian red", "prices": { "fullPour": "$9", "bottle": "$18.49" } },
+            { "name": "Zoli Inzolia", "meta": "(ITA)", "description": "Bright Sicilian white with soft pear, citrus & refreshing finish", "prices": { "fullPour": "$9", "bottle": "$25.49" } },
+            { "name": "Italian Christmas White", "meta": "(ITA)", "description": "Crisp citrus + floral notes, touch of honeyed fruit sweetness", "prices": { "fullPour": "$9", "bottle": "$16.49" } },
+            { "name": "Vin Glögg", "meta": "(USA)", "description": "Mulled wine spices, rich red fruit, cozy holiday sweetness", "prices": { "fullPour": "$9", "bottle": "$21.99" } },
+            { "name": "Italian Christmas Red", "meta": "(ITA)", "description": "Medium-bodied Sangiovese, cherry, berry + spice", "prices": { "fullPour": "$9", "bottle": "$16.49" } }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "on-tap",
+      "title": "On Tap",
+      "subsections": [
+        {
+          "title": "Pour | Pitcher",
+          "items": [
+            { "name": "Cameron’s Lager", "meta": "(CAN)", "prices": { "pour": "$5.50", "pitcher": "$18.00" } },
+            { "name": "Outerbelt 270 IPA", "meta": "(OH)", "prices": { "pour": "$5.50", "pitcher": "$18.00" } },
+            { "name": "Ales for ALS Hazy IPA", "meta": "(OH)", "prices": { "pour": "$6.00", "pitcher": "$20.00" } },
+            { "name": "Humble Pie Cider", "meta": "(OH)", "prices": { "pour": "$7.00", "pitcher": "$22.00" } },
+            { "name": "Seasonal Sangria", "meta": "(OH)", "prices": { "pour": "$6.00", "pitcher": "$25.00" } },
+            { "name": "Peach Mango Sangria", "meta": "(OH)", "prices": { "pour": "$6.00", "pitcher": "$25.00" } },
+            { "name": "“JStewie”", "prices": { "pour": "$7.00", "pitcher": "$25.00" } }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "beer-cans",
+      "title": "Beer & Cans",
+      "subsections": [
+        {
+          "title": "IPAs",
+          "items": [
+            { "name": "Bells Two Hearted", "prices": { "can": "$6" }, "description": "Classic IPA - pine + grapefruit" },
+            { "name": "Old Nation Raspberry Creamsicle M-43", "prices": { "can": "$6.50" }, "description": "N.E. IPA with natural raspberry & vanilla" },
+            { "name": "Flying Monkey Juicy Ass IPA", "prices": { "can": "$6" }, "description": "Lush tropical fruit, bold hops" },
+            { "name": "Flying Monkey Sparklepuff", "prices": { "can": "$7.50" }, "description": "Triple hopped, tropical fruit + heat" }
+          ]
+        },
+        {
+          "title": "Beer",
+          "items": [
+            { "name": "Garage Beer", "prices": { "can": "$3.50" }, "description": "Crisp, no-nonsense American light lager" },
+            { "name": "Garage Beer Lime", "prices": { "can": "$3.50" }, "description": "Zesty, crushable lime-infused lager" },
+            { "name": "Rhinegeist Cincy Light", "prices": { "can": "$3.50" }, "description": "Ultra light, clean, crisp, easy finish" },
+            { "name": "Bells Oberon Wheat Ale", "prices": { "can": "$4" }, "description": "Light, citrusy wheat ale with a hint of spice" },
+            { "name": "Zywiec Pale Lager", "prices": { "can": "$4.50" }, "description": "Euro-style, dry with bitter snap" },
+            { "name": "Victory Sour Monkey Sour Tripel", "prices": { "can": "$4.50" }, "description": "Tart, funky, high-ABV Belgian-style sour" },
+            { "name": "Waterloo Dark Lager", "prices": { "can": "$5" }, "description": "Toasty, smooth, light-bodied dark lager" },
+            { "name": "Zywiec Porter", "prices": { "can": "$6" }, "description": "Deep, roasty Polish porter with chocolate" },
+            { "name": "Shiner Cheer", "prices": { "can": "$4.50" }, "description": "Holiday peach + pecan notes with a soft, malty finish" },
+            { "name": "Great Lakes Christmas Ale", "prices": { "can": "$7.50" }, "description": "Spiced honey ale with warming cinnamon + ginger" },
+            { "name": "DuClaw Sweet Baby Jesus", "prices": { "can": "$5" }, "description": "Chocolate peanut butter porter with a smooth, dessert-like finish" }
+          ],
+          "footer": "Available in a Bucket of Beer - 6 for $15"
+        },
+        {
+          "title": "On The Rocks & Cold Cans",
+          "items": [
+            { "name": "Dulce Vida Margaritas", "prices": { "can": "$6" }, "description": "Ready-to-drink tequila margarita (Flavors: Lime, Watermelon)" },
+            { "name": "Heart of Glass Vodka Lemonade", "prices": { "can": "$7" }, "description": "Fresh lemon, smooth vodka kick" },
+            { "name": "Vikre Distillery Wine Cocktails", "prices": { "can": "$7" }, "description": "Light, floral + fruit forward (Flavors: Frenchie, Briar, Velo)" },
+            { "name": "Blake’s Hard Cider Salted Caramel Apple", "prices": { "can": "$4.50" }, "description": "Crisp apple cider with caramel + a hint of salt" },
+            { "name": "Blakes Black Phillip", "prices": { "can": "$4.50" }, "description": "Dark berry cider with black currant, mildly sweet with a dry finish" },
+            { "name": "Dragon Heart Mead", "prices": { "can": "$4.50" }, "description": "Apple, raspberry, strawberry honey wine" },
+            { "name": "Warhammer Mead", "prices": { "can": "$4.50" }, "description": "Apple + blueberry honey mead" },
+            { "name": "High Noon Pineapple", "prices": { "can": "$4" }, "description": "Fresh pineapple, clean vodka seltzer" },
+            { "name": "Lucky One Vodka Lemonade Blueberry", "prices": { "can": "$4" }, "description": "Smooth, still (non-carbonated) vodka drink" },
+            { "name": "Sun Cruiser", "prices": { "can": "$4" }, "description": "Easy sipper (Flavors: Classic Iced Tea, Pink Lemonade)" }
+          ]
+        },
+        {
+          "title": "Non-Alcoholic",
+          "items": [
+            { "name": "Rhinegeist NA Beers", "prices": { "can": "$4.50" }, "description": "Haze (juicy NA ale) or Pils (crisp NA lager)" },
+            { "name": "White Claw 0%", "prices": { "can": "$4" }, "description": "Variety" },
+            { "name": "Mocktails", "prices": { "can": "$7" }, "description": "Variety" },
+            { "name": "Canned Pop", "prices": { "can": "$2.50" }, "description": "Variety" },
+            { "name": "Pellegrino Sparkling Water", "prices": { "can": "$3" } },
+            { "name": "Bubbl’r Sparkling Water", "prices": { "can": "$2.50" }, "description": "Variety" }
+          ]
+        },
+        {
+          "title": "Sale Beer",
+          "items": [
+            { "name": "Rhinegeist Franz Oktoberfest", "prices": { "can": "$3" }, "description": "Malty, smooth, seasonal Festbier" },
+            { "name": "Jackie O’s Mystic Mama IPA", "prices": { "can": "$3" }, "description": "Bright, citrus + pine West coast IPA" },
+            { "name": "Neapolitan Milk Stout", "prices": { "can": "$3.50" }, "description": "Chocolate, vanilla + strawberry dessert stout" },
+            { "name": "Masthead Brewing Jalapeño IPA", "prices": { "can": "$5" }, "description": "Spicy hop bite, savory heat" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hot-chocolate",
+      "title": "Jackson Morgan Spiked Hot Chocolate",
+      "description": "Glass $9",
+      "subsections": [
+        {
+          "title": "Flavors",
+          "items": [
+            { "name": "Salted Caramel" },
+            { "name": "Spiced Pumpkin Roll" },
+            { "name": "Peppermint Mocha" },
+            { "name": "Brown Sugar & Cinnamon" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bottled-wine",
+      "title": "Bottled Wine (Cooler List)",
+      "subsections": [
+        {
+          "title": "Red",
+          "items": [
+            { "name": "2021 #Vigneto Dolce [Sweet] Red Wine", "prices": { "bottle": "$24.49" } },
+            { "name": "High Def Sweet Red", "prices": { "bottle": "$15.49" } },
+            { "name": "House Of Brown Red Blend", "prices": { "bottle": "$26.49" } },
+            { "name": "2020 Cherries & Rainbows Organic Sans Soufre", "prices": { "bottle": "$26.49" } },
+            { "name": "2021 Domaine La Bouvaude Fruandise Côtes du Rhône", "prices": { "bottle": "$20.99" } },
+            { "name": "2019 Innocent Bystander Pinot Noir", "prices": { "bottle": "$25.49" } },
+            { "name": "2021 Pike Road Pinot Noir", "prices": { "bottle": "$29.99" } },
+            { "name": "2021 Straight Shooter Pinot Noir", "prices": { "bottle": "$25.49" } },
+            { "name": "Sun & Moon Cellars Pinot Noir", "prices": { "bottle": "$19.99" } },
+            { "name": "Apaltagua Reserva Pinot Noir", "prices": { "bottle": "$18.49" } },
+            { "name": "Lapis Luna Pinot Noir", "prices": { "bottle": "$19.99" } },
+            { "name": "2021 Tasmorcan Barbera d'Asti", "prices": { "bottle": "$24.49" } },
+            { "name": "2021 Tercos Sangiovese", "prices": { "bottle": "$19.99" } },
+            { "name": "2020 Toscana Sangiovese", "prices": { "bottle": "$19.99" } },
+            { "name": "L’Opera Vino Rosso", "prices": { "bottle": "$19.99" } },
+            { "name": "2020 Raphael Merlot", "prices": { "bottle": "$19.99" } },
+            { "name": "2020 Fitch Mountain Merlot", "prices": { "bottle": "$35.49" } },
+            { "name": "NV For Me Merlot", "prices": { "bottle": "$24.49" } },
+            { "name": "2020 Carrascal Malbec", "prices": { "bottle": "$25.49" } },
+            { "name": "2019 Pétalos Bierzo", "prices": { "bottle": "$32.99" } },
+            { "name": "Rio Madre Rioja Graciano", "prices": { "bottle": "$19.99" } },
+            { "name": "2018 Villa Calcinaia Chianti Classico", "prices": { "bottle": "$32.99" } },
+            { "name": "2021 Dancing Crow Cabernet Sauvignon", "prices": { "bottle": "$29.99" } },
+            { "name": "2022 Areyna Cabernet Sauvignon", "prices": { "bottle": "$20.99" } },
+            { "name": "2019 Killerman’s Run Cabernet Sauvignon", "prices": { "bottle": "$22.99" } },
+            { "name": "Lapis Luna Cabernet Sauvignon", "prices": { "bottle": "$19.99" } },
+            { "name": "2021 Don Manñuel Villafane Cabernet Franc", "prices": { "bottle": "$18.49" } },
+            { "name": "2019 Surani Primitivo", "prices": { "bottle": "$25.49" } },
+            { "name": "2020 Petraio Nero d'Avola", "prices": { "bottle": "$14.49" } },
+            { "name": "2019 Juan Gil Silver Label Monastrell", "prices": { "bottle": "$24.49" } },
+            { "name": "Tarima Monastrell", "prices": { "bottle": "$18.49" } },
+            { "name": "2018 Dry Canyon Red Blend", "prices": { "bottle": "$18.49" } },
+            { "name": "2020 Care Garnacha Nativa", "prices": { "bottle": "$24.49" } },
+            { "name": "2019 Breaking Bread Grenache", "prices": { "bottle": "$27.49" } },
+            { "name": "2022 Monte Oton Garnacha", "prices": { "bottle": "$17.49" } },
+            { "name": "2018 d’Arenberg d’Arry’s Original Grenache Shiraz", "prices": { "bottle": "$27.49" } },
+            { "name": "2019 Bura Galeria Red Blend", "prices": { "bottle": "$32.99" } },
+            { "name": "Lapis Luna Red Blend", "prices": { "bottle": "$19.99" } },
+            { "name": "2021 LaPosta Tinto Red Blend", "prices": { "bottle": "$19.99" } },
+            { "name": "2020 Krs Crni Blatina Suho Vino", "prices": { "bottle": "$25.49" } },
+            { "name": "2019 Juliette Avril Cairanne", "prices": { "bottle": "$25.49" } },
+            { "name": "2018 d’Arenberg Laughing Magpie", "prices": { "bottle": "$36.49" } },
+            { "name": "2021 Chateau Virgile Cuvee l’Eneide", "prices": { "bottle": "$25.49" } },
+            { "name": "2021 Markou eMeis", "prices": { "bottle": "$26.49" } },
+            { "name": "Lapis Luna Zinfandel", "prices": { "bottle": "$19.99" } },
+            { "name": "2020 Lava Cap Zinfandel", "prices": { "bottle": "$30.99" } },
+            { "name": "2019 The Lackey Shiraz", "prices": { "bottle": "$24.49" } },
+            { "name": "2019 The Stump Jump Shiraz", "prices": { "bottle": "$20.99" } },
+            { "name": "2022 Feast Agiorgitiko", "prices": { "bottle": "$18.49" } },
+            { "name": "2017 Graziano Petite Sirah", "prices": { "bottle": "$25.49" } },
+            { "name": "2020 Masciarelli Montepulciano D'Abruzzo", "prices": { "bottle": "$19.99" } }
+          ]
+        },
+        {
+          "title": "Top Shelf",
+          "items": [
+            { "name": "2019 E. Guigal Cote-Rotie", "prices": { "bottle": "$104.99" } },
+            { "name": "2019 Ribera Del Duero Psi", "prices": { "bottle": "$47.99" } },
+            { "name": "2014 Meeker Merlot", "prices": { "bottle": "$45.99" } },
+            { "name": "2019 Revelry Limited Edition Reveler", "prices": { "bottle": "$40.49" } },
+            { "name": "2017 Revelry Red Mountain Cabernet Sauvignon", "prices": { "bottle": "$88.49" } },
+            { "name": "2020 Juan Gil Blue Label", "prices": { "bottle": "$52.49" } },
+            { "name": "2021 Clio", "prices": { "bottle": "$69.49" } },
+            { "name": "2021 El Nido", "prices": { "bottle": "$163.49" } },
+            { "name": "2015 Figgins Estate Red Wine", "prices": { "bottle": "$109.99" } },
+            { "name": "2017 Storybook Mountain Zinfandel", "prices": { "bottle": "$52.49" } },
+            { "name": "2019 Clef de Sol Chenin", "prices": { "bottle": "$42.49" } },
+            { "name": "2019 Far Mountain Fission Cabernet Sauvignon", "prices": { "bottle": "$85.99" } },
+            { "name": "2008/15/17 Andrew Geoffrey Cabernet Sauvignon", "prices": { "bottle": "$100.99" } },
+            { "name": "2014 Ziraldo Riesling Ice Wine", "prices": { "bottle": "$57.99" } }
+          ]
+        },
+        {
+          "title": "Non Alcoholic (Bottles)",
+          "items": [
+            { "name": "Leitz Sparkling Riesling", "prices": { "bottle": "$28.99" } },
+            { "name": "Leitz Riesling", "prices": { "bottle": "$22.99" } },
+            { "name": "Leitz Sparkling Rosé (250 ML)", "prices": { "bottle": "$6" } },
+            { "name": "Copenhagen Sparkling Tea BLA", "prices": { "bottle": "$37.99" } },
+            { "name": "V.no Sparkling Blanc de Blancs", "prices": { "bottle": "$25.49" } }
+          ]
+        },
+        {
+          "title": "Bubbly",
+          "items": [
+            { "name": "Ca' Furlan Prosecco", "prices": { "bottle": "$22.99" } },
+            { "name": "2019 Mestres 1312 Cava", "prices": { "bottle": "$29.99" } },
+            { "name": "Gratiot-Pilliere Champagne", "prices": { "bottle": "$52.49" } },
+            { "name": "Copenhagen Sparkling Tea Gron", "prices": { "bottle": "$43.49" } },
+            { "name": "Reginato Sparkling Rosé of Malbec", "prices": { "bottle": "$26.49" } }
+          ]
+        },
+        {
+          "title": "White",
+          "items": [
+            { "name": "2021 #Vigneto Moscato d'Asti", "prices": { "bottle": "$24.49" } },
+            { "name": "2021 Tattoo Girl Riesling", "prices": { "bottle": "$18.49" } },
+            { "name": "2020 Madonna Kabinett", "prices": { "bottle": "$24.49" } },
+            { "name": "2022 Devil’s Corner Chardonnay", "prices": { "bottle": "$30.99" } },
+            { "name": "Sun & Moon Cellars Chardonnay", "prices": { "bottle": "$19.99" } },
+            { "name": "2021 O Fillo Da Condesa Albarino", "prices": { "bottle": "$18.49" } },
+            { "name": "2021 Masciarelli Trebbiano d'Abruzzo", "prices": { "bottle": "$19.99" } },
+            { "name": "2022 Pullus Halozan", "prices": { "bottle": "$22.99" } },
+            { "name": "2022 Mantinia Nasiakos", "prices": { "bottle": "$32.99" } },
+            { "name": "2022 Casa Silva Sauvignon Gris", "prices": { "bottle": "$17.49" } },
+            { "name": "2021 Clos des Grands Primos", "prices": { "bottle": "$15.49" } },
+            { "name": "Mary Taylor Veneto Frizzante", "prices": { "bottle": "$16.49" } },
+            { "name": "2022 Honoro Vera Verdejo", "prices": { "bottle": "$16.49" } },
+            { "name": "Clos Des Lunes Lune d’Argent Vin Blanc", "prices": { "bottle": "$15.49" } },
+            { "name": "2023 Feast Moschofilero", "prices": { "bottle": "$17.49" } }
+          ]
+        },
+        {
+          "title": "Rosé",
+          "items": [
+            { "name": "2019 Protocolo Rosé", "prices": { "bottle": "$14.49" } },
+            { "name": "2022 Care Solidarity Rosé", "prices": { "bottle": "$20.99" } },
+            { "name": "2022 Petit Cochon Bronze Rose", "prices": { "bottle": "$26.49" } }
+          ]
+        },
+        {
+          "title": "Single Serve 6.3 oz Bottle",
+          "items": [
+            { "name": "2019 Hainaut Cabernet Sauvignon", "prices": { "bottle": "$7.49" } },
+            { "name": "2019 Chateau Peyredon Bordeaux", "prices": { "bottle": "$7.49" } },
+            { "name": "2020 Belle Rive Pinot Noir", "prices": { "bottle": "$7.49" } },
+            { "name": "2020 La Terre Haute Sauvignon Blanc", "prices": { "bottle": "$7.49" } },
+            { "name": "2020 Domaine Caylus Chardonnay", "prices": { "bottle": "$7.49" } },
+            { "name": "2020 Terroir des Anges Rosé", "prices": { "bottle": "$7.49" } },
+            { "name": "Courtage Brut Rosé", "prices": { "bottle": "$8.99" } },
+            { "name": "Courtage Brut", "prices": { "bottle": "$8.99" } }
+          ]
+        },
+        {
+          "title": "Port",
+          "items": [
+            { "name": "Domaine de Rancy Rivesalte Ambré", "prices": { "bottle": "$35.49" } },
+            { "name": "Trentadue Chocolate Amore", "prices": { "bottle": "$32.99" } },
+            { "name": "Alvear Cream", "prices": { "bottle": "$20.99" } },
+            { "name": "Noval Port Gift Pack", "prices": { "bottle": "$39.99" } }
+          ]
+        }
+      ]
+    }
+  ]
+}
