@@ -673,3 +673,31 @@ textarea {
     margin-left: auto;
   }
 }
+.form-card {
+  padding: 12px;
+  margin-top: 12px;
+  border: 1px solid rgba(0,0,0,0.05);
+  border-radius: 6px;
+  background: #fff;
+}
+.form-card.compact {
+  padding: 10px;
+}
+.compact-form label {
+  font-size: 0.95em;
+}
+.check-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.form-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-top: 8px;
+  flex-wrap: wrap;
+}
+.is-hidden {
+  display: none !important;
+}

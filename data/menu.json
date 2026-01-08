@@ -27,8 +27,8 @@
     {
       "name": "Soup & Pressed Sandwiches",
       "items": [
-        { "name": "Soup of the Week", "description": "Made from scratch. Cup | Bowl.", "price": null },
-        { "name": "Weekly Pressed Sandwich", "description": "Chef’s featured sandwich, changing weekly.", "price": null },
+        { "name": "Soup of the Week", "description": "Made from scratch. Cup | Bowl.", "price": null, "specialLabel": "Soup of the Week" },
+        { "name": "Weekly Pressed Sandwich", "description": "Chef’s featured sandwich, changing weekly.", "price": null, "specialLabel": "Weekly Pressed Sandwich" },
         { "name": "House Pressed Sandwich", "description": "Choose one: Red sauce & mozzarella OR Pepperoni & mozzarella.", "price": null },
         { "name": "Italian Pressed Sandwich", "description": "Salami, pepperoni, mozzarella, olive oil, and herbs.", "price": null, "featured": true },
         { "name": "Gourmet Grilled Cheese", "description": "", "price": null }
@@ -38,10 +38,16 @@
       "name": "Dinner Combos",
       "description": "A complete way to enjoy Mockingbird.",
       "items": [
-        { "name": "Pick 2", "description": "Half of a pressed sandwich or grilled cheese, a pickle, the chef’s weekly side, and your choice of a cup of soup or the weekly cold plate.", "price": null, "featured": true },
-        { "name": "Pick 3", "description": "Half of a pressed sandwich or grilled cheese, a pickle, the chef’s weekly side, a cup of soup, and the weekly cold plate.", "price": null }
+        { "name": "Pick 2", "description": "Half of a pressed sandwich or grilled cheese, a pickle, the chef’s weekly side, and your choice of a cup of soup or the cold side of the week.", "price": null, "featured": true },
+        { "name": "Pick 3", "description": "Half of a pressed sandwich or grilled cheese, a pickle, the chef’s weekly side, a cup of soup, and the cold side of the week.", "price": null }
       ],
       "footer": "Combos are curated meals; substitutions are limited."
+    },
+    {
+      "name": "Cold Side of the Week",
+      "items": [
+        { "name": "Ask your server about this week’s cold side", "description": "A rotating chilled side served with crackers or bread.", "price": null, "specialLabel": "Cold Side of the Week" }
+      ]
     },
     {
       "name": "Simple Add-Ons",
@@ -49,13 +55,13 @@
         { "name": "Cup of olives", "description": "", "price": null },
         { "name": "Cup of pickles", "description": "", "price": null },
         { "name": "Cup of crackers", "description": "", "price": null },
-        { "name": "Chef’s Weekly Side", "description": "", "price": null }
+        { "name": "Chef’s Weekly Side", "description": "", "price": null, "specialLabel": "Chef’s Weekly Side" }
       ]
     },
     {
       "name": "Sweet Bite of the Day",
       "items": [
-        { "name": "Ask your server about tonight’s dessert", "description": "", "price": null }
+        { "name": "Ask your server about tonight’s dessert", "description": "", "price": null, "specialLabel": "Sweet Bite of the Day" }
       ]
     }
   ]

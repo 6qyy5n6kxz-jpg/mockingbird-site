@@ -121,8 +121,12 @@
   <script src="../js/main.js"></script>
   <script>
     (async function() {
-      const menu = await Mockingbird.fetchJSON('menu.json', { categories: [] });
+      const menuPromise = Mockingbird.fetchJSON('menu.json', { categories: [] });
+      const specialsPromise = Mockingbird.fetchJSON('specials.json', {});
+      const menu = await menuPromise;
       Mockingbird.renderMenu(menu);
+      const specials = await specialsPromise;
+      Mockingbird.applySpecialsToMenu(specials);
     })();
   </script>
 </body>

@@ -129,8 +129,11 @@
   <script src="../js/main.js"></script>
   <script>
     (async function() {
-      const payments = await Mockingbird.fetchJSON('payments.json', {});
-      Mockingbird.renderWineClub(payments);
+      const [wineclub, site] = await Promise.all([
+        Mockingbird.fetchJSON('wineclub.json', {}),
+        Mockingbird.sitePromise
+      ]);
+      Mockingbird.renderWineClub(wineclub, site);
     })();
   </script>
 </body>

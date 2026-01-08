@@ -8,22 +8,15 @@
       "price": "Tickets via Wine & Canvas",
       "payment_link_url": "https://wineandcanvas.com/toledo/event/graytown-paint-and-sip-party-northern-glow/",
       "type": "Paint & Sip",
+      "ticketing": {
+        "capacity": 30,
+        "sold": 10,
+        "price_display": "$40 per person",
+        "clover_payment_url": "https://wineandcanvas.com/toledo/event/graytown-paint-and-sip-party-northern-glow/",
+        "sold_out_behavior": "disable"
+      },
       "image_url": "assets/events/northern-glow.jpg",
       "image_alt": "Northern Glow painting with aurora borealis over evergreen trees"
-    },
-    {
-      "date": "2025-01-15T18:00:00",
-      "title": "Winemaker Dinner: Willamette Valley",
-      "description": "Four courses with pairings from a favorite producer. Limited seating.",
-      "price": "$95",
-      "payment_link_url": "https://buy.stripe.com/test_winemaker_dinner"
-    },
-    {
-      "date": "2025-01-22T17:00:00",
-      "title": "Neighborhood Happy Hour",
-      "description": "Extended happy hour with snacks, no tickets required.",
-      "price": "No cover",
-      "payment_link_url": ""
     },
     {
       "date": "2025-02-05T19:00:00",
@@ -58,7 +51,24 @@
       "title": "Ticketed Valentine’s Dinner + Live Music (Aaron & Peter)",
       "description": "Ticketed Valentine’s dinner with live music by Aaron & Peter. Seating begins at 6:30 PM. Limited space. Ticket link/details coming soon.",
       "price": "Ticketed event",
-      "payment_link_url": ""
+      "type": "Special Event",
+      "ticketing": {
+        "capacity": 36,
+        "sold": 18,
+        "price_display": "$75 per guest",
+        "clover_payment_url": "https://link.clover.com/urlshortener/DL89fc",
+        "policy": "All sales final; transfers allowed. Seating is reserved after payment.",
+        "intake": {
+          "instructions": "After paying, send attendee names so we can seat your party together.",
+          "required_fields": ["name", "email", "phone", "quantity", "notes"],
+          "submission": {
+            "method": "mailto",
+            "to": "{{site_contact_email}}",
+            "subject_template": "Event Details – {{event_title}} – {{event_date}}",
+            "body_template": "Event: {{event_title}}\nDate: {{event_date}}\nName: {{name}}\nEmail: {{email}}\nPhone: {{phone}}\nQuantity: {{quantity}}\nNotes: {{notes}}\nPaid via Clover: {{paid}}\n"
+          }
+        }
+      }
     },
     {
       "date": "2026-02-12T18:00:00",

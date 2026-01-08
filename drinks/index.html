@@ -111,6 +111,11 @@
         Mockingbird.fetchJSON('drinks.json', {}),
         Mockingbird.sitePromise
       ]);
+      if (window.location.search.includes('debug=1')) {
+        const fn = Mockingbird.renderDrinks;
+        const fnStr = fn ? String(fn).slice(0, 150) : '';
+        console.log('drinks init', { hasContainer: !!document.getElementById('drinks-container'), sections: drinks?.sections?.length || 0, sectionIds: (drinks?.sections || []).map((s) => s.id), renderDrinksType: typeof fn, renderDrinksName: fn?.name, renderDrinksSnippet: fnStr });
+      }
       Mockingbird.renderDrinks(drinks, site);
     })();
   </script>

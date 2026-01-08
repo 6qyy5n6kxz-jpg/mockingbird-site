@@ -1,3 +1,8 @@
+window.__debug = new URLSearchParams(window.location.search).get('debug') === '1';
+window.dbg = function (...args) {
+  if (!window.__debug) return;
+  console.log('[dbg]', ...args);
+};
 (function(){
   function getBasePath(){
     const { hostname, pathname } = window.location;

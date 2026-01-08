@@ -34,7 +34,7 @@
     <div class="container">
       <p class="kicker">Events</p>
       <h1>Dinners, tastings, and neighborhood nights</h1>
-      <p class="lead">Ticketed events use Stripe checkout. For everything else, RSVP by email and we’ll confirm details.</p>
+      <p class="lead">Ticketed events use Clover payment links; share attendee details after purchase. For everything else, RSVP by email and we’ll confirm details.</p>
       <div id="events-list" class="table-grid" style="margin-top:20px;"></div>
     </div>
   </main>
@@ -118,13 +118,14 @@
   <script src="../js/main.js"></script>
   <script>
     (async function() {
-      const [events, site, payments] = await Promise.all([
+      const [events, site] = await Promise.all([
         Mockingbird.fetchJSON('events.json', { events: [] }),
-        Mockingbird.sitePromise,
-        Mockingbird.fetchJSON('payments.json', {})
+        Mockingbird.sitePromise
       ]);
-      const defaults = payments?.eventsDefaults || {};
-      Mockingbird.renderEvents(events, defaults.fallbackRsvpEmail || site.email, defaults.learnMoreUrl);
+      if (window.location.search.includes('debug=1')) {
+        console.log('events init', { events: events?.events?.length || 0, hasContainer: !!document.getElementById('events-list') });
+      }
+      Mockingbird.renderEvents(events, site.email);
     })();
   </script>
 </body>

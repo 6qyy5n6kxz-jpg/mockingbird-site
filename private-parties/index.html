@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Private Parties | Mockingbird</title>
-  <meta name="description" content="Book private parties at Mockingbird with simple inquiry and deposit options.">
+  <meta name="description" content="Book private parties at Mockingbird with simple inquiry and Clover deposit options.">
   <meta property="og:title" content="Private Parties | Mockingbird">
-  <meta property="og:description" content="Reserve the dining room or patio with easy deposits via Stripe.">
+  <meta property="og:description" content="Reserve the dining room or patio with easy deposits via Clover.">
   <meta property="og:image" content="../assets/images/og.jpg">
   <script src="../js/base.js"></script>
   <link rel="icon" type="image/svg+xml" data-favicon="svg">
@@ -165,8 +165,11 @@
   <script src="../js/main.js"></script>
   <script>
     (async function() {
-      const payments = await Mockingbird.fetchJSON('payments.json', {});
-      Mockingbird.renderDeposits(payments);
+      const [payments, site] = await Promise.all([
+        Mockingbird.fetchJSON('payments.json', {}),
+        Mockingbird.sitePromise
+      ]);
+      Mockingbird.renderDeposits(payments, site);
     })();
   </script>
 </body>

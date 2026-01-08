@@ -17,7 +17,7 @@
   //   it's probably the repo name.
   // - If path has 1 segment and it matches a known route, base should be '' (user site).
   const knownRoutes = new Set([
-    'menu', 'specials', 'events', 'private-parties', 'wine-club', 'gift-cards', 'contact'
+    'menu', 'specials', 'events', 'private-parties', 'wine-club', 'gift-cards', 'contact', 'drinks'
   ]);
 
   const parts = pathname.split('/').filter(Boolean);
@@ -49,14 +49,301 @@
     return lower.includes('replace_me') || lower.includes('stripe-link-placeholder') || lower.includes('example.com');
   }
 
+  function isValidPaymentLink(url, isPlaceholderFlag) {
+    if (!url || typeof url !== 'string') return false;
+    const trimmed = url.trim();
+    if (!trimmed) return false;
+    const lower = trimmed.toLowerCase();
+    if (isPlaceholderFlag === true) return false;
+    if (lower.includes('replace_me') || lower.includes('placeholder') || lower.includes('example.com') || lower.includes('test_')) return false;
+    return true;
+  }
+
+  function fillTemplate(template, tokens) {
+    if (!template) return '';
+    return template.replace(/{{\s*([\w.-]+)\s*}}/g, (match, key) => {
+      const val = tokens && Object.prototype.hasOwnProperty.call(tokens, key) ? tokens[key] : '';
+      return val === undefined || val === null ? '' : String(val);
+    });
+  }
+
+  const __debug = new URLSearchParams(window.location.search).get('debug') === '1';
+  function dbg(...args) {
+    if (__debug) console.log('[dbg]', ...args);
+  }
+
+  function ticketsRemaining(ticketing) {
+    if (!ticketing) return 0;
+    const capacity = Number(ticketing.capacity) || 0;
+    const sold = Number(ticketing.sold) || 0;
+    return Math.max(0, capacity - sold);
+  }
+
+  function buildSubmissionLink(submission, tokens, fallbackSubject = '', fallbackBody = '') {
+    if (!submission) return null;
+    if (submission.method === 'external_url' && submission.url) {
+      return { url: fillTemplate(submission.url, tokens), target: '_blank' };
+    }
+    const to = fillTemplate(submission.to || tokens?.site_contact_email || tokens?.siteEmail || '', tokens).trim();
+    if (!to) return null;
+    const subject = fillTemplate(submission.subject_template || fallbackSubject, tokens);
+    const body = fillTemplate(submission.body_template || fallbackBody, tokens);
+    const mailto = `mailto:${encodeURIComponent(to)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    return { url: mailto };
+  }
+
+  function createForm(fields, submission, tokens, submitLabel, instructions, fallbackSubject, fallbackBody, context, options = {}) {
+    if (!submission) return null;
+    const opts = options || {};
+
+    function coerceFields(list) {
+      const defaults = {
+        name: { id: 'name', label: 'Name', type: 'text' },
+        email: { id: 'email', label: 'Email', type: 'email' },
+        phone: { id: 'phone', label: 'Phone', type: 'tel' },
+        quantity: { id: 'quantity', label: 'Quantity', type: 'select', options: ['1', '2', '3', '4', '5', '6'] },
+        notes: { id: 'notes', label: 'Notes', type: 'textarea', rows: 3, placeholder: 'Attendee names + any seating notes' },
+        date: { id: 'date', label: 'Date', type: 'text' },
+        plan: { id: 'plan', label: 'Plan', type: 'select' },
+        paid: { id: 'paid', label: 'I already paid via Clover', type: 'checkbox', required: false }
+      };
+      const arr = Array.isArray(list) ? list : [];
+      return arr.map((entry) => {
+        if (entry && typeof entry === 'object' && entry.id) return entry;
+        if (typeof entry === 'string') {
+          const lower = entry.toLowerCase();
+          if (defaults[lower]) return { ...defaults[lower] };
+          const titled = entry.charAt(0).toUpperCase() + entry.slice(1);
+          return { id: entry, label: titled, type: 'text' };
+        }
+        return entry;
+      }).filter(Boolean);
+    }
+
+    const wrap = document.createElement('div');
+    wrap.className = opts.compact ? 'form-card compact' : 'form-card';
+    const form = document.createElement('form');
+    form.className = opts.compact ? 'note compact-form' : 'note';
+    const intro = document.createElement('p');
+    intro.className = 'note';
+    intro.textContent = 'Pay on Clover first.';
+    form.appendChild(intro);
+    const subnote = document.createElement('p');
+    subnote.className = 'note';
+    subnote.textContent = 'Then send attendee names for seating. (This emails us — it doesn’t process payment.)';
+    form.appendChild(subnote);
+    const fieldList = coerceFields(fields);
+    const hasPaid = fieldList.some((f) => f.id === 'paid');
+    if (!hasPaid) {
+      fieldList.push({ id: 'paid', label: 'I already paid via Clover', type: 'checkbox', required: false });
+    }
+
+    function normalizeRequired(list, ctx) {
+      const requiredMap = {
+        event_ticketed: ['name', 'email', 'quantity'],
+        deposit: ['name', 'email', 'phone', 'date'],
+        wineclub: ['plan', 'name', 'email']
+      };
+      const required = requiredMap[ctx] || [];
+      return list.map((f) => {
+        if (required.includes(f.id)) return { ...f, required: true };
+        return f;
+      });
+    }
+
+    function isEmailValid(val) {
+      if (!val || typeof val !== 'string') return false;
+      const at = val.indexOf('@');
+      const dot = val.lastIndexOf('.');
+      return at > 0 && dot > at + 1 && dot < val.length - 1;
+    }
+
+    const normalizedFields = normalizeRequired(fieldList, context);
+    let renderFields = normalizedFields;
+    if (context === 'event_ticketed') {
+      renderFields = normalizedFields
+        .filter((f) => f.required || ['notes', 'paid', 'name', 'email', 'quantity'].includes(f.id))
+        .map((f) => {
+          if (f.id === 'quantity') return { ...f, type: 'select', options: ['1', '2', '3', '4', '5', '6'] };
+          if (f.id === 'notes') return { ...f, placeholder: 'Attendee names + any seating notes' };
+          return f;
+        });
+    }
+    dbg('createForm fields', {
+      context,
+      incomingType: Array.isArray(fields) ? typeof fields[0] : typeof fields,
+      renderFields: renderFields.map((f) => ({ id: f.id, type: f.type }))
+    });
+
+    renderFields.forEach((field) => {
+      const wrapField = document.createElement('div');
+      wrapField.style.marginBottom = '8px';
+      let label;
+      if (field.type === 'checkbox') {
+        label = document.createElement('label');
+        label.className = 'check-row';
+      } else {
+        label = document.createElement('label');
+        label.setAttribute('for', `field-${field.id}`);
+        label.textContent = field.label;
+        wrapField.appendChild(label);
+      }
+      let input;
+      if (field.type === 'textarea') {
+        input = document.createElement('textarea');
+        input.rows = field.rows || 3;
+        input.placeholder = field.placeholder || 'Attendee names + any seating notes';
+      } else if (field.type === 'checkbox') {
+        input = document.createElement('input');
+        input.type = 'checkbox';
+      } else if (field.type === 'select') {
+        input = document.createElement('select');
+        let optsList = Array.isArray(field.options) ? field.options : [];
+// Hard guarantee: quantity always has choices
+if (field.id === 'quantity' && (!optsList || !optsList.length)) {
+  optsList = ['1', '2', '3', '4', '5', '6'];
+}
+        const builtOptions = [];
+        if (field.required || field.id === 'quantity') {
+          const placeholder = document.createElement('option');
+          placeholder.value = '';
+          placeholder.textContent = 'Select…';
+          placeholder.selected = true;
+          builtOptions.push(placeholder);
+        }
+        optsList.forEach((opt) => {
+          const o = document.createElement('option');
+          if (opt && typeof opt === 'object') {
+            o.value = opt.value ?? opt.label ?? '';
+            o.textContent = opt.label ?? opt.value ?? '';
+          } else {
+            o.value = opt;
+            o.textContent = opt;
+          }
+          builtOptions.push(o);
+        });
+        if (!builtOptions.length) {
+          console.warn('Select rendered with no options', field.id, field);
+          const none = document.createElement('option');
+          none.value = '';
+          none.textContent = 'No options available';
+          none.disabled = true;
+          none.selected = true;
+          builtOptions.push(none);
+        }
+        builtOptions.forEach((o) => input.appendChild(o));
+        if (__debug) dbg('select options built', field.id, input.options.length, optsList);
+      } else {
+        input = document.createElement('input');
+        input.type = field.type || 'text';
+      }
+      input.id = `field-${field.id}`;
+      input.name = field.id;
+      if (field.required) input.required = true;
+      if (field.placeholder && field.type !== 'textarea') input.placeholder = field.placeholder;
+      if (field.type === 'checkbox') {
+        label.appendChild(input);
+        label.appendChild(document.createTextNode(` ${field.label}`));
+        wrapField.appendChild(label);
+      } else {
+        wrapField.appendChild(input);
+      }
+      form.appendChild(wrapField);
+    });
+    const error = document.createElement('p');
+    error.className = 'note';
+    error.style.color = 'var(--color-error, #b00020)';
+    error.style.display = 'none';
+    form.appendChild(error);
+
+    const actions = document.createElement('div');
+    actions.className = 'form-actions';
+    const btn = document.createElement('button');
+    btn.type = 'submit';
+    btn.className = 'btn btn-secondary btn-small';
+    btn.textContent = submitLabel || 'Send Details';
+    actions.appendChild(btn);
+    form.appendChild(actions);
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const dataTokens = { ...(tokens || {}) };
+      renderFields.forEach((field) => {
+        const el = form.querySelector(`#field-${field.id}`);
+        if (!el) return;
+        let value = '';
+        if (field.type === 'checkbox') {
+          value = el.checked ? 'Yes' : 'No';
+        } else {
+          value = el.value || '';
+        }
+        dataTokens[field.id] = value;
+      });
+      const requiredMissing = renderFields.some((f) => f.required && !dataTokens[f.id]);
+      const emailField = renderFields.find((f) => f.id === 'email');
+      const emailValue = emailField ? dataTokens[emailField.id] : '';
+      const emailBad = emailField && !isEmailValid(emailValue);
+      if (requiredMissing) {
+        error.textContent = 'Please fill all required fields.';
+        error.style.display = 'block';
+        return;
+      }
+      if (emailBad) {
+        error.textContent = 'Please enter a valid email.';
+        error.style.display = 'block';
+        return;
+      }
+      error.style.display = 'none';
+      const link = buildSubmissionLink(submission, dataTokens, fallbackSubject, fallbackBody);
+      if (!link || !link.url) return;
+      if (link.target === '_blank') {
+        window.open(link.url, '_blank', 'noopener,noreferrer');
+      } else {
+        window.location.href = link.url;
+      }
+    });
+
+    if (opts.defaultCollapsed) {
+      const toggle = document.createElement('button');
+      toggle.type = 'button';
+      toggle.className = 'btn btn-ghost btn-small';
+      const formId = `form-${Math.random().toString(36).slice(2, 8)}`;
+      form.id = formId;
+      toggle.setAttribute('aria-controls', formId);
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.textContent = opts.collapseLabel || 'Send seating details';
+      const container = document.createElement('div');
+      container.className = wrap.className;
+      container.classList.add('is-hidden');
+      container.appendChild(form);
+      toggle.addEventListener('click', () => {
+        const isHidden = container.classList.contains('is-hidden');
+        container.classList.toggle('is-hidden');
+        toggle.setAttribute('aria-expanded', String(!isHidden));
+        if (__debug) dbg('form toggle', { containerHidden: container.classList.contains('is-hidden'), formHidden: form.classList.contains('is-hidden') });
+      });
+      const outer = document.createElement('div');
+      outer.appendChild(toggle);
+      outer.appendChild(container);
+      return outer;
+    }
+    wrap.appendChild(form);
+    return wrap;
+  }
+
   const state = { site: null, payments: null };
 
   async function fetchJSON(filename, fallback) {
     const url = withBase(`/data/${filename}`);
     try {
       const res = await fetch(url);
+      if (__debug) dbg('fetchJSON', { filename, url, ok: res.ok, status: res.status });
       if (!res.ok) throw new Error(`Request failed: ${res.status}`);
-      return await res.json();
+      const json = await res.json();
+      if (__debug && filename === 'drinks.json') {
+        dbg('drinks payload', { keys: Object.keys(json || {}), sectionIds: (json?.sections || []).map((s) => s.id) });
+      }
+      return json;
     } catch (err) {
       console.warn(`Data load error for ${filename}`, err);
       return fallback;
@@ -344,6 +631,14 @@
   function renderMenu(menuData) {
     const container = document.getElementById('menu-container');
     if (!container) return;
+    const specialPlaceholders = new Set([
+      'Soup of the Week',
+      'Weekly Pressed Sandwich',
+      'Chef’s Weekly Side',
+      'Sweet Bite of the Day',
+      'Hot Side of the Week',
+      'Cold Side of the Week'
+    ]);
     if (!menuData?.categories?.length) {
       const phone = state.site?.phone ? `tel:${state.site.phone}` : null;
       const call = phone ? `<a href="${phone}">call us</a>` : 'call us';
@@ -363,6 +658,14 @@
           ? `<div class="inline-links">${item.tags.map((t) => `<span class="badge">${t}</span>`).join('')}</div>`
           : '';
         row.innerHTML = `<div><h4>${item.name}</h4><p>${item.description || ''}</p>${tags}</div><div>${item.price || ''}</div>`;
+        const specialLabel = item.specialLabel || (specialPlaceholders.has(item.name) ? item.name : null);
+        if (specialLabel) {
+          row.setAttribute('data-special-label', specialLabel);
+          const nameEl = row.querySelector('h4');
+          const descEl = row.querySelector('p');
+          if (nameEl) nameEl.setAttribute('data-special-name', 'true');
+          if (descEl) descEl.setAttribute('data-special-description', 'true');
+        }
         list.appendChild(row);
       });
       section.appendChild(list);
@@ -383,8 +686,31 @@
     enableFadeIn();
   }
 
+  function applySpecialsToMenu(specialsData) {
+    const container = document.getElementById('menu-container');
+    if (!container) return;
+    const rows = container.querySelectorAll('[data-special-label]');
+    if (!rows.length) return;
+    const specials = new Map();
+    (specialsData?.items || []).forEach((item) => {
+      const key = item && item.label && String(item.label).trim();
+      if (key) specials.set(key, item);
+    });
+    rows.forEach((row) => {
+      const label = row.getAttribute('data-special-label');
+      const match = label ? specials.get(label) : null;
+      if (!match) return;
+      const nameEl = row.querySelector('[data-special-name]');
+      const descEl = row.querySelector('[data-special-description]');
+      if (nameEl && match.name) nameEl.textContent = match.name;
+      if (descEl && match.description) descEl.textContent = match.description;
+    });
+  }
+
   function formatPrices(prices) {
-    if (!prices || typeof prices !== 'object') return '';
+    if (!prices) return '';
+    if (typeof prices === 'string') return prices.trim();
+    if (typeof prices !== 'object') return '';
     const labels = {
       fullPour: 'Full Pour',
       bottle: 'Bottle',
@@ -408,7 +734,41 @@
   }
 
   function renderDrinks(drinks, site) {
-    const container = document.getElementById('drinks-container');
+    let container = document.getElementById('drinks-container');
+    let anchors = document.getElementById('drink-anchors');
+    let note = document.getElementById('drinks-note');
+    const main = document.getElementById('main');
+    dbg('renderDrinks start', {
+      hasContainer: !!container,
+      sectionCount: drinks?.sections?.length || 0,
+      sectionIds: (drinks?.sections || []).map((s) => s.id),
+      fnName: renderDrinks.name,
+      exportedName: window.Mockingbird?.renderDrinks?.name
+    });
+    const ids = (drinks?.sections || []).map((s) => s.id);
+    if (__debug && !ids.includes('bottled-wine')) console.warn('bottled-wine missing from runtime drinks.sections', ids, drinks);
+    if (!container && main) {
+      console.warn('Drinks containers missing; creating fallbacks');
+      const ctaWrap = document.createElement('div');
+      ctaWrap.className = 'inline-links';
+      ctaWrap.id = 'drink-anchors';
+      anchors = ctaWrap;
+      const grid = document.createElement('div');
+      grid.id = 'drinks-container';
+      grid.className = 'table-grid';
+      grid.style.marginTop = '20px';
+      container = grid;
+      const noteEl = document.createElement('p');
+      noteEl.className = 'note';
+      noteEl.id = 'drinks-note';
+      note = noteEl;
+      const inner = document.createElement('div');
+      inner.className = 'container';
+      inner.appendChild(ctaWrap);
+      inner.appendChild(grid);
+      inner.appendChild(noteEl);
+      main.appendChild(inner);
+    }
     if (!container) return;
     if (!drinks?.sections?.length) {
       const phone = site?.phone ? `tel:${site.phone}` : null;
@@ -417,7 +777,6 @@
       return;
     }
 
-    const anchors = document.getElementById('drink-anchors');
     if (anchors) {
       const anchorLinks = [];
       const allowedSections = new Set(['wine-flights', 'on-tap', 'beer-cans', 'bottled-wine']);
@@ -435,65 +794,146 @@
         .join('');
     }
 
-    container.innerHTML = '';
+    if (!drinks?.sections?.length) {
+      if (container.childElementCount && __debug) dbg('renderDrinks skip clear: empty sections but content exists');
+    } else {
+      container.innerHTML = '';
+    }
     drinks.sections.forEach((section) => {
       const secEl = document.createElement('section');
       secEl.className = 'menu-category fade-in';
       secEl.id = section.id || '';
-      let extraNote = '';
-      if (section.id === 'wine-flights' && drinks.notes?.pricingRules) {
-        extraNote = `<div class="note">${drinks.notes.pricingRules}</div>`;
-      }
-      if (section.id === 'bottled-wine') {
-        extraNote += `<div class="note">Bottled wines are not available for flights.</div>`;
-      }
-      secEl.innerHTML = `<div class="inline-links"><span class="kicker">${section.title}</span>${section.description ? `<span class="note">${section.description}</span>` : ''}</div>${extraNote}`;
-
-      const subsections = Array.isArray(section.subsections)
-        ? section.subsections
-        : Array.isArray(section.items)
-          ? [{ title: '', items: section.items }]
-          : [];
-
-      if (!subsections.length) {
+      try {
+        if (__debug && container.childElementCount > 0 && section.id === 'bottled-wine') {
+          dbg('renderDrinks bottled-wine pre-append existing children', container.childElementCount);
+        }
+        let extraNote = '';
+        if (section.id === 'wine-flights' && drinks.notes?.pricingRules) {
+          const note = document.createElement('div');
+          note.className = 'note';
+          note.textContent = drinks.notes.pricingRules;
+          secEl.appendChild(note);
+        }
         if (section.id === 'bottled-wine') {
-          const emptyNote = document.createElement('p');
-          emptyNote.className = 'note';
-          emptyNote.textContent = 'Cooler list is being updated — ask your server for what’s available tonight.';
-          secEl.appendChild(emptyNote);
+          const note = document.createElement('div');
+          note.className = 'note';
+          note.textContent = 'Bottled wines are not available for flights.';
+          secEl.appendChild(note);
+        }
+        const header = document.createElement('div');
+        header.className = 'inline-links';
+        const titleSpan = document.createElement('span');
+        titleSpan.className = 'kicker';
+        titleSpan.textContent = section.title || '';
+        header.appendChild(titleSpan);
+        if (section.description) {
+          const descSpan = document.createElement('span');
+          descSpan.className = 'note';
+          descSpan.textContent = section.description;
+          header.appendChild(descSpan);
+        }
+        secEl.appendChild(header);
+
+        const subsections = Array.isArray(section.subsections)
+          ? section.subsections
+          : Array.isArray(section.items)
+            ? [{ title: '', items: section.items }]
+            : [];
+
+        if (section.id === 'bottled-wine') {
+          const allItems = subsections.reduce((sum, sub) => sum + ((sub.items || []).length), 0);
+          dbg('bottled-wine counts', { subsections: subsections.length, items: allItems, sample: subsections[0]?.items?.[0] });
+          if (__debug) secEl.style.outline = '2px dashed #999';
+        }
+
+        if (!subsections.length) {
+          if (section.id === 'bottled-wine') {
+            const emptyNote = document.createElement('p');
+            emptyNote.className = 'note';
+            emptyNote.textContent = 'Cooler list is being updated — ask your server for what’s available tonight.';
+            secEl.appendChild(emptyNote);
+          }
+          container.appendChild(secEl);
+          return;
+        }
+
+        let appendedRows = 0;
+        subsections.forEach((sub) => {
+          const subEl = document.createElement('div');
+          subEl.className = 'card';
+          if (sub.title) {
+            subEl.id = sub.id || sub.title.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+            const h3 = document.createElement('h3');
+            h3.textContent = sub.title;
+            subEl.appendChild(h3);
+          }
+          if (sub.description) {
+            const p = document.createElement('p');
+            p.className = 'note';
+            p.textContent = sub.description;
+            subEl.appendChild(p);
+          }
+          const list = document.createElement('div');
+          (sub.items || []).forEach((item) => {
+            const priceText = formatPrices(item?.prices) || (item?.price != null ? String(item.price) : '');
+            if (!item || (!item.name && !priceText)) {
+              console.warn('Skipping drinks item with no name/price', item);
+              return;
+            }
+            const row = document.createElement('div');
+            row.className = 'menu-item';
+            const left = document.createElement('div');
+            const h4 = document.createElement('h4');
+            h4.textContent = item.name || '';
+            left.appendChild(h4);
+            const meta = item.meta;
+            if (meta) {
+              const badge = document.createElement('span');
+              badge.className = 'badge';
+              badge.textContent = meta;
+              h4.appendChild(document.createTextNode(' '));
+              h4.appendChild(badge);
+            }
+            const p = document.createElement('p');
+            p.textContent = item.description || '';
+            left.appendChild(p);
+            const right = document.createElement('div');
+            right.className = 'note';
+            right.textContent = priceText || '';
+            row.appendChild(left);
+            row.appendChild(right);
+            list.appendChild(row);
+            appendedRows += 1;
+          });
+          subEl.appendChild(list);
+          if (sub.footer) {
+            const foot = document.createElement('p');
+            foot.className = 'note';
+            foot.textContent = sub.footer;
+            subEl.appendChild(foot);
+          }
+          secEl.appendChild(subEl);
+        });
+        if (section.id === 'bottled-wine') {
+          dbg('bottled-wine rows appended', appendedRows);
+          if (appendedRows === 0) {
+            const fallback = document.createElement('p');
+            fallback.className = 'note';
+            fallback.textContent = 'Cooler list is temporarily unavailable — please ask your server for what’s available tonight.';
+            secEl.appendChild(fallback);
+            if (__debug) console.warn('bottled-wine rendered zero rows despite data');
+          }
         }
         container.appendChild(secEl);
-        return;
+      } catch (err) {
+        console.error('Drinks section render error', section.id, err);
+        const fallback = document.createElement('p');
+        fallback.className = 'note';
+        fallback.textContent = 'This list is temporarily unavailable — please ask your server for tonight’s selection.';
+        secEl.appendChild(fallback);
+        container.appendChild(secEl);
       }
-
-      subsections.forEach((sub) => {
-        const subEl = document.createElement('div');
-        subEl.className = 'card';
-        if (sub.title) {
-          subEl.id = sub.id || sub.title.toLowerCase().replace(/[^a-z0-9]+/g, '-');
-        }
-        subEl.innerHTML = `<h3>${sub.title || ''}</h3>${sub.description ? `<p class="note">${sub.description}</p>` : ''}`;
-        const list = document.createElement('div');
-        (sub.items || []).forEach((item) => {
-          const row = document.createElement('div');
-          row.className = 'menu-item';
-          const priceText = formatPrices(item.prices);
-          const meta = item.meta ? `<span class="badge">${item.meta}</span>` : '';
-          row.innerHTML = `<div><h4>${item.name} ${meta}</h4><p>${item.description || ''}</p></div><div class="note">${priceText}</div>`;
-          list.appendChild(row);
-        });
-        subEl.appendChild(list);
-        if (sub.footer) {
-          const foot = document.createElement('p');
-          foot.className = 'note';
-          foot.textContent = sub.footer;
-          subEl.appendChild(foot);
-        }
-        secEl.appendChild(subEl);
-      });
-      container.appendChild(secEl);
     });
-    const note = document.getElementById('drinks-note');
     if (note) {
       const cash = drinks.notes?.cashDiscount || '';
       const rules = drinks.notes?.pricingRules || '';
@@ -501,6 +941,28 @@
       note.innerHTML = [rules, eligibility, cash].filter(Boolean).join(' · ');
     }
     enableFadeIn();
+    if (container.id === 'drinks-container') {
+      const drinkSections = container.querySelectorAll('.menu-category.fade-in');
+      drinkSections.forEach((el) => el.classList.add('visible'));
+      const bw = container.querySelector('#bottled-wine');
+      if (__debug) {
+        dbg('renderDrinks appended sections', { count: container.querySelectorAll('section.menu-category').length });
+        dbg('bottled-wine DOM check', {
+          exists: !!bw,
+          menuItems: bw ? bw.querySelectorAll('.menu-item').length : 0,
+          cards: bw ? bw.querySelectorAll('.card').length : 0,
+          rect: bw ? bw.getBoundingClientRect() : null,
+          style: bw
+            ? {
+                display: getComputedStyle(bw).display,
+                visibility: getComputedStyle(bw).visibility,
+                opacity: getComputedStyle(bw).opacity
+              }
+            : null
+        });
+        if (bw) bw.style.outline = '2px dashed #999';
+      }
+    }
   }
 
   function renderSpecials(data) {
@@ -516,11 +978,12 @@
     data.items.forEach((item) => {
       const card = document.createElement('div');
       card.className = 'card fade-in';
+      const pillText = (item.label && String(item.label).trim()) ? item.label : 'Weekly special';
       const notes = Array.isArray(item.notes) && item.notes.length
         ? `<div class="note">${item.notes.join(' · ')}</div>`
         : '';
       card.innerHTML = `
-        <div class="inline-links"><span class="badge">Weekly special</span>${item.pairing ? `<span class="badge">Pairing: ${item.pairing}</span>` : ''}</div>
+        <div class="inline-links"><span class="badge">${pillText}</span>${item.pairing ? `<span class="badge">Pairing: ${item.pairing}</span>` : ''}</div>
         <h3>${item.name}</h3>
         <p>${item.description}</p>
         ${notes}
@@ -542,7 +1005,7 @@
     });
   }
 
-  function renderEvents(data, emailFallback, learnMoreUrl) {
+  function renderEvents(data, emailFallback) {
     const container = document.getElementById('events-list');
     if (!container) return;
     const now = new Date();
@@ -564,21 +1027,55 @@
         img = `<div class="event-thumb"><img src="${src}" alt="${alt}" loading="lazy" onerror="this.parentElement.remove();"></div>`;
       }
 
-      let button = '';
-      if (ev.payment_link_url && String(ev.payment_link_url).trim() && !isPlaceholderUrl(ev.payment_link_url, ev.isPlaceholder)) {
-        const isExternal = /^https?:\/\//i.test(ev.payment_link_url);
-        const target = isExternal ? ' target="_blank" rel="noopener noreferrer"' : '';
-        button = `<a class="btn btn-primary btn-small" href="${ev.payment_link_url}"${target}>Buy Tickets</a>`;
-      }
+      const ticketing = ev.ticketing;
+      const remaining = ticketing ? ticketsRemaining(ticketing) : null;
+      const soldOut = ticketing ? remaining === 0 : false;
+      const availabilityBadge = ticketing
+        ? `<span class="badge">${soldOut ? 'Sold out' : `${remaining} remaining`}</span>`
+        : '';
+      const priceBadge = (ticketing && ticketing.price_display) ? `<span class="badge">${ticketing.price_display}</span>` : (ev.price ? `<span class="badge">${ev.price}</span>` : '');
       const typeBadge = ev.type ? `<span class="badge badge-soft">${ev.type}</span>` : '';
 
+      let button = '';
+      if (ticketing && !soldOut && isValidPaymentLink(ticketing.clover_payment_url, ticketing.isPlaceholder)) {
+        button = `<a class="btn btn-primary btn-small" href="${ticketing.clover_payment_url}" target="_blank" rel="noopener noreferrer">Pay on Clover</a>`;
+      }
+      const lowInventory = ticketing && remaining > 0 && remaining <= 5;
       card.innerHTML = `
         ${img}
-        <div class="inline-links"><span class="badge">${formatDate(ev.date)}</span><span class="badge">${ev.price}</span>${typeBadge}</div>
+        <div class="inline-links"><span class="badge">${formatDate(ev.date)}</span>${priceBadge}${availabilityBadge}${typeBadge}</div>
         <h3>${ev.title}</h3>
         <p>${ev.description}</p>
-        ${button}
+        ${ticketing?.policy ? `<p class="note">${ticketing.policy}</p>` : ''}
+        <div class="form-actions">
+          ${button || ''}
+        </div>
+        ${lowInventory ? '<p class="note">Limited tickets remain. Availability isn’t held until payment completes.</p>' : ''}
       `;
+
+      if (ticketing?.intake) {
+        const tokens = {
+          event_title: ev.title || '',
+          event_date: formatDate(ev.date),
+          event_price: ticketing.price_display || ev.price || '',
+          site_contact_email: state.site?.email || emailFallback || ''
+        };
+        const fields = ticketing.intake.required_fields || [];
+        const fallbackBody = `Event: ${tokens.event_title}\nDate: ${tokens.event_date}\nName: {{name}}\nEmail: {{email}}\nPhone: {{phone}}\nQuantity: {{quantity}}\nNotes: {{notes}}\nPaid via Clover: {{paid}}\n`;
+        const form = createForm(
+          fields,
+          ticketing.intake.submission,
+          tokens,
+          'Send Details',
+          ticketing.intake.instructions,
+          ticketing.intake.submission?.subject_template || 'Event Details – {{event_title}} – {{event_date}}',
+          fallbackBody,
+          'event_ticketed',
+          { defaultCollapsed: true, collapseLabel: 'Send seating details', compact: true }
+        );
+        if (form) card.appendChild(form);
+      }
+
       container.appendChild(card);
     });
     enableFadeIn();
@@ -677,23 +1174,30 @@
   function renderGiftCards(payments) {
     const container = document.getElementById('giftcard-options');
     if (!container) return;
-    if (!payments?.giftCards) {
-      container.innerHTML = '<p class="note">Online payments are temporarily unavailable—please call us.</p>';
+    const giftData = payments?.giftCards || payments?.gift_cards || payments?.payments?.gift_cards;
+    if (!giftData) {
+      container.innerHTML = '<p class="note">Gift card info coming soon.</p>';
       return;
     }
-    if (!payments.giftCards.length) {
+    // New structure: in-person call to action
+    if (giftData.mode === 'in_person') {
+      container.innerHTML = `<div class="card fade-in"><h3>${giftData.title || 'Gift Cards'}</h3><p>${giftData.description || ''}</p><a class="btn btn-primary" href="${giftData.cta_url || '#'}">${giftData.cta_label || 'Call to purchase'}</a></div>`;
+      return;
+    }
+    const list = Array.isArray(giftData) ? giftData : [];
+    if (!list.length) {
       container.innerHTML = '<p class="note">Gift card purchasing is temporarily unavailable.</p>';
       return;
     }
     container.innerHTML = '';
-    payments.giftCards.forEach((item) => {
+    list.forEach((item) => {
       const actionable = item.url && !isPlaceholderUrl(item.url, item.isPlaceholder);
       const card = document.createElement('div');
       card.className = 'card fade-in';
       const action = actionable
         ? `<a class="btn btn-primary" href="${item.url}">Buy ${item.label || `$${item.amount}`}</a>`
         : `<button class="btn btn-secondary" type="button" disabled>Coming soon</button>`;
-      card.innerHTML = `<h3>${item.label || `$${item.amount} Gift Card`}</h3><p>Digital delivery via Stripe checkout.</p>${action}`;
+      card.innerHTML = `<h3>${item.label || `$${item.amount} Gift Card`}</h3><p>Digital delivery via Clover checkout.</p>${action}`;
       container.appendChild(card);
     });
     if (payments.policies?.giftCards) {
@@ -705,75 +1209,102 @@
     enableFadeIn();
   }
 
-  function renderDeposits(payments) {
+  function renderDeposits(payments, site) {
     const container = document.getElementById('deposit-options');
     if (!container) return;
-    if (!payments?.partyDeposits) {
-      container.innerHTML = '<p class="note">Online payments are temporarily unavailable—please call us.</p>';
+    const deposit = payments?.private_event_deposit || payments?.payments?.private_event_deposit;
+    if (!deposit) {
+      container.innerHTML = '<p class="note">Online deposits are temporarily unavailable—please call us.</p>';
       return;
     }
-    if (!payments.partyDeposits.length) {
-      container.innerHTML = '<p class="note">Deposit links coming soon.</p>';
-      return;
-    }
+    const actionable = isValidPaymentLink(deposit.clover_payment_url, deposit.isPlaceholder);
     container.innerHTML = '';
-    payments.partyDeposits.forEach((item) => {
-      const actionable = item.url && !isPlaceholderUrl(item.url, item.isPlaceholder);
-      const action = actionable
-        ? `<a class="btn btn-primary btn-small" href="${item.url}">Pay ${item.label || `$${item.amount}`}</a>`
-        : `<button class="btn btn-secondary btn-small" type="button" disabled>Coming soon</button>`;
-      const card = document.createElement('div');
-      card.className = 'card fade-in';
-      card.innerHTML = `<h3>${item.label || `$${item.amount} Reservation Deposit`}</h3><p>Hold your date instantly.</p>${action}`;
-      container.appendChild(card);
-    });
-    if (payments.policies?.partyDeposits) {
-      const policy = document.createElement('p');
-      policy.className = 'note';
-      policy.textContent = payments.policies.partyDeposits;
-      container.appendChild(policy);
+    const card = document.createElement('div');
+    card.className = 'card fade-in';
+    const action = actionable
+      ? `<a class="btn btn-primary btn-small" href="${deposit.clover_payment_url}" target="_blank" rel="noopener noreferrer">Pay Deposit</a>`
+      : `<button class="btn btn-secondary btn-small" type="button" disabled>Link coming soon</button>`;
+    card.innerHTML = `<h3>${deposit.title || 'Reservation Deposit'}</h3><p>${deposit.description || ''}</p><p><strong>${deposit.amount_display || ''}</strong></p>${action}${deposit.policy ? `<p class="note">${deposit.policy}</p>` : ''}`;
+    if (deposit.intake) {
+      const fieldMap = {
+        name: { id: 'name', label: 'Name', type: 'text', required: true },
+        email: { id: 'email', label: 'Email', type: 'email', required: true },
+        phone: { id: 'phone', label: 'Phone', type: 'tel', required: false },
+        date: { id: 'date', label: 'Preferred date', type: 'date', required: false },
+        notes: { id: 'notes', label: 'Notes', type: 'textarea', required: false }
+      };
+      const fields = (deposit.intake.required_fields || []).map((f) => fieldMap[f]).filter(Boolean);
+      const tokens = { site_contact_email: site?.email || '' };
+      const fallbackBody = `Name: {{name}}\nEmail: {{email}}\nPhone: {{phone}}\nPreferred date: {{date}}\nNotes: {{notes}}\nPaid via Clover: {{paid}}\n`;
+      const form = createForm(
+        fields,
+        deposit.intake.submission,
+        tokens,
+        'Send Details',
+        deposit.intake.instructions,
+        deposit.intake.submission?.subject_template || 'Private Event Request – {{date}} – {{name}}',
+        fallbackBody,
+        'deposit',
+        { compact: true }
+      );
+      if (form) card.appendChild(form);
     }
+    container.appendChild(card);
     enableFadeIn();
   }
 
-  function renderWineClub(payments) {
+  function renderWineClub(wineclubData, site) {
     const container = document.getElementById('wineclub-options');
     if (!container) return;
-    if (!payments?.wineClub) {
-      container.innerHTML = '<p class="note">Online payments are temporarily unavailable—please call us.</p>';
-      return;
-    }
-    const tiers = payments.wineClub.tiers || payments.wineClubTiers || [];
-    if (!tiers.length) {
+    const plans = wineclubData?.plans || [];
+    if (!plans.length) {
       container.innerHTML = '<p class="note">Wine club enrollment is temporarily unavailable.</p>';
       return;
     }
     container.innerHTML = '';
-    tiers.forEach((tier) => {
-      const actionable = tier.url && !isPlaceholderUrl(tier.url, tier.isPlaceholder) && tier.active !== false;
+    plans.forEach((plan) => {
+      const actionable = plan.clover_payment_url && !isPlaceholderUrl(plan.clover_payment_url, plan.isPlaceholder);
       const action = actionable
-        ? `<a class="btn btn-primary" href="${tier.url}">Join</a>`
-        : `<button class="btn btn-secondary" type="button" disabled>Coming soon</button>`;
-      const perks = tier.perks?.length
-        ? `<ul class="table-list">${tier.perks.map((p) => `<li>${p}</li>`).join('')}</ul>`
-        : '';
-      const note = tier.pickupPolicyNote ? `<p class="note">${tier.pickupPolicyNote}</p>` : '';
+        ? `<a class="btn btn-primary" href="${plan.clover_payment_url}" target="_blank" rel="noopener noreferrer">Pay with Clover</a>`
+        : `<button class="btn btn-secondary" type="button" disabled>Link coming soon</button>`;
+      const note = plan.notes ? `<p class="note">${plan.notes}</p>` : '';
       const card = document.createElement('div');
       card.className = 'card fade-in';
-      card.innerHTML = `<h3>${tier.name}</h3><p>${tier.priceDisplay || tier.price}</p><p class="note">${tier.cadence || ''}</p>${perks}${note}${action}`;
+      card.innerHTML = `<h3>${plan.name}</h3><p>${plan.price_display || plan.priceDisplay || ''}</p>${note}${action}`;
       container.appendChild(card);
     });
-    if (payments.wineClub.manageMembershipUrl && !isPlaceholderUrl(payments.wineClub.manageMembershipUrl)) {
-      const manage = document.createElement('p');
-      manage.className = 'note';
-      manage.innerHTML = `<a href="${payments.wineClub.manageMembershipUrl}">Manage membership</a>`;
-      container.appendChild(manage);
-    }
-    if (payments.policies?.wineClub) {
-      const policy = document.createElement('p');
-      policy.className = 'note';
-      policy.textContent = payments.policies.wineClub;
-      container.appendChild(policy);
+
+    const formConfig = wineclubData.preferences_form;
+    if (formConfig && formConfig.fields?.length) {
+      const holder = document.createElement('div');
+      holder.className = 'card';
+      const fields = formConfig.fields.map((f) => {
+        const field = { ...f };
+        if (f.optionsFromPlans) {
+          field.options = plans.map((p) => ({
+            value: p.id || p.name,
+            label: p.price_display ? `${p.name} — ${p.price_display}` : p.name
+          }));
+        }
+        return field;
+      });
+      const tokens = {
+        site_contact_email: site?.email || ''
+      };
+      const form = createForm(
+        fields,
+        formConfig.submission,
+        tokens,
+        'Send Details',
+        formConfig.note,
+        formConfig.submission?.subject || 'Wine Club Preferences – {{plan}} – {{name}}',
+        formConfig.submission?.body_template,
+        'wineclub',
+        { compact: true }
+      );
+      holder.innerHTML = '<h3>Preferences</h3>';
+      if (form) holder.appendChild(form);
+      container.parentElement.appendChild(holder);
     }
     enableFadeIn();
   }
@@ -886,6 +1417,7 @@
     renderFeaturedItems,
     renderSpecialsPreview,
     renderEventsPreview,
+    applySpecialsToMenu,
     renderGiftCards,
     renderDeposits,
     renderWineClub,

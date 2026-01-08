@@ -1,0 +1,58 @@
+{
+  "title": "Wine Club",
+  "intro": "Dinner-forward wine club built around what we’re pouring and what’s in the cooler.",
+  "plans": [
+    {
+      "id": "monthly",
+      "name": "Monthly Membership",
+      "price_display": "$65 / month",
+      "clover_payment_url": "https://link.clover.com/urlshortener/mock-monthly",
+      "notes": "Pickup during open hours; bring your ID."
+    },
+    {
+      "id": "quarterly",
+      "name": "Quarterly Membership",
+      "price_display": "$180 / quarter",
+      "clover_payment_url": "https://link.clover.com/urlshortener/mock-quarterly",
+      "notes": "Pickup-only; swaps available for equal value."
+    }
+  ],
+  "preferences_form": {
+    "fields": [
+      { "id": "name", "label": "Name", "type": "text", "required": true },
+      { "id": "email", "label": "Email", "type": "email", "required": true },
+      { "id": "phone", "label": "Phone", "type": "tel", "required": false },
+      { "id": "plan", "label": "Plan", "type": "select", "required": true, "optionsFromPlans": true },
+      {
+        "id": "style",
+        "label": "Wine preference",
+        "type": "select",
+        "required": true,
+        "options": ["Red", "White", "Mixed", "Adventurous"]
+      },
+      {
+        "id": "sweetness",
+        "label": "Sweetness tolerance",
+        "type": "select",
+        "required": false,
+        "options": ["Dry only", "Mostly dry", "Some sweet okay"]
+      },
+      {
+        "id": "pickup",
+        "label": "Preferred pickup day",
+        "type": "select",
+        "required": false,
+        "options": ["Thu", "Fri", "Sat"]
+      },
+      { "id": "notes", "label": "Notes / allergies", "type": "textarea", "required": false },
+      { "id": "paid", "label": "I already paid via Clover", "type": "checkbox", "required": false }
+    ],
+    "submission": {
+      "method": "mailto",
+      "to": "{{site_contact_email}}",
+      "subject": "Wine Club Preferences – {{plan}} – {{name}}",
+      "body_template": "Name: {{name}}\nEmail: {{email}}\nPhone: {{phone}}\nPlan: {{plan}}\nPreference: {{style}}\nSweetness: {{sweetness}}\nPickup: {{pickup}}\nNotes: {{notes}}\nPaid via Clover: {{paid}}\n"
+    },
+    "note": "Payment is handled through Clover. Use this form to tell us your preferences."
+  }
+}

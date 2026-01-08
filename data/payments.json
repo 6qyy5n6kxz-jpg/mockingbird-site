@@ -1,58 +1,32 @@
 {
-  "_note": "Replace URLs with real Stripe Payment Links later. Placeholder detection uses isPlaceholder=true or URL containing example.com/REPLACE_ME.",
-  "currency": "USD",
-  "giftCards": [
-    { "amount": 25, "label": "$25 Gift Card", "url": "https://example.com/stripe-link-placeholder", "featured": false, "isPlaceholder": true },
-    { "amount": 50, "label": "$50 Gift Card", "url": "https://example.com/stripe-link-placeholder", "featured": true, "isPlaceholder": true },
-    { "amount": 100, "label": "$100 Gift Card", "url": "https://example.com/stripe-link-placeholder", "featured": false, "isPlaceholder": true },
-    { "amount": 200, "label": "$200 Gift Card", "url": "https://example.com/stripe-link-placeholder", "featured": false, "isPlaceholder": true }
-  ],
-  "partyDeposits": [
-    { "amount": 250, "label": "$250 Reservation Deposit", "url": "https://example.com/stripe-link-placeholder", "isPlaceholder": true },
-    { "amount": 500, "label": "$500 Reservation Deposit", "url": "https://example.com/stripe-link-placeholder", "isPlaceholder": true }
-  ],
-  "wineClub": {
-    "manageMembershipUrl": "https://example.com/stripe-link-placeholder",
-    "tiers": [
-      {
-        "tierId": "monthly",
-        "name": "Monthly Pick-Up",
-        "cadence": "Monthly",
-        "priceDisplay": "$65 / month",
-        "url": "https://example.com/stripe-link-placeholder",
-        "perks": [
-          "2-3 seasonal bottles",
-          "Member pricing on pickup week",
-          "Swap for equal value on pickup"
-        ],
-        "pickupPolicyNote": "Pickup only with valid ID.",
-        "active": true,
-        "isPlaceholder": true
+  "_note": "Clover links handle payment only. Intake forms capture details for staff via mailto or external URLs.",
+  "payments": {
+    "private_event_deposit": {
+      "title": "Reservation Deposit",
+      "description": "Secure your date; refundable if we cannot accommodate your preferred time.",
+      "amount_display": "$250 deposit",
+      "clover_payment_url": "https://link.clover.com/urlshortener/mock-deposit",
+      "intake": {
+        "instructions": "After paying, send your details so we can confirm availability.",
+        "required_fields": ["name", "email", "phone", "date", "notes"],
+        "submission": {
+          "method": "mailto",
+          "to": "{{site_contact_email}}",
+          "subject_template": "Private Event Request – {{date}} – {{name}}",
+          "body_template": "Name: {{name}}\nEmail: {{email}}\nPhone: {{phone}}\nPreferred date: {{date}}\nNotes: {{notes}}\nPaid via Clover: {{paid}}\n"
+        }
       },
-      {
-        "tierId": "quarterly",
-        "name": "Quarterly Pick-Up",
-        "cadence": "Quarterly",
-        "priceDisplay": "$180 / quarter",
-        "url": "https://example.com/stripe-link-placeholder",
-        "perks": [
-          "3-4 seasonal bottles",
-          "Member pricing on pickup week",
-          "Swap for equal value on pickup"
-        ],
-        "pickupPolicyNote": "Pickup only with valid ID.",
-        "active": false,
-        "isPlaceholder": true
-      }
-    ]
-  },
-  "eventsDefaults": {
-    "fallbackRsvpEmail": "mockingbirddevin@gmail.com",
-    "learnMoreUrl": "https://example.com/stripe-link-placeholder"
-  },
-  "policies": {
-    "giftCards": "Gift cards are non-refundable and can be redeemed in-store.",
-    "partyDeposits": "Deposits apply to your final bill. Cancellation policy may apply.",
-    "wineClub": "Pickup only during business hours. Packages are held for 30 days."
+      "policy": "Deposit reserves your date after we confirm availability."
+    },
+    "gift_cards": {
+      "mode": "in_person",
+      "title": "Gift Cards",
+      "description": "Buy gift cards at the bar or by phone.",
+      "cta_label": "Call to purchase",
+      "cta_url": "tel:+1-419-504-4900"
+    },
+    "wine_club": {
+      "data_file": "wineclub.json"
+    }
   }
 }

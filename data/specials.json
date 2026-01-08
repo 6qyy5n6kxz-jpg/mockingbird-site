@@ -5,6 +5,7 @@
   "items": [
     {
       "name": "Rustic Lentil & Barley Soup",
+      "label": "Soup of the Week",
       "description": "Slow-simmered green lentils and pearl barley in a savory vegetable broth with tomato paste, olive oil, and herbs",
       "notes": [
         "Available as cup or bowl",
@@ -13,6 +14,7 @@
     },
     {
       "name": "Chicken Giardiniera & White Bean Press",
+      "label": "Weekly Pressed Sandwich",
       "description": "Roasted chicken thigh, smashed white beans with olive oil and garlic, giardiniera mix, and mozzarella. Pressed crisp and served hot",
       "notes": [
         "Served with pickle + Chef’s Weekly Side",
@@ -21,6 +23,7 @@
     },
     {
       "name": "Creamy Polenta with Artichoke & Herb Oil",
+      "label": "Hot Side of the Week",
       "description": "Soft cornmeal polenta finished with evaporated milk, topped with chopped artichokes, oregano, basil, and olive oil",
       "notes": [
         "Served warm in a composed bowl"
@@ -28,6 +31,7 @@
     },
     {
       "name": "White Bean, Artichoke & Caper Antipasto",
+      "label": "Cold Side of the Week",
       "description": "Marinated white beans with artichokes, capers, olive oil, and champagne vinegar",
       "notes": [
         "Served chilled with crackers",
@@ -36,6 +40,7 @@
     },
     {
       "name": "Chocolate Oat Bars",
+      "label": "Sweet Bite of the Day",
       "description": "Old fashioned oats baked with bittersweet and semi-sweet chocolate chips, brown sugar, and sweetened condensed milk",
       "notes": [
         "Cut fresh daily"
@@ -43,6 +48,7 @@
     },
     {
       "name": "Warm Farro, White Bean & Herb Bowl",
+      "label": "Chef’s Weekly Side",
       "description": "Farro and white beans tossed with olive oil, balsamic glaze, oregano, and black pepper",
       "notes": [
         "Served with all pressed sandwiches",
