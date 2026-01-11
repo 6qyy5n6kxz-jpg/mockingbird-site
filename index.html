@@ -44,39 +44,19 @@
             <a class="btn btn-primary" data-nav="menu">View Menu</a>
             <a class="btn btn-secondary" data-nav="specials">Tonight's Specials</a>
           </div>
+          <p class="note"><a data-nav="events">View upcoming events →</a></p>
         </div>
       </div>
     </section>
 
-    <section class="section fade-in">
+    <section class="section fade-in" data-section="why">
       <div class="container">
         <p class="kicker">Why Mockingbird</p>
-        <h2>Rooted in the neighborhood, shaped by the seasons.</h2>
-        <div class="features">
-          <div class="card">
-            <h3 data-why="0">Locally owned</h3>
-            <p data-why-body="0">We live here, shop here, and welcome neighbors daily.</p>
-          </div>
-          <div class="card">
-            <h3 data-why="1">Seasonal cooking</h3>
-            <p data-why-body="1">Menus evolve weekly to feature peak produce and responsible sourcing.</p>
-          </div>
-          <div class="card">
-            <h3 data-why="2">Curated bar</h3>
-          <p data-why-body="2">Thoughtful wine and beer selections, sangria, and no-proof options that shine.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section fade-in">
-      <div class="container">
-        <p class="kicker">What neighbors say</p>
-        <h2 data-fill="trust-heading">A local favorite on Mill Road</h2>
+        <h2 data-fill="trust-heading">Why Mockingbird</h2>
         <div class="features" id="trust-bullets">
-          <div class="card"><p data-trust="0">Warm, welcoming atmosphere for neighbors and friends</p></div>
-          <div class="card"><p data-trust="1">Seasonal specials worth coming back for</p></div>
-          <div class="card"><p data-trust="2">Thoughtful wine, beer, and sangria</p></div>
+          <div class="card"><p data-trust="0">Dinner-forward seasonal specials — updated weekly</p></div>
+          <div class="card"><p data-trust="1">Curated bottles, glass pours, sangria, beer, and NA options</p></div>
+          <div class="card"><p data-trust="2">Warm, local hospitality — walk in or call ahead</p></div>
         </div>
         <div class="inline-links" id="trust-review"></div>
       </div>
@@ -109,17 +89,11 @@
           <p class="kicker">Tonight</p>
           <h2>Specials</h2>
           <div id="specials-preview" class="list-flex"></div>
-          <div class="inline-links" style="margin-top:12px;">
-            <a class="btn btn-secondary btn-small" data-nav="specials">See all specials</a>
-          </div>
         </div>
         <div>
           <p class="kicker">This month</p>
           <h2>Events</h2>
           <div id="events-preview" class="list-flex"></div>
-          <div class="inline-links" style="margin-top:12px;">
-            <a class="btn btn-secondary btn-small" data-nav="events">View events</a>
-          </div>
         </div>
       </div>
     </section>
@@ -152,6 +126,7 @@
         <div class="info-block">
           <p class="kicker">Hours</p>
           <table class="hours-table" id="hours-table-home" aria-label="Hours"></table>
+          <p class="note" data-fill="seasonal-hours"></p>
         </div>
       </div>
     </section>
@@ -162,10 +137,6 @@
           <div>
             <p class="kicker">Join us tonight</p>
             <h2>Walk in or call ahead. We’ll have a seat ready.</h2>
-          </div>
-          <div class="hero-cta">
-            <a class="btn btn-primary" data-cta="call">Call</a>
-            <a class="btn btn-secondary" data-cta="directions">Directions</a>
           </div>
         </div>
       </div>

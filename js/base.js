@@ -1,9 +1,21 @@
-window.__debug = new URLSearchParams(window.location.search).get('debug') === '1';
-window.dbg = function (...args) {
-  if (!window.__debug) return;
-  console.log('[dbg]', ...args);
-};
 (function(){
+  let cachedDebug;
+  function isDebug(){
+    if (cachedDebug !== undefined) return cachedDebug;
+    if (window.__debug !== undefined) {
+      cachedDebug = !!window.__debug;
+      return cachedDebug;
+    }
+    cachedDebug = new URLSearchParams(window.location.search).get('debug') === '1';
+    window.__debug = cachedDebug;
+    return cachedDebug;
+  }
+  window.__debug = isDebug();
+  window.isDebugEnabled = isDebug;
+  window.dbg = function (...args) {
+    if (!isDebug()) return;
+    console.log('[dbg]', ...args);
+  };
   function getBasePath(){
     const { hostname, pathname } = window.location;
     if (hostname.endsWith('github.io')) {

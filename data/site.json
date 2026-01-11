@@ -2,11 +2,12 @@
   "_comment": "Update contact info, hours, social links, and image filenames here. All pages read from this file.",
   "name": "The Mockingbird on Mill Road",
   "shortName": "Mockingbird",
-  "tagline": "Neighborhood restaurant for wine, beer, and sangria",
-  "heroHeadline": "Seasonal suppers with wine, beer, and sangria on Mill Road",
-  "heroSubhead": "Graytown hospitality with weekly specials, sangria, and seasonal cooking for neighbors and friends.",
-  "description": "A cozy, seasonal restaurant serving Graytown with thoughtful cooking, wine, beer, sangria, and no-proof options.",
-  "seoDescription": "The Mockingbird on Mill Road is a neighborhood restaurant in Graytown, OH serving seasonal cooking, wine, beer, sangria, and weekly specials.",
+  "tagline": "The Mockingbird Wine Café",
+  "heroHeadline": "The Mockingbird Wine Café",
+  "heroSubhead": "From-scratch food and curated wines from around the world.",
+  "heroLede": "Weekly specials, curated wines, sangria, beer, and warm hospitality.",
+  "description": "A cozy wine café serving Graytown with seasonal cooking, weekly specials, curated wine, craft beverages, and no-proof options.",
+  "seoDescription": "The Mockingbird on Mill Road is a wine café in Graytown, OH serving seasonal cooking, curated wines, craft beverages, and weekly specials.",
   "locationShort": "Graytown, OH",
   "images": {
     "hero": { "src": "assets/images/hero.jpg", "fallback": "assets/images/hero.svg", "alt": "Dining room at The Mockingbird on Mill Road" },
@@ -41,11 +42,15 @@
   "email": "mockingbirddevin@gmail.com",
   "mapsUrl": "https://www.google.com/maps/search/?api=1&query=4408+N.+Elliston-Trowbridge+Rd.,+Graytown,+OH+43432",
   "hours": [
+    { "label": "Sun", "value": "Closed" },
+    { "label": "Mon", "value": "Closed" },
+    { "label": "Tue", "value": "Closed" },
+    { "label": "Wed", "value": "Closed" },
     { "label": "Thu", "value": "4:00 PM – 10:00 PM" },
     { "label": "Fri", "value": "4:00 PM – 10:00 PM" },
     { "label": "Sat", "value": "4:00 PM – 10:00 PM" }
   ],
-  "seasonalHoursNote": "Winter hours (February–May): Thu–Sat 5–10 PM",
+  "seasonalHoursNote": "Open Thu–Sat · Closed Sun–Wed",
   "socials": {
     "facebook": "https://www.facebook.com/themockingbirdonmillroad/",
     "instagram": "https://www.instagram.com/mockingbirdonmillroad/"
@@ -56,13 +61,14 @@
     "link": ""
   },
   "trust": {
-    "heading": "A local favorite on Mill Road",
+    "heading": "Why Mockingbird",
     "bullets": [
-      "Warm, welcoming atmosphere for neighbors and friends",
-      "Seasonal specials worth coming back for",
-      "Thoughtful wine, beer, and sangria"
+      "Dinner-forward seasonal specials — updated weekly",
+      "Curated bottles, glass pours, sangria, beer, and NA options",
+      "Warm, local hospitality — walk in or call ahead"
     ],
-    "reviewLink": ""
+    "reviewLink": "",
+    "quotes": []
   },
   "heroImage": "assets/images/hero.svg",
   "gallery": [
@@ -70,15 +76,15 @@
     "assets/images/interior2.svg",
     "assets/images/interior3.svg"
   ],
+  "footer": {
+    "hours_summary": "Open Thu–Sat 4–10 PM • Closed Sun–Wed"
+  },
   "defaultSEO": {
     "title": "The Mockingbird on Mill Road",
     "description": "Seasonal cooking and welcoming hospitality in Graytown, OH.",
     "ogImage": "assets/images/hero.svg"
   },
-  "whyBullets": [
-    "Locally owned gathering place with familiar faces",
-    "Seasonal cooking and specials driven by what’s fresh",
-    "Curated list with wine, beer, sangria, and no-proof options"
-  ],
+  "whyBullets": [],
+  "whyBodies": [],
   "featuredItems": []
 }

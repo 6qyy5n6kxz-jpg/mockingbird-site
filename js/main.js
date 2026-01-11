@@ -17,7 +17,7 @@
   //   it's probably the repo name.
   // - If path has 1 segment and it matches a known route, base should be '' (user site).
   const knownRoutes = new Set([
-    'menu', 'specials', 'events', 'private-parties', 'wine-club', 'gift-cards', 'contact', 'drinks'
+    'menu', 'specials', 'events', 'private-parties', 'reserve-date', 'wine-club', 'gift-cards', 'contact', 'drinks'
   ]);
 
   const parts = pathname.split('/').filter(Boolean);
@@ -67,9 +67,12 @@
     });
   }
 
-  const __debug = new URLSearchParams(window.location.search).get('debug') === '1';
+  const __debug = typeof window.isDebugEnabled === 'function'
+    ? window.isDebugEnabled()
+    : !!window.__debug;
+  const DEBUG = __debug === true;
   function dbg(...args) {
-    if (__debug) console.log('[dbg]', ...args);
+    if (DEBUG) console.log('[dbg]', ...args);
   }
 
   function ticketsRemaining(ticketing) {
@@ -332,20 +335,83 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
   }
 
   const state = { site: null, payments: null };
+  const debugSummary = {
+    menuItems: 0,
+    menuPriced: 0,
+    menuMissing: 0,
+    menuPdf: false,
+    giftMode: '',
+    giftOnline: false,
+    missingBySection: []
+  };
+
+  function validateSiteHours(site) {
+    if (!DEBUG) return;
+    const hours = site?.hours;
+    if (!Array.isArray(hours)) {
+      dbg('site hours schema mismatch', hours);
+      return;
+    }
+    if (hours.length !== 7) dbg('site hours schema mismatch', { length: hours.length, hours });
+    hours.forEach((row) => {
+      if (!row || !row.label || row.value === undefined) {
+        dbg('site hours schema mismatch', row);
+      }
+    });
+  }
+
+  function validateEvents(data) {
+    if (!DEBUG) return;
+    (data?.events || []).forEach((ev) => {
+      if (!ev) return;
+      if (ev.event_type !== 'ticketed' && ev.event_type !== 'rsvp') {
+        dbg('event_type invalid', ev.title, ev.event_type);
+      }
+    });
+  }
+
+  function updateDebugSummaryDisplay() {
+    if (!DEBUG) return;
+    const body = document.body || document.documentElement;
+    if (!body) return;
+    let panel = document.getElementById('debug-summary');
+    const lines = [
+      `Menu items: ${debugSummary.menuItems}`,
+      `Menu priced: ${debugSummary.menuPriced}`,
+      `Menu PDF: ${debugSummary.menuPdf ? 'yes' : 'no'}`,
+      `Gift cards: mode=${debugSummary.giftMode || 'unknown'}, onlineCTA=${debugSummary.giftOnline ? 'yes' : 'no'}`
+    ];
+    if (Array.isArray(debugSummary.missingBySection) && debugSummary.missingBySection.length) {
+      const capped = debugSummary.missingBySection.slice(0, 10);
+      lines.push(`Missing prices: ${capped.join(' | ')}`);
+    }
+    if (!panel) {
+      panel = document.createElement('div');
+      panel.id = 'debug-summary';
+      body.appendChild(panel);
+    }
+    panel.textContent = lines.join(' · ');
+  }
 
   async function fetchJSON(filename, fallback) {
     const url = withBase(`/data/${filename}`);
     try {
+      if (DEBUG && filename === 'menu.json') dbg('fetchJSON start', { filename, url });
       const res = await fetch(url);
-      if (__debug) dbg('fetchJSON', { filename, url, ok: res.ok, status: res.status });
+      if (DEBUG) dbg('fetchJSON', { filename, url, ok: res.ok, status: res.status });
       if (!res.ok) throw new Error(`Request failed: ${res.status}`);
       const json = await res.json();
-      if (__debug && filename === 'drinks.json') {
+      if (DEBUG && filename === 'drinks.json') {
         dbg('drinks payload', { keys: Object.keys(json || {}), sectionIds: (json?.sections || []).map((s) => s.id) });
+      }
+      if (DEBUG && filename === 'menu.json') {
+        const categories = Array.isArray(json?.categories) ? json.categories.length : 0;
+        dbg('menu payload', { keys: Object.keys(json || {}), categories });
       }
       return json;
     } catch (err) {
       console.warn(`Data load error for ${filename}`, err);
+      if (DEBUG && filename === 'menu.json') dbg('menu data load failed', err?.message || err);
       return fallback;
     }
   }
@@ -388,7 +454,8 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
     applyText('[data-fill="name"]', site.name || site.shortName);
     applyText('[data-fill="tagline"]', site.tagline);
     applyText('[data-fill="hero-headline"]', site.heroHeadline);
-    applyText('[data-fill="hero-subhead"]', site.heroSubhead);
+    applyText('[data-fill="hero-subhead"]', site.heroSubhead || site.heroLede);
+    applyText('[data-fill="hero-lede"]', site.heroLede || site.heroSubhead);
     applyText('[data-fill="location-short"]', site.locationShort);
     applyText('[data-fill="phone"]', site.phone);
     applyText('[data-fill="phone-link"]', site.phone);
@@ -397,9 +464,14 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
     applyText('[data-fill="city"]', `${site.address?.city || ''}, ${site.address?.state || ''} ${site.address?.zip || ''}`.trim());
     applyText('[data-fill="full-address"]', site.address?.full || '');
     applyText('[data-fill="email-text"]', site.email);
-    if (site.hours?.length) {
+    const hoursFooter = site.footer?.hours_summary || site.footer?.hoursSummary || site.footerHoursSummary;
+    if (hoursFooter) {
+      applyText('[data-fill="hours"]', hoursFooter);
+      if (DEBUG) dbg('footer hours mode', 'summary');
+    } else if (site.hours?.length) {
       const hoursText = site.hours.map((h) => `${h.label} ${h.value}`).join(' · ');
       applyText('[data-fill="hours"]', hoursText);
+      if (DEBUG) dbg('footer hours mode', 'full');
     }
     if (site.seasonalHoursNote) {
       applyText('[data-fill="seasonal-hours"]', site.seasonalHoursNote);
@@ -411,21 +483,102 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
     const socials = site.socials || site.social;
     setHref('[data-fill="facebook"]', socials?.facebook);
     setHref('[data-fill="instagram"]', socials?.instagram);
+    if (socials) {
+      const fb = socials.facebook;
+      const ig = socials.instagram;
+      document.querySelectorAll('footer .social').forEach((wrap) => {
+        wrap.innerHTML = '';
+        const icons = [];
+        if (fb) {
+          const a = document.createElement('a');
+          a.href = fb;
+          a.target = '_blank';
+          a.rel = 'noopener noreferrer';
+          a.setAttribute('aria-label', 'Facebook');
+          a.className = 'footer-icon';
+          a.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M13 10.5V8.75c0-.6.4-1 .9-1H14.9V6h-1.1c-1.8 0-3.25 1.4-3.25 3.1V10.5H9v1.8h1.55V18h2.05v-5.7h1.9l.25-1.8H12.6Z" fill="currentColor"/></svg>';
+          icons.push(a);
+        }
+        if (ig) {
+          const a = document.createElement('a');
+          a.href = ig;
+          a.target = '_blank';
+          a.rel = 'noopener noreferrer';
+          a.setAttribute('aria-label', 'Instagram');
+          a.className = 'footer-icon';
+          a.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 3h10a4 4 0 0 1 4 4v10a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V7a4 4 0 0 1 4-4Zm0 2A2 2 0 0 0 5 7v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H7Zm5 3.5A3.5 3.5 0 1 1 8.5 12 3.5 3.5 0 0 1 12 8.5Zm0 2A1.5 1.5 0 1 0 13.5 12 1.5 1.5 0 0 0 12 10.5Zm4-3.75a.75.75 0 1 1-.75.75.75.75 0 0 1 .75-.75Z" fill="currentColor"/></svg>';
+          icons.push(a);
+        }
+        if (icons.length) {
+          const holder = document.createElement('div');
+          holder.className = 'footer-social-icons';
+          icons.forEach((el) => holder.appendChild(el));
+          wrap.appendChild(holder);
+        }
+        if (DEBUG) dbg('footer social icons rendered', { fb: !!fb, ig: !!ig });
+      });
+    }
 
     setHref('[data-cta="call"]', site.phone ? `tel:${site.phone}` : '#');
     setHref('[data-cta="directions"]', site.mapsUrl || site.mapLink || '#');
+
+    if (DEBUG) {
+      const from = site.heroHeadline || site.tagline ? 'site.json' : 'index.html';
+      dbg('home tagline source', { from });
+      dbg('home sections', { why: (site.whyBullets || []).length, testimonials: (site.trust?.quotes || []).length });
+    }
+  }
+
+  function pruneFooterLinks() {
+    document.querySelectorAll('footer .footer-links').forEach((wrap) => {
+      wrap.querySelectorAll('a[data-nav="gallery"], a[data-nav="specials"]').forEach((a) => a.remove());
+      const explore = Array.from(wrap.querySelectorAll('div')).find((div) => {
+        const k = div.querySelector('.kicker');
+        return k && k.textContent.toLowerCase().includes('explore');
+      });
+      if (explore) {
+        const inline = explore.querySelector('.inline-links') || explore;
+        const existingAbout = inline.querySelector('a[data-nav="about"]');
+        if (!existingAbout) {
+          const a = document.createElement('a');
+          a.setAttribute('data-nav', 'about');
+          a.textContent = 'About';
+          a.href = withBase('/about/');
+          inline.appendChild(a);
+        }
+      }
+        if (DEBUG) {
+          const links = Array.from(wrap.querySelectorAll('a[data-nav]')).map((a) => a.getAttribute('data-nav'));
+          dbg('footer links', links);
+        }
+      if (DEBUG) {
+        const hrefs = Array.from(wrap.querySelectorAll('a[data-nav]')).map((a) => a.href);
+        const seen = new Set();
+        const dups = [];
+        hrefs.forEach((h) => {
+          if (seen.has(h)) dups.push(h);
+          else seen.add(h);
+        });
+        if (dups.length) dbg('Footer duplicate links detected', dups);
+      }
+    });
   }
 
   function populateWhyBullets(site) {
-    if (!site?.whyBullets?.length) return;
-    const bullets = site.whyBullets;
+    if (!site?.whyBullets?.length && !site?.whyBodies?.length) {
+      const section = document.querySelector('[data-section="why"]');
+      if (section) section.remove();
+      return;
+    }
+    const bullets = site.whyBullets || [];
+    const bodies = site.whyBodies || bullets;
     document.querySelectorAll('[data-why]').forEach((el) => {
       const idx = Number(el.getAttribute('data-why'));
       if (!Number.isNaN(idx) && bullets[idx]) el.textContent = bullets[idx];
     });
     document.querySelectorAll('[data-why-body]').forEach((el) => {
       const idx = Number(el.getAttribute('data-why-body'));
-      if (!Number.isNaN(idx) && bullets[idx]) el.textContent = bullets[idx];
+      if (!Number.isNaN(idx) && bodies[idx]) el.textContent = bodies[idx];
     });
   }
 
@@ -440,6 +593,10 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
   function populateTrust(site) {
     const trust = site?.trust;
     if (!trust) return;
+    if (Array.isArray(trust.quotes) && !trust.quotes.length && (!trust.bullets || !trust.bullets.length)) {
+      const section = document.getElementById('trust-bullets');
+      if (section && section.parentElement) section.parentElement.remove();
+    }
     applyText('[data-fill="trust-heading"]', trust.heading);
     const bullets = trust.bullets || [];
     document.querySelectorAll('[data-trust]').forEach((el) => {
@@ -625,12 +782,91 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
       table.innerHTML = '<tr><td colspan="2">Hours coming soon.</td></tr>';
       return;
     }
-    table.innerHTML = site.hours.map((row) => `<tr><td>${row.label}</td><td>${row.value}</td></tr>`).join('');
+    const rows = site.hours.map((row) => `<tr><td>${row.label}</td><td>${row.value}</td></tr>`);
+    table.innerHTML = rows.join('');
+    if (DEBUG) dbg('hours days rendered', rows.length);
+  }
+
+  function formatMenuPriceValue(val) {
+    if (val === null || val === undefined) return '';
+    const formatNumber = (num) => {
+      if (!Number.isFinite(num)) return '';
+      return num % 1 === 0 ? `$${num.toFixed(0)}` : `$${num.toFixed(2)}`;
+    };
+    const parseNum = (str) => {
+      const cleaned = str.replace(/\$/g, '').trim();
+      const num = Number(cleaned);
+      return Number.isFinite(num) ? num : null;
+    };
+    if (typeof val === 'number') return formatNumber(val);
+    if (typeof val === 'string') {
+      const trimmed = val.trim();
+      if (!trimmed) return '';
+      const rangeMatch = trimmed.split(/[–-]/).map((p) => p.trim()).filter(Boolean);
+      if (rangeMatch.length === 2 && rangeMatch.every((p) => /\d/.test(p))) {
+        const [a, b] = rangeMatch.map((p) => parseNum(p));
+        if (a !== null && b !== null) return `${formatNumber(a)}–${formatNumber(b)}`;
+      }
+      const slashMatch = trimmed.split('/').map((p) => p.trim()).filter(Boolean);
+      if (slashMatch.length === 2 && slashMatch.every((p) => /\d/.test(p))) {
+        const [a, b] = slashMatch.map((p) => parseNum(p));
+        if (a !== null && b !== null) return `${formatNumber(a)} / ${formatNumber(b)}`;
+      }
+      const num = parseNum(trimmed);
+      if (num !== null) return formatNumber(num);
+      if (/^\$\d/.test(trimmed)) return trimmed;
+      return '';
+    }
+    return '';
+  }
+
+  function formatCurrency(value) {
+    if (!Number.isFinite(value)) return '—';
+    return value % 1 === 0 ? `$${value.toFixed(0)}` : `$${value.toFixed(2)}`;
+  }
+
+  function getDisplayPrice(item) {
+    if (!item || typeof item !== 'object') return '';
+    const raw = item.price;
+    const direct = formatMenuPriceValue(raw);
+    if (direct) return direct;
+    if (DEBUG && raw !== null && raw !== undefined) dbg('Invalid price format', { name: item.name || item.title || '(no name)', price: raw });
+    const alt = item.price_display ?? item.priceDisplay;
+    const altVal = formatMenuPriceValue(alt);
+    if (altVal) return altVal;
+    if (Array.isArray(item.prices)) {
+      const joined = item.prices.map((p) => formatMenuPriceValue(p)).filter(Boolean).join(' / ');
+      if (joined) return joined;
+    }
+    if (Array.isArray(item.variants)) {
+      const variants = item.variants
+        .map((v) => {
+          const val = formatMenuPriceValue(v?.price);
+          if (!val) return '';
+          const label = v?.label || v?.name;
+          return label ? `${label}: ${val}` : val;
+        })
+        .filter(Boolean)
+        .join(' / ');
+      if (variants) return variants;
+    }
+    if (item.size_prices && typeof item.size_prices === 'object') {
+      const sizes = Object.entries(item.size_prices)
+        .map(([size, val]) => {
+          const clean = formatMenuPriceValue(val);
+          return clean ? `${size}: ${clean}` : '';
+        })
+        .filter(Boolean)
+        .join(' / ');
+      if (sizes) return sizes;
+    }
+    return '';
   }
 
   function renderMenu(menuData) {
     const container = document.getElementById('menu-container');
     if (!container) return;
+    dbg('renderMenu start', { hasData: !!menuData, categories: menuData?.categories?.length || 0 });
     const specialPlaceholders = new Set([
       'Soup of the Week',
       'Weekly Pressed Sandwich',
@@ -643,21 +879,37 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
       const phone = state.site?.phone ? `tel:${state.site.phone}` : null;
       const call = phone ? `<a href="${phone}">call us</a>` : 'call us';
       container.innerHTML = `<p class="note">Menu coming soon—please ${call} for today’s offerings.</p>`;
+      debugSummary.menuItems = 0;
+      debugSummary.menuPriced = 0;
+      updateDebugSummaryDisplay();
+      dbg('renderMenu end', { rendered: false, reason: 'no categories' });
       return;
     }
     container.innerHTML = '';
+    let totalItems = 0;
+    let pricedItems = 0;
+    const missingBySection = new Map();
+    const addMissing = (sectionName) => {
+      const key = sectionName || 'Uncategorized';
+      missingBySection.set(key, (missingBySection.get(key) || 0) + 1);
+    };
     menuData.categories.forEach((cat) => {
       const section = document.createElement('section');
       section.className = 'menu-category fade-in';
       section.innerHTML = `<div class="inline-links"><span class="kicker">${cat.name}</span>${cat.description ? `<span class="note">${cat.description}</span>` : ''}</div>`;
       const list = document.createElement('div');
       cat.items?.forEach((item) => {
+        totalItems += 1;
+        const priceText = getDisplayPrice(item);
+        if (priceText) pricedItems += 1;
+        if (!priceText) addMissing(cat.name);
         const row = document.createElement('div');
         row.className = 'menu-item';
         const tags = Array.isArray(item.tags) && item.tags.length
           ? `<div class="inline-links">${item.tags.map((t) => `<span class="badge">${t}</span>`).join('')}</div>`
           : '';
-        row.innerHTML = `<div><h4>${item.name}</h4><p>${item.description || ''}</p>${tags}</div><div>${item.price || ''}</div>`;
+        const right = priceText ? `<span class="price note">${priceText}</span>` : '';
+        row.innerHTML = `<div><h4>${item.name}</h4><p>${item.description || ''}</p>${tags}</div>${right ? `<div>${right}</div>` : ''}`;
         const specialLabel = item.specialLabel || (specialPlaceholders.has(item.name) ? item.name : null);
         if (specialLabel) {
           row.setAttribute('data-special-label', specialLabel);
@@ -684,6 +936,16 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
       container.appendChild(noteBlock);
     }
     enableFadeIn();
+    debugSummary.menuItems = totalItems;
+    debugSummary.menuPriced = pricedItems;
+    debugSummary.menuMissing = totalItems - pricedItems;
+    debugSummary.missingBySection = Array.from(missingBySection.entries())
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 10)
+      .map(([k, v]) => `${k}: ${v}`);
+    updateDebugSummaryDisplay();
+    dbg('renderMenu end', { rendered: true, categories: menuData.categories.length, totalItems, pricedItems });
+    if (!pricedItems) dbg('Menu items missing price fields; nothing to display');
   }
 
   function applySpecialsToMenu(specialsData) {
@@ -705,6 +967,47 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
       if (nameEl && match.name) nameEl.textContent = match.name;
       if (descEl && match.description) descEl.textContent = match.description;
     });
+  }
+
+  function resolveMenuPdfUrl(site) {
+    const candidates = [
+      site?.menu_pdf_url,
+      site?.menuPdfUrl,
+      site?.menuPdf,
+      site?.menu_pdf,
+      site?.menu?.pdf
+    ].filter(Boolean);
+    if (candidates.length) return withBase(candidates[0]);
+    return '';
+  }
+
+  function setupMenuPdfLink(site) {
+    const container = document.getElementById('menu-container');
+    if (!container) return;
+    const parent = container.parentElement;
+    if (!parent) return;
+    const url = resolveMenuPdfUrl(site);
+    debugSummary.menuPdf = !!url;
+    dbg('menu pdf resolved', Boolean(url), url || '');
+    const existing = document.getElementById('menu-pdf');
+    if (existing && !url && DEBUG) {
+      dbg('Menu PDF placeholder present in markup; consider removing');
+    }
+    if (!url) {
+      if (existing) existing.remove();
+      updateDebugSummaryDisplay();
+      return;
+    }
+    let holder = existing;
+    if (!holder) {
+      holder = document.createElement('div');
+      holder.id = 'menu-pdf';
+      holder.className = 'inline-links';
+      parent.insertBefore(holder, container);
+    }
+    holder.innerHTML = `<a class="download" href="${url}" target="_blank" rel="noopener noreferrer">Download PDF</a>`;
+    holder.hidden = false;
+    updateDebugSummaryDisplay();
   }
 
   function formatPrices(prices) {
@@ -938,7 +1241,8 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
       const cash = drinks.notes?.cashDiscount || '';
       const rules = drinks.notes?.pricingRules || '';
       const eligibility = drinks.notes?.eligibility || '';
-      note.innerHTML = [rules, eligibility, cash].filter(Boolean).join(' · ');
+      const jump = anchors && anchors.querySelectorAll('a').length > 1 ? 'Select a category above to jump to a section.' : '';
+      note.innerHTML = [rules, eligibility, cash, jump].filter(Boolean).join(' · ');
     }
     enableFadeIn();
     if (container.id === 'drinks-container') {
@@ -1008,6 +1312,7 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
   function renderEvents(data, emailFallback) {
     const container = document.getElementById('events-list');
     if (!container) return;
+    validateEvents(data);
     const now = new Date();
     const events = (data?.events || []).filter((ev) => new Date(ev.date) >= now);
     if (!events.length) {
@@ -1035,21 +1340,35 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
         : '';
       const priceBadge = (ticketing && ticketing.price_display) ? `<span class="badge">${ticketing.price_display}</span>` : (ev.price ? `<span class="badge">${ev.price}</span>` : '');
       const typeBadge = ev.type ? `<span class="badge badge-soft">${ev.type}</span>` : '';
+      const eventTypeBadge = ev.event_type === 'ticketed'
+        ? '<span class="badge badge-soft">Ticketed Event</span>'
+        : ev.event_type === 'rsvp'
+          ? '<span class="badge badge-soft">RSVP</span>'
+          : '';
+      if (DEBUG && ev.event_type) dbg('render event_type', ev.title, ev.event_type);
 
       let button = '';
-      if (ticketing && !soldOut && isValidPaymentLink(ticketing.clover_payment_url, ticketing.isPlaceholder)) {
+      const linkValid = ticketing && isValidPaymentLink(ticketing.clover_payment_url, ticketing.isPlaceholder);
+      if (ticketing && !soldOut && linkValid) {
         button = `<a class="btn btn-primary btn-small" href="${ticketing.clover_payment_url}" target="_blank" rel="noopener noreferrer">Pay on Clover</a>`;
+      }
+      let ticketCopy = '';
+      if (ticketing && !soldOut && linkValid) {
+        ticketCopy = '<p class="note">Ticketed event — pay on Clover, then email seating details.</p>';
+      } else if (ticketing && !linkValid) {
+        ticketCopy = '<p class="note">Ticket link coming soon.</p>';
       }
       const lowInventory = ticketing && remaining > 0 && remaining <= 5;
       card.innerHTML = `
         ${img}
-        <div class="inline-links"><span class="badge">${formatDate(ev.date)}</span>${priceBadge}${availabilityBadge}${typeBadge}</div>
+        <div class="inline-links"><span class="badge">${formatDate(ev.date)}</span>${priceBadge}${availabilityBadge}${typeBadge}${eventTypeBadge}</div>
         <h3>${ev.title}</h3>
         <p>${ev.description}</p>
         ${ticketing?.policy ? `<p class="note">${ticketing.policy}</p>` : ''}
         <div class="form-actions">
           ${button || ''}
         </div>
+        ${ticketCopy}
         ${lowInventory ? '<p class="note">Limited tickets remain. Availability isn’t held until payment completes.</p>' : ''}
       `;
 
@@ -1084,6 +1403,7 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
   function renderFeaturedItems(site, menuData) {
     const container = document.getElementById('featured-items');
     if (!container) return;
+    let source = 'none';
     let items = Array.isArray(site?.featuredItems) ? site.featuredItems.slice(0, 4) : [];
     if ((!items || !items.length) && menuData?.categories?.length) {
       const featuredMenu = [];
@@ -1093,6 +1413,9 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
         });
       });
       items = featuredMenu.slice(0, 4);
+      source = items.length ? 'menu-featured' : source;
+    } else if (items && items.length) {
+      source = 'site.json';
     }
     if ((!items || !items.length) && menuData?.categories?.length) {
       const collected = [];
@@ -1102,16 +1425,20 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
         });
       });
       items = collected;
+      source = items.length ? 'menu-derived' : source;
     }
+    if (DEBUG) dbg('home featured source', source || 'none');
     if (!items || !items.length) {
       container.innerHTML = '<p class="note">Featured items will be posted soon.</p>';
       return;
     }
     container.innerHTML = '';
     items.slice(0, 4).forEach((item) => {
+      const price = getDisplayPrice(item);
+      if (DEBUG) dbg('featured price match', item?.name || item?.title || '(no name)', price || 'none');
       const card = document.createElement('div');
       card.className = 'card fade-in';
-      card.innerHTML = `<h3>${item.name}</h3><p>${item.description || ''}</p>${item.price ? `<strong>${item.price}</strong>` : ''}`;
+      card.innerHTML = `<h3>${item.name}</h3><p>${item.description || ''}</p>${price ? `<strong>${price}</strong>` : ''}`;
       container.appendChild(card);
     });
     enableFadeIn();
@@ -1174,32 +1501,77 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
   function renderGiftCards(payments) {
     const container = document.getElementById('giftcard-options');
     if (!container) return;
+    state.payments = payments || state.payments;
     const giftData = payments?.giftCards || payments?.gift_cards || payments?.payments?.gift_cards;
     if (!giftData) {
       container.innerHTML = '<p class="note">Gift card info coming soon.</p>';
+      debugSummary.giftMode = 'missing';
+      debugSummary.giftOnline = false;
+      updateDebugSummaryDisplay();
       return;
     }
+    const sitePhone = state.site?.phone ? `tel:${state.site.phone}` : '';
+    const siteEmail = state.site?.email ? `mailto:${state.site.email}` : '';
+    const resolveGiftCardLink = (entry) => {
+      const link =
+        entry?.clover_payment_url ||
+        entry?.cloverPaymentUrl ||
+        entry?.online_url ||
+        entry?.onlineUrl ||
+        entry?.url ||
+        entry?.payment_link_url ||
+        entry?.payment_link ||
+        entry?.paymentLink ||
+        entry?.link;
+      if (!link) return '';
+      if (!/^https?:\/\//i.test(link)) {
+        if (DEBUG) dbg('gift card link non-http', link);
+        return '';
+      }
+      return isValidPaymentLink(link, entry?.isPlaceholder) ? link : '';
+    };
     // New structure: in-person call to action
-    if (giftData.mode === 'in_person') {
-      container.innerHTML = `<div class="card fade-in"><h3>${giftData.title || 'Gift Cards'}</h3><p>${giftData.description || ''}</p><a class="btn btn-primary" href="${giftData.cta_url || '#'}">${giftData.cta_label || 'Call to purchase'}</a></div>`;
+    if (!Array.isArray(giftData) && giftData.mode === 'in_person') {
+      debugSummary.giftMode = 'in_person';
+      const onlineUrl = resolveGiftCardLink(giftData);
+      debugSummary.giftOnline = !!onlineUrl;
+      dbg('gift cards mode', 'in_person', 'onlineCta', Boolean(onlineUrl));
+      if (!onlineUrl) dbg('No gift card payment link found; online CTA hidden');
+      const phoneHref = giftData.cta_url || sitePhone || '';
+      const actions = [];
+      if (phoneHref) actions.push(`<a class="btn btn-primary" href="${phoneHref}">${giftData.cta_label || 'Call to purchase'}</a>`);
+      if (onlineUrl) actions.push(`<a class="btn btn-secondary" href="${onlineUrl}" target="_blank" rel="noopener noreferrer">Buy Gift Card Online</a>`);
+      if (!onlineUrl && siteEmail) actions.push(`<a class="btn btn-ghost" href="${siteEmail}">Email us</a>`);
+      container.innerHTML = `<div class="card fade-in"><h3>${giftData.title || 'Gift Cards'}</h3><p>Pick up a physical card at the bar or call to load one for dinner, drinks, specials, or events.</p><p class="note">Redeem at Mockingbird when you visit. Custom amounts available when you call or email.</p>${actions.length ? `<div class="inline-links">${actions.join('')}</div>` : ''}</div>`;
+      enableFadeIn();
+      updateDebugSummaryDisplay();
       return;
     }
     const list = Array.isArray(giftData) ? giftData : [];
     if (!list.length) {
       container.innerHTML = '<p class="note">Gift card purchasing is temporarily unavailable.</p>';
+      debugSummary.giftMode = Array.isArray(giftData) ? 'list-empty' : (giftData.mode || 'unknown');
+      debugSummary.giftOnline = false;
+      updateDebugSummaryDisplay();
       return;
     }
     container.innerHTML = '';
+    let actionableCount = 0;
     list.forEach((item) => {
       const actionable = item.url && !isPlaceholderUrl(item.url, item.isPlaceholder);
+      if (actionable) actionableCount += 1;
       const card = document.createElement('div');
       card.className = 'card fade-in';
       const action = actionable
-        ? `<a class="btn btn-primary" href="${item.url}">Buy ${item.label || `$${item.amount}`}</a>`
+        ? `<a class="btn btn-primary" href="${item.url}" target="_blank" rel="noopener noreferrer">Buy ${item.label || `$${item.amount}`}</a>`
         : `<button class="btn btn-secondary" type="button" disabled>Coming soon</button>`;
       card.innerHTML = `<h3>${item.label || `$${item.amount} Gift Card`}</h3><p>Digital delivery via Clover checkout.</p>${action}`;
       container.appendChild(card);
     });
+    debugSummary.giftMode = 'list';
+    debugSummary.giftOnline = actionableCount > 0;
+    dbg('gift cards mode', 'list', 'onlineCta', actionableCount > 0);
+    dbg('Gift card link detection', { mode: 'list', total: list.length, actionable: actionableCount });
     if (payments.policies?.giftCards) {
       const policy = document.createElement('p');
       policy.className = 'note';
@@ -1207,6 +1579,7 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
       container.appendChild(policy);
     }
     enableFadeIn();
+    updateDebugSummaryDisplay();
   }
 
   function renderDeposits(payments, site) {
@@ -1221,8 +1594,9 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
     container.innerHTML = '';
     const card = document.createElement('div');
     card.className = 'card fade-in';
+    const ctaLabel = deposit.cta_label || 'Pay deposit';
     const action = actionable
-      ? `<a class="btn btn-primary btn-small" href="${deposit.clover_payment_url}" target="_blank" rel="noopener noreferrer">Pay Deposit</a>`
+      ? `<a class="btn btn-primary btn-small" href="${deposit.clover_payment_url}" target="_blank" rel="noopener noreferrer">${ctaLabel}</a>`
       : `<button class="btn btn-secondary btn-small" type="button" disabled>Link coming soon</button>`;
     card.innerHTML = `<h3>${deposit.title || 'Reservation Deposit'}</h3><p>${deposit.description || ''}</p><p><strong>${deposit.amount_display || ''}</strong></p>${action}${deposit.policy ? `<p class="note">${deposit.policy}</p>` : ''}`;
     if (deposit.intake) {
@@ -1251,6 +1625,464 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
     }
     container.appendChild(card);
     enableFadeIn();
+  }
+
+  function renderReserveDateDeposit(payments) {
+    const card = document.getElementById('reserve-deposit-card');
+    if (!card) return;
+    const amountEl = card.querySelector('[data-reserve-deposit="amount"]');
+    const balanceEl = card.querySelector('[data-reserve-deposit="balance"]');
+    const cta = card.querySelector('[data-reserve-deposit="cta"]');
+    const deposit = payments?.private_event_deposit || payments?.payments?.private_event_deposit;
+    if (!deposit) {
+      card.innerHTML = '<p class="note">Deposit information is temporarily unavailable.</p>';
+      return;
+    }
+    if (amountEl && deposit.amount_display) amountEl.textContent = deposit.amount_display;
+    if (balanceEl) {
+      const balance = deposit.balance_due_day_of_event;
+      if (typeof balance === 'number' && Number.isFinite(balance)) {
+        balanceEl.textContent = formatCurrency(balance);
+      } else if (typeof balance === 'string' && balance.trim()) {
+        balanceEl.textContent = balance;
+      }
+    }
+    if (cta) {
+      const ctaLabel = deposit.cta_label || 'Pay deposit';
+      const linkValid = isValidPaymentLink(deposit.clover_payment_url, deposit.isPlaceholder);
+      cta.textContent = ctaLabel;
+      if (linkValid) {
+        cta.href = deposit.clover_payment_url;
+      } else {
+        cta.href = '#';
+        cta.setAttribute('aria-disabled', 'true');
+        cta.addEventListener('click', (event) => event.preventDefault());
+      }
+    }
+  }
+
+  function renderPrivateEventMenu(privateData) {
+    const builder = document.getElementById('private-menu-builder');
+    if (!builder) return;
+    const menuTypes = builder.querySelector('[data-private-menu="types"]');
+    const menuSections = builder.querySelector('[data-private-menu="sections"]');
+    const menuAddons = builder.querySelector('[data-private-menu="addons"]');
+    const guestInput = builder.querySelector('#private-guest-count');
+    const estimateEl = builder.querySelector('[data-private-menu="estimate"]');
+    const estimateFixed = builder.querySelector('[data-private-menu="estimate-fixed"]');
+    const estimatePerGuest = builder.querySelector('[data-private-menu="estimate-perguest"]');
+    const summaryField = document.getElementById('party-menu-summary');
+    if (!menuTypes || !menuSections || !guestInput || !estimateEl) return;
+
+    const menus = Array.isArray(privateData?.menus) ? privateData.menus : [];
+    const pricing = privateData?.pricing || {};
+    const beverageAddons = Array.isArray(privateData?.beverage_addons) ? privateData.beverage_addons : [];
+    const multiplier = Number(pricing.catering_multiplier);
+    const roundTo = Number(pricing.round_to);
+    if (!menus.length) {
+      builder.innerHTML = '<p class="note">Menu selections are coming soon.</p>';
+      return;
+    }
+
+    function normalizeMenuItem(item, menuId, sectionTitle) {
+      const raw = typeof item === 'string' ? { name: item } : item;
+      if (!raw || typeof raw !== 'object') return null;
+      const name = raw.name || raw.label || raw.title;
+      if (!name) return null;
+      const fixedPrice = Number.isFinite(Number(raw.fixed_price)) ? Number(raw.fixed_price) : null;
+      const perPerson = Number.isFinite(Number(raw.per_person_price)) ? Number(raw.per_person_price) : null;
+      const ingredientCost = Number.isFinite(Number(raw.ingredient_cost_per_serving))
+        ? Number(raw.ingredient_cost_per_serving)
+        : null;
+      const allowQuantity = raw.allow_quantity === true;
+      const maxQty = Number.isFinite(Number(raw.max_qty)) ? Number(raw.max_qty) : null;
+      const normalized = {
+        name: String(name),
+        fixedPrice,
+        perPerson,
+        ingredientCost,
+        sectionTitle: sectionTitle || '',
+        allowQuantity,
+        maxQty
+      };
+      const isBrunchBoards = menuId === 'brunch' && String(sectionTitle || '').toLowerCase() === 'boards & stations';
+      const isLunchBoard = menuId === 'lunch_dinner'
+        && normalized.name.toLowerCase() === 'superboard or all-meat superboard';
+      if (isBrunchBoards || isLunchBoard) {
+        if (normalized.fixedPrice !== 90) {
+          normalized.fixedPrice = 90;
+          dbg('forced fixed_price', { name: normalized.name, fixed_price: 90 });
+        }
+      }
+      return normalized;
+    }
+
+    const normalizedMenus = menus.map((menu) => ({
+      ...menu,
+      sections: (menu.sections || []).map((section) => ({
+        ...section,
+        items: (section.items || [])
+          .map((item) => normalizeMenuItem(item, menu.id, section.title))
+          .filter(Boolean)
+      }))
+    }));
+
+    const menuById = new Map(normalizedMenus.map((menu) => [menu.id, menu]));
+    const selectionsByMenu = new Map();
+    const addonSelections = new Map();
+    let currentMenuId = normalizedMenus[0].id;
+
+    function roundToStep(value) {
+      if (!Number.isFinite(value) || !Number.isFinite(roundTo) || roundTo <= 0) return value;
+      return Math.round(value / roundTo) * roundTo;
+    }
+
+    function getPerPersonPrice(item) {
+      if (Number.isFinite(item.perPerson)) return { value: item.perPerson, derived: false };
+      if (Number.isFinite(item.ingredientCost) && Number.isFinite(multiplier)) {
+        const raw = item.ingredientCost * multiplier;
+        return { value: roundToStep(raw), derived: true };
+      }
+      dbg('missing item pricing', { name: item.name, menuType: currentMenuId });
+      return { value: 0, derived: false };
+    }
+
+    function getSelectionMap() {
+      if (!selectionsByMenu.has(currentMenuId)) selectionsByMenu.set(currentMenuId, new Map());
+      return selectionsByMenu.get(currentMenuId);
+    }
+
+    function getAddonSelectionMap() {
+      return addonSelections;
+    }
+
+    function getOrderedSelections(menu, selectionMap) {
+      if (!menu?.sections?.length || !selectionMap?.size) return [];
+      const ordered = [];
+      menu.sections.forEach((section) => {
+        (section.items || []).forEach((item) => {
+          const qty = selectionMap.get(item.name) || 0;
+          if (item && qty > 0) ordered.push({ ...item, qty });
+        });
+      });
+      return ordered;
+    }
+
+    function getSectionSelections(menu, selectionMap) {
+      const grouped = [];
+      if (!menu?.sections?.length || !selectionMap?.size) return grouped;
+      menu.sections.forEach((section) => {
+        const matches = (section.items || []).filter((item) => {
+          const qty = selectionMap.get(item.name) || 0;
+          return item && qty > 0;
+        }).map((item) => ({ ...item, qty: selectionMap.get(item.name) || 0 }));
+        if (!matches.length) return;
+        grouped.push({ title: section.title || 'Selections', items: matches });
+      });
+      return grouped;
+    }
+
+    function getAddonSelections(selectionMap) {
+      return (beverageAddons || []).map((addon) => {
+        const qty = selectionMap.get(addon.id) || 0;
+        return qty > 0 ? { ...addon, qty } : null;
+      }).filter(Boolean);
+    }
+
+    function normalizeGuestCount() {
+      const min = Number(guestInput.min) || 10;
+      const parsed = parseInt(guestInput.value, 10);
+      if (!Number.isFinite(parsed)) return min;
+      return Math.max(min, parsed);
+    }
+
+    function updateSummary(menuLabel, guestCount, groupedSelections, addonSelectionsList, fixedTotal, perGuest, estimate) {
+      if (!summaryField) return;
+      const lines = [
+        'Menu selection (estimate only)',
+        `Menu type: ${menuLabel || ''}`,
+        `Guests: ${guestCount}`,
+        '',
+        'Selections:'
+      ];
+      if (groupedSelections.length) {
+        groupedSelections.forEach((group) => {
+          lines.push(`${group.title}:`);
+          group.items.forEach((item) => {
+            const priceParts = [];
+            if (Number.isFinite(item.fixedPrice)) {
+              priceParts.push(`${formatCurrency(item.fixedPrice)} each`);
+            } else {
+              const perPersonInfo = getPerPersonPrice(item);
+              if (perPersonInfo.value) {
+                const prefix = perPersonInfo.derived ? '~' : '';
+                priceParts.push(`${prefix}${formatCurrency(perPersonInfo.value)}/guest`);
+              }
+            }
+            const priceLabel = priceParts.length ? ` (${priceParts.join(', ')})` : '';
+            const qtyTag = item.qty > 1 ? ` x${item.qty}` : '';
+            lines.push(`- ${item.name}${qtyTag}${priceLabel}`);
+          });
+        });
+      } else {
+        lines.push('- None selected');
+      }
+      if (addonSelectionsList.length) {
+        lines.push('', 'Beverage add-ons:');
+        addonSelectionsList.forEach((addon) => {
+          const qtyTag = addon.qty > 1 ? ` x${addon.qty}` : '';
+          const priceBits = [];
+          if (Number.isFinite(Number(addon.fixed_price))) priceBits.push(`${formatCurrency(addon.fixed_price)} each`);
+          if (Number.isFinite(Number(addon.per_person_price))) priceBits.push(`~${formatCurrency(addon.per_person_price)}/guest`);
+          const priceLabel = priceBits.length ? ` (${priceBits.join(', ')})` : '';
+          lines.push(`- ${addon.label || addon.name || addon.id}${qtyTag}${priceLabel}`);
+        });
+      }
+      lines.push('');
+      lines.push('Estimate breakdown:');
+      if (fixedTotal > 0) lines.push(`Boards/Stations: ${formatCurrency(fixedTotal)}`);
+      if (perGuest > 0) lines.push(`Per-guest subtotal: ~${formatCurrency(perGuest)} x ${guestCount} = ${formatCurrency(perGuest * guestCount)}`);
+      lines.push(`Estimated food total: ~${formatCurrency(estimate)}`);
+      summaryField.value = lines.join('\n');
+    }
+
+    function updateEstimate() {
+      const menu = menuById.get(currentMenuId);
+      const menuLabel = menu?.label || currentMenuId;
+      const guestCount = normalizeGuestCount();
+      const selectionMap = getSelectionMap();
+      const selectedItems = getOrderedSelections(menu, selectionMap);
+      const addonSelectionMap = getAddonSelectionMap();
+      const selectedAddons = getAddonSelections(addonSelectionMap);
+      const fixedTotal = selectedItems.reduce((sum, item) => (
+        Number.isFinite(item.fixedPrice) ? sum + (item.fixedPrice * (item.qty || 1)) : sum
+      ), 0);
+      const fixedAddonTotal = selectedAddons.reduce((sum, addon) => {
+        const price = Number(addon.fixed_price);
+        if (!Number.isFinite(price)) return sum;
+        return sum + (price * (addon.qty || 1));
+      }, 0);
+      const perPersonTotal = selectedItems.reduce((sum, item) => {
+        if (Number.isFinite(item.fixedPrice)) return sum;
+        const perPersonInfo = getPerPersonPrice(item);
+        const qty = item.qty || 1;
+        return sum + (Number.isFinite(perPersonInfo.value) ? perPersonInfo.value * qty : 0);
+      }, 0);
+      const perPersonAddonTotal = selectedAddons.reduce((sum, addon) => {
+        const price = Number(addon.per_person_price);
+        if (!Number.isFinite(price)) return sum;
+        const qty = addon.qty || 1;
+        return sum + (price * qty);
+      }, 0);
+      const combinedFixedTotal = fixedTotal + fixedAddonTotal;
+      const combinedPerPerson = perPersonTotal + perPersonAddonTotal;
+      const estimateTotal = combinedFixedTotal + (guestCount * combinedPerPerson);
+      estimateEl.textContent = `Estimated food total: ${formatCurrency(estimateTotal)}`;
+      if (estimateFixed) {
+        estimateFixed.textContent = combinedFixedTotal > 0
+          ? `Boards/stations: ${formatCurrency(combinedFixedTotal)}`
+          : '';
+      }
+      if (estimatePerGuest) {
+        estimatePerGuest.textContent = combinedPerPerson > 0
+          ? `Selections: ~${formatCurrency(combinedPerPerson)} per guest × ${guestCount} = ${formatCurrency(combinedPerPerson * guestCount)}`
+          : '';
+      }
+      const groupedSelections = getSectionSelections(menu, selectionMap);
+      updateSummary(menuLabel, guestCount, groupedSelections, selectedAddons, combinedFixedTotal, combinedPerPerson, estimateTotal);
+      const quantities = {};
+      selectionMap.forEach((qty, name) => {
+        if (qty > 0) quantities[name] = qty;
+      });
+      addonSelectionMap.forEach((qty, id) => {
+        if (qty > 0) quantities[`addon:${id}`] = qty;
+      });
+      dbg('event estimate qty', {
+        guestCount,
+        selectedCount: selectedItems.length,
+        fixedTotal: combinedFixedTotal,
+        perPersonSubtotal: combinedPerPerson,
+        estimateTotal,
+        quantities
+      });
+    }
+
+    function renderMenuTypes() {
+      menuTypes.innerHTML = '';
+      menus.forEach((menu) => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'btn btn-secondary btn-small menu-toggle';
+        const selected = menu.id === currentMenuId;
+        btn.classList.toggle('is-selected', selected);
+        btn.setAttribute('aria-pressed', selected ? 'true' : 'false');
+        btn.dataset.menuId = menu.id;
+        btn.textContent = menu.label || menu.id;
+        btn.addEventListener('click', () => {
+          if (menu.id === currentMenuId) return;
+          currentMenuId = menu.id;
+          renderMenuTypes();
+          renderMenuSections();
+          updateEstimate();
+        });
+        menuTypes.appendChild(btn);
+      });
+    }
+
+    function renderMenuSections() {
+      menuSections.innerHTML = '';
+      const menu = menuById.get(currentMenuId);
+      if (!menu?.sections?.length) return;
+      const selectionMap = getSelectionMap();
+      menu.sections.forEach((section) => {
+        const sectionEl = document.createElement('div');
+        sectionEl.className = 'menu-builder-section';
+        if (section.title) {
+          const title = document.createElement('h3');
+          title.textContent = section.title;
+          sectionEl.appendChild(title);
+        }
+        const itemsWrap = document.createElement('div');
+        itemsWrap.className = 'menu-builder-buttons';
+        (section.items || []).forEach((item) => {
+          const name = item?.name;
+          if (!name) return;
+          if (item.allowQuantity) {
+            const control = document.createElement('div');
+            control.className = 'qty-control';
+            const label = document.createElement('button');
+            label.type = 'button';
+            label.className = 'btn btn-ghost btn-small';
+            label.textContent = name;
+            if (!Number.isFinite(item.fixedPrice) && (Number.isFinite(item.perPerson) || Number.isFinite(item.ingredientCost))) {
+              const badge = document.createElement('span');
+              badge.className = 'badge per-guest-badge is-hidden';
+              badge.textContent = 'per guest';
+              label.appendChild(badge);
+            }
+            const minus = document.createElement('button');
+            minus.type = 'button';
+            minus.className = 'btn btn-secondary btn-small';
+            minus.textContent = '–';
+            const plus = document.createElement('button');
+            plus.type = 'button';
+            plus.className = 'btn btn-secondary btn-small';
+            plus.textContent = '+';
+            const count = document.createElement('span');
+            count.className = 'qty-value';
+            const maxQty = Number.isFinite(item.maxQty) ? item.maxQty : null;
+            const getQty = () => selectionMap.get(name) || 0;
+            const setQty = (next) => {
+              const bounded = Math.max(0, maxQty ? Math.min(next, maxQty) : next);
+              if (bounded === 0) selectionMap.delete(name);
+              else selectionMap.set(name, bounded);
+              count.textContent = String(bounded);
+              const badge = label.querySelector('.per-guest-badge');
+              if (badge) badge.classList.toggle('is-hidden', bounded === 0);
+              dbg('qty change', { item: name, qty: bounded });
+              updateEstimate();
+            };
+            count.textContent = String(getQty());
+            label.addEventListener('click', () => {
+              const current = getQty();
+              setQty(current > 0 ? 0 : 1);
+            });
+            minus.addEventListener('click', () => {
+              setQty(getQty() - 1);
+            });
+            plus.addEventListener('click', () => {
+              setQty(getQty() + 1);
+            });
+            control.appendChild(label);
+            control.appendChild(minus);
+            control.appendChild(count);
+            control.appendChild(plus);
+            itemsWrap.appendChild(control);
+          } else {
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'btn btn-ghost btn-small menu-toggle';
+            const isSelected = (selectionMap.get(name) || 0) > 0;
+            btn.classList.toggle('is-selected', isSelected);
+            btn.setAttribute('aria-pressed', isSelected ? 'true' : 'false');
+            btn.dataset.itemName = name;
+            btn.textContent = name;
+            if (!Number.isFinite(item.fixedPrice) && (Number.isFinite(item.perPerson) || Number.isFinite(item.ingredientCost))) {
+              const badge = document.createElement('span');
+              badge.className = 'badge per-guest-badge';
+              badge.textContent = 'per guest';
+              badge.classList.toggle('is-hidden', !isSelected);
+              btn.appendChild(badge);
+            }
+            btn.addEventListener('click', () => {
+              const next = (selectionMap.get(name) || 0) > 0 ? 0 : 1;
+              if (next === 0) selectionMap.delete(name);
+              else selectionMap.set(name, next);
+              btn.classList.toggle('is-selected', next > 0);
+              btn.setAttribute('aria-pressed', next > 0 ? 'true' : 'false');
+              const badge = btn.querySelector('.per-guest-badge');
+              if (badge) badge.classList.toggle('is-hidden', next === 0);
+              updateEstimate();
+            });
+            itemsWrap.appendChild(btn);
+          }
+        });
+        sectionEl.appendChild(itemsWrap);
+        menuSections.appendChild(sectionEl);
+      });
+    }
+
+    function renderAddons() {
+      if (!menuAddons) return;
+      menuAddons.innerHTML = '';
+      if (!beverageAddons.length) {
+        const note = document.createElement('p');
+        note.className = 'note';
+        note.textContent = 'Beverage service is quoted separately. Ask about bottle and case options.';
+        menuAddons.appendChild(note);
+        return;
+      }
+      const heading = document.createElement('h3');
+      heading.textContent = 'Beverage add-ons';
+      menuAddons.appendChild(heading);
+      const wrap = document.createElement('div');
+      wrap.className = 'menu-builder-buttons';
+      const selectionMap = getAddonSelectionMap();
+      beverageAddons.forEach((addon) => {
+        const id = addon.id || addon.label;
+        if (!id) return;
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'btn btn-ghost btn-small menu-toggle';
+        const isSelected = (selectionMap.get(id) || 0) > 0;
+        btn.classList.toggle('is-selected', isSelected);
+        btn.setAttribute('aria-pressed', isSelected ? 'true' : 'false');
+        btn.textContent = addon.label || addon.name || id;
+        btn.addEventListener('click', () => {
+          const next = (selectionMap.get(id) || 0) > 0 ? 0 : 1;
+          if (next === 0) selectionMap.delete(id);
+          else selectionMap.set(id, next);
+          btn.classList.toggle('is-selected', next > 0);
+          btn.setAttribute('aria-pressed', next > 0 ? 'true' : 'false');
+          updateEstimate();
+        });
+        wrap.appendChild(btn);
+      });
+      menuAddons.appendChild(wrap);
+    }
+
+    guestInput.addEventListener('input', updateEstimate);
+    guestInput.addEventListener('blur', () => {
+      const normalized = normalizeGuestCount();
+      if (guestInput.value !== String(normalized)) guestInput.value = normalized;
+      updateEstimate();
+    });
+
+    renderMenuTypes();
+    renderMenuSections();
+    renderAddons();
+    dbg('pp form sticky mode', { stickyEnabled: window.innerWidth >= 960 });
+    updateEstimate();
   }
 
   function renderWineClub(wineclubData, site) {
@@ -1325,14 +2157,19 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
   async function copyForm(formId, email, subject) {
     const form = document.getElementById(formId);
     if (!form) return;
+    const menuSummary = form.querySelector('[data-menu-summary]');
     const lines = [];
     Array.from(form.elements).forEach((el) => {
       if (!el.name || ['submit', 'button'].includes(el.type)) return;
+      if (menuSummary && el === menuSummary) return;
       const label = form.querySelector(`label[for="${el.id}"]`);
       const title = label ? label.textContent.trim() : el.name;
       const value = el.value || '(not provided)';
       lines.push(`${title}: ${value}`);
     });
+    if (menuSummary && menuSummary.value.trim()) {
+      lines.push('', menuSummary.value.trim());
+    }
     const text = lines.join('\n');
     try {
       if (navigator.clipboard) await navigator.clipboard.writeText(text);
@@ -1384,6 +2221,7 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
   }
 
   sitePromise.then((site) => {
+    validateSiteHours(site);
     state.site = site;
     populateSite(site);
     populateWhyBullets(site);
@@ -1391,6 +2229,7 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
     populateTrust(site);
     setupAnnouncement(site);
     setupBottomBar();
+    setupMenuPdfLink(site);
     injectSchema(site);
     attachCopyButtons(site?.email);
   });
@@ -1398,9 +2237,15 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
   document.addEventListener('DOMContentLoaded', () => {
     renderHeader();
     setupNav();
+    // Footer links are pruned before nav hrefs are set so any injected/removed links
+    // get base-path normalization (GitHub Pages friendly) and stay deterministic.
+    pruneFooterLinks();
     setNavLinks();
     setupBackToTop();
     enableFadeIn();
+    if (document.getElementById('private-menu-builder')) {
+      fetchJSON('private-events.json', {}).then(renderPrivateEventMenu);
+    }
   });
 
   window.Mockingbird = {
@@ -1420,6 +2265,7 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
     applySpecialsToMenu,
     renderGiftCards,
     renderDeposits,
+    renderReserveDateDeposit,
     renderWineClub,
     renderGallery,
     renderDrinks

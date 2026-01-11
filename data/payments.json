@@ -3,8 +3,10 @@
   "payments": {
     "private_event_deposit": {
       "title": "Reservation Deposit",
-      "description": "Secure your date; refundable if we cannot accommodate your preferred time.",
-      "amount_display": "$250 deposit",
+      "description": "Deposit reserves your date after we confirm availability. Refundable if we cannot accommodate the confirmed date/time.",
+      "amount_display": "$100 deposit",
+      "cta_label": "Pay $100 deposit",
+      "balance_due_day_of_event": 150,
       "clover_payment_url": "https://link.clover.com/urlshortener/mock-deposit",
       "intake": {
         "instructions": "After paying, send your details so we can confirm availability.",
