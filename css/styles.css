@@ -280,10 +280,68 @@ nav a:focus {
   gap: 22px;
 }
 
+.pp-builder-grid {
+  display: grid;
+  gap: 22px;
+}
+
+.pp-builder-right {
+  position: relative;
+}
+
 @media (min-width: 768px) {
   .grid-2 {
     grid-template-columns: 1.2fr 1fr;
   }
+}
+
+@media (min-width: 960px) {
+  .pp-builder-grid {
+    grid-template-columns: 1.1fr 0.9fr;
+    align-items: start;
+  }
+  .pp-inquiry-card {
+    position: sticky;
+    top: 96px;
+  }
+  .pp-inquiry-body {
+    max-height: calc(100vh - 120px);
+    overflow: auto;
+  }
+}
+
+@media (max-width: 959px) {
+  .pp-inquiry-card {
+    position: static;
+  }
+  .pp-inquiry-body {
+    max-height: none;
+    overflow: visible;
+  }
+}
+
+.qty-control {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: #fff;
+}
+
+.qty-control .qty-value {
+  min-width: 20px;
+  text-align: center;
+  font-weight: 700;
+}
+
+.qty-control .btn {
+  padding: 6px 10px;
+}
+
+.per-guest-badge {
+  margin-left: 6px;
 }
 
 .gallery-strip {
@@ -330,6 +388,23 @@ nav a:focus {
 .menu-item p {
   margin: 0;
   color: var(--muted);
+}
+
+.price {
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+#debug-summary {
+  position: fixed;
+  bottom: 12px;
+  right: 12px;
+  padding: 8px 10px;
+  background: rgba(0, 0, 0, 0.72);
+  color: #fff;
+  border-radius: 8px;
+  font-size: 12px;
+  z-index: 9999;
 }
 
 .info-block {
@@ -518,10 +593,68 @@ textarea {
   gap: 10px;
 }
 
+.menu-builder {
+  margin: 18px 0 20px;
+}
+
+.menu-builder-group {
+  margin-top: 12px;
+}
+
+.menu-builder-section {
+  margin-top: 16px;
+}
+
+.menu-builder-section h3 {
+  margin: 0 0 8px;
+  font-size: 16px;
+}
+
+.menu-builder-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.menu-toggle.is-selected {
+  background: rgba(176, 109, 60, 0.12);
+  border-color: var(--accent);
+  color: var(--text);
+}
+
+.menu-builder-estimate {
+  margin-top: 16px;
+}
+
+.menu-estimate {
+  margin: 10px 0 4px;
+  font-weight: 700;
+}
+
 .footer .social {
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
+}
+.footer-social-icons {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.footer-social-icons .footer-icon {
+  display: inline-flex;
+  width: 18px;
+  height: 18px;
+  color: inherit;
+  text-decoration: none;
+  opacity: 0.9;
+}
+.footer-social-icons .footer-icon svg {
+  width: 100%;
+  height: 100%;
+}
+.footer-social-icons .footer-icon:hover {
+  opacity: 1;
 }
 
 .mobile-nav-toggle {

@@ -1,0 +1,111 @@
+{
+  "pricing": {
+    "catering_multiplier": 3.5,
+    "round_to": 1,
+    "notes": "Estimate only. Final pricing varies by selections and service style."
+  },
+  "beverage_addons": [],
+  "menus": [
+    {
+      "id": "brunch",
+      "label": "Brunch",
+      "sections": [
+        {
+          "title": "Boards & Stations",
+          "items": [
+            { "name": "Superboard", "fixed_price": 90, "allow_quantity": true, "max_qty": 5 },
+            { "name": "Breakfast Sandwich Bar", "fixed_price": 90, "allow_quantity": true, "max_qty": 5 },
+            { "name": "Pancake Bar", "fixed_price": 90, "allow_quantity": true, "max_qty": 5 },
+            { "name": "Fruit & Veggie Board", "fixed_price": 90, "allow_quantity": true, "max_qty": 5 }
+          ]
+        },
+        {
+          "title": "Hot Favorites & Baked Items",
+          "items": [
+            { "name": "Cheesy Potatoes", "ingredient_cost_per_serving": 0.96 },
+            { "name": "Sausage, Biscuits & Gravy", "per_person_price": 6 },
+            { "name": "French Toast Casserole", "ingredient_cost_per_serving": 1.05 },
+            { "name": "Muffin Tin Omelets", "per_person_price": 5 },
+            { "name": "Muffins & Breakfast Breads", "per_person_price": 4 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lunch_dinner",
+      "label": "Lunch & Dinner",
+      "sections": [
+        {
+          "title": "Appetizers & Salads",
+          "items": [
+            { "name": "Soup", "per_person_price": 4 },
+            { "name": "Antipasto", "per_person_price": 6 },
+            { "name": "Green or Seasonal Salad", "per_person_price": 4 },
+            { "name": "Superboard or All-Meat Superboard", "fixed_price": 90, "allow_quantity": true, "max_qty": 5 },
+            { "name": "Stuffed Mushrooms", "per_person_price": 6 },
+            { "name": "Bruschetta", "per_person_price": 5 },
+            { "name": "Pasta Salad or Cole Slaw", "per_person_price": 3 },
+            { "name": "Fruit & Veggie Board", "fixed_price": 90 }
+          ]
+        },
+        {
+          "title": "Main Courses",
+          "items": [
+            { "name": "Baked Potato Bar", "per_person_price": 6 },
+            { "name": "Macaroni & Cheese", "per_person_price": 5 },
+            { "name": "Chicken", "per_person_price": 8 },
+            { "name": "Pulled Pork", "per_person_price": 8 },
+            { "name": "Shredded Chicken", "per_person_price": 8 },
+            { "name": "Meatballs", "per_person_price": 8 },
+            { "name": "Lasagna", "per_person_price": 9 },
+            { "name": "Spaghetti & Meatballs", "per_person_price": 8 },
+            { "name": "Sloppy Joes", "per_person_price": 7 },
+            { "name": "Flatbreads", "per_person_price": 7 }
+          ]
+        },
+        {
+          "title": "Sides",
+          "items": [
+            { "name": "Mashed or Cheesy Potatoes", "per_person_price": 4 },
+            { "name": "Brussels Sprouts", "per_person_price": 4 },
+            { "name": "Broccoli", "per_person_price": 3 },
+            { "name": "Green Beans", "per_person_price": 3 },
+            { "name": "Carrots", "per_person_price": 3 },
+            { "name": "Seasonal Vegetables", "per_person_price": 4 },
+            { "name": "Baked Beans", "per_person_price": 3 },
+            { "name": "Potato Salad", "per_person_price": 3 },
+            { "name": "Noodles", "per_person_price": 3 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "picnic",
+      "label": "Picnic-Style Packages",
+      "sections": [
+        {
+          "title": "Proteins",
+          "items": [
+            { "name": "Hot Dogs", "per_person_price": 4 },
+            { "name": "Brats", "per_person_price": 5 },
+            { "name": "Burgers", "per_person_price": 6 },
+            { "name": "Chicken", "per_person_price": 7 },
+            { "name": "Brisket", "per_person_price": 9 },
+            { "name": "Pork Chops", "per_person_price": 8 },
+            { "name": "Steaks", "per_person_price": 11 }
+          ]
+        },
+        {
+          "title": "Sides",
+          "items": [
+            { "name": "Baked Beans", "per_person_price": 3 },
+            { "name": "Potato Salad", "per_person_price": 3 },
+            { "name": "Cole Slaw", "per_person_price": 3 },
+            { "name": "Pasta Salad", "per_person_price": 3 },
+            { "name": "Seasonal or Green Salad", "per_person_price": 4 }
+          ]
+        }
+      ]
+    }
+  ]
+}

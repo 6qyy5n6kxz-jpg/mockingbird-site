@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en" data-base="..">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reserve Your Date | Mockingbird</title>
+  <meta name="description" content="Reserve your date for a private event after confirmation from Mockingbird.">
+  <meta property="og:title" content="Reserve Your Date | Mockingbird">
+  <meta property="og:description" content="Use this page after availability is confirmed to submit your deposit.">
+  <meta property="og:image" content="../assets/images/og.jpg">
+  <script src="../js/base.js"></script>
+  <link rel="icon" type="image/svg+xml" data-favicon="svg">
+  <link rel="alternate icon" data-favicon="ico">
+  <link rel="apple-touch-icon" data-favicon="apple">
+  <script>
+    (function() {
+      if (!window.withBase) return;
+      const svg = document.querySelector('link[data-favicon="svg"]');
+      const ico = document.querySelector('link[data-favicon="ico"]');
+      const apple = document.querySelector('link[data-favicon="apple"]');
+      if (svg) svg.href = withBase('/assets/images/favicon.svg');
+      if (ico) ico.href = withBase('/assets/images/favicon.png');
+      if (apple) apple.href = withBase('/assets/images/favicon.png');
+    })();
+  </script>
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+  <a class="sr-only" href="#main">Skip to main content</a>
+  <div class="announcement" role="status"></div>
+  <header id="site-header"></header>
+
+  <main id="main" class="section">
+    <div class="container">
+      <p class="kicker">Reserve Date</p>
+      <h1>Reserve your date</h1>
+      <p class="lead">Use this page only after we’ve confirmed availability for your event date.</p>
+
+      <div class="info-block" id="reserve-deposit-card">
+        <p class="kicker">Reservation deposit</p>
+        <h2>Reserve your date</h2>
+        <p><strong data-reserve-deposit="amount">$100 deposit</strong></p>
+        <p class="note">Remaining balance: <span data-reserve-deposit="balance">$150</span> due the day of your event.</p>
+        <p class="note">Deposit reserves your date after we confirm availability. Refundable if we cannot accommodate the confirmed date/time.</p>
+        <div class="inline-links" style="margin-top:12px;">
+          <a class="btn btn-primary" data-reserve-deposit="cta" target="_blank" rel="noopener noreferrer">Pay $100 deposit</a>
+          <a class="btn btn-secondary btn-small" data-nav="private-parties">Back to Private Parties</a>
+        </div>
+      </div>
+
+      <form id="reserve-date-form" data-subject="Reserve Date Confirmation" style="margin-top:20px;">
+        <p class="note">Pay on Clover first. Then send your details below. This email does not process payment.</p>
+        <label for="reserve-name">Name</label>
+        <input id="reserve-name" name="Name" placeholder="Full name" required>
+
+        <label for="reserve-email">Email</label>
+        <input id="reserve-email" name="Email" type="email" placeholder="you@example.com" required>
+
+        <label for="reserve-phone">Phone</label>
+        <input id="reserve-phone" name="Phone" type="tel" placeholder="555-123-4567">
+
+        <label for="reserve-date">Confirmed event date</label>
+        <input id="reserve-date" name="Confirmed event date" type="date" required>
+
+        <label for="reserve-guests">Estimated guest count</label>
+        <input id="reserve-guests" name="Estimated guest count" type="number" min="1" placeholder="40">
+
+        <label for="reserve-notes">Notes</label>
+        <textarea id="reserve-notes" name="Notes" placeholder="Timing, service style, or other details"></textarea>
+
+        <div class="inline-links" style="margin-top:12px;">
+          <button type="button" class="btn btn-primary" data-copy-form="reserve-date-form">Copy details &amp; email</button>
+          <a class="btn btn-secondary" data-fill="email-link">Email us</a>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <section class="section alt">
+    <div class="container">
+      <div class="final-cta">
+        <div>
+          <p class="kicker">Questions?</p>
+          <h2>Need help with timing or guest counts?</h2>
+        </div>
+        <div class="hero-cta">
+          <a class="btn btn-primary" data-cta="call">Call</a>
+          <a class="btn btn-secondary" data-cta="directions">Directions</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="meta">
+        <strong data-fill="name">Mockingbird</strong>
+        <div data-fill="address">123 Mockingbird Lane</div>
+        <div data-fill="city">Yourtown, CA</div>
+        <div class="note" data-fill="hours">Hours</div>
+        <div><a data-fill="phone-link">555-123-4567</a> • <a data-fill="email-link">hello@mockingbird.example</a></div>
+        <div class="social">
+          <a data-fill="facebook">Facebook</a>
+          <a data-fill="instagram">Instagram</a>
+        </div>
+        <div class="footer-links">
+          <div>
+            <p class="kicker">Visit</p>
+            <div class="inline-links">
+              <a data-nav="home">Home</a>
+              <a data-nav="menu">Menu</a>
+              <a data-nav="drinks">Drinks</a>
+              <a data-nav="specials">Specials</a>
+            </div>
+          </div>
+          <div>
+            <p class="kicker">Happenings</p>
+            <div class="inline-links">
+              <a data-nav="events">Events</a>
+              <a data-nav="private-parties">Private Parties</a>
+              <a data-nav="gallery">Gallery</a>
+            </div>
+          </div>
+          <div>
+            <p class="kicker">Explore</p>
+            <div class="inline-links">
+              <a data-nav="wine-club">Wine Club</a>
+              <a data-nav="gift-cards">Gift Cards</a>
+              <a data-nav="contact">Contact</a>
+            </div>
+          </div>
+        </div>
+        <small>© Mockingbird</small>
+      </div>
+    </div>
+  </footer>
+
+  <div class="sticky-cta-bar" aria-label="Quick actions">
+    <a data-cta="call">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.1 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.81.37 1.6.72 2.34a2 2 0 0 1-.45 2.18L8.09 9.91a16 16 0 0 0 6 6l1.67-1.33a2 2 0 0 1 2.18-.45c.74.35 1.53.6 2.34.72A2 2 0 0 1 22 16.92z"/></svg>
+      Call
+    </a>
+    <a data-cta="menu">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      Menu
+    </a>
+    <a data-cta="directions">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2l7 7-7 13-7-13z"/><path d="M12 9v4"/></svg>
+      Directions
+    </a>
+  </div>
+
+  <button class="back-to-top" aria-label="Back to top">↑</button>
+
+  <script src="../js/main.js"></script>
+  <script>
+    (async function() {
+      const [payments, site] = await Promise.all([
+        Mockingbird.fetchJSON('payments.json', {}),
+        Mockingbird.sitePromise
+      ]);
+      Mockingbird.renderReserveDateDeposit(payments, site);
+    })();
+  </script>
+</body>
+</html>
