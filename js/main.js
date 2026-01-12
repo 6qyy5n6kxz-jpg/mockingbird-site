@@ -103,12 +103,19 @@
     const hiddenFields = opts.hiddenFields && typeof opts.hiddenFields === 'object' ? opts.hiddenFields : null;
     const ajaxSubmit = opts.ajax === true;
     const formAction = typeof opts.action === 'string' ? opts.action.trim() : '';
+    const requirePaidCheckbox = opts.requirePaidCheckbox === true;
+    const successMessageRaw = typeof opts.successMessage === 'string' ? opts.successMessage.trim() : '';
+    const successMessage = successMessageRaw || 'Thanks! We received your seating details.';
+    const defaultIntro = context === 'event_ticketed' ? 'This form completes your reservation.' : '';
+    const defaultSubnote = context === 'event_ticketed' ? 'This form emails us your seating details — it doesn’t process payment.' : '';
+    const introText = typeof opts.introNote === 'string' ? opts.introNote : defaultIntro;
+    const subnoteText = typeof opts.subnote === 'string' ? opts.subnote : defaultSubnote;
 
     function coerceFields(list) {
       const defaults = {
         name: { id: 'name', label: 'Name', type: 'text' },
         email: { id: 'email', label: 'Email', type: 'email' },
-        phone: { id: 'phone', label: 'Phone', type: 'tel' },
+        phone: { id: 'phone', label: 'Phone number', type: 'tel', placeholder: '(555) 555-5555' },
         quantity: { id: 'quantity', label: 'Quantity', type: 'select', options: ['1', '2', '3', '4', '5', '6'] },
         notes: { id: 'notes', label: 'Notes', type: 'textarea', rows: 3, placeholder: 'Attendee names + any seating notes' },
         date: { id: 'date', label: 'Date', type: 'text' },
@@ -139,12 +146,16 @@
     }
     const intro = document.createElement('p');
     intro.className = 'note';
-    intro.textContent = opts.introNote || 'This form completes your reservation.';
-    form.appendChild(intro);
-    const subnote = document.createElement('p');
-    subnote.className = 'note';
-    subnote.textContent = opts.subnote || 'This form emails us your seating details — it doesn’t process payment.';
-    form.appendChild(subnote);
+    if (introText) {
+      intro.textContent = introText;
+      form.appendChild(intro);
+    }
+    if (subnoteText) {
+      const subnote = document.createElement('p');
+      subnote.className = 'note';
+      subnote.textContent = subnoteText;
+      form.appendChild(subnote);
+    }
     if (preFieldsNote) {
       const reinforce = document.createElement('p');
       reinforce.className = 'note event-help';
@@ -171,8 +182,13 @@
     }
     const fieldList = coerceFields(fields);
     const hasPaid = fieldList.some((f) => f.id === 'paid');
-    if (!hasPaid) {
-      fieldList.push({ id: 'paid', label: paidLabel, type: 'checkbox', required: false });
+    if (!hasPaid && requirePaidCheckbox) {
+      fieldList.push({ id: 'paid', label: paidLabel, type: 'checkbox', required: true });
+    }
+    if (requirePaidCheckbox) {
+      fieldList.forEach((field) => {
+        if (field.id === 'paid') field.required = true;
+      });
     }
 
     function normalizeRequired(list, ctx) {
@@ -199,7 +215,7 @@
     let renderFields = normalizedFields;
     if (context === 'event_ticketed') {
       renderFields = normalizedFields
-        .filter((f) => f.required || ['notes', 'paid', 'name', 'email', 'quantity'].includes(f.id))
+        .filter((f) => f.required || ['notes', 'paid', 'name', 'email', 'phone', 'quantity'].includes(f.id))
         .map((f) => {
           if (f.id === 'quantity') return { ...f, type: 'select', options: ['1', '2', '3', '4', '5', '6'] };
           if (f.id === 'notes') return { ...f, placeholder: 'Attendee names + any seating notes' };
@@ -212,6 +228,7 @@
       renderFields: renderFields.map((f) => ({ id: f.id, type: f.type }))
     });
 
+    const fieldErrors = {};
     renderFields.forEach((field) => {
       const wrapField = document.createElement('div');
       wrapField.style.marginBottom = '8px';
@@ -282,15 +299,54 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
       if (field.type === 'checkbox') {
         label.appendChild(input);
         label.appendChild(document.createTextNode(` ${field.label}`));
+        if (field.required) {
+          const required = document.createElement('span');
+          required.className = 'required';
+          required.textContent = ' *';
+          label.appendChild(required);
+          input.setAttribute('aria-required', 'true');
+        }
         wrapField.appendChild(label);
       } else {
+        if (field.required) {
+          const required = document.createElement('span');
+          required.className = 'required';
+          required.textContent = ' *';
+          label.appendChild(required);
+          input.setAttribute('aria-required', 'true');
+        }
         wrapField.appendChild(input);
+      }
+      if (field.id === 'name') input.autocomplete = 'name';
+      if (field.id === 'email') input.autocomplete = 'email';
+      if (field.id === 'phone') {
+        input.autocomplete = 'tel';
+        input.inputMode = 'tel';
+      }
+      if (field.id === 'quantity') input.autocomplete = 'off';
+      if (field.id === 'notes') input.autocomplete = 'off';
+      if (field.id === 'phone') {
+        const fieldError = document.createElement('p');
+        fieldError.className = 'field-error';
+        fieldError.style.display = 'none';
+        wrapField.appendChild(fieldError);
+        fieldErrors.phone = fieldError;
+        input.addEventListener('input', () => {
+          if (fieldErrors.phone) {
+            fieldErrors.phone.textContent = '';
+            fieldErrors.phone.style.display = 'none';
+          }
+        });
       }
       form.appendChild(wrapField);
     });
     const status = document.createElement('p');
     status.className = 'form-status';
     status.style.display = 'none';
+    status.tabIndex = -1;
+    status.setAttribute('role', 'status');
+    status.setAttribute('aria-live', 'polite');
+    status.setAttribute('aria-atomic', 'true');
     form.appendChild(status);
 
     const actions = document.createElement('div');
@@ -302,6 +358,19 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
     btn.textContent = defaultLabel;
     actions.appendChild(btn);
     form.appendChild(actions);
+    const paidInput = form.querySelector('#field-paid');
+    const updateSubmitState = () => {
+      if (!requirePaidCheckbox || !paidInput) {
+        btn.disabled = false;
+        return;
+      }
+      btn.disabled = !paidInput.checked;
+    };
+    updateSubmitState();
+    if (paidInput) {
+      if (requirePaidCheckbox) paidInput.required = true;
+      paidInput.addEventListener('change', updateSubmitState);
+    }
 
     form.addEventListener('submit', (e) => {
       e.preventDefault();
@@ -309,15 +378,18 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
         status.textContent = message || '';
         status.classList.remove('is-success', 'is-error');
         if (type) status.classList.add(type === 'success' ? 'is-success' : 'is-error');
+        status.setAttribute('aria-live', type === 'error' ? 'assertive' : 'polite');
         status.style.display = message ? 'block' : 'none';
+        if (message) status.focus();
       };
+      if (btn.dataset.submitting === 'true') return;
       const dataTokens = { ...(tokens || {}) };
       renderFields.forEach((field) => {
         const el = form.querySelector(`#field-${field.id}`);
         if (!el) return;
         let value = '';
         if (field.type === 'checkbox') {
-          value = el.checked ? 'Yes' : 'No';
+          value = el.checked ? 'Yes' : '';
         } else {
           value = el.value || '';
         }
@@ -327,6 +399,21 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
       const emailField = renderFields.find((f) => f.id === 'email');
       const emailValue = emailField ? dataTokens[emailField.id] : '';
       const emailBad = emailField && !isEmailValid(emailValue);
+      const phoneEl = form.querySelector('#field-phone');
+      if (phoneEl) {
+        const rawPhone = String(phoneEl.value || '').trim();
+        if (rawPhone) {
+          const invalidChars = /[^0-9()\s+\-]/.test(rawPhone);
+          const digits = rawPhone.replace(/\D/g, '');
+          if (invalidChars || digits.length < 10) {
+            if (fieldErrors.phone) {
+              fieldErrors.phone.textContent = 'Please enter a valid phone number.';
+              fieldErrors.phone.style.display = 'block';
+            }
+            return;
+          }
+        }
+      }
       if (requiredMissing) {
         setStatus('error', 'Please fill all required fields.');
         return;
@@ -337,6 +424,7 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
       }
       setStatus('', '');
       if (ajaxSubmit && formAction) {
+        btn.dataset.submitting = 'true';
         btn.disabled = true;
         btn.textContent = 'Sending...';
         const formData = new FormData(form);
@@ -346,12 +434,15 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
           headers: { Accept: 'application/json' }
         }).then((res) => {
           if (!res.ok) throw new Error('Formspree error');
-          setStatus('success', 'Thanks — we’ve received your seating details.');
+          setStatus('success', successMessage);
           form.reset();
-          btn.textContent = 'Sent';
+          btn.textContent = defaultLabel;
+          btn.dataset.submitting = 'false';
+          updateSubmitState();
         }).catch(() => {
           setStatus('error', 'Something went wrong. Please try again.');
-          btn.disabled = false;
+          btn.dataset.submitting = 'false';
+          updateSubmitState();
           btn.textContent = defaultLabel;
         });
         return;
@@ -510,6 +601,7 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
 
   function populateSite(site) {
     if (!site) return;
+    const email = site.email ? String(site.email).trim() : '';
     applyText('[data-fill="name"]', site.name || site.shortName);
     applyText('[data-fill="tagline"]', site.tagline);
     applyText('[data-fill="hero-headline"]', site.heroHeadline);
@@ -518,11 +610,11 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
     applyText('[data-fill="location-short"]', site.locationShort);
     applyText('[data-fill="phone"]', site.phone);
     applyText('[data-fill="phone-link"]', site.phone);
-    applyText('[data-fill="email-link"]', site.email);
+    if (email) applyText('[data-fill="email-link"]', email);
     applyText('[data-fill="address"]', site.address?.line1 || '');
     applyText('[data-fill="city"]', `${site.address?.city || ''}, ${site.address?.state || ''} ${site.address?.zip || ''}`.trim());
     applyText('[data-fill="full-address"]', site.address?.full || '');
-    applyText('[data-fill="email-text"]', site.email);
+    if (email) applyText('[data-fill="email-text"]', email);
     const hoursFooter = site.footer?.hours_summary || site.footer?.hoursSummary || site.footerHoursSummary;
     if (hoursFooter) {
       applyText('[data-fill="hours"]', hoursFooter);
@@ -538,7 +630,18 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
 
     setHref('[data-fill="phone-link"]', site.phone ? `tel:${site.phone}` : null);
     setHref('[data-fill="map"]', site.mapsUrl || site.mapLink);
-    setHref('[data-fill="email-link"]', site.email ? `mailto:${site.email}` : null);
+    setHref('[data-fill="email-link"]', email ? `mailto:${email}` : null);
+    if (!email) {
+      document.querySelectorAll('[data-fill="email-link"], [data-fill="email-text"]').forEach((el) => {
+        const parent = el.parentElement;
+        const prev = el.previousSibling;
+        if (prev && prev.nodeType === Node.TEXT_NODE && prev.textContent.includes('•')) {
+          prev.remove();
+        }
+        el.remove();
+        if (parent && !parent.textContent.trim()) parent.remove();
+      });
+    }
     const socials = site.socials || site.social;
     setHref('[data-fill="facebook"]', socials?.facebook);
     setHref('[data-fill="instagram"]', socials?.instagram);
@@ -676,6 +779,9 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
       bar.classList.add('active');
       const link = announce.link ? withBase(announce.link) : null;
       bar.innerHTML = link ? `<a href="${link}">${announce.message}</a>` : announce.message;
+      bar.querySelectorAll('a[href^="/"]').forEach((a) => {
+        a.href = withBase(a.getAttribute('href'));
+      });
     }
   }
 
@@ -1410,12 +1516,14 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
           ? '<span class="badge badge-soft">RSVP</span>'
           : '';
       const isTicketed = ev.event_type === 'ticketed';
-      const isVendorPayment = ev.payment_provider === 'vendor';
-      if (DEBUG && ev.payment_provider && !['vendor', 'clover'].includes(ev.payment_provider)) {
+      const paymentOverride = !!(ev.payment_url && ev.payment_label);
+      const paymentProvider = ev.payment_provider || (paymentOverride ? 'vendor' : 'clover');
+      const isVendorPayment = paymentProvider === 'vendor' || paymentProvider === 'venmo';
+      if (DEBUG && ev.payment_provider && !['vendor', 'clover', 'venmo'].includes(ev.payment_provider)) {
         dbg('event payment provider unknown', { title: ev.title, provider: ev.payment_provider });
       }
       const paymentMethodLabel = isVendorPayment
-        ? ((ev.payment_label || '').replace(/^pay\s+via\s+/i, '').trim() || 'Vendor')
+        ? ((ev.payment_label || '').replace(/^pay\s+via\s+/i, '').trim() || (paymentProvider === 'venmo' ? 'Venmo' : 'Vendor'))
         : 'Clover';
       const paymentMethodDetail = isVendorPayment && ev.vendor_name
         ? `${paymentMethodLabel} (${ev.vendor_name})`
@@ -1425,15 +1533,23 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
       dbg('vendor payment ux', { title: ev.title, sold_out_override: !!ev.sold_out_override });
 
       let button = '';
-      const paymentOverride = !!(ev.payment_url && ev.payment_label);
+      const providerKey = ev.payment_provider || (paymentOverride ? 'vendor' : 'clover');
       const paymentUrl = paymentOverride ? ev.payment_url : ticketing?.clover_payment_url;
       const paymentLabel = paymentOverride ? ev.payment_label : 'Pay on Clover';
+      const helperProvider = providerKey === 'vendor' && /venmo/i.test(`${paymentLabel} ${paymentUrl || ''}`) ? 'venmo' : providerKey;
+      const paymentHelperOverride = typeof ev.payment_helper === 'string' ? ev.payment_helper.trim() : '';
+      const paymentHelperDefault = helperProvider === 'clover'
+        ? 'You’ll complete payment securely via Clover.'
+        : helperProvider === 'venmo'
+          ? 'You’ll complete payment via Venmo.'
+          : 'You’ll complete payment on the vendor’s ticketing page.';
+      const paymentHelper = paymentHelperOverride || paymentHelperDefault;
       const linkValid = ticketing && isValidPaymentLink(paymentUrl, ticketing.isPlaceholder);
       const soldOutOverride = ev.sold_out_override === true;
       const paymentEnabled = ticketing && !soldOut && !soldOutOverride && linkValid;
       if (paymentEnabled) {
         if (paymentOverride) {
-          const paymentAttrs = ev.payment_provider === 'vendor'
+          const paymentAttrs = providerKey === 'vendor' || providerKey === 'venmo'
             ? ' target="_blank" rel="noopener noreferrer"'
             : '';
           button = `<a class="btn btn-primary btn-small" href="${paymentUrl}"${paymentAttrs}>${paymentLabel}</a>`;
@@ -1467,21 +1583,12 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
         ? '<p class="note event-info">Tickets currently unavailable — please check back or contact us.</p>'
         : '';
       let ticketCopy = '';
-      if (ticketing && !soldOut && linkValid && !soldOutOverride) {
-        const hideTicketedHelper = ev.hide_ticketed_helper === true;
-        const paymentNote = typeof ev.payment_note === 'string' ? ev.payment_note.trim() : '';
-        const helperOverride = typeof ev.ticketed_helper_copy === 'string' ? ev.ticketed_helper_copy.trim() : '';
-        dbg('ticketed helper', { title: ev.title, hide: ev.hide_ticketed_helper, note: ev.payment_note, provider: ev.payment_provider });
-        ticketCopy = hideTicketedHelper
-          ? ''
-          : (helperOverride
-            ? `<p class="note">${helperOverride}</p>`
-            : (paymentNote
-              ? `<p class="note">${paymentNote}</p>`
-              : '<p class="note">Ticketed event — pay on Clover, then send seating details.</p>'));
-      } else if (ticketing && !linkValid) {
+      if (ticketing && !linkValid) {
         ticketCopy = '<p class="note">Ticket link coming soon.</p>';
       }
+      const paymentHelperLine = (paymentEnabled && !ev.hide_ticketed_helper && paymentHelper)
+        ? `<p class="note event-help">${paymentHelper}</p>`
+        : '';
       const lowInventory = ticketing && remaining > 0 && remaining <= 5;
       card.innerHTML = `
         ${img}
@@ -1489,12 +1596,17 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
         <h3>${ev.title}</h3>
         <p>${ev.description}</p>
         ${ticketing?.policy ? `<p class="note">${ticketing.policy}</p>` : ''}
-        <div class="form-actions">
-          ${button || ''}
-        </div>
-        ${vendorPaymentDetails}
-        ${soldOutOverrideNotice}
-        ${ticketCopy}
+        ${ticketing ? `
+        <div class="event-payment">
+          <h4 class="event-section-title">Pay for tickets</h4>
+          <div class="form-actions">
+            ${button || ''}
+          </div>
+          ${paymentHelperLine}
+          ${vendorPaymentDetails}
+          ${soldOutOverrideNotice}
+          ${ticketCopy}
+        </div>` : ''}
         ${lowInventory ? '<p class="note">Limited tickets remain. Availability isn’t held until payment completes.</p>' : ''}
       `;
 
@@ -1518,20 +1630,8 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
         const fallbackBody = `Event: ${tokens.event_title}\nDate: ${tokens.event_date}\nName: {{name}}\nEmail: {{email}}\nPhone: {{phone}}\nQuantity: {{quantity}}\nNotes: {{notes}}\n${paymentMethodLine}${paidLineLabel}: {{paid}}\n`;
         const paidLabel = 'I’ve already paid';
         dbg('seating paid label', { title: ev.title, label: paidLabel });
-        const vendorFormIntro = typeof ev.vendor_post_payment_copy === 'string' ? ev.vendor_post_payment_copy.trim() : '';
-        const vendorFormConfirm = typeof ev.vendor_confirmation_copy === 'string'
-          ? ev.vendor_confirmation_copy.trim()
-          : 'You’ll receive a confirmation once we’ve received your seating details.';
-        const vendorFormReinforce = typeof ev.vendor_form_reinforce_copy === 'string' ? ev.vendor_form_reinforce_copy.trim() : '';
-        dbg('vendor form reinforce', { title: ev.title, enabled: !!vendorFormReinforce });
-        const seatingFormIntro = isVendorPayment && vendorFormIntro
-          ? vendorFormIntro
-          : 'This form completes your reservation.';
-        const seatingFormSubnote = isVendorPayment
-          ? vendorFormConfirm
-          : (ev.payment_provider === 'clover'
-            ? 'Payment is handled on Clover. This form emails us your seating details — it doesn’t process payment.'
-            : 'This form emails us your seating details — it doesn’t process payment.');
+        const requirePaidCheckbox = ev.seating_form?.require_paid_checkbox !== false;
+        const seatingSuccessMessage = ev.seating_form?.success_message || '';
         dbg('seating form copy', { title: ev.title, provider: ev.payment_provider || 'default' });
         const form = createForm(
           fields,
@@ -1544,15 +1644,17 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
           'event_ticketed',
           {
             defaultCollapsed: true,
-            collapseLabel: 'Send seating details',
+            collapseLabel: 'Open seating form',
             compact: true,
             paidLabel,
-            introNote: seatingFormIntro,
-            subnote: seatingFormSubnote,
-            preFieldsNote: isVendorPayment && vendorFormReinforce ? vendorFormReinforce : undefined,
+            introNote: '',
+            subnote: '',
+            preFieldsNote: undefined,
             ajax: true,
             action: 'https://formspree.io/f/xbddjoek',
             formClass: 'seating-form',
+            requirePaidCheckbox,
+            successMessage: seatingSuccessMessage,
             hiddenFields: {
               event_title: ev.title || '',
               event_date_display: formatDate(ev.date),
@@ -1562,7 +1664,17 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
             }
           }
         );
-        if (form) card.appendChild(form);
+        if (form) {
+          const seatingBlock = document.createElement('div');
+          seatingBlock.className = 'event-seating';
+          seatingBlock.innerHTML = `
+            <h4 class="event-section-title">Send seating details</h4>
+            <p class="note event-help">This form completes your reservation.</p>
+            <p class="note event-help">Payment is handled separately above.</p>
+          `;
+          seatingBlock.appendChild(form);
+          card.appendChild(seatingBlock);
+        }
       }
 
       container.appendChild(card);
@@ -2346,8 +2458,65 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
     } catch (err) {
       console.warn('Clipboard copy failed', err);
     }
-    const encoded = encodeURIComponent(text);
-    window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encoded}`;
+    if (DEBUG) dbg('form copied to clipboard', { formId, subject });
+  }
+
+  function initContactForm() {
+    const form = document.getElementById('contact-form');
+    if (!form) return;
+    const button = form.querySelector('button[type="submit"]');
+    if (!button) return;
+    let status = form.querySelector('.form-status');
+    if (!status) {
+      status = document.createElement('p');
+      status.className = 'form-status';
+      status.style.display = 'none';
+      form.appendChild(status);
+    }
+    status.tabIndex = -1;
+    status.setAttribute('role', 'status');
+    status.setAttribute('aria-live', 'polite');
+    status.setAttribute('aria-atomic', 'true');
+
+    const setStatus = (type, message) => {
+      status.textContent = message || '';
+      status.classList.remove('is-success', 'is-error');
+      if (type) status.classList.add(type === 'success' ? 'is-success' : 'is-error');
+      status.setAttribute('aria-live', type === 'error' ? 'assertive' : 'polite');
+      status.style.display = message ? 'block' : 'none';
+      if (message) status.focus();
+    };
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (button.dataset.submitting === 'true') return;
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+      setStatus('', '');
+      const action = form.getAttribute('action') || 'https://formspree.io/f/xbddjoek';
+      const formData = new FormData(form);
+      button.dataset.submitting = 'true';
+      button.disabled = true;
+      const defaultLabel = button.textContent;
+      button.textContent = 'Sending...';
+      fetch(action, {
+        method: 'POST',
+        body: formData,
+        headers: { Accept: 'application/json' }
+      }).then((res) => {
+        if (!res.ok) throw new Error('Formspree error');
+        setStatus('success', 'Thanks — we received your message.');
+        form.reset();
+      }).catch(() => {
+        setStatus('error', 'Something went wrong. Please try again.');
+      }).finally(() => {
+        button.dataset.submitting = 'false';
+        button.disabled = false;
+        button.textContent = defaultLabel;
+      });
+    });
   }
 
   function injectSchema(site) {
@@ -2413,6 +2582,7 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
     setNavLinks();
     setupBackToTop();
     enableFadeIn();
+    initContactForm();
     if (document.getElementById('private-menu-builder')) {
       fetchJSON('private-events.json', {}).then(renderPrivateEventMenu);
     }

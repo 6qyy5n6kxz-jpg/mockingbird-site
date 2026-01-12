@@ -6,7 +6,7 @@
   <title>Contact | Mockingbird</title>
   <meta name="description" content="Contact Mockingbird for reservations, hours, and directions.">
   <meta property="og:title" content="Contact | Mockingbird">
-  <meta property="og:description" content="Call, email, or visit Mockingbird. View hours and location.">
+  <meta property="og:description" content="Call or visit Mockingbird. View hours and location.">
   <meta property="og:image" content="../assets/images/og.jpg">
   <script src="../js/base.js"></script>
   <link rel="icon" type="image/svg+xml" data-favicon="svg">
@@ -27,8 +27,8 @@
 </head>
 <body>
   <a class="sr-only" href="#main">Skip to main content</a>
-  <div class="announcement" role="status"></div>
   <header id="site-header"></header>
+  <div class="announcement" role="status"></div>
 
   <main id="main" class="section">
     <div class="container grid-2">
@@ -40,7 +40,6 @@
         <div class="inline-links">
           <a class="btn btn-primary btn-small" data-fill="map">Directions</a>
           <a class="btn btn-secondary btn-small" data-fill="phone-link">Call</a>
-          <a class="btn btn-ghost btn-small" data-fill="email-link">Email</a>
         </div>
         <div style="margin-top:16px;">
           <p class="kicker">Hours</p>
@@ -50,31 +49,36 @@
         <div style="margin-top:16px;">
           <p class="kicker">Social</p>
           <div class="social">
-            <a data-fill="facebook">Facebook</a>
-            <a data-fill="instagram">Instagram</a>
+            <a data-fill="facebook" class="social-icon" aria-label="Facebook">
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M13 10.5V8.75c0-.6.4-1 .9-1H14.9V6h-1.1c-1.8 0-3.25 1.4-3.25 3.1V10.5H9v1.8h1.55V18h2.05v-5.7h1.9l.25-1.8H12.6Z" fill="currentColor"/></svg>
+            </a>
+            <a data-fill="instagram" class="social-icon" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M16.5 7.2a.9.9 0 1 1-1.8 0 .9.9 0 0 1 1.8 0Z" fill="currentColor"/><path d="M12 8.2a3.8 3.8 0 1 0 0 7.6 3.8 3.8 0 0 0 0-7.6Zm0 1.6a2.2 2.2 0 1 1 0 4.4 2.2 2.2 0 0 1 0-4.4Z" fill="currentColor"/><path d="M16.2 3.8H7.8A4.05 4.05 0 0 0 3.8 7.8v8.4a4.05 4.05 0 0 0 4 4h8.4a4.05 4.05 0 0 0 4-4V7.8a4.05 4.05 0 0 0-4-4Zm2.4 12.4a2.4 2.4 0 0 1-2.4 2.4H7.8a2.4 2.4 0 0 1-2.4-2.4V7.8a2.4 2.4 0 0 1 2.4-2.4h8.4a2.4 2.4 0 0 1 2.4 2.4Z" fill="currentColor"/></svg>
+            </a>
           </div>
         </div>
       </div>
       <div>
-        <form id="contact-form" data-subject="General Contact">
+        <form id="contact-form" action="https://formspree.io/f/xbddjoek" method="POST">
           <p class="kicker">Contact</p>
           <h2>Questions? We respond quickly.</h2>
           <label for="contact-name">Name</label>
-          <input id="contact-name" name="Name" placeholder="Full name" required>
+          <input id="contact-name" name="name" placeholder="Full name" autocomplete="name" required>
 
           <label for="contact-email">Email</label>
-          <input id="contact-email" name="Email" type="email" placeholder="you@example.com" required>
+          <input id="contact-email" name="email" type="email" placeholder="you@example.com" autocomplete="email" required>
 
           <label for="contact-phone">Phone</label>
-          <input id="contact-phone" name="Phone" type="tel" placeholder="555-123-4567">
+          <input id="contact-phone" name="phone" type="tel" placeholder="555-123-4567" inputmode="tel" autocomplete="tel">
 
           <label for="contact-message">How can we help?</label>
-          <textarea id="contact-message" name="Message" placeholder="Reservations, dietary notes, accessibility, etc." required></textarea>
+          <textarea id="contact-message" name="message" placeholder="Reservations, dietary notes, accessibility, etc." required></textarea>
+          <input type="hidden" name="source" value="contact">
 
-          <div class="inline-links" style="margin-top:12px;">
-            <button type="button" class="btn btn-primary" data-copy-form="contact-form">Copy details &amp; email</button>
-            <a class="btn btn-secondary" data-fill="email-link">Open email</a>
+          <div class="form-actions" style="margin-top:12px;">
+            <button type="submit" class="btn btn-primary">Send message</button>
           </div>
+          <p class="form-status" role="status" aria-live="polite" aria-atomic="true" style="display:none;"></p>
           <p class="note">We typically respond within one business day.</p>
         </form>
       </div>
@@ -103,7 +107,7 @@
         <div data-fill="address">123 Mockingbird Lane</div>
         <div data-fill="city">Yourtown, CA</div>
         <div class="note" data-fill="hours">Hours</div>
-        <div><a data-fill="phone-link">555-123-4567</a> • <a data-fill="email-link">hello@mockingbird.example</a></div>
+        <div><a data-fill="phone-link">555-123-4567</a></div>
         <div class="social">
           <a data-fill="facebook">Facebook</a>
           <a data-fill="instagram">Instagram</a>

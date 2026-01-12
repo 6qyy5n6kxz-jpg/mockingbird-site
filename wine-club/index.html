@@ -27,25 +27,18 @@
 </head>
 <body>
   <a class="sr-only" href="#main">Skip to main content</a>
-  <div class="announcement" role="status"></div>
   <header id="site-header"></header>
+  <div class="announcement" role="status"></div>
 
   <main id="main" class="section">
-    <div class="container grid-2">
-      <div>
-        <p class="kicker">Wine Club</p>
-        <h1>Pickup-only membership</h1>
-        <p class="lead">Two to four bottles curated monthly or quarterly. Pickup at the restaurant with a quick hello and pairing notes.</p>
-        <ul class="table-list">
-          <li>Member pricing on glass pours during pickup week</li>
-          <li>Swap bottles for equal value if desired</li>
-          <li>Priority access to pairing dinners and tastings</li>
-        </ul>
-        <p class="note">Pickup only. Bring a valid ID. To pause or adjust your tier, email us anytime.</p>
-      </div>
-      <div>
-        <div id="wineclub-options" class="table-grid"></div>
-      </div>
+    <div class="container">
+      <p class="kicker">Wine Club</p>
+      <h1>Wine Club</h1>
+      <p class="lead">Coming soon.</p>
+      <p class="note">
+        Our Wine Club is being refreshed. Pickup-only membership will return soon.
+        Follow along on <a data-fill="facebook">Facebook</a> and <a data-fill="instagram">Instagram</a> for updates.
+      </p>
     </div>
   </main>
 
@@ -54,11 +47,10 @@
       <div class="final-cta">
         <div>
           <p class="kicker">Have questions?</p>
-          <h2>Email or call and we’ll personalize your pickup schedule.</h2>
+          <h2>Call and we’ll share the latest timeline.</h2>
         </div>
         <div class="hero-cta">
           <a class="btn btn-primary" data-cta="call">Call</a>
-          <a class="btn btn-secondary" data-fill="email-link">Email</a>
         </div>
       </div>
     </div>
@@ -71,7 +63,7 @@
         <div data-fill="address">123 Mockingbird Lane</div>
         <div data-fill="city">Yourtown, CA</div>
         <div class="note" data-fill="hours">Hours</div>
-        <div><a data-fill="phone-link">555-123-4567</a> • <a data-fill="email-link">hello@mockingbird.example</a></div>
+        <div><a data-fill="phone-link">555-123-4567</a></div>
         <div class="social">
           <a data-fill="facebook">Facebook</a>
           <a data-fill="instagram">Instagram</a>
@@ -128,11 +120,7 @@
   <script src="../js/main.js"></script>
   <script>
     (async function() {
-      const [wineclub, site] = await Promise.all([
-        Mockingbird.fetchJSON('wineclub.json', {}),
-        Mockingbird.sitePromise
-      ]);
-      Mockingbird.renderWineClub(wineclub, site);
+      await Mockingbird.sitePromise;
     })();
   </script>
 </body>

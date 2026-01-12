@@ -39,7 +39,7 @@
     "full": "4408 N. Elliston-Trowbridge Rd., Graytown, OH 43432"
   },
   "phone": "419-504-4900",
-  "email": "mockingbirddevin@gmail.com",
+  "email": "",
   "mapsUrl": "https://www.google.com/maps/search/?api=1&query=4408+N.+Elliston-Trowbridge+Rd.,+Graytown,+OH+43432",
   "hours": [
     { "label": "Sun", "value": "Closed" },
@@ -56,8 +56,8 @@
     "instagram": "https://www.instagram.com/mockingbirdonmillroad/"
   },
   "announcementBar": {
-    "enabled": false,
-    "message": "Now booking private parties and celebrations.",
+    "enabled": true,
+    "message": "We’re closed for regular service in January. We’re still hosting <a href=\"/events/\">special events</a> and <a href=\"/private-parties/\">private events</a>. Reopening in February.",
     "link": ""
   },
   "trust": {
