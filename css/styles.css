@@ -708,6 +708,16 @@ textarea {
   font-size: 14px;
 }
 
+.event-help {
+  margin: 4px 0;
+}
+
+.event-info {
+  color: var(--text);
+  font-size: 14px;
+  margin: 6px 0 0;
+}
+
 .gallery-grid {
   display: grid;
   gap: 12px;

@@ -98,6 +98,8 @@
   function createForm(fields, submission, tokens, submitLabel, instructions, fallbackSubject, fallbackBody, context, options = {}) {
     if (!submission) return null;
     const opts = options || {};
+    const paidLabel = opts.paidLabel || 'I already paid';
+    const preFieldsNote = typeof opts.preFieldsNote === 'string' ? opts.preFieldsNote.trim() : '';
 
     function coerceFields(list) {
       const defaults = {
@@ -108,7 +110,7 @@
         notes: { id: 'notes', label: 'Notes', type: 'textarea', rows: 3, placeholder: 'Attendee names + any seating notes' },
         date: { id: 'date', label: 'Date', type: 'text' },
         plan: { id: 'plan', label: 'Plan', type: 'select' },
-        paid: { id: 'paid', label: 'I already paid via Clover', type: 'checkbox', required: false }
+        paid: { id: 'paid', label: paidLabel, type: 'checkbox', required: false }
       };
       const arr = Array.isArray(list) ? list : [];
       return arr.map((entry) => {
@@ -129,16 +131,22 @@
     form.className = opts.compact ? 'note compact-form' : 'note';
     const intro = document.createElement('p');
     intro.className = 'note';
-    intro.textContent = 'Pay on Clover first.';
+    intro.textContent = opts.introNote || 'This form completes your reservation';
     form.appendChild(intro);
     const subnote = document.createElement('p');
     subnote.className = 'note';
-    subnote.textContent = 'Then send attendee names for seating. (This emails us — it doesn’t process payment.)';
+    subnote.textContent = opts.subnote || 'Then send attendee names for seating. (This emails us — it doesn’t process payment.)';
     form.appendChild(subnote);
+    if (preFieldsNote) {
+      const reinforce = document.createElement('p');
+      reinforce.className = 'note event-help';
+      reinforce.textContent = preFieldsNote;
+      form.appendChild(reinforce);
+    }
     const fieldList = coerceFields(fields);
     const hasPaid = fieldList.some((f) => f.id === 'paid');
     if (!hasPaid) {
-      fieldList.push({ id: 'paid', label: 'I already paid via Clover', type: 'checkbox', required: false });
+      fieldList.push({ id: 'paid', label: paidLabel, type: 'checkbox', required: false });
     }
 
     function normalizeRequired(list, ctx) {
@@ -1335,8 +1343,13 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
       const ticketing = ev.ticketing;
       const remaining = ticketing ? ticketsRemaining(ticketing) : null;
       const soldOut = ticketing ? remaining === 0 : false;
+      const capacityDisplayMode = ev.capacity_display || 'default';
+      dbg('capacity display', { title: ev.title, mode: capacityDisplayMode });
+      const availabilityLabel = soldOut
+        ? 'Sold out'
+        : (capacityDisplayMode === 'limited' ? 'Limited seating available' : `${remaining} remaining`);
       const availabilityBadge = ticketing
-        ? `<span class="badge">${soldOut ? 'Sold out' : `${remaining} remaining`}</span>`
+        ? `<span class="badge">${availabilityLabel}</span>`
         : '';
       const priceBadge = (ticketing && ticketing.price_display) ? `<span class="badge">${ticketing.price_display}</span>` : (ev.price ? `<span class="badge">${ev.price}</span>` : '');
       const typeBadge = ev.type ? `<span class="badge badge-soft">${ev.type}</span>` : '';
@@ -1345,16 +1358,70 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
         : ev.event_type === 'rsvp'
           ? '<span class="badge badge-soft">RSVP</span>'
           : '';
+      const isTicketed = ev.event_type === 'ticketed';
+      const isVendorPayment = ev.payment_provider === 'vendor';
+      const paymentMethodLabel = isVendorPayment
+        ? ((ev.payment_label || '').replace(/^pay\s+via\s+/i, '').trim() || 'Vendor')
+        : 'Clover';
+      const paymentMethodDetail = isVendorPayment && ev.vendor_name
+        ? `${paymentMethodLabel} (${ev.vendor_name})`
+        : '';
       if (DEBUG && ev.event_type) dbg('render event_type', ev.title, ev.event_type);
+      dbg('event payment override', { title: ev.title, payment_provider: ev.payment_provider, payment_url: ev.payment_url });
+      dbg('vendor payment ux', { title: ev.title, sold_out_override: !!ev.sold_out_override });
 
       let button = '';
-      const linkValid = ticketing && isValidPaymentLink(ticketing.clover_payment_url, ticketing.isPlaceholder);
-      if (ticketing && !soldOut && linkValid) {
-        button = `<a class="btn btn-primary btn-small" href="${ticketing.clover_payment_url}" target="_blank" rel="noopener noreferrer">Pay on Clover</a>`;
+      const paymentOverride = !!(ev.payment_url && ev.payment_label);
+      const paymentUrl = paymentOverride ? ev.payment_url : ticketing?.clover_payment_url;
+      const paymentLabel = paymentOverride ? ev.payment_label : 'Pay on Clover';
+      const linkValid = ticketing && isValidPaymentLink(paymentUrl, ticketing.isPlaceholder);
+      const soldOutOverride = ev.sold_out_override === true;
+      const paymentEnabled = ticketing && !soldOut && !soldOutOverride && linkValid;
+      if (paymentEnabled) {
+        if (paymentOverride) {
+          const paymentAttrs = ev.payment_provider === 'vendor'
+            ? ' target="_blank" rel="noopener noreferrer"'
+            : '';
+          button = `<a class="btn btn-primary btn-small" href="${paymentUrl}"${paymentAttrs}>${paymentLabel}</a>`;
+        } else {
+          button = `<a class="btn btn-primary btn-small" href="${paymentUrl}" target="_blank" rel="noopener noreferrer">${paymentLabel}</a>`;
+        }
       }
+      let vendorPaymentDetails = '';
+      if (isVendorPayment && paymentEnabled) {
+        const vendorLines = [];
+        const vendorPaymentCopy = typeof ev.vendor_payment_copy === 'string' ? ev.vendor_payment_copy.trim() : '';
+        const vendorLinkHint = typeof ev.vendor_link_hint === 'string' ? ev.vendor_link_hint.trim() : '';
+        const vendorNoteLabel = typeof ev.vendor_note_label === 'string' ? ev.vendor_note_label.trim() : '';
+        const vendorNoteValue = typeof ev.vendor_note_value === 'string' ? ev.vendor_note_value.trim() : '';
+        const vendorPostPaymentCopy = typeof ev.vendor_post_payment_copy === 'string' ? ev.vendor_post_payment_copy.trim() : '';
+        if (vendorPaymentCopy) {
+          vendorLines.push(`<p class="note event-help">${vendorPaymentCopy}</p>`);
+        }
+        if (vendorLinkHint) {
+          vendorLines.push(`<p class="note event-help">${vendorLinkHint}</p>`);
+        }
+        if (vendorNoteLabel && vendorNoteValue) {
+          vendorLines.push(`<p class="note event-help"><strong>${vendorNoteLabel}:</strong> ${vendorNoteValue}</p>`);
+        }
+        if (vendorPostPaymentCopy) {
+          vendorLines.push(`<p class="event-info">${vendorPostPaymentCopy}</p>`);
+        }
+        vendorPaymentDetails = vendorLines.join('');
+      }
+      const soldOutOverrideNotice = soldOutOverride
+        ? '<p class="note event-info">Tickets currently unavailable — please check back or contact us.</p>'
+        : '';
       let ticketCopy = '';
-      if (ticketing && !soldOut && linkValid) {
-        ticketCopy = '<p class="note">Ticketed event — pay on Clover, then email seating details.</p>';
+      if (ticketing && !soldOut && linkValid && !soldOutOverride) {
+        const hideTicketedHelper = ev.hide_ticketed_helper === true;
+        const paymentNote = typeof ev.payment_note === 'string' ? ev.payment_note.trim() : '';
+        dbg('ticketed helper', { title: ev.title, hide: ev.hide_ticketed_helper, note: ev.payment_note, provider: ev.payment_provider });
+        ticketCopy = hideTicketedHelper
+          ? ''
+          : (paymentNote
+            ? `<p class="note">${paymentNote}</p>`
+            : '<p class="note">Ticketed event — pay on Clover, then email seating details.</p>');
       } else if (ticketing && !linkValid) {
         ticketCopy = '<p class="note">Ticket link coming soon.</p>';
       }
@@ -1368,29 +1435,56 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
         <div class="form-actions">
           ${button || ''}
         </div>
+        ${vendorPaymentDetails}
+        ${soldOutOverrideNotice}
         ${ticketCopy}
         ${lowInventory ? '<p class="note">Limited tickets remain. Availability isn’t held until payment completes.</p>' : ''}
       `;
 
-      if (ticketing?.intake) {
+      const shouldShowSeatingForm = isTicketed && (ticketing?.intake || ev.seating_form?.enabled === true);
+      if (shouldShowSeatingForm) {
+        dbg('seating form render', { title: ev.title, provider: ev.payment_provider, enabled: !!ev.seating_form?.enabled });
+        const seatingIntake = ticketing?.intake || {
+          required_fields: ['name', 'email', 'phone', 'quantity', 'notes'],
+          submission: { method: 'mailto', to: '{{site_contact_email}}' }
+        };
         const tokens = {
           event_title: ev.title || '',
           event_date: formatDate(ev.date),
-          event_price: ticketing.price_display || ev.price || '',
-          site_contact_email: state.site?.email || emailFallback || ''
+          event_price: ticketing?.price_display || ev.price || '',
+          site_contact_email: state.site?.email || emailFallback || '',
+          payment_method: paymentMethodDetail || paymentMethodLabel
         };
-        const fields = ticketing.intake.required_fields || [];
-        const fallbackBody = `Event: ${tokens.event_title}\nDate: ${tokens.event_date}\nName: {{name}}\nEmail: {{email}}\nPhone: {{phone}}\nQuantity: {{quantity}}\nNotes: {{notes}}\nPaid via Clover: {{paid}}\n`;
+        const fields = seatingIntake.required_fields || [];
+        const paymentMethodLine = paymentMethodDetail ? `Payment method: ${paymentMethodDetail}\n` : '';
+        const paidLineLabel = isVendorPayment ? `Paid via ${paymentMethodLabel}` : 'Paid';
+        const fallbackBody = `Event: ${tokens.event_title}\nDate: ${tokens.event_date}\nName: {{name}}\nEmail: {{email}}\nPhone: {{phone}}\nQuantity: {{quantity}}\nNotes: {{notes}}\n${paymentMethodLine}${paidLineLabel}: {{paid}}\n`;
+        const paidLabel = 'I\'ve already paid';
+        dbg('seating paid label', { title: ev.title, label: paidLabel });
+        const vendorFormIntro = typeof ev.vendor_post_payment_copy === 'string' ? ev.vendor_post_payment_copy.trim() : '';
+        const vendorFormConfirm = typeof ev.vendor_confirmation_copy === 'string'
+          ? ev.vendor_confirmation_copy.trim()
+          : 'You’ll receive a confirmation once we’ve received your seating details.';
+        const vendorFormReinforce = typeof ev.vendor_form_reinforce_copy === 'string' ? ev.vendor_form_reinforce_copy.trim() : '';
+        dbg('vendor form reinforce', { title: ev.title, enabled: !!vendorFormReinforce });
         const form = createForm(
           fields,
-          ticketing.intake.submission,
+          seatingIntake.submission,
           tokens,
           'Send Details',
-          ticketing.intake.instructions,
-          ticketing.intake.submission?.subject_template || 'Event Details – {{event_title}} – {{event_date}}',
+          seatingIntake.instructions,
+          seatingIntake.submission?.subject_template || 'Event Details – {{event_title}} – {{event_date}}',
           fallbackBody,
           'event_ticketed',
-          { defaultCollapsed: true, collapseLabel: 'Send seating details', compact: true }
+          {
+            defaultCollapsed: true,
+            collapseLabel: 'Send seating details',
+            compact: true,
+            paidLabel,
+            introNote: isVendorPayment && vendorFormIntro ? vendorFormIntro : undefined,
+            subnote: isVendorPayment ? vendorFormConfirm : undefined,
+            preFieldsNote: isVendorPayment && vendorFormReinforce ? vendorFormReinforce : undefined
+          }
         );
         if (form) card.appendChild(form);
       }
@@ -1609,7 +1703,7 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
       };
       const fields = (deposit.intake.required_fields || []).map((f) => fieldMap[f]).filter(Boolean);
       const tokens = { site_contact_email: site?.email || '' };
-      const fallbackBody = `Name: {{name}}\nEmail: {{email}}\nPhone: {{phone}}\nPreferred date: {{date}}\nNotes: {{notes}}\nPaid via Clover: {{paid}}\n`;
+      const fallbackBody = `Name: {{name}}\nEmail: {{email}}\nPhone: {{phone}}\nPreferred date: {{date}}\nNotes: {{notes}}\nPaid: {{paid}}\n`;
       const form = createForm(
         fields,
         deposit.intake.submission,

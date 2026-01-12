@@ -8,6 +8,14 @@
       "price": "Tickets via Wine & Canvas",
       "event_type": "ticketed",
       "payment_link_url": "https://wineandcanvas.com/toledo/event/graytown-paint-and-sip-party-northern-glow/",
+      "payment_provider": "vendor",
+      "payment_label": "Buy tickets",
+      "payment_url": "https://wineandcanvas.com/toledo/event/graytown-paint-and-sip-party-northern-glow/",
+      "payment_note": "",
+      "hide_ticketed_helper": true,
+      "seating_form": {
+        "enabled": true
+      },
       "type": "Paint & Sip",
       "ticketing": {
         "capacity": 30,
@@ -45,11 +53,38 @@
     },
     {
       "date": "2026-02-08T11:00:00",
-      "title": "Galentine’s Day with Meregold Creations",
-      "description": "Galentine’s Day pop-up with Meregold Creations starting at 11 AM. Come early to enjoy dinner-forward bites and drinks.",
-      "price": "No cover",
-      "event_type": "rsvp",
-      "payment_link_url": ""
+      "title": "Galentine’s Day Floral Workshop with Meregold Creations",
+      "description": "Join us at The Mockingbird for a relaxed, creative Galentine’s Day celebration featuring Meredith of Meregold Creations. Guests will enjoy a guided floral workshop with all supplies and instruction provided. Doors open at 11:00 AM so you can settle in, enjoy food and drinks, and sip mimosas before crafting begins at 12:00 PM. Food and drinks will be available for purchase throughout the event.",
+      "price": "35",
+      "event_type": "ticketed",
+      "payment_link_url": "https://venmo.com/u/Meredith-Wolfe-4",
+      "payment_provider": "vendor",
+      "payment_label": "Pay via Venmo",
+      "payment_url": "https://venmo.com/u/Meredith-Wolfe-4",
+      "payment_note": "Ticketed event — pay Meregold Creations via Venmo, then email seating details.",
+      "vendor_name": "Meregold Creations",
+      "vendor_payment_copy": "$35 per person — paid directly to Meregold Creations via Venmo.",
+      "vendor_post_payment_copy": "This form completes your reservation.",
+      "vendor_note_label": "Venmo note",
+      "vendor_note_value": "Galentine’s Day Floral Workshop – Feb 8",
+      "vendor_confirmation_copy": "You’ll receive a confirmation email once we receive your seating details.",
+      "vendor_link_hint": "Venmo opens in a new tab.",
+      "capacity_display": "limited",
+      "sold_out_override": false,
+      "seating_form": {
+        "enabled": true
+      },
+      "type": "Floral Crafting",
+      "ticketing": {
+        "capacity": 30,
+        "sold": 0,
+        "price_display": "$35 per person",
+        "clover_payment_url": "https://venmo.com/u/Meredith-Wolfe-4",
+        "sold_out_behavior": "disable"
+        
+      },
+      "image_url": "assets/events/floral-arrangement.jpg",
+      "image_alt": "Pink envelope-style floral arrangement filled with blush roses, white flowers, and eucalyptus greenery.”"
     },
     {
       "date": "2026-02-11T18:30:00",

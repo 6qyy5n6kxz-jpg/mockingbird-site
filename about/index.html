@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en" data-base="..">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About | Mockingbird</title>
+  <meta name="description" content="About The Mockingbird Wine Café in Graytown, OH.">
+  <meta property="og:title" content="About | Mockingbird">
+  <meta property="og:description" content="Learn about The Mockingbird Wine Café: seasonal food, curated wines, and warm hospitality.">
+  <meta property="og:image" content="../assets/images/og.jpg">
+  <script src="../js/base.js"></script>
+  <link rel="icon" type="image/svg+xml" data-favicon="svg">
+  <link rel="alternate icon" data-favicon="ico">
+  <link rel="apple-touch-icon" data-favicon="apple">
+  <script>
+    (function() {
+      if (!window.withBase) return;
+      const svg = document.querySelector('link[data-favicon="svg"]');
+      const ico = document.querySelector('link[data-favicon="ico"]');
+      const apple = document.querySelector('link[data-favicon="apple"]');
+      if (svg) svg.href = withBase('/assets/images/favicon.svg');
+      if (ico) ico.href = withBase('/assets/images/favicon.png');
+      if (apple) apple.href = withBase('/assets/images/favicon.png');
+    })();
+  </script>
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+  <a class="sr-only" href="#main">Skip to main content</a>
+  <div class="announcement" role="status"></div>
+  <header id="site-header"></header>
+
+  <main id="main" class="section">
+    <div class="container">
+      <p class="kicker">About</p>
+      <h1>About</h1>
+      <h2>The Mockingbird Wine Café</h2>
+      <p>Mockingbird is a wine café in Graytown focused on from-scratch food and a bottle-forward list. We keep the atmosphere cozy and welcoming so neighbors and friends can drop in for dinner or linger over a glass.</p>
+      <p>Our menu is cooked in-house: homemade soups, flatbreads, pressed sandwiches, grilled cheese, and weekly specials. Pair them with curated wines from around the world, craft beer, ciders, sangria, meads, and thoughtful non-alcoholic options.</p>
+      <p>We keep things simple: walk in or call ahead. Want to plan ahead? Check our events for ticketed dinners and tastings.</p>
+      <ul class="table-list">
+        <li>Nearly 100 bottles spanning classic regions and new finds</li>
+        <li>Rotating glass pours, sangria, beer, and NA picks</li>
+        <li>From-scratch kitchen with seasonal specials each week</li>
+        <li>Warm, local hospitality — no pretense, no fuss</li>
+      </ul>
+      <div class="inline-links" style="margin-top:12px;">
+        <a class="btn btn-secondary btn-small" data-nav="events">View upcoming events</a>
+        <a class="btn btn-ghost btn-small" data-nav="menu">See the menu</a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="meta">
+        <strong data-fill="name">Mockingbird</strong>
+        <div data-fill="address">123 Mockingbird Lane</div>
+        <div data-fill="city">Yourtown, CA</div>
+        <div class="note" data-fill="hours">Hours</div>
+        <div><a data-fill="phone-link">555-123-4567</a> • <a data-fill="email-link">hello@mockingbird.example</a></div>
+        <div class="social">
+          <a data-fill="facebook">Facebook</a>
+          <a data-fill="instagram">Instagram</a>
+        </div>
+        <div class="footer-links">
+          <div>
+            <p class="kicker">Visit</p>
+            <div class="inline-links">
+              <a data-nav="home">Home</a>
+              <a data-nav="menu">Menu</a>
+              <a data-nav="drinks">Drinks</a>
+            </div>
+          </div>
+          <div>
+            <p class="kicker">Happenings</p>
+            <div class="inline-links">
+              <a data-nav="events">Events</a>
+              <a data-nav="private-parties">Private Parties</a>
+            </div>
+          </div>
+          <div>
+            <p class="kicker">Explore</p>
+            <div class="inline-links">
+              <a data-nav="wine-club">Wine Club</a>
+              <a data-nav="gift-cards">Gift Cards</a>
+              <a data-nav="about">About</a>
+              <a data-nav="contact">Contact</a>
+            </div>
+          </div>
+        </div>
+        <small>© Mockingbird</small>
+      </div>
+    </div>
+  </footer>
+
+  <div class="sticky-cta-bar" aria-label="Quick actions">
+    <a data-cta="call">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.1 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.81.37 1.6.72 2.34a2 2 0 0 1-.45 2.18L8.09 9.91a16 16 0 0 0 6 6l1.67-1.33a2 2 0 0 1 2.18-.45c.74.35 1.53.6 2.34.72A2 2 0 0 1 22 16.92z"/></svg>
+      Call
+    </a>
+    <a data-cta="menu">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      Menu
+    </a>
+    <a data-cta="directions">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2l7 7-7 13-7-13z"/><path d="M12 9v4"/></svg>
+      Directions
+    </a>
+  </div>
+
+  <button class="back-to-top" aria-label="Back to top">↑</button>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>
