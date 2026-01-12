@@ -718,6 +718,24 @@ textarea {
   margin: 6px 0 0;
 }
 
+.form-status {
+  font-size: 14px;
+  margin: 6px 0 0;
+}
+
+.form-status.is-success {
+  color: var(--accent-strong);
+}
+
+.form-status.is-error {
+  color: var(--color-error, #b00020);
+}
+
+.btn[disabled] {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
 .gallery-grid {
   display: grid;
   gap: 12px;

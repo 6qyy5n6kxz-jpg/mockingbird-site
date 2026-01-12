@@ -28,27 +28,10 @@
       "image_alt": "Northern Glow painting with aurora borealis over evergreen trees"
     },
     {
-      "date": "2025-02-05T19:00:00",
-      "title": "Jazz Night",
-      "description": "Live trio, snacks plus wine and sangria available for purchase.",
-      "price": "$10 at the door",
-      "event_type": "ticketed",
-      "payment_link_url": "https://buy.stripe.com/test_jazznight"
-    },
-    {
-      "date": "2026-02-01T16:00:00",
-      "title": "Jazz Sunday: Bumblepuppy",
-      "description": "Live jazz with Bumblepuppy, 4–7 PM. Doors open at 3:30 PM. Space is limited.",
-      "price": "No cover",
-      "event_type": "rsvp",
-      "payment_link_url": ""
-    },
-    {
       "date": "2026-02-07T18:00:00",
       "title": "Live Music: Jake Pilewski",
       "description": "Live music by Jake Pilewski, 6–9 PM.",
       "price": "No cover",
-      "event_type": "rsvp",
       "payment_link_url": ""
     },
     {
@@ -89,14 +72,21 @@
     {
       "date": "2026-02-11T18:30:00",
       "title": "Ticketed Valentine’s Dinner + Live Music (Aaron & Peter)",
-      "description": "Ticketed Valentine’s dinner with live music by Aaron & Peter. Seating begins at 6:30 PM. Limited space. Ticket link/details coming soon.",
+      "description": "Valentine's Dinner for Two. Celebrate love this Valentine's Day with an unforgettable evening at The Mockingbird on Mill Road! Featuring Live music by Aaron & Peter String Duo. Includes a 5 course gourment meal, 8x10 photo and a bottle of wine to share!",
       "price": "Ticketed event",
       "event_type": "ticketed",
+      "payment_provider": "clover",
+      "payment_label": "Pay on Clover",
+      "hide_ticketed_helper": false,
+      "seating_form": {
+        "enabled": true
+      },
+      "ticketed_helper_copy": "Ticketed event — pay on Clover, then send seating details.",
       "type": "Special Event",
       "ticketing": {
-        "capacity": 36,
-        "sold": 18,
-        "price_display": "$75 per guest",
+        "capacity": 10,
+        "sold": 0,
+        "price_display": "$125 per couple",
         "clover_payment_url": "https://link.clover.com/urlshortener/DL89fc",
         "policy": "All sales final; transfers allowed. Seating is reserved after payment.",
         "intake": {

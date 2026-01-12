@@ -98,8 +98,11 @@
   function createForm(fields, submission, tokens, submitLabel, instructions, fallbackSubject, fallbackBody, context, options = {}) {
     if (!submission) return null;
     const opts = options || {};
-    const paidLabel = opts.paidLabel || 'I already paid';
+    const paidLabel = opts.paidLabel || 'I’ve already paid';
     const preFieldsNote = typeof opts.preFieldsNote === 'string' ? opts.preFieldsNote.trim() : '';
+    const hiddenFields = opts.hiddenFields && typeof opts.hiddenFields === 'object' ? opts.hiddenFields : null;
+    const ajaxSubmit = opts.ajax === true;
+    const formAction = typeof opts.action === 'string' ? opts.action.trim() : '';
 
     function coerceFields(list) {
       const defaults = {
@@ -129,19 +132,42 @@
     wrap.className = opts.compact ? 'form-card compact' : 'form-card';
     const form = document.createElement('form');
     form.className = opts.compact ? 'note compact-form' : 'note';
+    if (opts.formClass) form.classList.add(opts.formClass);
+    if (ajaxSubmit && formAction) {
+      form.action = formAction;
+      form.method = 'POST';
+    }
     const intro = document.createElement('p');
     intro.className = 'note';
-    intro.textContent = opts.introNote || 'This form completes your reservation';
+    intro.textContent = opts.introNote || 'This form completes your reservation.';
     form.appendChild(intro);
     const subnote = document.createElement('p');
     subnote.className = 'note';
-    subnote.textContent = opts.subnote || 'Then send attendee names for seating. (This emails us — it doesn’t process payment.)';
+    subnote.textContent = opts.subnote || 'This form emails us your seating details — it doesn’t process payment.';
     form.appendChild(subnote);
     if (preFieldsNote) {
       const reinforce = document.createElement('p');
       reinforce.className = 'note event-help';
       reinforce.textContent = preFieldsNote;
       form.appendChild(reinforce);
+    }
+    if (hiddenFields) {
+      Object.entries(hiddenFields).forEach(([key, value]) => {
+        const hidden = document.createElement('input');
+        hidden.type = 'hidden';
+        hidden.name = key;
+        hidden.value = value == null ? '' : String(value);
+        form.appendChild(hidden);
+      });
+    }
+    if (ajaxSubmit) {
+      const honeypot = document.createElement('input');
+      honeypot.type = 'text';
+      honeypot.name = '_gotcha';
+      honeypot.autocomplete = 'off';
+      honeypot.tabIndex = -1;
+      honeypot.className = 'sr-only';
+      form.appendChild(honeypot);
     }
     const fieldList = coerceFields(fields);
     const hasPaid = fieldList.some((f) => f.id === 'paid');
@@ -249,7 +275,8 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
         input.type = field.type || 'text';
       }
       input.id = `field-${field.id}`;
-      input.name = field.id;
+      input.name = field.id === 'paid' ? 'already_paid' : field.id;
+      if (field.type === 'checkbox') input.value = 'yes';
       if (field.required) input.required = true;
       if (field.placeholder && field.type !== 'textarea') input.placeholder = field.placeholder;
       if (field.type === 'checkbox') {
@@ -261,23 +288,29 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
       }
       form.appendChild(wrapField);
     });
-    const error = document.createElement('p');
-    error.className = 'note';
-    error.style.color = 'var(--color-error, #b00020)';
-    error.style.display = 'none';
-    form.appendChild(error);
+    const status = document.createElement('p');
+    status.className = 'form-status';
+    status.style.display = 'none';
+    form.appendChild(status);
 
     const actions = document.createElement('div');
     actions.className = 'form-actions';
     const btn = document.createElement('button');
     btn.type = 'submit';
     btn.className = 'btn btn-secondary btn-small';
-    btn.textContent = submitLabel || 'Send Details';
+    const defaultLabel = submitLabel || 'Send Details';
+    btn.textContent = defaultLabel;
     actions.appendChild(btn);
     form.appendChild(actions);
 
     form.addEventListener('submit', (e) => {
       e.preventDefault();
+      const setStatus = (type, message) => {
+        status.textContent = message || '';
+        status.classList.remove('is-success', 'is-error');
+        if (type) status.classList.add(type === 'success' ? 'is-success' : 'is-error');
+        status.style.display = message ? 'block' : 'none';
+      };
       const dataTokens = { ...(tokens || {}) };
       renderFields.forEach((field) => {
         const el = form.querySelector(`#field-${field.id}`);
@@ -295,16 +328,34 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
       const emailValue = emailField ? dataTokens[emailField.id] : '';
       const emailBad = emailField && !isEmailValid(emailValue);
       if (requiredMissing) {
-        error.textContent = 'Please fill all required fields.';
-        error.style.display = 'block';
+        setStatus('error', 'Please fill all required fields.');
         return;
       }
       if (emailBad) {
-        error.textContent = 'Please enter a valid email.';
-        error.style.display = 'block';
+        setStatus('error', 'Please enter a valid email.');
         return;
       }
-      error.style.display = 'none';
+      setStatus('', '');
+      if (ajaxSubmit && formAction) {
+        btn.disabled = true;
+        btn.textContent = 'Sending...';
+        const formData = new FormData(form);
+        fetch(formAction, {
+          method: 'POST',
+          body: formData,
+          headers: { Accept: 'application/json' }
+        }).then((res) => {
+          if (!res.ok) throw new Error('Formspree error');
+          setStatus('success', 'Thanks — we’ve received your seating details.');
+          form.reset();
+          btn.textContent = 'Sent';
+        }).catch(() => {
+          setStatus('error', 'Something went wrong. Please try again.');
+          btn.disabled = false;
+          btn.textContent = defaultLabel;
+        });
+        return;
+      }
       const link = buildSubmissionLink(submission, dataTokens, fallbackSubject, fallbackBody);
       if (!link || !link.url) return;
       if (link.target === '_blank') {
@@ -1360,6 +1411,9 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
           : '';
       const isTicketed = ev.event_type === 'ticketed';
       const isVendorPayment = ev.payment_provider === 'vendor';
+      if (DEBUG && ev.payment_provider && !['vendor', 'clover'].includes(ev.payment_provider)) {
+        dbg('event payment provider unknown', { title: ev.title, provider: ev.payment_provider });
+      }
       const paymentMethodLabel = isVendorPayment
         ? ((ev.payment_label || '').replace(/^pay\s+via\s+/i, '').trim() || 'Vendor')
         : 'Clover';
@@ -1416,12 +1470,15 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
       if (ticketing && !soldOut && linkValid && !soldOutOverride) {
         const hideTicketedHelper = ev.hide_ticketed_helper === true;
         const paymentNote = typeof ev.payment_note === 'string' ? ev.payment_note.trim() : '';
+        const helperOverride = typeof ev.ticketed_helper_copy === 'string' ? ev.ticketed_helper_copy.trim() : '';
         dbg('ticketed helper', { title: ev.title, hide: ev.hide_ticketed_helper, note: ev.payment_note, provider: ev.payment_provider });
         ticketCopy = hideTicketedHelper
           ? ''
-          : (paymentNote
-            ? `<p class="note">${paymentNote}</p>`
-            : '<p class="note">Ticketed event — pay on Clover, then email seating details.</p>');
+          : (helperOverride
+            ? `<p class="note">${helperOverride}</p>`
+            : (paymentNote
+              ? `<p class="note">${paymentNote}</p>`
+              : '<p class="note">Ticketed event — pay on Clover, then send seating details.</p>'));
       } else if (ticketing && !linkValid) {
         ticketCopy = '<p class="note">Ticket link coming soon.</p>';
       }
@@ -1459,7 +1516,7 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
         const paymentMethodLine = paymentMethodDetail ? `Payment method: ${paymentMethodDetail}\n` : '';
         const paidLineLabel = isVendorPayment ? `Paid via ${paymentMethodLabel}` : 'Paid';
         const fallbackBody = `Event: ${tokens.event_title}\nDate: ${tokens.event_date}\nName: {{name}}\nEmail: {{email}}\nPhone: {{phone}}\nQuantity: {{quantity}}\nNotes: {{notes}}\n${paymentMethodLine}${paidLineLabel}: {{paid}}\n`;
-        const paidLabel = 'I\'ve already paid';
+        const paidLabel = 'I’ve already paid';
         dbg('seating paid label', { title: ev.title, label: paidLabel });
         const vendorFormIntro = typeof ev.vendor_post_payment_copy === 'string' ? ev.vendor_post_payment_copy.trim() : '';
         const vendorFormConfirm = typeof ev.vendor_confirmation_copy === 'string'
@@ -1467,6 +1524,15 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
           : 'You’ll receive a confirmation once we’ve received your seating details.';
         const vendorFormReinforce = typeof ev.vendor_form_reinforce_copy === 'string' ? ev.vendor_form_reinforce_copy.trim() : '';
         dbg('vendor form reinforce', { title: ev.title, enabled: !!vendorFormReinforce });
+        const seatingFormIntro = isVendorPayment && vendorFormIntro
+          ? vendorFormIntro
+          : 'This form completes your reservation.';
+        const seatingFormSubnote = isVendorPayment
+          ? vendorFormConfirm
+          : (ev.payment_provider === 'clover'
+            ? 'Payment is handled on Clover. This form emails us your seating details — it doesn’t process payment.'
+            : 'This form emails us your seating details — it doesn’t process payment.');
+        dbg('seating form copy', { title: ev.title, provider: ev.payment_provider || 'default' });
         const form = createForm(
           fields,
           seatingIntake.submission,
@@ -1481,9 +1547,19 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
             collapseLabel: 'Send seating details',
             compact: true,
             paidLabel,
-            introNote: isVendorPayment && vendorFormIntro ? vendorFormIntro : undefined,
-            subnote: isVendorPayment ? vendorFormConfirm : undefined,
-            preFieldsNote: isVendorPayment && vendorFormReinforce ? vendorFormReinforce : undefined
+            introNote: seatingFormIntro,
+            subnote: seatingFormSubnote,
+            preFieldsNote: isVendorPayment && vendorFormReinforce ? vendorFormReinforce : undefined,
+            ajax: true,
+            action: 'https://formspree.io/f/xbddjoek',
+            formClass: 'seating-form',
+            hiddenFields: {
+              event_title: ev.title || '',
+              event_date_display: formatDate(ev.date),
+              event_datetime_iso: ev.date || '',
+              payment_method: paymentMethodDetail || paymentMethodLabel,
+              payment_url: paymentUrl || ''
+            }
           }
         );
         if (form) card.appendChild(form);
