@@ -2021,6 +2021,31 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
     const selectionsByMenu = new Map();
     const addonSelections = new Map();
     let currentMenuId = normalizedMenus[0].id;
+    let resetButton;
+
+    const MENU_PRESETS = {
+      brunch: [
+        { name: 'Superboard', qty: 1 },
+        { name: 'Breakfast Sandwich Bar', qty: 1 },
+        { name: 'Cheesy Potatoes', qty: 1 },
+        { name: 'Sausage, Biscuits & Gravy', qty: 1 },
+        { name: 'Muffin Tin Omelets', qty: 1 }
+      ],
+      lunch_dinner: [
+        { name: 'Superboard', qty: 1 },
+        { name: 'Green or Seasonal Salad', qty: 1 },
+        { name: 'Chicken', qty: 1 },
+        { name: 'Mashed or Cheesy Potatoes', qty: 1 },
+        { name: 'Broccoli', qty: 1 }
+      ],
+      picnic: [
+        { name: 'Hot Dogs', qty: 1 },
+        { name: 'Baked Beans', qty: 1 },
+        { name: 'Potato Salad', qty: 1 },
+        { name: 'Cole Slaw', qty: 1 },
+        { name: 'Fruit & Veggie Board', qty: 1 }
+      ]
+    };
 
     function getPerPersonPrice(item) {
       if (Number.isFinite(item.perPerson)) return { value: item.perPerson };
@@ -2031,6 +2056,60 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
     function getSelectionMap() {
       if (!selectionsByMenu.has(currentMenuId)) selectionsByMenu.set(currentMenuId, new Map());
       return selectionsByMenu.get(currentMenuId);
+    }
+
+    function buildPresetMap(menuId) {
+      const preset = MENU_PRESETS[menuId] || [];
+      const presetMap = new Map();
+      preset.forEach((item) => {
+        if (item?.name && item.qty) presetMap.set(item.name, item.qty);
+      });
+      return presetMap;
+    }
+
+    function applyPreset(menuId, force = false) {
+      const presetMap = buildPresetMap(menuId);
+      if (!presetMap.size) return;
+      const existing = selectionsByMenu.get(menuId);
+      if (existing && existing.size && !force) return;
+      const next = new Map(presetMap);
+      selectionsByMenu.set(menuId, next);
+    }
+
+    function isPresetMatch(menuId, selectionMap) {
+      const presetMap = buildPresetMap(menuId);
+      if (!presetMap.size) return selectionMap.size === 0;
+      if (selectionMap.size !== presetMap.size) return false;
+      for (const [name, qty] of selectionMap.entries()) {
+        if (presetMap.get(name) !== qty) return false;
+      }
+      return true;
+    }
+
+    function ensureResetButton() {
+      if (resetButton || !menuTypes?.parentElement) return;
+      resetButton = document.createElement('button');
+      resetButton.type = 'button';
+      resetButton.className = 'btn btn-ghost btn-small';
+      resetButton.textContent = 'Reset to recommended';
+      resetButton.addEventListener('click', () => {
+        applyPreset(currentMenuId, true);
+        renderMenuSections();
+        updateEstimate();
+        updateResetButton();
+      });
+      const wrap = document.createElement('div');
+      wrap.className = 'inline-links';
+      wrap.style.marginTop = '8px';
+      wrap.appendChild(resetButton);
+      menuTypes.parentElement.appendChild(wrap);
+    }
+
+    function updateResetButton() {
+      if (!resetButton) return;
+      const selectionMap = getSelectionMap();
+      const show = !isPresetMatch(currentMenuId, selectionMap) && selectionMap.size > 0;
+      resetButton.style.display = show ? 'inline-flex' : 'none';
     }
 
     function getAddonSelectionMap() {
@@ -2077,7 +2156,7 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
       return Math.max(min, parsed);
     }
 
-    function updateSummary(menuLabel, guestCount, groupedSelections, addonSelectionsList, fixedTotal, perGuest, estimate) {
+    function updateSummary(menuLabel, guestCount, groupedSelections, addonSelectionsList, fixedTotal, perGuest, taxAmount, gratuityAmount, estimate) {
       if (!summaryField) return;
       const lines = [
         'Menu selection (estimate only)',
@@ -2120,7 +2199,9 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
       lines.push('Estimate breakdown:');
       if (fixedTotal > 0) lines.push(`Boards/Stations: ${formatCurrency(fixedTotal)}`);
       if (perGuest > 0) lines.push(`Per-guest subtotal: ~${formatCurrency(perGuest)} x ${guestCount} = ${formatCurrency(perGuest * guestCount)}`);
-      lines.push(`Estimated food total: ~${formatCurrency(estimate)}`);
+      if (taxAmount > 0) lines.push(`Tax (7%): ${formatCurrency(taxAmount)}`);
+      if (gratuityAmount > 0) lines.push(`Gratuity (18%): ${formatCurrency(gratuityAmount)}`);
+      lines.push(`Estimated total: ~${formatCurrency(estimate)}`);
       summaryField.value = lines.join('\n');
     }
 
@@ -2136,6 +2217,8 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
       let combinedPerPerson = 0;
       let estimateTotal = 0;
       let foodCostTotal = 0;
+      let taxAmount = 0;
+      let gratuityAmount = 0;
       if (pricingModule?.computeEstimate) {
         const estimate = pricingModule.computeEstimate({
           guestCount,
@@ -2146,6 +2229,8 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
         combinedPerPerson = estimate.perPersonSellTotal || 0;
         estimateTotal = estimate.sellTotal || 0;
         foodCostTotal = estimate.foodCostTotal || 0;
+        taxAmount = estimate.taxAmount || 0;
+        gratuityAmount = estimate.gratuityAmount || 0;
       } else {
         const fixedTotal = selectedItems.reduce((sum, item) => (
           Number.isFinite(item.fixedPrice) ? sum + (item.fixedPrice * (item.qty || 1)) : sum
@@ -2171,11 +2256,13 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
         combinedPerPerson = perPersonTotal + perPersonAddonTotal;
         estimateTotal = combinedFixedTotal + (guestCount * combinedPerPerson);
       }
-      estimateEl.textContent = `Estimated food total: ${formatCurrency(estimateTotal)}`;
+      estimateEl.textContent = `Estimated total: ${formatCurrency(estimateTotal)}`;
       if (estimateFixed) {
-        estimateFixed.textContent = combinedFixedTotal > 0
-          ? `Boards/stations: ${formatCurrency(combinedFixedTotal)}`
-          : '';
+        const parts = [];
+        if (combinedFixedTotal > 0) parts.push(`Boards/stations: ${formatCurrency(combinedFixedTotal)}`);
+        if (taxAmount > 0) parts.push(`Tax (7%): ${formatCurrency(taxAmount)}`);
+        if (gratuityAmount > 0) parts.push(`Gratuity (18%): ${formatCurrency(gratuityAmount)}`);
+        estimateFixed.textContent = parts.join(' · ');
       }
       if (estimatePerGuest) {
         estimatePerGuest.textContent = combinedPerPerson > 0
@@ -2183,7 +2270,18 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
           : '';
       }
       const groupedSelections = getSectionSelections(menu, selectionMap);
-      updateSummary(menuLabel, guestCount, groupedSelections, selectedAddons, combinedFixedTotal, combinedPerPerson, estimateTotal);
+      updateSummary(
+        menuLabel,
+        guestCount,
+        groupedSelections,
+        selectedAddons,
+        combinedFixedTotal,
+        combinedPerPerson,
+        taxAmount,
+        gratuityAmount,
+        estimateTotal
+      );
+      updateResetButton();
       const quantities = {};
       selectionMap.forEach((qty, name) => {
         if (qty > 0) quantities[name] = qty;
@@ -2216,12 +2314,15 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
         btn.addEventListener('click', () => {
           if (menu.id === currentMenuId) return;
           currentMenuId = menu.id;
+          applyPreset(currentMenuId);
           renderMenuTypes();
           renderMenuSections();
           updateEstimate();
         });
         menuTypes.appendChild(btn);
       });
+      ensureResetButton();
+      updateResetButton();
     }
 
     function renderMenuSections() {
@@ -2373,6 +2474,7 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
       updateEstimate();
     });
 
+    applyPreset(currentMenuId);
     renderMenuTypes();
     renderMenuSections();
     renderAddons();

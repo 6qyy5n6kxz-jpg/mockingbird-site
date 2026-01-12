@@ -368,6 +368,15 @@ nav a:focus {
 .availability-grid > * {
   min-width: 0;
 }
+.pp-inquiry-card .availability-card .availability-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+}
+.pp-inquiry-card .availability-card .availability-weekday {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .availability-weekday {
   font-size: 12px;
   color: var(--muted);
@@ -386,6 +395,7 @@ nav a:focus {
   background: #f8f3ed;
   border: 1px solid transparent;
   color: var(--text);
+  aspect-ratio: 1 / 1;
 }
 .calendar-day:not(.unavailable):hover {
   border-color: rgba(176, 109, 60, 0.5);
@@ -408,6 +418,7 @@ nav a:focus {
   color: #6f3a14;
   cursor: not-allowed;
   position: relative;
+  border-color: rgba(111, 58, 20, 0.35);
 }
 .calendar-day.unavailable::after {
   content: "×";
@@ -480,7 +491,11 @@ nav a:focus {
     min-height: 42px;
     font-size: 13px;
   }
+  .calendar-day.unavailable {
+    border-color: rgba(111, 58, 20, 0.55);
+  }
 }
+/* Test: open /private-parties/ at ~375px width; grid should stay 7 columns and unavailable tiles stand out. */
 
 @media (max-width: 959px) {
   .pp-inquiry-card {
