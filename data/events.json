@@ -14,7 +14,7 @@
       "payment_note": "",
       "hide_ticketed_helper": true,
       "seating_form": {
-        "enabled": true
+        "enabled": false
       },
       "type": "Paint & Sip",
       "ticketing": {
