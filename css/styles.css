@@ -238,6 +238,27 @@ nav a:focus {
   font-size: 18px;
 }
 
+.hero-events-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  min-height: 36px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.28);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  color: #fff;
+  text-decoration: none;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.45);
+}
+.hero-events-link:hover {
+  background: rgba(0, 0, 0, 0.38);
+}
+.hero-events-link:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
 .section {
   padding: 64px 0;
 }
@@ -595,6 +616,10 @@ textarea {
   text-align: center;
 }
 
+.events-cta-tight {
+  margin-top: 24px;
+}
+
 .table-list {
   display: grid;
   gap: 10px;
@@ -751,6 +776,16 @@ textarea {
 
 .event-help {
   margin: 4px 0;
+}
+
+.drinks-helper {
+  margin: 10px 0 16px;
+}
+.drinks-helper .note {
+  margin: 0 0 4px;
+}
+.drinks-helper .note:last-child {
+  margin-bottom: 0;
 }
 
 .event-info {

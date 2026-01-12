@@ -1262,6 +1262,21 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
         .join('');
     }
 
+    const helperCopy = [
+      'Flights: Flight Board (any 4) $15 · Half Pour $5 · Taste $4',
+      'Notes: Flights are available only from Wine Flights (On Pour). Bottles/cans aren’t eligible. Prices reflect a 4% cash discount.'
+    ];
+    if (anchors && container) {
+      let helper = document.getElementById('drinks-helper');
+      if (!helper) {
+        helper = document.createElement('div');
+        helper.id = 'drinks-helper';
+        helper.className = 'drinks-helper';
+        anchors.insertAdjacentElement('afterend', helper);
+      }
+      helper.innerHTML = helperCopy.map((line) => `<p class="note">${line}</p>`).join('');
+    }
+
     if (!drinks?.sections?.length) {
       if (container.childElementCount && __debug) dbg('renderDrinks skip clear: empty sections but content exists');
     } else {
@@ -1276,12 +1291,6 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
           dbg('renderDrinks bottled-wine pre-append existing children', container.childElementCount);
         }
         let extraNote = '';
-        if (section.id === 'wine-flights' && drinks.notes?.pricingRules) {
-          const note = document.createElement('div');
-          note.className = 'note';
-          note.textContent = drinks.notes.pricingRules;
-          secEl.appendChild(note);
-        }
         if (section.id === 'bottled-wine') {
           const note = document.createElement('div');
           note.className = 'note';
@@ -1335,10 +1344,16 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
             h3.textContent = sub.title;
             subEl.appendChild(h3);
           }
-          if (sub.description) {
+          const hasSubDescription = !!(sub.description && String(sub.description).trim());
+          if (hasSubDescription) {
             const p = document.createElement('p');
             p.className = 'note';
             p.textContent = sub.description;
+            subEl.appendChild(p);
+          } else if (section.id === 'wine-flights') {
+            const p = document.createElement('p');
+            p.className = 'note';
+            p.textContent = 'Full Pour $9 unless noted';
             subEl.appendChild(p);
           }
           const list = document.createElement('div');
@@ -1403,11 +1418,8 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
       }
     });
     if (note) {
-      const cash = drinks.notes?.cashDiscount || '';
-      const rules = drinks.notes?.pricingRules || '';
-      const eligibility = drinks.notes?.eligibility || '';
-      const jump = anchors && anchors.querySelectorAll('a').length > 1 ? 'Select a category above to jump to a section.' : '';
-      note.innerHTML = [rules, eligibility, cash, jump].filter(Boolean).join(' · ');
+      note.textContent = '';
+      note.style.display = 'none';
     }
     enableFadeIn();
     if (container.id === 'drinks-container') {

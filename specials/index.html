@@ -34,27 +34,12 @@
     <div class="container">
       <p class="kicker">Specials</p>
       <h1>This week’s highlights</h1>
-      <p class="lead">Chef-driven dishes and pairings that change weekly. Updated in real time from our specials file.</p>
+      <p class="lead">Chef-driven dishes and pairings that change weekly.</p>
       <p class="note" id="specials-week"></p>
       <div id="specials-list" class="table-grid" style="margin-top:20px;"></div>
       <p class="note">Pairings are suggestions—feel free to explore the full wine, beer, and sangria list.</p>
     </div>
   </main>
-
-  <section class="section alt">
-    <div class="container">
-      <div class="final-cta">
-        <div>
-          <p class="kicker">Here tonight?</p>
-          <h2>Call or head over—we’ll have a seat ready.</h2>
-        </div>
-        <div class="hero-cta">
-          <a class="btn btn-primary" data-cta="call">Call</a>
-          <a class="btn btn-secondary" data-cta="directions">Directions</a>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <footer class="footer">
     <div class="container">
@@ -125,7 +110,7 @@
       const weekEl = document.getElementById('specials-week');
       if (weekEl) {
         if (specials.dateRange) {
-          weekEl.textContent = specials.dateRange;
+          weekEl.textContent = `This week: ${specials.dateRange}`;
         } else if (specials.weekOf) {
           const week = new Date(specials.weekOf);
           weekEl.textContent = `Week of ${week.toLocaleDateString()}`;

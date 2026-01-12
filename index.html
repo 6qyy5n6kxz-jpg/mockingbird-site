@@ -44,7 +44,7 @@
             <a class="btn btn-primary" data-nav="menu">View Menu</a>
             <a class="btn btn-secondary" data-nav="specials">Tonight's Specials</a>
           </div>
-          <p class="note"><a data-nav="events">View upcoming events →</a></p>
+          <p class="note"><a class="hero-events-link" data-nav="events">View upcoming events →</a></p>
         </div>
       </div>
     </section>
@@ -79,21 +79,6 @@
           <img data-img="interior1" src="assets/images/interior1.svg" alt="Dining room" loading="lazy" width="1200" height="800">
           <img data-img="interior2" src="assets/images/interior2.svg" alt="Bar" loading="lazy" width="1200" height="800">
           <img data-img="interior3" src="assets/images/interior3.svg" alt="Patio" loading="lazy" width="1200" height="800">
-        </div>
-      </div>
-    </section>
-
-    <section class="section alt fade-in">
-      <div class="container grid-2">
-        <div>
-          <p class="kicker">Tonight</p>
-          <h2>Specials</h2>
-          <div id="specials-preview" class="list-flex"></div>
-        </div>
-        <div>
-          <p class="kicker">This month</p>
-          <h2>Events</h2>
-          <div id="events-preview" class="list-flex"></div>
         </div>
       </div>
     </section>
@@ -135,8 +120,8 @@
       <div class="container">
         <div class="final-cta">
           <div>
-            <p class="kicker">Join us tonight</p>
-            <h2>Walk in or call ahead. We’ll have a seat ready.</h2>
+            <p class="kicker">Join us for special events this month</p>
+            <h2>We're hosting a limited number of ticketed events in January.</h2>
           </div>
         </div>
       </div>
@@ -207,15 +192,11 @@
   <script src="js/main.js"></script>
   <script>
     (async function() {
-      const [site, specials, events, menu] = await Promise.all([
+      const [site, menu] = await Promise.all([
         Mockingbird.sitePromise,
-        Mockingbird.fetchJSON('specials.json', { items: [] }),
-        Mockingbird.fetchJSON('events.json', { events: [] }),
         Mockingbird.fetchJSON('menu.json', { categories: [] })
       ]);
       Mockingbird.renderFeaturedItems(site, menu);
-      Mockingbird.renderSpecialsPreview(specials);
-      Mockingbird.renderEventsPreview(events);
       Mockingbird.renderHoursTable(site, 'hours-table-home');
     })();
   </script>
