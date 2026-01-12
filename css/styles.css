@@ -332,12 +332,19 @@ nav a:focus {
   position: sticky;
   top: 96px;
 }
+  .pp-inquiry-body {
+    max-height: calc(100vh - 120px);
+    overflow: auto;
+  }
+}
+
 .availability-card {
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 14px;
   background: #fff;
   margin-bottom: 14px;
+  overflow: hidden;
 }
 .availability-header {
   display: flex;
@@ -358,6 +365,9 @@ nav a:focus {
   grid-template-columns: repeat(7, minmax(0, 1fr));
   gap: 6px;
 }
+.availability-grid > * {
+  min-width: 0;
+}
 .availability-weekday {
   font-size: 12px;
   color: var(--muted);
@@ -368,7 +378,7 @@ nav a:focus {
 }
 .calendar-day,
 .cal-day {
-  min-height: 36px;
+  min-height: 40px;
   border-radius: 10px;
   display: grid;
   place-items: center;
@@ -459,9 +469,16 @@ nav a:focus {
   font-size: 13px;
   color: var(--muted);
 }
-  .pp-inquiry-body {
-    max-height: calc(100vh - 120px);
-    overflow: auto;
+
+/* Mobile fix: prevent calendar grid collapsing into list layout. */
+@media (max-width: 520px) {
+  .availability-grid {
+    gap: 8px;
+  }
+  .calendar-day,
+  .cal-day {
+    min-height: 42px;
+    font-size: 13px;
   }
 }
 

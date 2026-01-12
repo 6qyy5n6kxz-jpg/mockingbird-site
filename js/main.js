@@ -1955,7 +1955,7 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
     }
   }
 
-  function renderPrivateEventMenu(privateData) {
+  function renderPrivateEventMenu(privateData, pricingModule) {
     const builder = document.getElementById('private-menu-builder');
     if (!builder) return;
     const menuTypes = builder.querySelector('[data-private-menu="types"]');
@@ -1968,8 +1968,10 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
     const summaryField = document.getElementById('party-menu-summary');
     if (!menuTypes || !menuSections || !guestInput || !estimateEl) return;
 
-    const menus = Array.isArray(privateData?.menus) ? privateData.menus : [];
-    const beverageAddons = Array.isArray(privateData?.beverage_addons) ? privateData.beverage_addons : [];
+    const rawMenus = Array.isArray(privateData?.menus) ? privateData.menus : [];
+    const rawAddons = Array.isArray(privateData?.beverage_addons) ? privateData.beverage_addons : [];
+    const menus = pricingModule?.applyPricing ? pricingModule.applyPricing(rawMenus) : rawMenus;
+    const beverageAddons = rawAddons;
     if (!menus.length) {
       builder.innerHTML = '<p class="note">Menu selections are coming soon.</p>';
       return;
@@ -1982,12 +1984,22 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
       if (!name) return null;
       const fixedPrice = Number.isFinite(Number(raw.fixed_price)) ? Number(raw.fixed_price) : null;
       const perPerson = Number.isFinite(Number(raw.per_person_price)) ? Number(raw.per_person_price) : null;
+      const cogsPerPerson = Number.isFinite(Number(raw.cogs_per_person))
+        ? Number(raw.cogs_per_person)
+        : (Number.isFinite(Number(raw.ingredient_cost_per_serving)) ? Number(raw.ingredient_cost_per_serving) : null);
+      const cogsPerBatch = Number.isFinite(Number(raw.cogs_per_batch)) ? Number(raw.cogs_per_batch) : null;
+      const servingsPerBatch = Number.isFinite(Number(raw.servings_per_batch)) ? Number(raw.servings_per_batch) : null;
       const allowQuantity = raw.allow_quantity === true;
       const maxQty = Number.isFinite(Number(raw.max_qty)) ? Number(raw.max_qty) : null;
+      const pricingType = raw.pricing_type || raw.pricingType || (Number.isFinite(fixedPrice) ? 'fixed' : 'per_person');
       const normalized = {
         name: String(name),
         fixedPrice,
         perPerson,
+        cogsPerPerson,
+        cogsPerBatch,
+        servingsPerBatch,
+        pricingType,
         sectionTitle: sectionTitle || '',
         allowQuantity,
         maxQty
@@ -2120,29 +2132,45 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
       const selectedItems = getOrderedSelections(menu, selectionMap);
       const addonSelectionMap = getAddonSelectionMap();
       const selectedAddons = getAddonSelections(addonSelectionMap);
-      const fixedTotal = selectedItems.reduce((sum, item) => (
-        Number.isFinite(item.fixedPrice) ? sum + (item.fixedPrice * (item.qty || 1)) : sum
-      ), 0);
-      const fixedAddonTotal = selectedAddons.reduce((sum, addon) => {
-        const price = Number(addon.fixed_price);
-        if (!Number.isFinite(price)) return sum;
-        return sum + (price * (addon.qty || 1));
-      }, 0);
-      const perPersonTotal = selectedItems.reduce((sum, item) => {
-        if (Number.isFinite(item.fixedPrice)) return sum;
-        const perPersonInfo = getPerPersonPrice(item);
-        const qty = item.qty || 1;
-        return sum + (Number.isFinite(perPersonInfo.value) ? perPersonInfo.value * qty : 0);
-      }, 0);
-      const perPersonAddonTotal = selectedAddons.reduce((sum, addon) => {
-        const price = Number(addon.per_person_price);
-        if (!Number.isFinite(price)) return sum;
-        const qty = addon.qty || 1;
-        return sum + (price * qty);
-      }, 0);
-      const combinedFixedTotal = fixedTotal + fixedAddonTotal;
-      const combinedPerPerson = perPersonTotal + perPersonAddonTotal;
-      const estimateTotal = combinedFixedTotal + (guestCount * combinedPerPerson);
+      let combinedFixedTotal = 0;
+      let combinedPerPerson = 0;
+      let estimateTotal = 0;
+      let foodCostTotal = 0;
+      if (pricingModule?.computeEstimate) {
+        const estimate = pricingModule.computeEstimate({
+          guestCount,
+          selections: selectedItems,
+          addons: selectedAddons
+        });
+        combinedFixedTotal = estimate.fixedSellTotal || 0;
+        combinedPerPerson = estimate.perPersonSellTotal || 0;
+        estimateTotal = estimate.sellTotal || 0;
+        foodCostTotal = estimate.foodCostTotal || 0;
+      } else {
+        const fixedTotal = selectedItems.reduce((sum, item) => (
+          Number.isFinite(item.fixedPrice) ? sum + (item.fixedPrice * (item.qty || 1)) : sum
+        ), 0);
+        const fixedAddonTotal = selectedAddons.reduce((sum, addon) => {
+          const price = Number(addon.fixed_price);
+          if (!Number.isFinite(price)) return sum;
+          return sum + (price * (addon.qty || 1));
+        }, 0);
+        const perPersonTotal = selectedItems.reduce((sum, item) => {
+          if (Number.isFinite(item.fixedPrice)) return sum;
+          const perPersonInfo = getPerPersonPrice(item);
+          const qty = item.qty || 1;
+          return sum + (Number.isFinite(perPersonInfo.value) ? perPersonInfo.value * qty : 0);
+        }, 0);
+        const perPersonAddonTotal = selectedAddons.reduce((sum, addon) => {
+          const price = Number(addon.per_person_price);
+          if (!Number.isFinite(price)) return sum;
+          const qty = addon.qty || 1;
+          return sum + (price * qty);
+        }, 0);
+        combinedFixedTotal = fixedTotal + fixedAddonTotal;
+        combinedPerPerson = perPersonTotal + perPersonAddonTotal;
+        estimateTotal = combinedFixedTotal + (guestCount * combinedPerPerson);
+      }
       estimateEl.textContent = `Estimated food total: ${formatCurrency(estimateTotal)}`;
       if (estimateFixed) {
         estimateFixed.textContent = combinedFixedTotal > 0
@@ -2169,6 +2197,7 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
         fixedTotal: combinedFixedTotal,
         perPersonSubtotal: combinedPerPerson,
         estimateTotal,
+        foodCostTotal,
         quantities
       });
     }
@@ -2568,7 +2597,12 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
     enableFadeIn();
     initContactForm();
     if (document.getElementById('private-menu-builder')) {
-      fetchJSON('private-events.json', {}).then(renderPrivateEventMenu);
+      const pricingModule = window.PrivateMenuPricing;
+      if (pricingModule?.MENUS) {
+        renderPrivateEventMenu({ menus: pricingModule.MENUS, beverage_addons: pricingModule.BEVERAGE_ADDONS }, pricingModule);
+      } else {
+        fetchJSON('private-events.json', {}).then((data) => renderPrivateEventMenu(data, pricingModule));
+      }
     }
   });
 
