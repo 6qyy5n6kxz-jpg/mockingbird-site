@@ -328,10 +328,137 @@ nav a:focus {
     grid-template-columns: 1.1fr 0.9fr;
     align-items: start;
   }
-  .pp-inquiry-card {
-    position: sticky;
-    top: 96px;
-  }
+.pp-inquiry-card {
+  position: sticky;
+  top: 96px;
+}
+.availability-card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px;
+  background: #fff;
+  margin-bottom: 14px;
+}
+.availability-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.availability-nav {
+  display: inline-flex;
+  gap: 8px;
+}
+.availability-month {
+  font-weight: 600;
+  margin: 6px 0 10px;
+}
+.availability-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 6px;
+}
+.availability-weekday {
+  font-size: 12px;
+  color: var(--muted);
+  text-align: center;
+}
+.availability-pad {
+  min-height: 36px;
+}
+.calendar-day,
+.cal-day {
+  min-height: 36px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  font-size: 14px;
+  background: #f8f3ed;
+  border: 1px solid transparent;
+  color: var(--text);
+}
+.calendar-day:not(.unavailable):hover {
+  border-color: rgba(176, 109, 60, 0.5);
+}
+.calendar-day:not(.unavailable):focus-visible {
+  outline: 2px solid rgba(176, 109, 60, 0.6);
+  outline-offset: 2px;
+}
+.calendar-day.today {
+  border-color: var(--accent-strong);
+}
+.calendar-day.unavailable {
+  background: repeating-linear-gradient(
+    135deg,
+    rgba(176, 109, 60, 0.32),
+    rgba(176, 109, 60, 0.32) 6px,
+    rgba(176, 109, 60, 0.18) 6px,
+    rgba(176, 109, 60, 0.18) 12px
+  );
+  color: #6f3a14;
+  cursor: not-allowed;
+  position: relative;
+}
+.calendar-day.unavailable::after {
+  content: "×";
+  position: absolute;
+  top: 4px;
+  right: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  color: rgba(111, 58, 20, 0.9);
+}
+.calendar-day.unavailable.today {
+  border-color: var(--accent-strong);
+}
+.availability-legend {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 10px 0 6px;
+  font-size: 13px;
+  color: var(--muted);
+}
+.legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+  background: #f8f3ed;
+  border: 1px solid var(--border);
+}
+.legend-dot.unavailable {
+  background: repeating-linear-gradient(
+    135deg,
+    rgba(176, 109, 60, 0.32),
+    rgba(176, 109, 60, 0.32) 3px,
+    rgba(176, 109, 60, 0.18) 3px,
+    rgba(176, 109, 60, 0.18) 6px
+  );
+  border-color: rgba(176, 109, 60, 0.5);
+}
+.availability-warning {
+  color: var(--accent-strong);
+  margin-top: 6px;
+}
+.availability-fallback {
+  margin-top: 8px;
+}
+.availability-fallback summary {
+  cursor: pointer;
+  font-size: 13px;
+}
+.availability-fallback ul {
+  margin: 8px 0 0 18px;
+  padding: 0;
+  font-size: 13px;
+  color: var(--muted);
+}
   .pp-inquiry-body {
     max-height: calc(100vh - 120px);
     overflow: auto;

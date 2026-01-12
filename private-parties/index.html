@@ -60,6 +60,27 @@
           <div class="card pp-inquiry-card">
             <div class="pp-inquiry-body">
               <form id="party-form" data-subject="Private Party Inquiry">
+                <div class="availability-card" id="availability-card">
+                  <div class="availability-header">
+                    <p class="kicker">Availability</p>
+                    <div class="availability-nav">
+                      <button type="button" class="btn btn-ghost btn-small" id="availability-prev" aria-label="Previous month">Prev</button>
+                      <button type="button" class="btn btn-ghost btn-small" id="availability-next" aria-label="Next month">Next</button>
+                    </div>
+                  </div>
+                  <div id="availability-month" class="availability-month" aria-live="polite"></div>
+                  <div id="availability-grid" class="availability-grid" role="grid" aria-label="Availability calendar"></div>
+                  <div class="availability-legend" aria-label="Availability legend">
+                    <span class="legend-item"><span class="legend-dot available"></span>Available</span>
+                    <span class="legend-item"><span class="legend-dot unavailable"></span>Unavailable</span>
+                  </div>
+                  <p class="note">Dates marked unavailable are already booked. Not seeing your date? Send your request—availability can change.</p>
+                  <p class="note">Thursday–Saturday evenings are not available for private events. We’re happy to consider morning or daytime requests—Mockingbird remains open during regular dinner service.</p>
+                  <details class="availability-fallback" id="availability-fallback">
+                    <summary>Unavailable dates (upcoming)</summary>
+                    <ul></ul>
+                  </details>
+                </div>
                 <input id="party-menu-summary" name="Private Event Menu Selection" type="hidden" data-menu-summary>
                 <label for="party-name">Name</label>
                 <input id="party-name" name="Name" placeholder="Full name" required>
@@ -72,6 +93,14 @@
 
           <label for="party-date">Preferred date</label>
           <input id="party-date" name="Preferred date" type="date">
+          <label for="party-time-window">Preferred time</label>
+          <select id="party-time-window" name="Preferred time">
+            <option>Morning</option>
+            <option>Afternoon</option>
+            <option selected>Evening</option>
+          </select>
+          <p class="note availability-warning" id="availability-warning" aria-live="polite"></p>
+          <p class="note availability-warning" id="availability-warning-time" aria-live="polite"></p>
 
           <label for="party-size">Estimated headcount</label>
           <input id="party-size" name="Headcount" type="number" min="1" placeholder="40">
@@ -113,6 +142,7 @@
           <li>Bar packages with classic, low-proof, and no-proof options</li>
           <li>Dedicated host to coordinate timeline and dietary needs</li>
         </ul>
+        <p class="note">Special requests (menu adjustments, custom timing, rentals, AV, etc.) are reviewed and priced individually.</p>
       </div>
     </div>
   </main>
@@ -194,5 +224,6 @@
   <button class="back-to-top" aria-label="Back to top">↑</button>
 
   <script src="../js/main.js"></script>
+  <script src="../js/private-availability.js"></script>
 </body>
 </html>

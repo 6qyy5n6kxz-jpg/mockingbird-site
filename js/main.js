@@ -1969,10 +1969,7 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
     if (!menuTypes || !menuSections || !guestInput || !estimateEl) return;
 
     const menus = Array.isArray(privateData?.menus) ? privateData.menus : [];
-    const pricing = privateData?.pricing || {};
     const beverageAddons = Array.isArray(privateData?.beverage_addons) ? privateData.beverage_addons : [];
-    const multiplier = Number(pricing.catering_multiplier);
-    const roundTo = Number(pricing.round_to);
     if (!menus.length) {
       builder.innerHTML = '<p class="note">Menu selections are coming soon.</p>';
       return;
@@ -1985,29 +1982,16 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
       if (!name) return null;
       const fixedPrice = Number.isFinite(Number(raw.fixed_price)) ? Number(raw.fixed_price) : null;
       const perPerson = Number.isFinite(Number(raw.per_person_price)) ? Number(raw.per_person_price) : null;
-      const ingredientCost = Number.isFinite(Number(raw.ingredient_cost_per_serving))
-        ? Number(raw.ingredient_cost_per_serving)
-        : null;
       const allowQuantity = raw.allow_quantity === true;
       const maxQty = Number.isFinite(Number(raw.max_qty)) ? Number(raw.max_qty) : null;
       const normalized = {
         name: String(name),
         fixedPrice,
         perPerson,
-        ingredientCost,
         sectionTitle: sectionTitle || '',
         allowQuantity,
         maxQty
       };
-      const isBrunchBoards = menuId === 'brunch' && String(sectionTitle || '').toLowerCase() === 'boards & stations';
-      const isLunchBoard = menuId === 'lunch_dinner'
-        && normalized.name.toLowerCase() === 'superboard or all-meat superboard';
-      if (isBrunchBoards || isLunchBoard) {
-        if (normalized.fixedPrice !== 90) {
-          normalized.fixedPrice = 90;
-          dbg('forced fixed_price', { name: normalized.name, fixed_price: 90 });
-        }
-      }
       return normalized;
     }
 
@@ -2026,19 +2010,10 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
     const addonSelections = new Map();
     let currentMenuId = normalizedMenus[0].id;
 
-    function roundToStep(value) {
-      if (!Number.isFinite(value) || !Number.isFinite(roundTo) || roundTo <= 0) return value;
-      return Math.round(value / roundTo) * roundTo;
-    }
-
     function getPerPersonPrice(item) {
-      if (Number.isFinite(item.perPerson)) return { value: item.perPerson, derived: false };
-      if (Number.isFinite(item.ingredientCost) && Number.isFinite(multiplier)) {
-        const raw = item.ingredientCost * multiplier;
-        return { value: roundToStep(raw), derived: true };
-      }
+      if (Number.isFinite(item.perPerson)) return { value: item.perPerson };
       dbg('missing item pricing', { name: item.name, menuType: currentMenuId });
-      return { value: 0, derived: false };
+      return { value: 0 };
     }
 
     function getSelectionMap() {
@@ -2108,10 +2083,7 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
               priceParts.push(`${formatCurrency(item.fixedPrice)} each`);
             } else {
               const perPersonInfo = getPerPersonPrice(item);
-              if (perPersonInfo.value) {
-                const prefix = perPersonInfo.derived ? '~' : '';
-                priceParts.push(`${prefix}${formatCurrency(perPersonInfo.value)}/guest`);
-              }
+              if (perPersonInfo.value) priceParts.push(`${formatCurrency(perPersonInfo.value)}/guest`);
             }
             const priceLabel = priceParts.length ? ` (${priceParts.join(', ')})` : '';
             const qtyTag = item.qty > 1 ? ` x${item.qty}` : '';
@@ -2248,7 +2220,7 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
             label.type = 'button';
             label.className = 'btn btn-ghost btn-small';
             label.textContent = name;
-            if (!Number.isFinite(item.fixedPrice) && (Number.isFinite(item.perPerson) || Number.isFinite(item.ingredientCost))) {
+            if (!Number.isFinite(item.fixedPrice) && Number.isFinite(item.perPerson)) {
               const badge = document.createElement('span');
               badge.className = 'badge per-guest-badge is-hidden';
               badge.textContent = 'per guest';
@@ -2301,7 +2273,7 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
             btn.setAttribute('aria-pressed', isSelected ? 'true' : 'false');
             btn.dataset.itemName = name;
             btn.textContent = name;
-            if (!Number.isFinite(item.fixedPrice) && (Number.isFinite(item.perPerson) || Number.isFinite(item.ingredientCost))) {
+            if (!Number.isFinite(item.fixedPrice) && Number.isFinite(item.perPerson)) {
               const badge = document.createElement('span');
               badge.className = 'badge per-guest-badge';
               badge.textContent = 'per guest';
