@@ -15,7 +15,7 @@
     {
       "name": "Starters",
       "items": [
-        { "name": "Brie, Jam & Crackers", "description": "Brie, house jam, crackers", "price": null },
+        { "name": "Brie, Jam & Crackers", "description": "Brie, house jam, Tom's homemade crackers", "price": null },
         { "name": "Soup of the Week", "description": "Made from scratch. Cup/bowl.", "price": null, "specialLabel": "Soup of the Week" },
         { "name": "Seasonal Salad", "description": "Chef’s selection of fresh greens, seasonal vegetables, and house vinaigrette.", "price": null }
       ]

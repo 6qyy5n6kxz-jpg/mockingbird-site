@@ -577,6 +577,24 @@ nav a:focus {
   color: var(--muted);
 }
 
+.menu-price-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.menu-price-spacer {
+  flex: 1;
+}
+
+.menu-price-label {
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
 .menu-combo-callout {
   margin-top: 12px;
   padding: 12px 14px;

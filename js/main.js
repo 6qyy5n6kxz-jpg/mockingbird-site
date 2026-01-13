@@ -1243,6 +1243,103 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
     return formatted.join(' | ');
   }
 
+  const DRINK_PRICE_LABELS = {
+    fullPour: 'Full Pour',
+    bottle: 'Bottle',
+    pour: 'Pour',
+    pitcher: 'Pitcher',
+    glass: 'Glass',
+    can: 'Can',
+    draft: 'Draft'
+  };
+
+  const DRINK_PRICE_ORDER = [
+    'fullPour',
+    'bottle',
+    'pour',
+    'pitcher',
+    'glass',
+    'can',
+    'draft'
+  ];
+
+  function normalizeDrinkValue(val) {
+    if (typeof val === 'string') return val.trim();
+    if (typeof val === 'number' && Number.isFinite(val)) return `$${val.toFixed(2)}`;
+    return '';
+  }
+
+  function stripDrinkLabel(text) {
+    const labels = Object.values(DRINK_PRICE_LABELS).join('|');
+    const regex = new RegExp(`^\\s*(${labels})\\s*:\\s*`, 'i');
+    return text.replace(regex, '').trim();
+  }
+
+  function parseDrinkLabelString(text) {
+    if (!text) return [];
+    const known = Object.values(DRINK_PRICE_LABELS);
+    return String(text)
+      .split('|')
+      .map((part) => {
+        const match = String(part).match(/^\s*([^:]+)\s*:/);
+        if (!match) return '';
+        const label = match[1].trim();
+        const knownMatch = known.find((val) => val.toLowerCase() === label.toLowerCase());
+        return knownMatch || label;
+      })
+      .filter(Boolean);
+  }
+
+  function parseDrinkPriceString(text) {
+    if (!text) return [];
+    return String(text)
+      .split('|')
+      .map((part) => stripDrinkLabel(part))
+      .map((part) => part.trim())
+      .filter(Boolean);
+  }
+
+  function getDrinkHeaderForSubsection(items) {
+    const keys = new Set();
+    let inferred = [];
+    (items || []).forEach((item) => {
+      const prices = item?.prices;
+      if (prices && typeof prices === 'object') {
+        Object.keys(prices).forEach((key) => keys.add(key));
+      } else if (typeof prices === 'string' && !inferred.length) {
+        inferred = parseDrinkLabelString(prices);
+      }
+    });
+    const orderedKeys = DRINK_PRICE_ORDER.filter((key) => keys.has(key));
+    if (orderedKeys.length) {
+      const labels = orderedKeys.map((key) => (DRINK_PRICE_LABELS[key] || key));
+      return { labels, keys: orderedKeys };
+    }
+    if (inferred.length > 1) {
+      return { labels: inferred.map((label) => label.toUpperCase()), keys: [] };
+    }
+    if (inferred.length === 1) {
+      return { labels: [inferred[0].toUpperCase()], keys: [] };
+    }
+    return { labels: ['Price'], keys: [] };
+  }
+
+  function formatDrinkPrices(prices, orderedKeys) {
+    if (!prices) return '';
+    if (typeof prices === 'string') {
+      const parts = parseDrinkPriceString(prices);
+      return parts.join(' | ');
+    }
+    if (typeof prices !== 'object') return '';
+    const keys = orderedKeys && orderedKeys.length
+      ? orderedKeys
+      : DRINK_PRICE_ORDER.filter((key) => prices[key] != null);
+    const parts = keys
+      .map((key) => normalizeDrinkValue(prices[key]))
+      .filter(Boolean);
+    return parts.join(' | ');
+  }
+
   function renderDrinks(drinks, site) {
     let container = document.getElementById('drinks-container');
     let anchors = document.getElementById('drink-anchors');
@@ -1398,9 +1495,26 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
             p.textContent = 'Full Pour $9 unless noted';
             subEl.appendChild(p);
           }
+          const headerInfo = getDrinkHeaderForSubsection(sub.items || []);
+          if (headerInfo.labels && headerInfo.labels.length) {
+            const header = document.createElement('div');
+            header.className = 'menu-price-header';
+            const spacer = document.createElement('div');
+            spacer.className = 'menu-price-spacer';
+            const label = document.createElement('div');
+            label.className = 'note menu-price-label';
+            const headerText = section.id === 'beer-cans' && headerInfo.labels.length === 1
+              ? 'PRICE'
+              : headerInfo.labels.map((l) => String(l).toUpperCase()).join(' | ');
+            label.textContent = headerText;
+            header.appendChild(spacer);
+            header.appendChild(label);
+            subEl.appendChild(header);
+          }
           const list = document.createElement('div');
           (sub.items || []).forEach((item) => {
-            const priceText = formatPrices(item?.prices) || (item?.price != null ? String(item.price) : '');
+            const priceText = formatDrinkPrices(item?.prices, headerInfo.keys)
+              || (item?.price != null ? String(item.price) : '');
             if (!item || (!item.name && !priceText)) {
               console.warn('Skipping drinks item with no name/price', item);
               return;
