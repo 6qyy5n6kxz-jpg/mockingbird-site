@@ -44,13 +44,13 @@
   "hours": [
     { "label": "Sun", "value": "Closed" },
     { "label": "Mon", "value": "Closed" },
-    { "label": "Tue", "value": "Closed" },
-    { "label": "Wed", "value": "Closed" },
-    { "label": "Thu", "value": "4:00 PM – 10:00 PM" },
-    { "label": "Fri", "value": "4:00 PM – 10:00 PM" },
-    { "label": "Sat", "value": "4:00 PM – 10:00 PM" }
+    { "label": "Tue", "value": "5–9 PM", "note": "Beverage carryout only" },
+    { "label": "Wed", "value": "5–9 PM", "note": "Beverage carryout only" },
+    { "label": "Thu", "value": "4–10 PM", "note": "Full service" },
+    { "label": "Fri", "value": "4–10 PM", "note": "Full service" },
+    { "label": "Sat", "value": "4–10 PM", "note": "Full service" }
   ],
-  "seasonalHoursNote": "Open Thu–Sat · Closed Sun–Wed",
+  "seasonalHoursNote": "Beverage carryout: Tue–Wed 5–9 PM · Full service: Thu–Sat 4–10 PM",
   "socials": {
     "facebook": "https://www.facebook.com/themockingbirdonmillroad/",
     "instagram": "https://www.instagram.com/mockingbirdonmillroad/"
@@ -77,7 +77,7 @@
     "assets/images/interior3.svg"
   ],
   "footer": {
-    "hours_summary": "Open Thu–Sat 4–10 PM • Closed Sun–Wed"
+    "hours_summary": "Beverage carryout: Tue–Wed 5–9 PM • Full service: Thu–Sat 4–10 PM • Closed Sun–Mon"
   },
   "defaultSEO": {
     "title": "The Mockingbird on Mill Road",

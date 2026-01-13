@@ -947,7 +947,10 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
       table.innerHTML = '<tr><td colspan="2">Hours coming soon.</td></tr>';
       return;
     }
-    const rows = site.hours.map((row) => `<tr><td>${row.label}</td><td>${row.value}</td></tr>`);
+    const rows = site.hours.map((row) => {
+      const note = row.note ? `<td class="hours-note-cell"><span class="hours-secondary">${row.note}</span></td>` : '<td class="hours-note-cell"></td>';
+      return `<tr class="hours-row"><td class="hours-day">${row.label}</td><td class="hours-time"><span class="hours-primary">${row.value}</span></td>${note}</tr>`;
+    });
     table.innerHTML = rows.join('');
     if (DEBUG) dbg('hours days rendered', rows.length);
   }
