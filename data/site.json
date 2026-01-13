@@ -51,6 +51,7 @@
     { "label": "Sat", "value": "4–10 PM", "note": "Full service" }
   ],
   "seasonalHoursNote": "Beverage carryout: Tue–Wed 5–9 PM · Full service: Thu–Sat 4–10 PM",
+  "kitchenNote": "Kitchen closes at 9 PM nightly.",
   "socials": {
     "facebook": "https://www.facebook.com/themockingbirdonmillroad/",
     "instagram": "https://www.instagram.com/mockingbirdonmillroad/"

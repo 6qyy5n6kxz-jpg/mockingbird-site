@@ -624,6 +624,9 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
       applyText('[data-fill="hours"]', hoursText);
       if (DEBUG) dbg('footer hours mode', 'full');
     }
+    if (site.kitchenNote) {
+      applyText('[data-fill="kitchen-note"]', site.kitchenNote);
+    }
     if (site.seasonalHoursNote) {
       applyText('[data-fill="seasonal-hours"]', site.seasonalHoursNote);
     }

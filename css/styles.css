@@ -701,6 +701,14 @@ nav a:focus {
   opacity: 0.7;
 }
 
+.hours-kitchen-note {
+  margin-top: 12px;
+}
+
+.hours-kitchen-note + .note {
+  margin-top: 6px;
+}
+
 .hours-time,
 .hours-note-cell,
 .hours-day {
