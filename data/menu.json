@@ -1,18 +1,23 @@
 {
   "_comment": "Edit menu categories and items. Each item supports name, description, optional price, featured, and optional tags array.",
   "notes": [
-    "Flatbreads are served à la carte.",
-    "Pressed sandwiches and dinner combos are available all evening.",
-    "Weekly sides and cold plates change regularly."
+    "Weekly sides and specials change regularly."
   ],
   "categories": [
     {
-      "name": "Boards & Shares",
+      "name": "Boards",
       "items": [
-        { "name": "The Mockingbird Board", "description": "A curated selection of cheeses, cured meats, accompaniments, and crackers. Designed for 1–2 people.", "price": null, "featured": true },
-        { "name": "Mockingbird Sampler", "description": "A smaller tasting of the Mockingbird Board. Perfect for one or light sharing.", "price": null },
-        { "name": "Super Board", "description": "An expanded Mockingbird Board designed for the table. Ideal for sharing.", "price": null },
-        { "name": "Brie, Jam & Crackers", "description": "Brie, house jam, crackers", "price": null }
+        { "name": "The Mockingbird Board", "description": "A curated selection of cheeses, cured meats, accompaniments, and crackers. Serves 3–4.", "price": null, "featured": true },
+        { "name": "Mockingbird Sampler", "description": "A smaller tasting of the Mockingbird Board. Individual serving.", "price": null },
+        { "name": "Super Board", "description": "An expanded Mockingbird Board designed for the table. Designed for groups of 5+.", "price": null }
+      ]
+    },
+    {
+      "name": "Starters",
+      "items": [
+        { "name": "Brie, Jam & Crackers", "description": "Brie, house jam, crackers", "price": null },
+        { "name": "Soup of the Week", "description": "Made from scratch. Cup/bowl.", "price": null, "specialLabel": "Soup of the Week" },
+        { "name": "Seasonal Salad", "description": "Chef’s selection of fresh greens, seasonal vegetables, and house vinaigrette.", "price": null }
       ]
     },
     {
@@ -22,40 +27,27 @@
         { "name": "Red Sauce & Cheese", "description": "House red sauce, mozzarella, parmesan", "price": null },
         { "name": "Pepperoni", "description": "House red sauce, pepperoni, mozzarella, parmesan", "price": null, "featured": true },
         { "name": "Bacon Onion Jam", "description": "House bacon onion jam, cheese blend, balsamic finish", "price": null }
-      ]
+      ],
+      "footer": "MAKE IT A COMBO → Add a cup of soup, a half Seasonal Salad, or both. Served with a pickle + Chef’s Weekly Side.\nChef’s Weekly Side: Warm Farro, White Bean & Herb Bowl."
     },
     {
-      "name": "Soup & Pressed Sandwiches",
+      "name": "Pressed Sandwiches",
+      "description": "Hot, pressed panini-style sandwiches made with bold flavors and served crisp",
       "items": [
-        { "name": "Soup of the Week", "description": "Made from scratch. Cup | Bowl.", "price": null, "specialLabel": "Soup of the Week" },
         { "name": "Weekly Pressed Sandwich", "description": "Chef’s featured sandwich, changing weekly.", "price": null, "specialLabel": "Weekly Pressed Sandwich" },
         { "name": "House Pressed Sandwich", "description": "Choose one: Red sauce & mozzarella OR Pepperoni & mozzarella.", "price": null },
         { "name": "Italian Pressed Sandwich", "description": "Salami, pepperoni, mozzarella, olive oil, and herbs.", "price": null, "featured": true },
         { "name": "Gourmet Grilled Cheese", "description": "", "price": null }
-      ]
-    },
-    {
-      "name": "Dinner Combos",
-      "description": "A complete way to enjoy Mockingbird.",
-      "items": [
-        { "name": "Pick 2", "description": "Half of a pressed sandwich or grilled cheese, a pickle, the chef’s weekly side, and your choice of a cup of soup or the cold side of the week.", "price": null, "featured": true },
-        { "name": "Pick 3", "description": "Half of a pressed sandwich or grilled cheese, a pickle, the chef’s weekly side, a cup of soup, and the cold side of the week.", "price": null }
       ],
-      "footer": "Combos are curated meals; substitutions are limited."
-    },
-    {
-      "name": "Cold Side of the Week",
-      "items": [
-        { "name": "Ask your server about this week’s cold side", "description": "A rotating chilled side served with crackers or bread.", "price": null, "specialLabel": "Cold Side of the Week" }
-      ]
+      "footer": "MAKE IT A COMBO → Add a cup of soup, a half Seasonal Salad, or both. Served with a pickle + Chef’s Weekly Side.\nChef’s Weekly Side: Warm Farro, White Bean & Herb Bowl."
     },
     {
       "name": "Simple Add-Ons",
       "items": [
         { "name": "Cup of olives", "description": "", "price": null },
         { "name": "Cup of pickles", "description": "", "price": null },
-        { "name": "Cup of crackers", "description": "", "price": null },
-        { "name": "Chef’s Weekly Side", "description": "", "price": null, "specialLabel": "Chef’s Weekly Side" }
+        { "name": "Tom’s Homemade Crackers", "description": "", "price": null },
+        { "name": "Chef’s Weekly Side: Warm Farro, White Bean & Herb Bowl", "description": "", "price": null, "specialLabel": "Chef’s Weekly Side: Warm Farro, White Bean & Herb Bowl" }
       ]
     },
     {

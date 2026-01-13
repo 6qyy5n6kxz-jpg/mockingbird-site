@@ -1035,10 +1035,9 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
     const specialPlaceholders = new Set([
       'Soup of the Week',
       'Weekly Pressed Sandwich',
-      'Chef’s Weekly Side',
+      'Chef’s Weekly Side: Warm Farro, White Bean & Herb Bowl',
       'Sweet Bite of the Day',
-      'Hot Side of the Week',
-      'Cold Side of the Week'
+      'Hot Side of the Week'
     ]);
     if (!menuData?.categories?.length) {
       const phone = state.site?.phone ? `tel:${state.site.phone}` : null;
@@ -1087,10 +1086,53 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
       });
       section.appendChild(list);
       if (cat.footer) {
-        const foot = document.createElement('p');
-        foot.className = 'note';
-        foot.textContent = cat.footer;
-        section.appendChild(foot);
+        const footerLines = Array.isArray(cat.footer)
+          ? cat.footer
+          : String(cat.footer).split('\n');
+        const comboPrefix = 'MAKE IT A COMBO →';
+        const sidePrefix = 'Chef’s Weekly Side:';
+        const comboLine = footerLines.find((line) => String(line || '').trim().startsWith(comboPrefix));
+        const sideLine = footerLines.find((line) => String(line || '').trim().startsWith(sidePrefix));
+        if (comboLine && sideLine) {
+          const callout = document.createElement('div');
+          callout.className = 'menu-combo-callout';
+          const title = document.createElement('div');
+          title.className = 'menu-combo-title';
+          title.textContent = 'Make it a combo';
+          const details = document.createElement('div');
+          details.className = 'menu-combo-details';
+          const comboBody = String(comboLine).slice(comboPrefix.length).trim();
+          const servedIdx = comboBody.toLowerCase().indexOf('served with');
+          const addPart = servedIdx >= 0 ? comboBody.slice(0, servedIdx).trim() : comboBody.trim();
+          const includesPart = servedIdx >= 0 ? comboBody.slice(servedIdx).trim() : '';
+          const addText = addPart.replace(/^\s*add\s+/i, '').replace(/\.$/, '');
+          details.textContent = addText ? `Add: ${addText}` : 'Add: Cup of Soup • 1/2 Seasonal Salad • Both';
+          const includes = document.createElement('div');
+          includes.className = 'menu-combo-includes';
+          const includesText = includesPart.replace(/^served with\s*/i, '').replace(/\.$/, '');
+          if (cat.name === 'Pressed Sandwiches') {
+            includes.textContent = 'Includes: half a pressed sandwich, a pickle + Chef’s Weekly Side';
+          } else {
+            includes.textContent = includesText ? `Includes: ${includesText}` : 'Includes: a pickle + Chef’s Weekly Side';
+          }
+          const side = document.createElement('div');
+          side.className = 'menu-combo-side';
+          side.textContent = String(sideLine).trim();
+          callout.appendChild(title);
+          callout.appendChild(details);
+          callout.appendChild(includes);
+          callout.appendChild(side);
+          section.appendChild(callout);
+        } else {
+          const foot = document.createElement('div');
+          foot.className = 'note';
+          footerLines.forEach((line) => {
+            const row = document.createElement('div');
+            row.textContent = String(line || '').trim();
+            foot.appendChild(row);
+          });
+          section.appendChild(foot);
+        }
       }
       container.appendChild(section);
     });

@@ -9,7 +9,7 @@
       "description": "Slow-simmered green lentils and pearl barley in a savory vegetable broth with tomato paste, olive oil, and herbs",
       "notes": [
         "Available as cup or bowl",
-        "Included in Pick 2 & Pick 3 combos"
+        "Available as a combo add-on"
       ]
     },
     {
@@ -17,8 +17,8 @@
       "label": "Weekly Pressed Sandwich",
       "description": "Roasted chicken thigh, smashed white beans with olive oil and garlic, giardiniera mix, and mozzarella. Pressed crisp and served hot",
       "notes": [
-        "Served with pickle + Chef’s Weekly Side",
-        "Available as a half in Pick 2 & Pick 3 combos"
+        "Served with pickle + Chef’s Weekly Side (changes weekly)",
+        "Available as a combo add-on"
       ]
     },
     {
@@ -30,15 +30,6 @@
       ]
     },
     {
-      "name": "White Bean, Artichoke & Caper Antipasto",
-      "label": "Cold Side of the Week",
-      "description": "Marinated white beans with artichokes, capers, olive oil, and champagne vinegar",
-      "notes": [
-        "Served chilled with crackers",
-        "Included in Pick 2 & Pick 3 combos"
-      ]
-    },
-    {
       "name": "Chocolate Oat Bars",
       "label": "Sweet Bite of the Day",
       "description": "Old fashioned oats baked with bittersweet and semi-sweet chocolate chips, brown sugar, and sweetened condensed milk",
@@ -47,12 +38,12 @@
       ]
     },
     {
-      "name": "Warm Farro, White Bean & Herb Bowl",
-      "label": "Chef’s Weekly Side",
+      "name": "Chef’s Weekly Side: Warm Farro, White Bean & Herb Bowl",
+      "label": "Chef’s Weekly Side: Warm Farro, White Bean & Herb Bowl",
       "description": "Farro and white beans tossed with olive oil, balsamic glaze, oregano, and black pepper",
       "notes": [
         "Served with all pressed sandwiches",
-        "Included in Pick 2 & Pick 3 combos",
+        "Available as a combo add-on",
         "Available as an add-on"
       ]
     }
