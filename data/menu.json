@@ -15,14 +15,16 @@
     {
       "name": "Starters",
       "items": [
+        { "name": "Rustic Lentil & Barley Soup", "description": "Made from scratch. Cup/bowl.", "price": null, "specialLabel": "Soup of the Week" },
+        { "name": "Bruschetta", "description": "Tomato, basil, mozzarella, and balsamic drizzle on homemade bread.", "price": null },
+        { "name": "Stuffed Mushrooms", "description": "Mushrooms stuffed with a sun-dried tomato mixture, finished with a balsamic drizzle.", "price": null },
         { "name": "Brie, Jam & Crackers", "description": "Brie, house jam, Tom's homemade crackers", "price": null },
-        { "name": "Soup of the Week", "description": "Made from scratch. Cup/bowl.", "price": null, "specialLabel": "Soup of the Week" },
         { "name": "Seasonal Salad", "description": "Chef’s selection of fresh greens, seasonal vegetables, and house vinaigrette.", "price": null }
       ]
     },
     {
       "name": "Personal Flatbreads",
-      "description": "Crisp, oven-baked flatbreads topped generously and served hot.",
+      "description": "Crisp, oven-baked homemade flatbreads topped generously and served hot.",
       "items": [
         { "name": "Red Sauce & Cheese", "description": "House red sauce, mozzarella, parmesan", "price": null },
         { "name": "Pepperoni", "description": "House red sauce, pepperoni, mozzarella, parmesan", "price": null, "featured": true },
@@ -32,12 +34,13 @@
     },
     {
       "name": "Pressed Sandwiches",
-      "description": "Hot, pressed panini-style sandwiches made with bold flavors and served crisp",
+      "description": "Hot, pressed panini-style homemade sandwiches made with bold flavors and served crisp.",
       "items": [
         { "name": "Weekly Pressed Sandwich", "description": "Chef’s featured sandwich, changing weekly.", "price": null, "specialLabel": "Weekly Pressed Sandwich" },
-        { "name": "House Pressed Sandwich", "description": "Choose one: Red sauce & mozzarella OR Pepperoni & mozzarella.", "price": null },
+        { "name": "Red Sauce Pressed Sandwich", "description": "Homemade red sauce, mozzarella, and parmesan.", "price": null },
+        { "name": "Pepperoni Pressed Sandwich", "description": "Homemade red sauce, mozzarella, parmesan, and pepperoni.", "price": null },
         { "name": "Italian Pressed Sandwich", "description": "Salami, pepperoni, mozzarella, olive oil, and herbs.", "price": null, "featured": true },
-        { "name": "Gourmet Grilled Cheese", "description": "", "price": null }
+        { "name": "Gourmet Grilled Cheese Pressed Sandwich", "description": "Mozzarella, parmesan, and a seasonal third cheese", "price": null }
       ],
       "footer": "MAKE IT A COMBO → Add a cup of soup, a half Seasonal Salad, or both. Served with a pickle + Chef’s Weekly Side.\nChef’s Weekly Side: Warm Farro, White Bean & Herb Bowl."
     },
