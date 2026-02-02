@@ -57,8 +57,8 @@
     "instagram": "https://www.instagram.com/mockingbirdonmillroad/"
   },
   "announcementBar": {
-    "enabled": true,
-    "message": "We’re closed for regular service in January. We’re still hosting <a href=\"/events/\">special events</a> and <a href=\"/private-parties/\">private events</a>. Reopening in February.",
+    "enabled": false,
+    "message": "",
     "link": ""
   },
   "trust": {
