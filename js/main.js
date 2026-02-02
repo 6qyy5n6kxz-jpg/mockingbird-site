@@ -1794,27 +1794,46 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
         ? `<p class="note event-help">${paymentHelper}</p>`
         : '';
       const lowInventory = ticketing && remaining > 0 && remaining <= 5;
+      const soldOutNote = soldOut
+        ? `<p class="note">${ev.sold_out_note || 'This event is sold out — thank you!'}</p>`
+        : '';
+      const paymentBlock = ticketing
+        ? (soldOut
+          ? `<div class="event-payment">
+            <h4 class="event-section-title">Tickets</h4>
+            <p class="note event-help">This event is sold out.</p>
+          </div>`
+          : `
+          <div class="event-payment">
+            <h4 class="event-section-title">Pay for tickets</h4>
+            <div class="form-actions">
+              ${button || ''}
+            </div>
+            ${paymentHelperLine}
+            ${vendorPaymentDetails}
+            ${soldOutOverrideNotice}
+            ${ticketCopy}
+          </div>`)
+        : '';
+      const seatingClosedBlock = (soldOut && isTicketed)
+        ? `<div class="event-seating">
+          <h4 class="event-section-title">Seating details</h4>
+          <p class="note event-help">Seating details are now closed for this event.</p>
+        </div>`
+        : '';
       card.innerHTML = `
         ${img}
         <div class="inline-links"><span class="badge">${formatDate(ev.date)}</span>${priceBadge}${availabilityBadge}${typeBadge}${eventTypeBadge}</div>
         <h3>${ev.title}</h3>
         <p>${ev.description}</p>
+        ${soldOutNote}
         ${ticketing?.policy ? `<p class="note">${ticketing.policy}</p>` : ''}
-        ${ticketing ? `
-        <div class="event-payment">
-          <h4 class="event-section-title">Pay for tickets</h4>
-          <div class="form-actions">
-            ${button || ''}
-          </div>
-          ${paymentHelperLine}
-          ${vendorPaymentDetails}
-          ${soldOutOverrideNotice}
-          ${ticketCopy}
-        </div>` : ''}
+        ${paymentBlock}
         ${lowInventory ? '<p class="note">Limited tickets remain. Availability isn’t held until payment completes.</p>' : ''}
+        ${seatingClosedBlock}
       `;
 
-      const shouldShowSeatingForm = isTicketed && (ticketing?.intake || ev.seating_form?.enabled === true);
+      const shouldShowSeatingForm = !soldOut && isTicketed && (ticketing?.intake || ev.seating_form?.enabled === true);
       if (shouldShowSeatingForm) {
         dbg('seating form render', { title: ev.title, provider: ev.payment_provider, enabled: !!ev.seating_form?.enabled });
         const seatingIntake = ticketing?.intake || {

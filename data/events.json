@@ -78,6 +78,7 @@
       "payment_provider": "clover",
       "payment_label": "Pay on Clover",
       "hide_ticketed_helper": false,
+      "sold_out_note": "This event is sold out — thank you!",
       "seating_form": {
         "enabled": true
       },
@@ -85,7 +86,7 @@
       "type": "Special Event",
       "ticketing": {
         "capacity": 10,
-        "sold": 0,
+        "sold": 10,
         "price_display": "$125 per couple",
         "clover_payment_url": "https://link.clover.com/urlshortener/DL89fc",
         "policy": "All sales final; transfers allowed. Seating is reserved after payment.",
