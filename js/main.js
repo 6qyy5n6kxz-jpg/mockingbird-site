@@ -75,6 +75,51 @@
     if (DEBUG) console.log('[dbg]', ...args);
   }
 
+  function injectLocalBusinessSchema() {
+    if (typeof document === 'undefined') return;
+    const head = document.head || document.querySelector('head');
+    if (!head || document.getElementById('localbusiness-schema')) return;
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.id = 'localbusiness-schema';
+    script.textContent = `{
+  "@context": "https://schema.org",
+  "@type": ["CafeOrCoffeeShop", "WineBar"],
+  "name": "The Mockingbird on Mill Road",
+  "url": "https://themockingbirdonmillroad.com/",
+  "image": {
+    "@type": "ImageObject",
+    "url": "https://themockingbirdonmillroad.com/assets/images/og.jpg"
+  },
+  "description": "The Mockingbird on Mill Road is a cozy wine café and event space in Graytown, OH featuring live music, trivia nights, book club, private parties, and seasonal food and drinks.",
+  "priceRange": "$$",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "4408 N Elliston-Trowbridge Rd",
+    "addressLocality": "Graytown",
+    "addressRegion": "OH",
+    "postalCode": "43432",
+    "addressCountry": "US"
+  },
+  "areaServed": [
+    { "@type": "City", "name": "Graytown" },
+    { "@type": "City", "name": "Toledo" },
+    { "@type": "City", "name": "Oregon" },
+    { "@type": "City", "name": "Port Clinton" },
+    { "@type": "City", "name": "Genoa" }
+  ],
+  "sameAs": [
+    "https://www.facebook.com/themockingbirdonmillroad/",
+    "https://www.instagram.com/mockingbirdonmillroad/"
+  ],
+  "hasMenu": "https://themockingbirdonmillroad.com/menu/",
+  "acceptsReservations": true
+}`;
+    head.appendChild(script);
+  }
+
+  injectLocalBusinessSchema();
+
   function ticketsRemaining(ticketing) {
     if (!ticketing) return 0;
     const capacity = Number(ticketing.capacity) || 0;
