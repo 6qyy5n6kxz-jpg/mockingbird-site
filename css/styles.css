@@ -577,6 +577,11 @@ nav a:focus {
   color: var(--muted);
 }
 
+.menu-size-pricing {
+  font-style: italic;
+  color: color-mix(in srgb, var(--muted) 85%, transparent);
+}
+
 .menu-price-header {
   display: flex;
   align-items: flex-end;
@@ -618,8 +623,22 @@ nav a:focus {
 
 .menu-combo-details,
 .menu-combo-includes,
-.menu-combo-side {
+.menu-combo-side,
+.menu-combo-pricing {
   color: var(--text);
+}
+
+.menu-combo-pricing {
+  font-weight: 700;
+}
+
+.menu-combo-callout ul {
+  margin: 4px 0 0;
+  padding-left: 16px;
+}
+
+.menu-combo-callout li {
+  margin: 2px 0;
 }
 
 .price {

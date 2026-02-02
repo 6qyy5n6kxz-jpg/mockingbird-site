@@ -1096,37 +1096,67 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
           ? cat.footer
           : String(cat.footer).split('\n');
         const comboPrefix = 'MAKE IT A COMBO →';
-        const sidePrefix = 'Chef’s Weekly Side:';
+        const sidePrefixes = ['Chef’s Weekly Side:', 'This week’s Chef’s Weekly Side:'];
         const comboLine = footerLines.find((line) => String(line || '').trim().startsWith(comboPrefix));
-        const sideLine = footerLines.find((line) => String(line || '').trim().startsWith(sidePrefix));
+        const sideLine = footerLines.find((line) => {
+          const trimmed = String(line || '').trim();
+          return sidePrefixes.some((prefix) => trimmed.startsWith(prefix));
+        });
+        const addLine = footerLines.find((line) => String(line || '').trim().toLowerCase().startsWith('add:'));
+        const detailsLine = footerLines.find((line) => {
+          const trimmed = String(line || '').trim();
+          const lower = trimmed.toLowerCase();
+          return lower.startsWith('choose your sides:') ||
+            lower.startsWith('sides you can choose from') ||
+            lower.startsWith('choose 2 or 3 sides:') ||
+            lower.startsWith('choose 2 or 3 additional sides:');
+        });
+        const noteLine = footerLines.find((line) => String(line || '').toLowerCase().includes('counts as 2 sides'));
+        const includesLine = footerLines.find((line) => String(line || '').trim().toLowerCase().startsWith('includes:'));
         if (comboLine && sideLine) {
           const callout = document.createElement('div');
           callout.className = 'menu-combo-callout';
           const title = document.createElement('div');
           title.className = 'menu-combo-title';
           title.textContent = 'Make it a combo';
+          const pricing = document.createElement('div');
+          pricing.className = 'menu-combo-pricing';
           const details = document.createElement('div');
           details.className = 'menu-combo-details';
           const comboBody = String(comboLine).slice(comboPrefix.length).trim();
+          if (comboBody) pricing.textContent = comboBody;
           const servedIdx = comboBody.toLowerCase().indexOf('served with');
           const addPart = servedIdx >= 0 ? comboBody.slice(0, servedIdx).trim() : comboBody.trim();
           const includesPart = servedIdx >= 0 ? comboBody.slice(servedIdx).trim() : '';
           const addText = addPart.replace(/^\s*add\s+/i, '').replace(/\.$/, '');
-          details.textContent = addText ? `Add: ${addText}` : 'Add: Cup of Soup • 1/2 Seasonal Salad • Both';
+          const detailsSource = detailsLine || addLine;
+          if (detailsSource) {
+            details.textContent = String(detailsSource || '').trim();
+          } else {
+            details.textContent = addText ? `Add: ${addText}` : 'Add: Cup of Soup • 1/2 Seasonal Salad • Both';
+          }
           const includes = document.createElement('div');
           includes.className = 'menu-combo-includes';
           const includesText = includesPart.replace(/^served with\s*/i, '').replace(/\.$/, '');
-          if (cat.name === 'Pressed Sandwiches') {
+          if (includesLine) {
+            const rawIncludes = String(includesLine || '').trim();
+            includes.innerHTML = rawIncludes.includes('<') ? rawIncludes : rawIncludes.replace(/\n/g, '<br>');
+          } else if (cat.name === 'Pressed Sandwiches') {
             includes.textContent = 'Includes: half a pressed sandwich, a pickle + Chef’s Weekly Side';
           } else {
             includes.textContent = includesText ? `Includes: ${includesText}` : 'Includes: a pickle + Chef’s Weekly Side';
           }
+          const note = document.createElement('div');
+          note.className = 'menu-combo-note note';
+          if (noteLine) note.textContent = String(noteLine || '').trim();
           const side = document.createElement('div');
           side.className = 'menu-combo-side';
           side.textContent = String(sideLine).trim();
           callout.appendChild(title);
-          callout.appendChild(details);
+          if (pricing.textContent) callout.appendChild(pricing);
           callout.appendChild(includes);
+          callout.appendChild(details);
+          if (note.textContent) callout.appendChild(note);
           callout.appendChild(side);
           section.appendChild(callout);
         } else {
@@ -2738,8 +2768,7 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
     if (DEBUG) dbg('form copied to clipboard', { formId, subject });
   }
 
-  function initContactForm() {
-    const form = document.getElementById('contact-form');
+  function initFormspreeForm(form) {
     if (!form) return;
     const button = form.querySelector('button[type="submit"]');
     if (!button) return;
@@ -2755,6 +2784,20 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
     status.setAttribute('aria-live', 'polite');
     status.setAttribute('aria-atomic', 'true');
 
+    const successMessage = form.dataset.successMessage || 'Thanks - we received your message.';
+    const errorMessage = form.dataset.errorMessage || 'Something went wrong. Please try again.';
+
+    const syncAriaInvalid = () => {
+      Array.from(form.elements).forEach((el) => {
+        if (!el.willValidate) return;
+        if (!el.checkValidity()) {
+          el.setAttribute('aria-invalid', 'true');
+        } else {
+          el.removeAttribute('aria-invalid');
+        }
+      });
+    };
+
     const setStatus = (type, message) => {
       status.textContent = message || '';
       status.classList.remove('is-success', 'is-error');
@@ -2768,9 +2811,11 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
       e.preventDefault();
       if (button.dataset.submitting === 'true') return;
       if (!form.checkValidity()) {
+        syncAriaInvalid();
         form.reportValidity();
         return;
       }
+      syncAriaInvalid();
       setStatus('', '');
       const action = form.getAttribute('action') || 'https://formspree.io/f/xbddjoek';
       const formData = new FormData(form);
@@ -2784,15 +2829,25 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
         headers: { Accept: 'application/json' }
       }).then((res) => {
         if (!res.ok) throw new Error('Formspree error');
-        setStatus('success', 'Thanks — we received your message.');
+        setStatus('success', successMessage);
         form.reset();
+        syncAriaInvalid();
       }).catch(() => {
-        setStatus('error', 'Something went wrong. Please try again.');
+        setStatus('error', errorMessage);
       }).finally(() => {
         button.dataset.submitting = 'false';
         button.disabled = false;
         button.textContent = defaultLabel;
       });
+    });
+
+    form.addEventListener('input', syncAriaInvalid);
+    form.addEventListener('change', syncAriaInvalid);
+  }
+
+  function initContactForm() {
+    document.querySelectorAll('form[data-formspree]').forEach((form) => {
+      initFormspreeForm(form);
     });
   }
 
