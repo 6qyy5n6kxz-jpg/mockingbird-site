@@ -5,35 +5,21 @@
   ],
   "categories": [
     {
+      "name": "Starters",
+      "items": [
+        { "name": "Soup of the Week", "description": "<span class=\"menu-size-pricing\">Cup $7.50 | Bowl $9</span>", "price": null, "specialLabel": "Soup of the Week" },
+        { "name": "Bruschetta", "description": "Tomato, basil, mozzarella, and balsamic drizzle on homemade bread.", "price": 12 },
+        { "name": "Stuffed Mushrooms", "description": "Mushrooms stuffed with a sun-dried tomato mixture, finished with a balsamic drizzle.", "price": 10 },
+        { "name": "Brie, Jam & Crackers", "description": "Brie, house jam, Tom's homemade crackers", "price": 12 },
+        { "name": "Seasonal Salad", "description": "Chef’s rotating seasonal salad (Ask your server for this week’s preparation)", "price": 13 }
+      ]
+    },
+    {
       "name": "Boards",
       "items": [
         { "name": "The Mockingbird Board", "description": "A curated selection of cheeses, cured meats, accompaniments, and crackers. Serves 3–4.", "price": 30, "featured": true },
         { "name": "Mockingbird Sampler", "description": "A smaller tasting of the Mockingbird Board. Individual serving.", "price": 12 },
         { "name": "Super Board", "description": "An expanded Mockingbird Board designed for the table. Designed for groups of 5+.", "price": 90 }
-      ]
-    },
-    {
-      "name": "Starters",
-      "items": [
-        { "name": "Rustic Lentil & Barley Soup", "description": "<span class=\"menu-size-pricing\">Cup $7.50 | Bowl $9</span><br>Slow-simmered green lentils and pearl barley in a savory vegetable broth with tomato paste, olive oil, and herbs", "price": null },
-        { "name": "Bruschetta", "description": "Tomato, basil, mozzarella, and balsamic drizzle on homemade bread.", "price": 12 },
-        { "name": "Stuffed Mushrooms", "description": "Mushrooms stuffed with a sun-dried tomato mixture, finished with a balsamic drizzle.", "price": 10 },
-        { "name": "Brie, Jam & Crackers", "description": "Brie, house jam, Tom's homemade crackers", "price": 12 },
-        { "name": "Seasonal Salad", "description": "Chef’s selection of fresh greens, seasonal vegetables, and house vinaigrette.", "price": 13 }
-      ]
-    },
-    {
-      "name": "COMBOS",
-      "description": "Choose a main + sides. Every combo includes the Chef’s Weekly Side.",
-      "items": [
-        {
-          "name": "Combo — $16 • Combo Plus — $21",
-          "description": "Choose 1 main:<br>• ½ pressed sandwich (choose any from Pressed Sandwiches)<br>• Personal flatbread (choose any from Personal Flatbreads)<br>• Seasonal salad<br><br>Sides:<br>Combo: choose 1 side<br>Combo Plus: choose 2 sides<br><br>Side choices: Cup of soup • ½ seasonal salad • Olives (cup) • Tom’s Homemade Crackers • Pickle (cup)",
-          "price": null
-        }
-      ],
-      "footer": [
-        "This week’s Chef’s Weekly Side: Warm Farro, White Bean & Herb Bowl."
       ]
     },
     {
@@ -59,18 +45,32 @@
       "footer": "Combo available — see COMBOS above (Combo / Combo Plus)."
     },
     {
+      "name": "COMBOS",
+      "description": "Choose a main + sides. Every combo includes the Chef’s Weekly Side.",
+      "items": [
+        {
+          "name": "Combo — $16 • Combo Plus — $21",
+          "description": "Choose 1 main:<br>• ½ pressed sandwich (choose any from Pressed Sandwiches)<br>• Personal flatbread (choose any from Personal Flatbreads)<br>• Seasonal salad<br><br>Sides:<br>Combo: choose 1 side<br>Combo Plus: choose 2 sides<br><br>Side choices: Cup of soup • ½ seasonal salad • Olives (cup) • Tom’s Homemade Crackers • Pickle (cup)",
+          "price": null
+        }
+      ],
+      "footer": [
+        "This week’s Chef’s Weekly Side: Warm Potato, Onion & Herb Hash."
+      ]
+    },
+    {
       "name": "Simple Add-Ons",
       "items": [
         { "name": "Olives (cup)", "description": "", "price": 4 },
         { "name": "Pickles (cup)", "description": "", "price": 4 },
         { "name": "Tom’s Homemade Crackers", "description": "", "price": 5 },
-        { "name": "Chef’s Weekly Side: Warm Farro, White Bean & Herb Bowl", "description": "", "price": 5, "specialLabel": "Chef’s Weekly Side: Warm Farro, White Bean & Herb Bowl" }
+        { "name": "Chef’s Weekly Side", "description": "Available as an add-on.", "price": 5, "specialLabel": "Chef’s Weekly Side" }
       ]
     },
     {
       "name": "Sweet Bite of the Day",
       "items": [
-        { "name": "Sweet Bite", "description": "Ask your server about tonight’s dessert", "price": 8, "specialLabel": "Sweet Bite of the Day" }
+        { "name": "Sweet Bite of the Day", "description": "", "price": 8, "specialLabel": "Sweet Bite of the Day" }
       ]
     }
   ]

@@ -638,6 +638,10 @@ nav a:focus {
   font-weight: 700;
 }
 
+.menu-jump {
+  display: none;
+}
+
 .menu-combo-callout ul {
   margin: 4px 0 0;
   padding-left: 16px;
@@ -1096,6 +1100,58 @@ textarea {
 }
 
 @media (max-width: 640px) {
+  body {
+    padding-bottom: 84px;
+  }
+
+  .hero img {
+    height: 360px;
+  }
+
+  .hero-content {
+    padding: 28px 16px;
+  }
+
+  .hero-cta {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .hero-cta .btn {
+    width: 100%;
+  }
+
+  .table-grid {
+    gap: 10px;
+  }
+
+  .card {
+    padding: 14px;
+  }
+
+  .list-flex {
+    gap: 10px;
+  }
+
+  .menu-jump {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 12px 0 16px;
+  }
+
+  .menu-jump a {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 10px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text);
+    font-size: 12px;
+    text-decoration: none;
+  }
+
   .event-payment .btn,
   .event-seating .btn,
   .form-actions .btn {

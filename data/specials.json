@@ -1,50 +1,42 @@
 {
   "_comment": "Update weekly specials. weekOf should be the Monday of the current week.",
-  "weekOf": "2026-02-05",
+  "weekOf": "2026-02-02",
   "dateRange": "February 5–7",
   "items": [
     {
-      "name": "Rustic Lentil & Barley Soup",
+      "name": "Potato, Broccoli & Cheddar Soup",
       "label": "Soup of the Week",
-      "description": "Slow-simmered green lentils and pearl barley in a savory vegetable broth with tomato paste, olive oil, and herbs",
+      "description": "Creamy potato soup with tender broccoli, sharp cheddar, and smoked ham",
       "notes": [
         "Available as cup or bowl",
         "Available as a combo add-on"
       ]
     },
     {
-      "name": "Chicken Giardiniera & White Bean Press",
+      "name": "Chicken & Cheddar Press",
       "label": "Weekly Pressed Sandwich",
-      "description": "Roasted chicken thigh, smashed white beans with olive oil and garlic, giardiniera mix, and mozzarella.",
+      "description": "Roasted chicken thigh and melted cheddar, pressed until crisp and hot.",
       "notes": [
         "Served with pickle + Chef’s Weekly Side (changes weekly)",
         "Available as a combo add-on"
       ]
     },
     {
-      "name": "Creamy Polenta with Artichoke & Herb Oil",
-      "label": "Hot Side of the Week",
-      "description": "Soft cornmeal polenta finished with evaporated milk, topped with chopped artichokes, oregano, basil, and olive oil",
-      "notes": [
-        "Served warm in a composed bowl"
-      ]
-    },
-    {
-      "name": "Chocolate Oat Bars",
-      "label": "Sweet Bite of the Day",
-      "description": "Old fashioned oats baked with bittersweet and semi-sweet chocolate chips, brown sugar, and sweetened condensed milk",
-      "notes": [
-        "Cut fresh daily"
-      ]
-    },
-    {
-      "name": "Chef’s Weekly Side: Warm Farro, White Bean & Herb Bowl",
-      "label": "Chef’s Weekly Side: Warm Farro, White Bean & Herb Bowl",
-      "description": "Farro and white beans tossed with olive oil, balsamic glaze, oregano, and black pepper",
+      "name": "Chef’s Weekly Side: Warm Potato, Onion & Herb Hash",
+      "label": "Chef’s Weekly Side",
+      "description": "Roasted potatoes with sautéed onion, olive oil, salt, and black pepper.",
       "notes": [
         "Served with all pressed sandwiches",
-        "Available as a combo add-on",
+        "Included in combos",
         "Available as an add-on"
+      ]
+    },
+    {
+      "name": "Dutch Apple Cake",
+      "label": "Sweet Bite of the Day",
+      "description": "Classic apple cake with cinnamon and vanilla, served by the slice.",
+      "notes": [
+        "Changes weekly"
       ]
     }
   ]

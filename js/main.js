@@ -17,7 +17,7 @@
   //   it's probably the repo name.
   // - If path has 1 segment and it matches a known route, base should be '' (user site).
   const knownRoutes = new Set([
-    'menu', 'specials', 'events', 'private-parties', 'reserve-date', 'wine-club', 'gift-cards', 'contact', 'drinks'
+    'menu', 'specials', 'events', 'private-parties', 'reserve-date', 'gift-cards', 'contact', 'drinks'
   ]);
 
   const parts = pathname.split('/').filter(Boolean);
@@ -1079,6 +1079,14 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
     return '';
   }
 
+  function menuSectionId(name) {
+    return `menu-${String(name || '')
+      .toLowerCase()
+      .replace(/&/g, 'and')
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/(^-|-$)+/g, '')}`;
+  }
+
   function renderMenu(menuData) {
     const container = document.getElementById('menu-container');
     if (!container) return;
@@ -1111,6 +1119,7 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
     menuData.categories.forEach((cat) => {
       const section = document.createElement('section');
       section.className = 'menu-category fade-in';
+      section.id = menuSectionId(cat.name);
       section.innerHTML = `<div class="inline-links"><span class="kicker">${cat.name}</span>${cat.description ? `<span class="note">${cat.description}</span>` : ''}</div>`;
       const list = document.createElement('div');
       cat.items?.forEach((item) => {
@@ -1253,7 +1262,16 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
       const nameEl = row.querySelector('[data-special-name]');
       const descEl = row.querySelector('[data-special-description]');
       if (nameEl && match.name) nameEl.textContent = match.name;
-      if (descEl && match.description) descEl.textContent = match.description;
+      if (descEl) {
+        const prefixEl = descEl.querySelector('.menu-size-pricing');
+        const prefix = prefixEl ? prefixEl.outerHTML : '';
+        const parts = [];
+        if (prefix) parts.push(prefix);
+        if (match.description) parts.push(match.description);
+        const notes = Array.isArray(match.notes) ? match.notes.filter(Boolean) : [];
+        notes.forEach((note) => parts.push(String(note)));
+        if (parts.length) descEl.innerHTML = parts.join('<br>');
+      }
     });
   }
 
