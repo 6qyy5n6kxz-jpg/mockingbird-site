@@ -917,7 +917,6 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
           </ul>
           <div class="nav-divider" aria-hidden="true"></div>
           <ul class="nav-secondary" aria-label="Explore">
-            <li><a data-nav="wine-club">Wine Club</a></li>
             <li><a data-nav="gift-cards">Gift Cards</a></li>
             <li><a data-nav="gallery">Gallery</a></li>
             <li><a data-nav="contact">Contact</a></li>
