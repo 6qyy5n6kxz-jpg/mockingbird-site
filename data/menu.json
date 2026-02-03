@@ -11,7 +11,7 @@
         { "name": "Bruschetta", "description": "Tomato, basil, mozzarella, and balsamic drizzle on homemade bread.", "price": 12 },
         { "name": "Stuffed Mushrooms", "description": "Mushrooms stuffed with a sun-dried tomato mixture, finished with a balsamic drizzle.", "price": 10 },
         { "name": "Brie, Jam & Crackers", "description": "Brie, house jam, Tom's homemade crackers", "price": 12 },
-        { "name": "Seasonal Salad", "description": "Chef’s rotating seasonal salad (Ask your server for this week’s preparation)", "price": 13 }
+        { "name": "Seasonal Salad", "description": "", "price": 13, "specialLabel": "Seasonal Salad" }
       ]
     },
     {
@@ -46,7 +46,7 @@
     },
     {
       "name": "COMBOS",
-      "description": "Choose a main + sides. Every combo includes the Chef’s Weekly Side.",
+      "description": "Choose a main + sides. Every combo includes the Weekly Side.",
       "items": [
         {
           "name": "Combo — $16 • Combo Plus — $21",
@@ -55,7 +55,7 @@
         }
       ],
       "footer": [
-        "This week’s Chef’s Weekly Side: Warm Potato, Onion & Herb Hash."
+        "This week’s Weekly Side: Warm Potato, Onion & Herb Hash."
       ]
     },
     {
@@ -64,7 +64,7 @@
         { "name": "Olives (cup)", "description": "", "price": 4 },
         { "name": "Pickles (cup)", "description": "", "price": 4 },
         { "name": "Tom’s Homemade Crackers", "description": "", "price": 5 },
-        { "name": "Chef’s Weekly Side", "description": "Available as an add-on.", "price": 5, "specialLabel": "Chef’s Weekly Side" }
+        { "name": "Weekly Side", "description": "Available as an add-on.", "price": 5, "specialLabel": "Weekly Side" }
       ]
     },
     {

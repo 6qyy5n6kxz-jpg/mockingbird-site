@@ -1093,7 +1093,7 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
     const specialPlaceholders = new Set([
       'Soup of the Week',
       'Weekly Pressed Sandwich',
-      'Chef’s Weekly Side: Warm Farro, White Bean & Herb Bowl',
+      'Weekly Side',
       'Sweet Bite of the Day',
       'Hot Side of the Week'
     ]);
@@ -1149,7 +1149,7 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
           ? cat.footer
           : String(cat.footer).split('\n');
         const comboPrefix = 'MAKE IT A COMBO →';
-        const sidePrefixes = ['Chef’s Weekly Side:', 'This week’s Chef’s Weekly Side:'];
+        const sidePrefixes = ['Weekly Side:', 'This week’s Weekly Side:'];
         const comboLine = footerLines.find((line) => String(line || '').trim().startsWith(comboPrefix));
         const sideLine = footerLines.find((line) => {
           const trimmed = String(line || '').trim();
@@ -1195,9 +1195,9 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
             const rawIncludes = String(includesLine || '').trim();
             includes.innerHTML = rawIncludes.includes('<') ? rawIncludes : rawIncludes.replace(/\n/g, '<br>');
           } else if (cat.name === 'Pressed Sandwiches') {
-            includes.textContent = 'Includes: half a pressed sandwich, a pickle + Chef’s Weekly Side';
+            includes.textContent = 'Includes: half a pressed sandwich, a pickle + Weekly Side';
           } else {
-            includes.textContent = includesText ? `Includes: ${includesText}` : 'Includes: a pickle + Chef’s Weekly Side';
+            includes.textContent = includesText ? `Includes: ${includesText}` : 'Includes: a pickle + Weekly Side';
           }
           const note = document.createElement('div');
           note.className = 'menu-combo-note note';

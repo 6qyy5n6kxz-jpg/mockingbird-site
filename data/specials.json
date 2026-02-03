@@ -4,27 +4,33 @@
   "dateRange": "February 5–7",
   "items": [
     {
-      "name": "Ham & Vegetable Chowder Soup",
+      "name": "Potato, Broccoli & Cheddar Soup",
       "label": "Soup of the Week",
-      "description": "Slow-simmered ham with potatoes, carrots, and onion in a lightly creamy broth. Hearty, comforting, and made for a winter evening.",
+      "description": "Creamy potato soup with tender broccoli, sharp cheddar, and smoked ham",
       "notes": [
         "Available as cup or bowl",
         "Available as a combo add-on"
       ]
     },
     {
-      "name": "Roasted Turkey & Swiss Press",
+      "name": "Seasonal Salad",
+      "label": "Seasonal Salad",
+      "description": "Mixed greens with red onion, dried cranberries, toasted pecans, and shaved Parmesan. Dressing served on the side.",
+      "notes": []
+    },
+    {
+      "name": "Chicken & Cheddar Press",
       "label": "Weekly Pressed Sandwich",
-      "description": "Warm roasted turkey, baby Swiss, and herb butter, pressed crisp on our house bread. Balanced, savory, and satisfying without feeling heavy.",
+      "description": "Roasted chicken thigh and melted cheddar, pressed until crisp and hot.",
       "notes": [
         "Served with pickle + Weekly Side (changes weekly)",
         "Available as a combo add-on"
       ]
     },
     {
-      "name": "Weekly Side: Warm Red Pepper & Onion Farro",
+      "name": "Weekly Side: Warm Potato, Onion & Herb Hash",
       "label": "Weekly Side",
-      "description": "Nutty farro tossed with roasted red pepper, softened red onion, olive oil, and herbs. Served warm with all pressed sandwiches and included with every combo.",
+      "description": "Roasted potatoes with sautéed onion, olive oil, salt, and black pepper.",
       "notes": [
         "Served with all pressed sandwiches",
         "Included in combos",
