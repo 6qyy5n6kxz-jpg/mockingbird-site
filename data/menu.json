@@ -1,17 +1,15 @@
 {
   "_comment": "Edit menu categories and items. Each item supports name, description, optional price, featured, and optional tags array.",
   "notes": [
-    "Weekly sides and specials change regularly."
+    "Featured sides and specials change regularly."
   ],
   "categories": [
     {
       "name": "Starters",
       "items": [
-        { "name": "Soup of the Week", "description": "<span class=\"menu-size-pricing\">Cup $7.50 | Bowl $9</span>", "price": null, "specialLabel": "Soup of the Week" },
         { "name": "Bruschetta", "description": "Tomato, basil, mozzarella, and balsamic drizzle on homemade bread.", "price": 12 },
         { "name": "Stuffed Mushrooms", "description": "Mushrooms stuffed with a sun-dried tomato mixture, finished with a balsamic drizzle.", "price": 10 },
-        { "name": "Brie, Jam & Crackers", "description": "Brie, house jam, Tom's homemade crackers", "price": 12 },
-        { "name": "Seasonal Salad", "description": "", "price": 13, "specialLabel": "Seasonal Salad" }
+        { "name": "Brie, Jam & Crackers", "description": "Brie, house jam, Tom's homemade crackers", "price": 12 }
       ]
     },
     {
@@ -23,48 +21,56 @@
       ]
     },
     {
-      "name": "Personal Flatbreads",
+      "name": "Flatbreads",
       "description": "Crisp, oven-baked homemade flatbreads topped generously and served hot.",
       "items": [
         { "name": "Red Sauce & Cheese", "description": "House red sauce, mozzarella, parmesan", "price": 10 },
         { "name": "Pepperoni", "description": "House red sauce, pepperoni, mozzarella, parmesan", "price": 10, "featured": true },
         { "name": "Bacon Onion Jam", "description": "House bacon onion jam, cheese blend, balsamic finish", "price": 10 }
       ],
-      "footer": "Combo available — see COMBOS above (Combo / Combo Plus)."
+      "footer": "Combo available — see Combos above (Combo / Combo Plus)."
     },
     {
       "name": "Pressed Sandwiches",
       "description": "Hot, pressed panini-style homemade sandwiches made with bold flavors and served crisp.",
       "items": [
-        { "name": "Weekly Pressed Sandwich", "description": "Chef’s featured sandwich, changing weekly.", "price": 13, "specialLabel": "Weekly Pressed Sandwich" },
-        { "name": "Red Sauce Pressed Sandwich", "description": "Homemade red sauce, mozzarella, and parmesan.", "price": 13 },
-        { "name": "Pepperoni Pressed Sandwich", "description": "Homemade red sauce, mozzarella, parmesan, and pepperoni.", "price": 13 },
-        { "name": "Italian Pressed Sandwich", "description": "Salami, pepperoni, mozzarella, olive oil, and herbs.", "price": 13, "featured": true },
-        { "name": "Gourmet Grilled Cheese Pressed Sandwich", "description": "Mozzarella, parmesan, and a seasonal third cheese", "price": 13 }
+        { "name": "Featured Pressed Sandwich — $13", "description": "Also available as a flatbread.", "price": 13, "specialLabel": "Featured Pressed Sandwich", "suppressSpecialName": true },
+        { "name": "Red Sauce", "description": "Homemade red sauce, mozzarella, and parmesan.", "price": 13 },
+        { "name": "Pepperoni", "description": "Homemade red sauce, mozzarella, parmesan, and pepperoni.", "price": 13 },
+        { "name": "Italian", "description": "Salami, pepperoni, mozzarella, olive oil, and herbs.", "price": 13, "featured": true },
+        { "name": "Gourmet Grilled Cheese", "description": "Mozzarella, parmesan, and a seasonal third cheese", "price": 13 }
       ],
-      "footer": "Combo available — see COMBOS above (Combo / Combo Plus)."
+      "footer": "Combo available — see Combos above (Combo / Combo Plus)."
     },
     {
-      "name": "COMBOS",
-      "description": "Choose a main + sides. Every combo includes the Weekly Side.",
+      "name": "Combos",
+      "description": "Choose a main and sides. Every combo includes the Featured Side.",
       "items": [
         {
           "name": "Combo — $16 • Combo Plus — $21",
-          "description": "Choose 1 main:<br>• ½ pressed sandwich (choose any from Pressed Sandwiches)<br>• Personal flatbread (choose any from Personal Flatbreads)<br>• Seasonal salad<br><br>Sides:<br>Combo: choose 1 side<br>Combo Plus: choose 2 sides<br><br>Side choices: Cup of soup • ½ seasonal salad • Olives (cup) • Tom’s Homemade Crackers • Pickle (cup)",
+          "description": "Choose 1 main:<br>• ½ pressed sandwich (any)<br>• Flatbread<br>• Seasonal salad<br><br>Sides:<br>Combo (1 side) • Combo Plus (2 sides)<br><br>Side choices: Cup of soup • ½ seasonal salad • Olives (cup) • Pickles (cup) • Tom’s crackers",
           "price": null
         }
       ],
       "footer": [
-        "This week’s Weekly Side: Warm Potato, Onion & Herb Hash."
+        "This week’s Featured Side: Warm Potato, Onion & Herb Hash."
       ]
     },
     {
-      "name": "Simple Add-Ons",
+      "name": "Snack Starters",
       "items": [
         { "name": "Olives (cup)", "description": "", "price": 4 },
         { "name": "Pickles (cup)", "description": "", "price": 4 },
         { "name": "Tom’s Homemade Crackers", "description": "", "price": 5 },
-        { "name": "Weekly Side", "description": "Available as an add-on.", "price": 5, "specialLabel": "Weekly Side" }
+        { "name": "Featured Side", "description": "", "price": 5, "specialLabel": "Featured Side", "suppressSpecialName": true, "suppressSpecialDescription": true }
+      ]
+    },
+    {
+      "name": "Soup & Salad",
+      "description": "Always from scratch.",
+      "items": [
+        { "name": "Soup of the Day", "description": "<span class=\"menu-size-pricing\">Cup $7.50 | Bowl $9</span>", "price": null, "specialLabel": "Soup of the Day", "suppressSpecialName": true },
+        { "name": "Seasonal Salad", "description": "", "price": 13, "specialLabel": "Seasonal Salad" }
       ]
     },
     {

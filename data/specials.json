@@ -5,7 +5,7 @@
   "items": [
     {
       "name": "Potato, Broccoli & Cheddar Soup",
-      "label": "Soup of the Week",
+      "label": "Soup of the Day",
       "description": "Creamy potato soup with tender broccoli, sharp cheddar, and smoked ham",
       "notes": [
         "Available as cup or bowl",
@@ -15,21 +15,21 @@
     {
       "name": "Seasonal Salad",
       "label": "Seasonal Salad",
-      "description": "Mixed greens with red onion, dried cranberries, toasted pecans, and shaved Parmesan. Dressing served on the side.",
+      "description": "Rotating seasonal salad (Ask your server for this week’s preparation)",
       "notes": []
     },
     {
       "name": "Chicken & Cheddar Press",
-      "label": "Weekly Pressed Sandwich",
+      "label": "Featured Pressed Sandwich",
       "description": "Roasted chicken thigh and melted cheddar, pressed until crisp and hot.",
       "notes": [
-        "Served with pickle + Weekly Side (changes weekly)",
+        "Served with pickle + Featured Side (changes weekly)",
         "Available as a combo add-on"
       ]
     },
     {
-      "name": "Weekly Side: Warm Potato, Onion & Herb Hash",
-      "label": "Weekly Side",
+      "name": "Featured Side: Warm Potato, Onion & Herb Hash",
+      "label": "Featured Side",
       "description": "Roasted potatoes with sautéed onion, olive oil, salt, and black pepper.",
       "notes": [
         "Served with all pressed sandwiches",

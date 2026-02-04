@@ -1091,9 +1091,10 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
     if (!container) return;
     dbg('renderMenu start', { hasData: !!menuData, categories: menuData?.categories?.length || 0 });
     const specialPlaceholders = new Set([
-      'Soup of the Week',
-      'Weekly Pressed Sandwich',
-      'Weekly Side',
+      'Soup of the Day',
+      'Featured Pressed Sandwich',
+      'Featured Side',
+      'Seasonal Salad',
       'Sweet Bite of the Day',
       'Hot Side of the Week'
     ]);
@@ -1138,8 +1139,8 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
           row.setAttribute('data-special-label', specialLabel);
           const nameEl = row.querySelector('h4');
           const descEl = row.querySelector('p');
-          if (nameEl) nameEl.setAttribute('data-special-name', 'true');
-          if (descEl) descEl.setAttribute('data-special-description', 'true');
+          if (nameEl && !item.suppressSpecialName) nameEl.setAttribute('data-special-name', 'true');
+          if (descEl && !item.suppressSpecialDescription) descEl.setAttribute('data-special-description', 'true');
         }
         list.appendChild(row);
       });
@@ -1149,7 +1150,7 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
           ? cat.footer
           : String(cat.footer).split('\n');
         const comboPrefix = 'MAKE IT A COMBO →';
-        const sidePrefixes = ['Weekly Side:', 'This week’s Weekly Side:'];
+        const sidePrefixes = ['Featured Side:', 'This week’s Featured Side:'];
         const comboLine = footerLines.find((line) => String(line || '').trim().startsWith(comboPrefix));
         const sideLine = footerLines.find((line) => {
           const trimmed = String(line || '').trim();
@@ -1195,9 +1196,9 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
             const rawIncludes = String(includesLine || '').trim();
             includes.innerHTML = rawIncludes.includes('<') ? rawIncludes : rawIncludes.replace(/\n/g, '<br>');
           } else if (cat.name === 'Pressed Sandwiches') {
-            includes.textContent = 'Includes: half a pressed sandwich, a pickle + Weekly Side';
+            includes.textContent = 'Includes: half a pressed sandwich, a pickle + Featured Side';
           } else {
-            includes.textContent = includesText ? `Includes: ${includesText}` : 'Includes: a pickle + Weekly Side';
+            includes.textContent = includesText ? `Includes: ${includesText}` : 'Includes: a pickle + Featured Side';
           }
           const note = document.createElement('div');
           note.className = 'menu-combo-note note';
@@ -1263,7 +1264,8 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
       if (nameEl && match.name) nameEl.textContent = match.name;
       if (descEl) {
         const prefixEl = descEl.querySelector('.menu-size-pricing');
-        const prefix = prefixEl ? prefixEl.outerHTML : '';
+        const rawPrefix = descEl.innerHTML.trim();
+        const prefix = prefixEl ? prefixEl.outerHTML : (rawPrefix ? rawPrefix : '');
         const parts = [];
         if (prefix) parts.push(prefix);
         if (match.description) parts.push(match.description);
