@@ -13,6 +13,23 @@
       ]
     },
     {
+      "name": "Snack Starters",
+      "items": [
+        { "name": "Olives (cup)", "description": "", "price": 4 },
+        { "name": "Pickles (cup)", "description": "", "price": 4 },
+        { "name": "Tom’s Homemade Crackers", "description": "", "price": 5 },
+        { "name": "Featured Side", "description": "", "price": 5, "specialLabel": "Featured Side", "suppressSpecialName": true, "suppressSpecialDescription": true }
+      ]
+    },
+    {
+      "name": "Soup & Salad",
+      "description": "Always from scratch.",
+      "items": [
+        { "name": "Soup of the Day", "description": "<span class=\"menu-size-pricing\">Cup $7.50 | Bowl $9</span>", "price": null, "specialLabel": "Soup of the Day", "suppressSpecialName": true },
+        { "name": "Seasonal Salad", "description": "", "price": 13, "specialLabel": "Seasonal Salad" }
+      ]
+    },
+    {
       "name": "Boards",
       "items": [
         { "name": "The Mockingbird Board", "description": "A curated selection of cheeses, cured meats, accompaniments, and crackers. Serves 3–4.", "price": 30, "featured": true },
@@ -54,23 +71,6 @@
       ],
       "footer": [
         "This week’s Featured Side: Warm Potato, Onion & Herb Hash."
-      ]
-    },
-    {
-      "name": "Snack Starters",
-      "items": [
-        { "name": "Olives (cup)", "description": "", "price": 4 },
-        { "name": "Pickles (cup)", "description": "", "price": 4 },
-        { "name": "Tom’s Homemade Crackers", "description": "", "price": 5 },
-        { "name": "Featured Side", "description": "", "price": 5, "specialLabel": "Featured Side", "suppressSpecialName": true, "suppressSpecialDescription": true }
-      ]
-    },
-    {
-      "name": "Soup & Salad",
-      "description": "Always from scratch.",
-      "items": [
-        { "name": "Soup of the Day", "description": "<span class=\"menu-size-pricing\">Cup $7.50 | Bowl $9</span>", "price": null, "specialLabel": "Soup of the Day", "suppressSpecialName": true },
-        { "name": "Seasonal Salad", "description": "", "price": 13, "specialLabel": "Seasonal Salad" }
       ]
     },
     {
