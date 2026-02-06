@@ -1,7 +1,5 @@
 {
   "notes": {
-    "pricingRules": "Flight Board (any 4) $15 | Half Pour $5 | Taste $4",
-    "eligibility": "Only wines listed under ‘Wine Flights (On Pour)’ are eligible for flights. Cans/bottles are not available on flights.",
     "cashDiscount": "Prices in the menu reflect a 4% discount for cash paying customers."
   },
   "sections": [
@@ -10,8 +8,7 @@
       "title": "Wine Flights (On Pour)",
       "subsections": [
         {
-          "title": "Whites & Rosé",
-          "description": "Full Pour $9 unless noted",
+          "title": "Whites",
           "items": [
             { "name": "D’Altieri Moscato d'Asti", "meta": "(ITA)", "description": "Sweet, lightly fizzy, peach + floral", "prices": { "fullPour": "$9", "bottle": "$20.99" } },
             { "name": "Innocent Bystander Pink Moscato", "meta": "(AUS)", "description": "Sweet + spritzy, strawberry + rose", "prices": { "fullPour": "$9", "bottle": "$20.99" } },
@@ -20,7 +17,7 @@
             { "name": "Cantina Colli Euganei Pinot Grigio", "meta": "(ITA)", "description": "Crisp pear, citrus + mineral finish", "prices": { "fullPour": "$9", "bottle": "$19.99" } },
             { "name": "House Of Brown Chardonnay", "meta": "(USA)", "description": "Dry, round, pear + golden apple", "prices": { "fullPour": "$9", "bottle": "$26.49" } },
             { "name": "Aves Del Sur Sauvignon Blanc", "meta": "(CHL)", "description": "Zesty, grapefruit + fresh herbs", "prices": { "fullPour": "$9", "bottle": "$16.49" } },
-            { "name": "Moonlight Soju (Blueberry, Lychee, Peach, Strawberry, Watermelon)", "meta": "(KOR)", "prices": { "fullPour": "$9", "bottle": "$12.99" } }
+            { "name": "Zoli Inzolia", "meta": "(ITA)", "description": "Dry, light-bodied, citrus peel + soft almond.", "prices": { "fullPour": "$9", "bottle": "$25.49" } }
           ]
         },
         {
@@ -35,17 +32,14 @@
             { "name": "St. Innocent Pinot Noir", "meta": "(USA)", "description": "Silky, raspberry + black tea", "prices": { "fullPour": "$12", "bottle": "$38.99" } },
             { "name": "Masciarelli Montepulciano", "meta": "(ITA)", "description": "Rustic, earthy cherry + leather", "prices": { "fullPour": "$9", "bottle": "$19.99" } },
             { "name": "Honoro Vera Monastrell", "meta": "(ESP)", "description": "Dark, earthy, dry with firm grip", "prices": { "fullPour": "$9", "bottle": "$16.49" } },
-            { "name": "The Stump Jump Cabernet Sauvignon", "meta": "(AUS)", "description": "Bold, dry, blackcurrant + mint", "prices": { "fullPour": "$9", "bottle": "$19.99" } }
+            { "name": "The Stump Jump Cabernet Sauvignon", "meta": "(AUS)", "description": "Bold, dry, blackcurrant + mint", "prices": { "fullPour": "$9", "bottle": "$19.99" } },
+            { "name": "Marotti Campi Rubico", "meta": "(ITA)", "description": "Floral, medium-bodied Italian red", "prices": { "fullPour": "$9", "bottle": "$18.49" } }
           ]
         },
         {
-          "title": "Tastes of the Month",
+          "title": "Specialty",
           "items": [
-            { "name": "Marotti Campi Rubico", "meta": "(ITA)", "description": "Floral, medium-bodied Italian red", "prices": { "fullPour": "$9", "bottle": "$18.49" } },
-            { "name": "Zoli Inzolia", "meta": "(ITA)", "description": "Bright Sicilian white with soft pear, citrus & refreshing finish", "prices": { "fullPour": "$9", "bottle": "$25.49" } },
-            { "name": "Italian Christmas White", "meta": "(ITA)", "description": "Crisp citrus + floral notes, touch of honeyed fruit sweetness", "prices": { "fullPour": "$9", "bottle": "$16.49" } },
-            { "name": "Vin Glögg", "meta": "(USA)", "description": "Mulled wine spices, rich red fruit, cozy holiday sweetness", "prices": { "fullPour": "$9", "bottle": "$21.99" } },
-            { "name": "Italian Christmas Red", "meta": "(ITA)", "description": "Medium-bodied Sangiovese, cherry, berry + spice", "prices": { "fullPour": "$9", "bottle": "$16.49" } }
+            {  "name": "Moonlight Soju (Blueberry, Lychee, Peach, Strawberry, Watermelon)", "meta": "(KOR)", "prices": { "fullPour": "$9", "bottle": "$12.99" }}
           ]
         }
       ]
@@ -55,15 +49,15 @@
       "title": "On Tap",
       "subsections": [
         {
-          "title": "Pour | Pitcher",
+          "title": "Pour",
           "items": [
-            { "name": "Cameron’s Lager", "meta": "(CAN)", "prices": { "pour": "$5.50", "pitcher": "$18.00" } },
-            { "name": "Outerbelt 270 IPA", "meta": "(OH)", "prices": { "pour": "$5.50", "pitcher": "$18.00" } },
-            { "name": "Ales for ALS Hazy IPA", "meta": "(OH)", "prices": { "pour": "$6.00", "pitcher": "$20.00" } },
-            { "name": "Humble Pie Cider", "meta": "(OH)", "prices": { "pour": "$7.00", "pitcher": "$22.00" } },
-            { "name": "Seasonal Sangria", "meta": "(OH)", "prices": { "pour": "$6.00", "pitcher": "$25.00" } },
-            { "name": "Peach Mango Sangria", "meta": "(OH)", "prices": { "pour": "$6.00", "pitcher": "$25.00" } },
-            { "name": "“JStewie”", "prices": { "pour": "$7.00", "pitcher": "$25.00" } }
+            { "name": "Cameron’s Lager", "meta": "(CAN)", "prices": { "pour": "$5.50" } },
+            { "name": "Outerbelt 270 IPA", "meta": "(OH)", "prices": { "pour": "$5.50" } },
+            { "name": "Ales for ALS Hazy IPA", "meta": "(OH)", "prices": { "pour": "$6.00" } },
+            { "name": "Humble Pie Cider", "meta": "(OH)", "prices": { "pour": "$7.00" } },
+            { "name": "Seasonal Sangria", "meta": "(OH)", "prices": { "pour": "$6.00" } },
+            { "name": "Peach Mango Sangria", "meta": "(OH)", "prices": { "pour": "$6.00" } },
+            { "name": "“JStewie”", "prices": { "pour": "$7.00" } }
           ]
         }
       ]
