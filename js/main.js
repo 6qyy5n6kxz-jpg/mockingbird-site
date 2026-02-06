@@ -1261,9 +1261,7 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
       if (!match) return;
       const nameEl = row.querySelector('[data-special-name]');
       const descEl = row.querySelector('[data-special-description]');
-      if (nameEl && match.name && !['Soup of the Day', 'Featured Pressed Sandwich'].includes(label)) {
-        nameEl.textContent = match.name;
-      }
+      if (nameEl && match.name) nameEl.textContent = match.name;
       if (descEl) {
         const section = row.closest('section.menu-category');
         const sectionName = section?.querySelector('.kicker')?.textContent?.trim() || '';

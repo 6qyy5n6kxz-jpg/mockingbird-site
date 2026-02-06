@@ -25,7 +25,7 @@
       "name": "Soup & Salad",
       "description": "Always from scratch.",
       "items": [
-        { "name": "Soup of the Day", "description": "<span class=\"menu-size-pricing\">Cup $7.50 | Bowl $9</span>", "price": null, "specialLabel": "Soup of the Day", "suppressSpecialName": true },
+        { "name": "Soup of the Day", "description": "<span class=\"menu-size-pricing\">Cup $7.50 | Bowl $9</span>", "price": null, "specialLabel": "Soup of the Day" },
         { "name": "Seasonal Salad", "description": "", "price": 13, "specialLabel": "Seasonal Salad" }
       ]
     },
@@ -51,7 +51,7 @@
       "name": "Pressed Sandwiches",
       "description": "Hot, pressed panini-style homemade sandwiches made with bold flavors and served crisp.",
       "items": [
-        { "name": "Featured Pressed Sandwich", "description": "Also available as a flatbread.", "price": 13, "specialLabel": "Featured Pressed Sandwich", "suppressSpecialName": true },
+        { "name": "Featured Pressed Sandwich", "description": "Also available as a flatbread.", "price": 13, "specialLabel": "Featured Pressed Sandwich" },
         { "name": "Red Sauce", "description": "Homemade red sauce, mozzarella, and parmesan.", "price": 13 },
         { "name": "Pepperoni", "description": "Homemade red sauce, mozzarella, parmesan, and pepperoni.", "price": 13 },
         { "name": "Italian", "description": "Salami, pepperoni, mozzarella, olive oil, and herbs. Available cold or pressed.", "price": 13, "featured": true },

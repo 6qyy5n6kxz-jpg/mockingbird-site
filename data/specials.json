@@ -23,8 +23,7 @@
       "label": "Featured Pressed Sandwich",
       "description": "Warm roasted turkey, baby swiss, and herb butter, pressed crisp on our house bread.",
       "notes": [
-        "Served with pickle + Featured Side (changes weekly)",
-        "Available as a combo add-on"
+        "Served with pickle + Featured Side (changes weekly)"
       ]
     },
     {
@@ -33,8 +32,7 @@
       "description": "Nutty farro tossed with roasted red pepper, softened red onion, olive oil, and herbs.",
       "notes": [
         "Served with all pressed sandwiches",
-        "Included in combos",
-        "Available as an add-on"
+        "Included in combos"
       ]
     },
     {
@@ -42,7 +40,7 @@
       "label": "Sweet Bite of the Day",
       "description": "Tender baked apples with warm spice and a golden crumb topping.",
       "notes": [
-        "Changes weekly"
+        "Always from scratch."
       ]
     }
   ]
