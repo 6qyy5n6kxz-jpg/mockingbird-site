@@ -2346,25 +2346,19 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
 
     const MENU_PRESETS = {
       brunch: [
-        { name: 'Superboard', qty: 1 },
         { name: 'Breakfast Sandwich Bar', qty: 1 },
         { name: 'Cheesy Potatoes', qty: 1 },
-        { name: 'Sausage, Biscuits & Gravy', qty: 1 },
         { name: 'Muffin Tin Omelets', qty: 1 }
       ],
       lunch_dinner: [
-        { name: 'Superboard', qty: 1 },
-        { name: 'Green or Seasonal Salad', qty: 1 },
-        { name: 'Chicken', qty: 1 },
-        { name: 'Mashed or Cheesy Potatoes', qty: 1 },
-        { name: 'Broccoli', qty: 1 }
+        { name: 'Soup', qty: 1 },
+        { name: 'Shredded Chicken', qty: 1 },
+        { name: 'Potato Salad', qty: 1 }
       ],
       picnic: [
         { name: 'Hot Dogs', qty: 1 },
-        { name: 'Baked Beans', qty: 1 },
-        { name: 'Potato Salad', qty: 1 },
-        { name: 'Cole Slaw', qty: 1 },
-        { name: 'Fruit & Veggie Board', qty: 1 }
+        { name: 'Burgers', qty: 1 },
+        { name: 'Cole Slaw', qty: 1 }
       ]
     };
 

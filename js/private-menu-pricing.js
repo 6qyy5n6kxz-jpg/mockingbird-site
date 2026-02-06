@@ -147,7 +147,7 @@
     },
     {
       id: 'picnic',
-      label: 'Picnic-Style Packages',
+      label: 'Picnic-Style',
       sections: [
         {
           title: 'Proteins',
