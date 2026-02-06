@@ -1261,7 +1261,9 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
       if (!match) return;
       const nameEl = row.querySelector('[data-special-name]');
       const descEl = row.querySelector('[data-special-description]');
-      if (nameEl && match.name) nameEl.textContent = match.name;
+      if (nameEl && match.name && !['Soup of the Day', 'Featured Pressed Sandwich'].includes(label)) {
+        nameEl.textContent = match.name;
+      }
       if (descEl) {
         const section = row.closest('section.menu-category');
         const sectionName = section?.querySelector('.kicker')?.textContent?.trim() || '';
@@ -1269,9 +1271,18 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
           descEl.textContent = '';
           return;
         }
-        const prefixEl = descEl.querySelector('.menu-size-pricing');
-        const rawPrefix = descEl.innerHTML.trim();
-        const prefix = prefixEl ? prefixEl.outerHTML : (rawPrefix ? rawPrefix : '');
+        let prefix = '';
+        if (label === 'Soup of the Day') {
+          const prefixEl = descEl.querySelector('.menu-size-pricing');
+          const rawPrefix = descEl.innerHTML.trim();
+          prefix = prefixEl ? prefixEl.outerHTML : (rawPrefix ? rawPrefix : '');
+        } else if (label === 'Featured Pressed Sandwich') {
+          prefix = 'Also available as a flatbread.';
+        } else {
+          const prefixEl = descEl.querySelector('.menu-size-pricing');
+          const rawPrefix = descEl.innerHTML.trim();
+          prefix = prefixEl ? prefixEl.outerHTML : (rawPrefix ? rawPrefix : '');
+        }
         const parts = [];
         if (prefix) parts.push(prefix);
         if (match.description) parts.push(match.description);
