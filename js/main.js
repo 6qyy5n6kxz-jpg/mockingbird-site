@@ -1255,6 +1255,26 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
       const key = item && item.label && String(item.label).trim();
       if (key) specials.set(key, item);
     });
+    const featuredSide = specials.get('Featured Side');
+    if (featuredSide?.name) {
+      const comboSection = Array.from(container.querySelectorAll('section.menu-category'))
+        .find((section) => section.querySelector('.kicker')?.textContent?.trim() === 'Combos');
+      const note = comboSection?.querySelector('.note');
+      if (note) {
+        const rawName = String(featuredSide.name || '').trim();
+        const cleanedName = rawName.replace(/^featured side[:\s-]*/i, '').replace(/\.$/, '').trim();
+        const lineText = cleanedName ? `This week’s Featured Side: ${cleanedName}.` : 'This week’s Featured Side:';
+        const rows = note.querySelectorAll('div');
+        if (rows.length) {
+          rows.forEach((row) => {
+            const text = row.textContent || '';
+            if (text.toLowerCase().includes('featured side')) row.textContent = lineText;
+          });
+        } else {
+          note.textContent = lineText;
+        }
+      }
+    }
     rows.forEach((row) => {
       const label = row.getAttribute('data-special-label');
       const match = label ? specials.get(label) : null;

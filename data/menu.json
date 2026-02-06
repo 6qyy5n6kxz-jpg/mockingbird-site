@@ -57,7 +57,7 @@
         { "name": "Italian", "description": "Salami, pepperoni, mozzarella, olive oil, and herbs. Available cold or pressed.", "price": 13, "featured": true },
         { "name": "Gourmet Grilled Cheese", "description": "Mozzarella, parmesan, and a seasonal third cheese", "price": 13 }
       ],
-      "footer": "Combo available — see Combos above (Combo / Combo Plus)."
+      "footer": "Combo available — see Combos below (Combo / Combo Plus)."
     },
     {
       "name": "Combos",
@@ -65,12 +65,12 @@
       "items": [
         {
           "name": "Combo — $16 • Combo Plus — $21",
-          "description": "Choose 1 main:<br>• ½ pressed sandwich (any)<br>• Flatbread<br>• Seasonal salad<br><br>Sides:<br>Combo (1 side) • Combo Plus (2 sides)<br><br>Side choices: Cup of soup • ½ seasonal salad • Olives (cup) • Pickles (cup) • Tom’s crackers",
+          "description": "Choose 1 main:<br>• ½ pressed sandwich<br>• Flatbread<br>• Seasonal salad<br><br>Sides:<br>Combo (1 side) • Combo Plus (2 sides)<br><br>Side choices: Cup of soup • ½ seasonal salad • Olives (cup) • Pickles (cup) • Tom’s crackers",
           "price": null
         }
       ],
       "footer": [
-        "This week’s Featured Side: Warm Potato, Onion & Herb Hash."
+        "This week’s Featured Side: Warm Red Pepper & Onion Farro."
       ]
     },
     {
