@@ -1,36 +1,36 @@
 {
   "_comment": "Update weekly specials. weekOf should be the Monday of the current week.",
   "weekOf": "2026-02-02",
-  "dateRange": "February 5–7",
+  "dateRange": "February 5–8",
   "items": [
     {
-      "name": "Potato, Broccoli & Cheddar Soup",
+      "name": "Ham & Vegetable Chowder",
       "label": "Soup of the Day",
-      "description": "Creamy potato soup with tender broccoli, sharp cheddar, and smoked ham",
+      "description": "Slow-simmered ham with potatoes, carrots, onion, and a lightly creamy broth, finished with cheddar.",
       "notes": [
         "Available as cup or bowl",
         "Available as a combo add-on"
       ]
     },
     {
-      "name": "Seasonal Salad",
+      "name": "Winter Greens Salad",
       "label": "Seasonal Salad",
-      "description": "Rotating seasonal salad (Ask your server for this week’s preparation)",
+      "description": "Mixed greens with red onion, dried cranberries, toasted pecans, and shredded Parmesan. Dressing served on the side.",
       "notes": []
     },
     {
-      "name": "Chicken & Cheddar Press",
+      "name": "Roasted Turkey & Swiss Pressed",
       "label": "Featured Pressed Sandwich",
-      "description": "Roasted chicken thigh and melted cheddar, pressed until crisp and hot.",
+      "description": "Warm roasted turkey, baby swiss, and herb butter, pressed crisp on our house bread.",
       "notes": [
         "Served with pickle + Featured Side (changes weekly)",
         "Available as a combo add-on"
       ]
     },
     {
-      "name": "Featured Side: Warm Potato, Onion & Herb Hash",
+      "name": "Warm Red Pepper & Onion Farro",
       "label": "Featured Side",
-      "description": "Roasted potatoes with sautéed onion, olive oil, salt, and black pepper.",
+      "description": "Nutty farro tossed with roasted red pepper, softened red onion, olive oil, and herbs.",
       "notes": [
         "Served with all pressed sandwiches",
         "Included in combos",
@@ -40,7 +40,7 @@
     {
       "name": "Dutch Apple Cake",
       "label": "Sweet Bite of the Day",
-      "description": "Classic apple cake with cinnamon and vanilla, served by the slice.",
+      "description": "Tender baked apples with warm spice and a golden crumb topping.",
       "notes": [
         "Changes weekly"
       ]
