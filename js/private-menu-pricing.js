@@ -78,25 +78,19 @@
         {
           title: 'Boards & Stations',
           items: [
-            { name: 'Superboard', pricing_type: 'fixed', fixed_price: 150, cogs_per_batch: 95, servings_per_batch: 16, allow_quantity: true, max_qty: 4 },
-            { name: 'Breakfast Sandwich Bar', pricing_type: 'fixed', fixed_price: 140, cogs_per_batch: 100, servings_per_batch: 16, allow_quantity: true, max_qty: 4 },
-            { name: 'Pancake Bar', pricing_type: 'fixed', fixed_price: 120, cogs_per_batch: 80, servings_per_batch: 18, allow_quantity: true, max_qty: 4 },
-            { name: 'Fruit & Veggie Board', pricing_type: 'fixed', fixed_price: 100, cogs_per_batch: 70, servings_per_batch: 16, allow_quantity: true, max_qty: 4 }
+            { name: 'Superboard', pricing_type: 'fixed', fixed_price: 125, cogs_per_batch: 95, servings_per_batch: 16, allow_quantity: true, max_qty: 4 },
+            { name: 'Breakfast Sandwich Bar', pricing_type: 'fixed', fixed_price: 130, cogs_per_batch: 100, servings_per_batch: 16, allow_quantity: true, max_qty: 4 },
+            { name: 'Pancake Bar', pricing_type: 'fixed', fixed_price: 110, cogs_per_batch: 80, servings_per_batch: 18, allow_quantity: true, max_qty: 4 }
           ]
         },
         {
           title: 'Hot Favorites & Baked Items',
           items: [
-            // Cheesy potatoes: ~0.35 lb potatoes + 1.5 oz cheese + dairy/butter.
-            { name: 'Cheesy Potatoes', pricing_type: 'per_person', category: 'side', cogs_per_person: costFromPortion(0.35, COMMODITY_COSTS.russet_potatoes_lb, 0.55) + (0.094 * COMMODITY_COSTS.cheddar_lb) },
-            // Sausage, biscuits & gravy: 0.30 lb sausage + biscuit/flour + gravy.
-            { name: 'Sausage, Biscuits & Gravy', pricing_type: 'per_person', category: 'entree', cogs_per_person: costFromPortion(0.3, COMMODITY_COSTS.sausage_lb, 0.6) },
-            // French toast casserole: bread + eggs + dairy.
-            { name: 'French Toast Casserole', pricing_type: 'per_person', category: 'breakfast', cogs_per_person: ((COMMODITY_COSTS.eggs_dozen / 12) * 3) + (COMMODITY_COSTS.all_purpose_flour_lb * 0.2) + 0.75 },
-            // Muffin tin omelets: ~2 eggs + cheese/veg adder.
-            { name: 'Muffin Tin Omelets', pricing_type: 'per_person', category: 'breakfast', cogs_per_person: ((COMMODITY_COSTS.eggs_dozen / 12) * 2) + 0.6 },
-            // Muffins/breads: 1 portion baked goods.
-            { name: 'Muffins & Breakfast Breads', pricing_type: 'per_person', category: 'breakfast', cogs_per_person: 0.95 }
+            { name: 'Cheesy Potatoes', pricing_type: 'per_person', per_person_price: 3, category: 'side', cogs_per_person: costFromPortion(0.35, COMMODITY_COSTS.russet_potatoes_lb, 0.55) + (0.094 * COMMODITY_COSTS.cheddar_lb) },
+            { name: 'Sausage, Biscuits & Gravy', pricing_type: 'per_person', per_person_price: 3.5, category: 'entree', cogs_per_person: costFromPortion(0.3, COMMODITY_COSTS.sausage_lb, 0.6) },
+            { name: 'French Toast Casserole', pricing_type: 'per_person', per_person_price: 3.25, category: 'breakfast', cogs_per_person: ((COMMODITY_COSTS.eggs_dozen / 12) * 3) + (COMMODITY_COSTS.all_purpose_flour_lb * 0.2) + 0.75 },
+            { name: 'Muffin Tin Omelets', pricing_type: 'per_person', per_person_price: 4.5, category: 'breakfast', cogs_per_person: ((COMMODITY_COSTS.eggs_dozen / 12) * 2) + 0.6 },
+            { name: 'Muffins & Breakfast Breads', pricing_type: 'per_person', per_person_price: 2.5, category: 'breakfast', cogs_per_person: 0.95 }
           ]
         }
       ]
@@ -108,43 +102,45 @@
         {
           title: 'Appetizers & Salads',
           items: [
-            { name: 'Soup', pricing_type: 'per_person', category: 'app', cogs_per_person: 1.5 },
-            { name: 'Antipasto', pricing_type: 'per_person', category: 'app', cogs_per_person: 3.1 },
-            { name: 'Green or Seasonal Salad', pricing_type: 'per_person', category: 'salad', cogs_per_person: costFromPortion(0.18, COMMODITY_COSTS.spring_mix_lb, COMMODITY_COSTS.dressing_per_serving + 0.25) },
+            { name: 'Soup', pricing_type: 'fixed', fixed_price: 75, allow_quantity: true, max_qty: 4, category: 'app', cogs_per_person: 1.5 },
+            { name: 'Antipasto', pricing_type: 'per_person', per_person_price: 6, category: 'app', cogs_per_person: 3.1 },
+            { name: 'Seasonal Salad', pricing_type: 'per_person', per_person_price: 3.5, category: 'salad', cogs_per_person: costFromPortion(0.18, COMMODITY_COSTS.spring_mix_lb, COMMODITY_COSTS.dressing_per_serving + 0.25) },
             { name: 'Superboard', pricing_type: 'fixed', fixed_price: 125, cogs_per_batch: 110, servings_per_batch: 16, allow_quantity: true, max_qty: 4 },
-            { name: 'Stuffed Mushrooms', pricing_type: 'per_person', category: 'app', cogs_per_person: 2.6 },
-            { name: 'Bruschetta', pricing_type: 'per_person', category: 'app', cogs_per_person: 1.6 },
-            { name: 'Pasta Salad or Cole Slaw', pricing_type: 'per_person', category: 'side', cogs_per_person: 1.05 },
-            { name: 'Fruit & Veggie Board', pricing_type: 'fixed', cogs_per_batch: 70, servings_per_batch: 16 }
+            { name: 'Stuffed Mushrooms', pricing_type: 'per_person', per_person_price: 2, category: 'app', cogs_per_person: 2.6 },
+            { name: 'Bruschetta', pricing_type: 'per_person', per_person_price: 2, category: 'app', cogs_per_person: 1.6 },
+            { name: 'Pasta Salad', pricing_type: 'per_person', per_person_price: 2.75, category: 'side', cogs_per_person: 1.05 },
+            { name: 'Cole Slaw', pricing_type: 'per_person', per_person_price: 2.25, category: 'side', cogs_per_person: 1.05 },
+            { name: 'Fruit & Veggie Board', pricing_type: 'fixed', fixed_price: 95, cogs_per_batch: 70, servings_per_batch: 16 }
           ]
         },
         {
           title: 'Main Courses',
           items: [
-            { name: 'Baked Potato Bar', pricing_type: 'per_person', category: 'entree', cogs_per_person: 2.4 },
-            { name: 'Macaroni & Cheese', pricing_type: 'per_person', category: 'entree', cogs_per_person: (COMMODITY_COSTS.pasta_lb * 0.18) + (COMMODITY_COSTS.cheddar_lb * 0.15) + 0.55 },
-            { name: 'Chicken', pricing_type: 'per_person', category: 'entree', cogs_per_person: costFromPortion(0.45, COMMODITY_COSTS.chicken_thighs_lb, 0.45) },
-            { name: 'Pulled Pork', pricing_type: 'per_person', category: 'entree', cogs_per_person: costFromPortion(0.45, COMMODITY_COSTS.pork_butt_lb, 0.35) },
-            { name: 'Shredded Chicken', pricing_type: 'per_person', category: 'entree', cogs_per_person: costFromPortion(0.4, COMMODITY_COSTS.chicken_thighs_lb, 0.35) },
-            { name: 'Meatballs', pricing_type: 'per_person', category: 'entree', cogs_per_person: costFromPortion(0.4, COMMODITY_COSTS.ground_beef_80_20_lb, 0.45) },
-            { name: 'Lasagna', pricing_type: 'per_person', category: 'entree', cogs_per_person: (COMMODITY_COSTS.pasta_lb * 0.2) + (COMMODITY_COSTS.mozzarella_lb * 0.2) + COMMODITY_COSTS.marinara_per_serving + 0.55 },
-            { name: 'Spaghetti & Meatballs', pricing_type: 'per_person', category: 'entree', cogs_per_person: (COMMODITY_COSTS.pasta_lb * 0.18) + (COMMODITY_COSTS.ground_beef_80_20_lb * 0.15) + COMMODITY_COSTS.marinara_per_serving + 0.4 },
-            { name: 'Sloppy Joes', pricing_type: 'per_person', category: 'entree', cogs_per_person: costFromPortion(0.3, COMMODITY_COSTS.ground_beef_80_20_lb, COMMODITY_COSTS.sandwich_buns_each + 0.35) },
-            { name: 'Flatbreads', pricing_type: 'per_person', category: 'entree', cogs_per_person: 2.2 }
+            { name: 'Baked Potato Bar', pricing_type: 'per_person', per_person_price: 4.5, category: 'entree', cogs_per_person: 2.4 },
+            { name: 'Macaroni & Cheese', pricing_type: 'per_person', per_person_price: 3.5, category: 'entree', cogs_per_person: (COMMODITY_COSTS.pasta_lb * 0.18) + (COMMODITY_COSTS.cheddar_lb * 0.15) + 0.55 },
+            { name: 'Chicken', pricing_type: 'per_person', per_person_price: 6, category: 'entree', cogs_per_person: costFromPortion(0.45, COMMODITY_COSTS.chicken_thighs_lb, 0.45) },
+            { name: 'Pulled Pork', pricing_type: 'per_person', per_person_price: 5, category: 'entree', cogs_per_person: costFromPortion(0.45, COMMODITY_COSTS.pork_butt_lb, 0.35) },
+            { name: 'Shredded Chicken', pricing_type: 'per_person', per_person_price: 5.75, category: 'entree', cogs_per_person: costFromPortion(0.4, COMMODITY_COSTS.chicken_thighs_lb, 0.35) },
+            { name: 'Meatballs', pricing_type: 'per_person', per_person_price: 5.5, category: 'entree', cogs_per_person: costFromPortion(0.4, COMMODITY_COSTS.ground_beef_80_20_lb, 0.45) },
+            { name: 'Lasagna', pricing_type: 'per_person', per_person_price: 6.5, category: 'entree', cogs_per_person: (COMMODITY_COSTS.pasta_lb * 0.2) + (COMMODITY_COSTS.mozzarella_lb * 0.2) + COMMODITY_COSTS.marinara_per_serving + 0.55 },
+            { name: 'Spaghetti & Meatballs', pricing_type: 'per_person', per_person_price: 5.5, category: 'entree', cogs_per_person: (COMMODITY_COSTS.pasta_lb * 0.18) + (COMMODITY_COSTS.ground_beef_80_20_lb * 0.15) + COMMODITY_COSTS.marinara_per_serving + 0.4 },
+            { name: 'Sloppy Joes', pricing_type: 'per_person', per_person_price: 4.25, category: 'entree', cogs_per_person: costFromPortion(0.3, COMMODITY_COSTS.ground_beef_80_20_lb, COMMODITY_COSTS.sandwich_buns_each + 0.35) },
+            { name: 'Flatbreads', pricing_type: 'per_person', per_person_price: 10, category: 'entree', cogs_per_person: 2.2 }
           ]
         },
         {
           title: 'Sides',
           items: [
-            { name: 'Mashed or Cheesy Potatoes', pricing_type: 'per_person', category: 'side', cogs_per_person: 1.2 },
-            { name: 'Brussels Sprouts', pricing_type: 'per_person', category: 'side', cogs_per_person: costFromPortion(0.3, COMMODITY_COSTS.brussels_sprouts_lb, 0.2) },
-            { name: 'Broccoli', pricing_type: 'per_person', category: 'side', cogs_per_person: costFromPortion(0.3, COMMODITY_COSTS.broccoli_lb, 0.15) },
-            { name: 'Green Beans', pricing_type: 'per_person', category: 'side', cogs_per_person: costFromPortion(0.3, COMMODITY_COSTS.green_beans_lb, 0.15) },
-            { name: 'Carrots', pricing_type: 'per_person', category: 'side', cogs_per_person: costFromPortion(0.3, COMMODITY_COSTS.carrots_lb, 0.15) },
-            { name: 'Seasonal Vegetables', pricing_type: 'per_person', category: 'side', cogs_per_person: costFromPortion(0.3, 1.8, 0.15) },
-            { name: 'Baked Beans', pricing_type: 'per_person', category: 'side', cogs_per_person: 0.8 },
-            { name: 'Potato Salad', pricing_type: 'per_person', category: 'side', cogs_per_person: 0.9 },
-            { name: 'Noodles', pricing_type: 'per_person', category: 'side', cogs_per_person: 0.75 }
+            { name: 'Mashed Potatoes', pricing_type: 'per_person', per_person_price: 2.75, category: 'side', cogs_per_person: 1.2 },
+            { name: 'Cheesy Potatoes', pricing_type: 'per_person', per_person_price: 3, category: 'side', cogs_per_person: 1.2 },
+            { name: 'Brussels Sprouts', pricing_type: 'per_person', per_person_price: 3.75, category: 'side', cogs_per_person: costFromPortion(0.3, COMMODITY_COSTS.brussels_sprouts_lb, 0.2) },
+            { name: 'Broccoli', pricing_type: 'per_person', per_person_price: 2.75, category: 'side', cogs_per_person: costFromPortion(0.3, COMMODITY_COSTS.broccoli_lb, 0.15) },
+            { name: 'Green Beans', pricing_type: 'per_person', per_person_price: 2.75, category: 'side', cogs_per_person: costFromPortion(0.3, COMMODITY_COSTS.green_beans_lb, 0.15) },
+            { name: 'Carrots', pricing_type: 'per_person', per_person_price: 2.5, category: 'side', cogs_per_person: costFromPortion(0.3, COMMODITY_COSTS.carrots_lb, 0.15) },
+            { name: 'Seasonal Vegetables', pricing_type: 'per_person', per_person_price: 3.25, category: 'side', cogs_per_person: costFromPortion(0.3, 1.8, 0.15) },
+            { name: 'Baked Beans', pricing_type: 'per_person', per_person_price: 2.5, category: 'side', cogs_per_person: 0.8 },
+            { name: 'Potato Salad', pricing_type: 'per_person', per_person_price: 2.75, category: 'side', cogs_per_person: 0.9 },
+            { name: 'Noodles', pricing_type: 'per_person', per_person_price: 2.25, category: 'side', cogs_per_person: 0.75 }
           ]
         }
       ]
@@ -156,24 +152,23 @@
         {
           title: 'Proteins',
           items: [
-            { name: 'Hot Dogs', pricing_type: 'per_person', category: 'entree', cogs_per_person: COMMODITY_COSTS.hotdog_each + COMMODITY_COSTS.sandwich_buns_each + 0.2 },
-            { name: 'Brats', pricing_type: 'per_person', category: 'entree', cogs_per_person: COMMODITY_COSTS.brat_each + COMMODITY_COSTS.sandwich_buns_each + 0.25 },
-            { name: 'Burgers', pricing_type: 'per_person', category: 'entree', cogs_per_person: costFromPortion(0.33, COMMODITY_COSTS.ground_beef_80_20_lb, COMMODITY_COSTS.sandwich_buns_each + 0.35) },
-            { name: 'Chicken', pricing_type: 'per_person', category: 'entree', cogs_per_person: costFromPortion(0.4, COMMODITY_COSTS.chicken_thighs_lb, 0.35) },
-            { name: 'Brisket', pricing_type: 'per_person', category: 'entree', cogs_per_person: costFromPortion(0.35, COMMODITY_COSTS.brisket_lb, 0.35) },
-            { name: 'Pork Chops', pricing_type: 'per_person', category: 'entree', cogs_per_person: costFromPortion(0.45, COMMODITY_COSTS.pork_chops_lb, 0.3) },
-            { name: 'Steaks', pricing_type: 'per_person', category: 'entree', cogs_per_person: costFromPortion(0.45, 8.0, 0.35) }
+            { name: 'Hot Dogs', pricing_type: 'per_person', per_person_price: 3, category: 'entree', cogs_per_person: COMMODITY_COSTS.hotdog_each + COMMODITY_COSTS.sandwich_buns_each + 0.2 },
+            { name: 'Brats', pricing_type: 'per_person', per_person_price: 4.75, category: 'entree', cogs_per_person: COMMODITY_COSTS.brat_each + COMMODITY_COSTS.sandwich_buns_each + 0.25 },
+            { name: 'Burgers', pricing_type: 'per_person', per_person_price: 6.5, category: 'entree', cogs_per_person: costFromPortion(0.33, COMMODITY_COSTS.ground_beef_80_20_lb, COMMODITY_COSTS.sandwich_buns_each + 0.35) },
+            { name: 'Chicken', pricing_type: 'per_person', per_person_price: 6, category: 'entree', cogs_per_person: costFromPortion(0.4, COMMODITY_COSTS.chicken_thighs_lb, 0.35) },
+            { name: 'Brisket', pricing_type: 'per_person', per_person_price: 12, category: 'entree', cogs_per_person: costFromPortion(0.35, COMMODITY_COSTS.brisket_lb, 0.35) },
+            { name: 'Pork Chops', pricing_type: 'per_person', per_person_price: 8.5, category: 'entree', cogs_per_person: costFromPortion(0.45, COMMODITY_COSTS.pork_chops_lb, 0.3) },
+            { name: 'Steaks', pricing_type: 'per_person', per_person_price: 16, category: 'entree', cogs_per_person: costFromPortion(0.45, 8.0, 0.35) }
           ]
         },
         {
           title: 'Sides',
           items: [
-            { name: 'Fruit & Veggie Board', pricing_type: 'fixed', fixed_price: 100, allow_quantity: true, max_qty: 4 },
-            { name: 'Baked Beans', pricing_type: 'per_person', category: 'side', cogs_per_person: 0.8 },
-            { name: 'Potato Salad', pricing_type: 'per_person', category: 'side', cogs_per_person: 0.9 },
-            { name: 'Cole Slaw', pricing_type: 'per_person', category: 'side', cogs_per_person: 0.9 },
-            { name: 'Pasta Salad', pricing_type: 'per_person', category: 'side', cogs_per_person: 1.1 },
-            { name: 'Seasonal or Green Salad', pricing_type: 'per_person', category: 'salad', cogs_per_person: costFromPortion(0.18, COMMODITY_COSTS.spring_mix_lb, COMMODITY_COSTS.dressing_per_serving + 0.2) }
+            { name: 'Baked Beans', pricing_type: 'per_person', per_person_price: 2.5, category: 'side', cogs_per_person: 0.8 },
+            { name: 'Potato Salad', pricing_type: 'per_person', per_person_price: 2.75, category: 'side', cogs_per_person: 0.9 },
+            { name: 'Cole Slaw', pricing_type: 'per_person', per_person_price: 2.25, category: 'side', cogs_per_person: 0.9 },
+            { name: 'Pasta Salad', pricing_type: 'per_person', per_person_price: 2.75, category: 'side', cogs_per_person: 1.1 },
+            { name: 'Seasonal Salad', pricing_type: 'per_person', per_person_price: 3.5, category: 'salad', cogs_per_person: costFromPortion(0.18, COMMODITY_COSTS.spring_mix_lb, COMMODITY_COSTS.dressing_per_serving + 0.2) }
           ]
         }
       ]
