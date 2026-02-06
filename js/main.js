@@ -1584,6 +1584,16 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
           header.appendChild(descSpan);
         }
         secEl.appendChild(header);
+        if (section.id === 'wine-flights') {
+          const note = document.createElement('div');
+          note.className = 'note';
+          note.innerHTML = [
+            'Pour Sizes: Full 6 oz ($9) • Flight 2 oz',
+            'Build-Your-Own-Flight (any 4) $15 — Mix and match from anywhere on this list.',
+            'Listed from sweeter to drier.'
+          ].map((line) => `<div>${line}</div>`).join('');
+          secEl.appendChild(note);
+        }
 
         const subsections = Array.isArray(section.subsections)
           ? section.subsections
@@ -1620,17 +1630,18 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
           }
           const hasSubDescription = !!(sub.description && String(sub.description).trim());
           if (hasSubDescription) {
-            const p = document.createElement('p');
-            p.className = 'note';
-            p.textContent = sub.description;
-            subEl.appendChild(p);
+            if (section.id !== 'wine-flights') {
+              const p = document.createElement('p');
+              p.className = 'note';
+              p.textContent = sub.description;
+              subEl.appendChild(p);
+            }
           } else if (section.id === 'wine-flights') {
-            const p = document.createElement('p');
-            p.className = 'note';
-            p.textContent = 'Full Pour $9 unless noted';
-            subEl.appendChild(p);
+            // Handled by section-level note.
           }
-          const headerInfo = getDrinkHeaderForSubsection(sub.items || []);
+          const headerInfo = section.id === 'wine-flights'
+            ? { labels: ['Bottle'], keys: ['bottle'] }
+            : getDrinkHeaderForSubsection(sub.items || []);
           if (headerInfo.labels && headerInfo.labels.length) {
             const header = document.createElement('div');
             header.className = 'menu-price-header';
