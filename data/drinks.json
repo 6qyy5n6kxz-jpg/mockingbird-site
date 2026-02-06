@@ -33,7 +33,7 @@
             { "name": "Masciarelli Montepulciano", "meta": "(ITA)", "description": "Rustic, earthy cherry + leather", "prices": { "fullPour": "$9", "bottle": "$19.99" } },
             { "name": "Honoro Vera Monastrell", "meta": "(ESP)", "description": "Dark, earthy, dry with firm grip", "prices": { "fullPour": "$9", "bottle": "$16.49" } },
             { "name": "The Stump Jump Cabernet Sauvignon", "meta": "(AUS)", "description": "Bold, dry, blackcurrant + mint", "prices": { "fullPour": "$9", "bottle": "$19.99" } },
-            { "name": "Marotti Campi Rubico", "meta": "(ITA)", "description": "Floral, medium-bodied Italian red", "prices": { "fullPour": "$9", "bottle": "$18.49" } }
+            { "name": "Marotti Campi Rubico", "meta": "(ITA)", "description": "Medium-bodied, soft tannins, red cherry + earth", "prices": { "fullPour": "$9", "bottle": "$18.49" } }
           ]
         },
         {
@@ -51,13 +51,27 @@
         {
           "title": "Pour",
           "items": [
-            { "name": "Cameron’s Lager", "meta": "(CAN)", "prices": { "pour": "$5.50" } },
-            { "name": "Outerbelt 270 IPA", "meta": "(OH)", "prices": { "pour": "$5.50" } },
-            { "name": "Ales for ALS Hazy IPA", "meta": "(OH)", "prices": { "pour": "$6.00" } },
-            { "name": "Humble Pie Cider", "meta": "(OH)", "prices": { "pour": "$7.00" } },
-            { "name": "Seasonal Sangria", "meta": "(OH)", "prices": { "pour": "$6.00" } },
-            { "name": "Peach Mango Sangria", "meta": "(OH)", "prices": { "pour": "$6.00" } },
+            { "name": "Cameron’s Lager", "prices": { "pour": "$5.50" } },
+            { "name": "Outerbelt 71 South IPA", "prices": { "pour": "$5.50" } },
+            { "name": "Seasonal Sangria", "prices": { "pour": "$6.00" } },
+            { "name": "Peach Mango Sangria", "prices": { "pour": "$6.00" } },
             { "name": "“JStewie”", "prices": { "pour": "$7.00" } }
+          ]
+        }
+      ]
+    },
+     {
+      "id": "hot-chocolate",
+      "title": "Jackson Morgan Spiked Hot Chocolate",
+      "description": "Glass $9",
+      "subsections": [
+        {
+          "title": "Flavors",
+          "items": [
+            { "name": "Salted Caramel" },
+            { "name": "Spiced Pumpkin Roll" },
+            { "name": "Peppermint Mocha" },
+            { "name": "Brown Sugar & Cinnamon" }
           ]
         }
       ]
@@ -125,22 +139,6 @@
             { "name": "Jackie O’s Mystic Mama IPA", "prices": { "can": "$3" }, "description": "Bright, citrus + pine West coast IPA" },
             { "name": "Neapolitan Milk Stout", "prices": { "can": "$3.50" }, "description": "Chocolate, vanilla + strawberry dessert stout" },
             { "name": "Masthead Brewing Jalapeño IPA", "prices": { "can": "$5" }, "description": "Spicy hop bite, savory heat" }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "hot-chocolate",
-      "title": "Jackson Morgan Spiked Hot Chocolate",
-      "description": "Glass $9",
-      "subsections": [
-        {
-          "title": "Flavors",
-          "items": [
-            { "name": "Salted Caramel" },
-            { "name": "Spiced Pumpkin Roll" },
-            { "name": "Peppermint Mocha" },
-            { "name": "Brown Sugar & Cinnamon" }
           ]
         }
       ]
