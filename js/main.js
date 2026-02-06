@@ -1263,6 +1263,12 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
       const descEl = row.querySelector('[data-special-description]');
       if (nameEl && match.name) nameEl.textContent = match.name;
       if (descEl) {
+        const section = row.closest('section.menu-category');
+        const sectionName = section?.querySelector('.kicker')?.textContent?.trim() || '';
+        if (sectionName === 'Snack Starters' && label === 'Featured Side') {
+          descEl.textContent = '';
+          return;
+        }
         const prefixEl = descEl.querySelector('.menu-size-pricing');
         const rawPrefix = descEl.innerHTML.trim();
         const prefix = prefixEl ? prefixEl.outerHTML : (rawPrefix ? rawPrefix : '');

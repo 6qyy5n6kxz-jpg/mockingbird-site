@@ -18,7 +18,7 @@
         { "name": "Olives (cup)", "description": "", "price": 4 },
         { "name": "Pickles (cup)", "description": "", "price": 4 },
         { "name": "Tom’s Homemade Crackers", "description": "", "price": 5 },
-        { "name": "Featured Side", "description": "", "price": 5, "specialLabel": "Featured Side", "suppressSpecialName": true, "suppressSpecialDescription": true }
+        { "name": "Featured Side", "description": "", "price": 5, "specialLabel": "Featured Side", "suppressSpecialDescription": true }
       ]
     },
     {
@@ -51,10 +51,10 @@
       "name": "Pressed Sandwiches",
       "description": "Hot, pressed panini-style homemade sandwiches made with bold flavors and served crisp.",
       "items": [
-        { "name": "Featured Pressed Sandwich — $13", "description": "Also available as a flatbread.", "price": 13, "specialLabel": "Featured Pressed Sandwich", "suppressSpecialName": true },
+        { "name": "Featured Pressed Sandwich", "description": "Also available as a flatbread.", "price": 13, "specialLabel": "Featured Pressed Sandwich", "suppressSpecialName": true },
         { "name": "Red Sauce", "description": "Homemade red sauce, mozzarella, and parmesan.", "price": 13 },
         { "name": "Pepperoni", "description": "Homemade red sauce, mozzarella, parmesan, and pepperoni.", "price": 13 },
-        { "name": "Italian", "description": "Salami, pepperoni, mozzarella, olive oil, and herbs.", "price": 13, "featured": true },
+        { "name": "Italian", "description": "Salami, pepperoni, mozzarella, olive oil, and herbs. Available cold or pressed.", "price": 13, "featured": true },
         { "name": "Gourmet Grilled Cheese", "description": "Mozzarella, parmesan, and a seasonal third cheese", "price": 13 }
       ],
       "footer": "Combo available — see Combos above (Combo / Combo Plus)."
