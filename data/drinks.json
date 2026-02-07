@@ -216,7 +216,7 @@
             { "name": "2021 El Nido", "prices": { "bottle": "$163.49" } },
             { "name": "2015 Figgins Estate Red Wine", "prices": { "bottle": "$109.99" } },
             { "name": "2017 Storybook Mountain Zinfandel", "prices": { "bottle": "$52.49" } },
-            { "name": "2019 Clef de Sol Chenin", "prices": { "bottle": "$42.49" } },
+            { "name": "2019 Clef de Sol Chenin", "prices": { "bottle": "$41.99" } },
             { "name": "2019 Far Mountain Fission Cabernet Sauvignon", "prices": { "bottle": "$85.99" } },
             { "name": "2008/15/17 Andrew Geoffrey Cabernet Sauvignon", "prices": { "bottle": "$100.99" } },
             { "name": "2014 Ziraldo Riesling Ice Wine", "prices": { "bottle": "$57.99" } }
@@ -245,21 +245,23 @@
         {
           "title": "White",
           "items": [
-            { "name": "2021 #Vigneto Moscato d'Asti", "prices": { "bottle": "$24.49" } },
-            { "name": "2021 Tattoo Girl Riesling", "prices": { "bottle": "$18.49" } },
-            { "name": "2020 Madonna Kabinett", "prices": { "bottle": "$24.49" } },
-            { "name": "2022 Devil’s Corner Chardonnay", "prices": { "bottle": "$30.99" } },
-            { "name": "Sun & Moon Cellars Chardonnay", "prices": { "bottle": "$19.99" } },
-            { "name": "2021 O Fillo Da Condesa Albarino", "prices": { "bottle": "$18.49" } },
-            { "name": "2021 Masciarelli Trebbiano d'Abruzzo", "prices": { "bottle": "$19.99" } },
-            { "name": "2022 Pullus Halozan", "prices": { "bottle": "$22.99" } },
-            { "name": "2022 Mantinia Nasiakos", "prices": { "bottle": "$32.99" } },
-            { "name": "2022 Casa Silva Sauvignon Gris", "prices": { "bottle": "$17.49" } },
-            { "name": "2021 Clos des Grands Primos", "prices": { "bottle": "$15.49" } },
+            { "name": "#Vigneto Moscato d'Asti", "prices": { "bottle": "$24.49" } },
+            { "name": "Sourgal Moscato d'Asti", "prices": { "bottle": "$20.99" } },
+            { "name": "Gustav Adolf Schmitt Riesling", "prices": { "bottle": "$19.99" } },
+            { "name": "Madonna Kabinett", "prices": { "bottle": "$18.49" } },
+            { "name": "Devil’s Corner Chardonnay", "prices": { "bottle": "$24.49" } },
+            { "name": "Masciarelli Trebbiano d'Abruzzo", "prices": { "bottle": "$19.99" } },
+            { "name": "Pullus Halozan", "prices": { "bottle": "$22.99" } },
+            { "name": "Mantinia Nasiakos", "prices": { "bottle": "$32.99" } },
+            { "name": "Casa Silva Sauvignon Gris", "prices": { "bottle": "$25.49" } },
+            { "name": "Clos des Grands Primos", "prices": { "bottle": "$15.49" } },
             { "name": "Mary Taylor Veneto Frizzante", "prices": { "bottle": "$16.49" } },
-            { "name": "2022 Honoro Vera Verdejo", "prices": { "bottle": "$16.49" } },
-            { "name": "Clos Des Lunes Lune d’Argent Vin Blanc", "prices": { "bottle": "$15.49" } },
-            { "name": "2023 Feast Moschofilero", "prices": { "bottle": "$17.49" } }
+            { "name": "O Fillo Da Condesa Albarino", "prices": { "bottle": "$20.99" } },
+            { "name": "Vega Sindoa Chardonnay", "prices": { "bottle": "$24.49" } },
+            { "name": "Fraga do Corvo Godello", "prices": { "bottle": "$30.99" } },
+            { "name": "Pomalo Debit Method", "prices": { "bottle": "$25.49" } },
+            { "name": "Pavao Vinho Verde", "prices": { "bottle": "$15.49" } },
+            { "name": "Gateway Vinho Verde", "prices": { "bottle": "$15.49" } }
           ]
         },
         {
@@ -288,7 +290,7 @@
           "items": [
             { "name": "Domaine de Rancy Rivesalte Ambré", "prices": { "bottle": "$35.49" } },
             { "name": "Trentadue Chocolate Amore", "prices": { "bottle": "$32.99" } },
-            { "name": "Alvear Cream", "prices": { "bottle": "$20.99" } },
+            { "name": "Alvear Cream", "prices": { "bottle": "$16.49" } },
             { "name": "Noval Port Gift Pack", "prices": { "bottle": "$39.99" } }
           ]
         }
