@@ -2,48 +2,6 @@
   "_comment": "Upcoming events. Remove past dates as needed.",
   "events": [
     {
-      "date": "2026-02-07T18:00:00",
-      "title": "Live Music: Jake Pilewski",
-      "description": "Live music by Jake Pilewski, 6–9 PM.",
-      "price": "No cover",
-      "payment_link_url": ""
-    },
-    {
-      "date": "2026-02-08T11:00:00",
-      "title": "Galentine’s Day Floral Workshop with Meregold Creations",
-      "description": "Join us at The Mockingbird for a relaxed, creative Galentine’s Day celebration featuring Meredith of Meregold Creations. Guests will enjoy a guided floral workshop with all supplies and instruction provided. Doors open at 11:00 AM so you can settle in, enjoy food and drinks, and sip mimosas before crafting begins at 12:00 PM. Food and drinks will be available for purchase throughout the event.",
-      "price": "35",
-      "event_type": "ticketed",
-      "payment_link_url": "https://venmo.com/u/Meredith-Wolfe-4",
-      "payment_provider": "vendor",
-      "payment_label": "Pay via Venmo",
-      "payment_url": "https://venmo.com/u/Meredith-Wolfe-4",
-      "payment_note": "Ticketed event — pay Meregold Creations via Venmo, then email seating details.",
-      "vendor_name": "Meregold Creations",
-      "vendor_payment_copy": "$35 per person — paid directly to Meregold Creations via Venmo.",
-      "vendor_post_payment_copy": "This form completes your reservation.",
-      "vendor_note_label": "Venmo note",
-      "vendor_note_value": "Galentine’s Day Floral Workshop – Feb 8",
-      "vendor_confirmation_copy": "You’ll receive a confirmation email once we receive your seating details.",
-      "vendor_link_hint": "Venmo opens in a new tab.",
-      "capacity_display": "limited",
-      "sold_out_override": false,
-      "seating_form": {
-        "enabled": true
-      },
-      "type": "Floral Crafting",
-      "ticketing": {
-        "capacity": 30,
-        "sold": 0,
-        "price_display": "$35 per person",
-        "clover_payment_url": "https://venmo.com/u/Meredith-Wolfe-4",
-        "sold_out_behavior": "disable"
-        
-      },
-      "image_url": "assets/events/floral-arrangement.jpg",
-      "image_alt": "Pink envelope-style floral arrangement filled with blush roses, white flowers, and eucalyptus greenery.”"
-    },
-    {
       "date": "2026-02-11T18:30:00",
       "title": "Valentine’s Dinner for Two.",
       "description": "Celebrate love this Valentine’s Day with an elegant, ticketed dining experience at The Mockingbird on Mill Road. Enjoy a romantic evening featuring live music by the Aaron & Peter String Duo, creating a warm and intimate atmosphere throughout the night.<br><br>Each ticket includes a five-course French-inspired dinner, a bottle of wine to share, and a keepsake 8×10 professional photo of you and your Valentine.<br><br>Perfect for date night, anniversaries, or simply celebrating love.<br><br><strong>Valentine’s Day Menu</strong><br>• Warm Brie & Fig Crostini<br>• Salade Parisienne with Dijon Vinaigrette<br>• Classic French Onion Soup<br>• Beef Bourguignon with Creamy Mashed Potatoes<br>• Blueberry Clafoutis<br><br><span class=\"note\">Menu subject to minor changes. Dietary accommodations available with advance notice.</span>",
@@ -100,7 +58,7 @@
        "image_alt": "Mockingbird Book Club event image for Isola by Allegra Goodman, Thursday, February 19 at 6:30 PM"
     },
     {
-      "date": "2026-02-14T18:00:00",
+      "date": "2026-02-21T18:00:00",
       "title": "Live Music: Bruce Brodie",
       "description": "Live music by Bruce Brodie, 6–9 PM.",
       "price": "No cover",
