@@ -58,13 +58,6 @@
        "image_alt": "Mockingbird Book Club event image for Isola by Allegra Goodman, Thursday, February 19 at 6:30 PM"
     },
     {
-      "date": "2026-02-21T18:00:00",
-      "title": "Live Music: Bruce Brodie",
-      "description": "Live music by Bruce Brodie, 6–9 PM.",
-      "price": "No cover",
-      "payment_link_url": ""
-    },
-    {
       "date": "2026-02-23T18:00:00",
       "title": "Wine & Canvas: Midnight Blossoms (Paint & Sip Express)",
       "description": "Paint a glowing 16×20 black-canvas floral masterpiece in just 2 hours at The Mockingbird on Mill Road—guided, beginner-friendly, $30, with food & drinks available. 🥂🎨",
@@ -89,6 +82,13 @@
       },
       "image_url": "assets/events/Midnight_Blossoms.jpg",
       "image_alt": "Black canvas painting of white blossoms in a glass jar with soft highlights and reflections"
+    },
+     {
+      "date": "2026-02-21T18:00:00",
+      "title": "Live Music: Bruce Brodie",
+      "description": "Live music by Bruce Brodie, 6–9 PM.",
+      "price": "No cover",
+      "payment_link_url": ""
     },
     {
       "date": "2026-02-28T18:00:00",

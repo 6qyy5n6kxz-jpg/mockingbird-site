@@ -1,41 +1,41 @@
 {
   "_comment": "Update weekly specials. weekOf should be the Monday of the current week.",
-  "weekOf": "2026-02-02",
-  "dateRange": "February 5–8",
+  "weekOf": "2026-02-09",
+  "dateRange": "February 12–14",
   "items": [
     {
-      "name": "Ham & Vegetable Chowder",
+      "name": "Chicken Noodle Soup",
       "label": "Soup of the Day",
-      "description": "Slow-simmered ham with potatoes, carrots, onion, and a lightly creamy broth, finished with cheddar.",
+      "description": "Classic chicken noodle soup with tender chicken, carrots, celery, and egg noodles in a savory herb broth.",
       "notes": [
         "Available as cup or bowl",
         "Available as a combo add-on"
       ]
     },
     {
-      "name": "Winter Greens Salad",
+      "name": "Blueberry, Pecan & Feta Salad",
       "label": "Seasonal Salad",
-      "description": "Mixed greens with red onion, dried cranberries, toasted pecans, and shredded Parmesan. Dressing served on the side.",
+      "description": "Mixed greens topped with fresh blueberries, toasted pecans, thin-shaved shallots, and crumbled feta. Dressing served on the side.",
       "notes": []
     },
     {
-      "name": "Roasted Turkey & Swiss Pressed",
+      "name": "Roast Beef & Mozzarella Pressed",
       "label": "Featured Pressed Sandwich",
-      "description": "Warm roasted turkey, baby swiss, and herb butter, pressed crisp on our house bread."
+      "description": "Thin-sliced roast beef with horseradish sauce and melted mozzarella, pressed crisp on our house bread."
     },
     {
-      "name": "Warm Red Pepper & Onion Farro",
+      "name": "Herb Roasted Gold Potatoes",
       "label": "Featured Side",
-      "description": "Nutty farro tossed with roasted red pepper, softened red onion, olive oil, and herbs.",
+      "description": "Crispy roasted gold potato wedges seasoned with salt, pepper, garlic, and onion.",
       "notes": [
         "Served with all pressed sandwiches",
         "Included in combos"
       ]
     },
     {
-      "name": "Dutch Apple Cake",
+      "name": "Banana Cream Pudding",
       "label": "Sweet Bite of the Day",
-      "description": "Tender baked apples with warm spice and a golden crumb topping.",
+      "description": "Creamy banana pudding layered with fresh banana slices and topped with a vanilla wafer.",
       "notes": [
         "Always from scratch."
       ]
