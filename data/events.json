@@ -28,7 +28,7 @@
       "type": "Paint & Sip",
       "ticketing": {
         "capacity": 20,
-        "sold": 0,
+        "sold": 3,
         "price_display": "$30 per person",
         "clover_payment_url": "https://wineandcanvas.com/toledo/event/graytown-paint-and-sip-express-party-midnight-blossoms/",
         "sold_out_behavior": "disable"
