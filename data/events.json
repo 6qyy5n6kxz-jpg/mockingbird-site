@@ -2,53 +2,6 @@
   "_comment": "Upcoming events. Remove past dates as needed.",
   "events": [
     {
-      "date": "2026-02-11T18:30:00",
-      "title": "Valentine’s Dinner for Two.",
-      "description": "Celebrate love this Valentine’s Day with an elegant, ticketed dining experience at The Mockingbird on Mill Road. Enjoy a romantic evening featuring live music by the Aaron & Peter String Duo, creating a warm and intimate atmosphere throughout the night.<br><br>Each ticket includes a five-course French-inspired dinner, a bottle of wine to share, and a keepsake 8×10 professional photo of you and your Valentine.<br><br>Perfect for date night, anniversaries, or simply celebrating love.<br><br><strong>Valentine’s Day Menu</strong><br>• Warm Brie & Fig Crostini<br>• Salade Parisienne with Dijon Vinaigrette<br>• Classic French Onion Soup<br>• Beef Bourguignon with Creamy Mashed Potatoes<br>• Blueberry Clafoutis<br><br><span class=\"note\">Menu subject to minor changes. Dietary accommodations available with advance notice.</span>",
-      "price": "Ticketed event",
-      "event_type": "ticketed",
-      "payment_provider": "clover",
-      "payment_label": "Pay on Clover",
-      "hide_ticketed_helper": false,
-      "sold_out_note": "This event is sold out — thank you!",
-      "seating_form": {
-        "enabled": true
-      },
-      "ticketed_helper_copy": "Ticketed event — pay on Clover, then send seating details.",
-      "type": "Special Event",
-      "ticketing": {
-        "capacity": 10,
-        "sold": 10,
-        "price_display": "$125 per couple",
-        "clover_payment_url": "https://link.clover.com/urlshortener/DL89fc",
-        "policy": "All sales final; transfers allowed. Seating is reserved after payment.",
-        "intake": {
-          "instructions": "After paying, send attendee names so we can seat your party together.",
-          "required_fields": ["name", "email", "phone", "quantity", "notes"],
-          "submission": {
-            "method": "mailto",
-            "to": "{{site_contact_email}}",
-            "subject_template": "Event Details – {{event_title}} – {{event_date}}",
-            "body_template": "Event: {{event_title}}\nDate: {{event_date}}\nName: {{name}}\nEmail: {{email}}\nPhone: {{phone}}\nQuantity: {{quantity}}\nNotes: {{notes}}\nPaid via Clover: {{paid}}\n"
-          }
-        }
-      }
-    },
-    {
-      "date": "2026-02-12T18:00:00",
-      "title": "Trivia Night",
-      "description": "Trivia starts at 6 PM. Limited space — first come, first served.",
-      "price": "No cover",
-      "payment_link_url": ""
-    },
-    {
-      "date": "2026-02-14T18:00:00",
-      "title": "Live Music: A Change of Plans (Mockingbird House Band)",
-      "description": "Live music by A Change of Plans, 6–9 PM.",
-      "price": "No cover",
-      "payment_link_url": ""
-    },
-    {
        "date": "2026-02-19T18:30:00",
        "title": "Mockingbird Book Club — February",
        "description": "Join us for Mockingbird Book Club on Thursday, February 19 at 6:30 PM as we discuss Isola by Allegra Goodman—an open, welcoming conversation with food and drinks available.",
@@ -95,7 +48,13 @@
       "title": "Live Music: Clay Kirchenbauer",
       "description": "Live music by Clay Kirchenbauer, 6–9 PM.",
       "price": "No cover",
-      "event_type": "rsvp",
+      "payment_link_url": ""
+    },
+    {
+      "date": "2026-02-28T18:00:00",
+      "title": "Live Music: Kevin VanSickle",
+      "description": "Live music by Kevin VanSickle, 6–9 PM.",
+      "price": "No cover",
       "payment_link_url": ""
     }
   ]
