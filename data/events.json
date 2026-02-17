@@ -51,11 +51,37 @@
       "payment_link_url": ""
     },
     {
-      "date": "2026-02-28T18:00:00",
+      "date": "2026-03-07T18:00:00",
       "title": "Live Music: Kevin VanSickle",
       "description": "Live music by Kevin VanSickle, 6–9 PM.",
       "price": "No cover",
       "payment_link_url": ""
+    },
+    {
+      "date": "2026-03-23T18:00:00",
+      "title": "Wine & Canvas: He Lives",
+      "description": "Paint a peaceful 16×20 Easter sunrise masterpiece at The Mockingbird on Mill Road—guided, beginner-friendly, $30, with wine, flatbreads & more available for purchase. 🌅🎨🍷",
+      "price": "Tickets via Wine & Canvas",
+      "event_type": "ticketed",
+      "payment_link_url": "https://wineandcanvas.com/toledo/event/graytown-paint-and-sip-party-he-lives/",
+      "payment_provider": "vendor",
+      "payment_label": "Buy tickets",
+      "payment_url": "https://wineandcanvas.com/toledo/event/graytown-paint-and-sip-party-he-lives/",
+      "payment_note": "",
+      "hide_ticketed_helper": true,
+      "seating_form": {
+        "enabled": false
+      },
+      "type": "Paint & Sip",
+      "ticketing": {
+        "capacity": 20,
+        "sold": 0,
+        "price_display": "$40 per person",
+        "clover_payment_url": "https://wineandcanvas.com/toledo/event/graytown-paint-and-sip-party-he-lives/",
+        "sold_out_behavior": "disable"
+      },
+      "image_url": "assets/events/He Lives BL.jpg",
+      "image_alt": "Three crosses at sunrise with tree silhouette and birds – Christian Easter painting"
     }
   ]
 

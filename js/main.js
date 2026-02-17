@@ -2861,14 +2861,18 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
         const mailto = btn.getAttribute('data-mailto') || defaultEmail || '';
         const form = document.getElementById(formId);
         const subject = btn.dataset.subject || form?.dataset.subject || 'Inquiry';
+        if (btn.dataset.sendEmail === 'true') {
+          sendFormMailto(formId, mailto, subject);
+          return;
+        }
         copyForm(formId, mailto, subject);
       });
     });
   }
 
-  async function copyForm(formId, email, subject) {
+  function buildFormBody(formId) {
     const form = document.getElementById(formId);
-    if (!form) return;
+    if (!form) return '';
     const menuSummary = form.querySelector('[data-menu-summary]');
     const lines = [];
     Array.from(form.elements).forEach((el) => {
@@ -2882,13 +2886,25 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
     if (menuSummary && menuSummary.value.trim()) {
       lines.push('', menuSummary.value.trim());
     }
-    const text = lines.join('\n');
+    return lines.join('\n');
+  }
+
+  async function copyForm(formId, email, subject) {
+    const text = buildFormBody(formId);
+    if (!text) return;
     try {
       if (navigator.clipboard) await navigator.clipboard.writeText(text);
     } catch (err) {
       console.warn('Clipboard copy failed', err);
     }
     if (DEBUG) dbg('form copied to clipboard', { formId, subject });
+  }
+
+  function sendFormMailto(formId, email, subject) {
+    if (!email) return;
+    const body = buildFormBody(formId);
+    const mailto = `mailto:${encodeURIComponent(email)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = mailto;
   }
 
   function initFormspreeForm(form) {
