@@ -1,41 +1,41 @@
 {
   "_comment": "Update weekly specials. weekOf should be the Monday of the current week.",
-  "weekOf": "2026-02-09",
-  "dateRange": "February 12–14",
+  "weekOf": "2026-02-16",
+  "dateRange": "February 19–21",
   "items": [
     {
-      "name": "Chicken Noodle Soup",
+      "name": "Cabbage Roll Soup",
       "label": "Soup of the Day",
-      "description": "Classic chicken noodle soup with tender chicken, carrots, celery, and egg noodles in a savory herb broth.",
+      "description": "Ground beef, green cabbage, tomatoes, and rice simmered slowly with garlic and herbs. Deep, savory comfort.",
       "notes": [
         "Available as cup or bowl",
         "Available as a combo add-on"
       ]
     },
     {
-      "name": "Blueberry, Pecan & Feta Salad",
+      "name": "Apple, Feta & Toasted Pecan Salad",
       "label": "Seasonal Salad",
-      "description": "Mixed greens topped with fresh blueberries, toasted pecans, thin-shaved shallots, and crumbled feta. Dressing served on the side.",
+      "description": "Romaine, fresh apple, dried cranberries, toasted pecans, and feta. Served with dressing on the side.",
       "notes": []
     },
     {
-      "name": "Roast Beef & Mozzarella Pressed",
+      "name": "Herb Roasted Chicken & Mozzarella Pressed",
       "label": "Featured Pressed Sandwich",
-      "description": "Thin-sliced roast beef with horseradish sauce and melted mozzarella, pressed crisp on our house bread."
+      "description": "Roasted herb chicken thigh, mozzarella, and giardiniera, pressed crisp."
     },
     {
-      "name": "Herb Roasted Gold Potatoes",
+      "name": "Garlic Parmesan Barley",
       "label": "Featured Side",
-      "description": "Crispy roasted gold potato wedges seasoned with salt, pepper, garlic, and onion.",
+      "description": "Warm barley with olive oil, garlic, herbs, and Parmesan.",
       "notes": [
         "Served with all pressed sandwiches",
         "Included in combos"
       ]
     },
     {
-      "name": "Banana Cream Pudding",
+      "name": "Southern Chocolate Cobbler",
       "label": "Sweet Bite of the Day",
-      "description": "Creamy banana pudding layered with fresh banana slices and topped with a vanilla wafer.",
+      "description": "Warm, old-fashioned chocolate cobbler with a rich fudge base.",
       "notes": [
         "Always from scratch."
       ]
