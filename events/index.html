@@ -119,8 +119,9 @@
   <script src="../js/main.js"></script>
   <script>
     (async function() {
+      const cacheBuster = Date.now();
       const [events, site] = await Promise.all([
-        Mockingbird.fetchJSON('events.json', { events: [] }),
+        Mockingbird.fetchJSON(`events.json?cb=${cacheBuster}`, { events: [] }),
         Mockingbird.sitePromise
       ]);
       if (window.location.search.includes('debug=1')) {
