@@ -51,11 +51,12 @@
         {
           "title": "Pour",
           "items": [
-            { "name": "Cameron’s Lager", "prices": { "pour": "$5.50" } },
-            { "name": "Outerbelt 71 South IPA", "prices": { "pour": "$5.50" } },
+            { "name": "Kentucky Bourbon Barrel Ale", "prices": { "pour": "$6.00" } },
+            { "name": "Outerbelt 71 South Hazy IPA", "prices": { "pour": "$6.00" } },
             { "name": "Seasonal Sangria", "prices": { "pour": "$6.00" } },
             { "name": "Peach Mango Sangria", "prices": { "pour": "$6.00" } },
-            { "name": "“JStewie”", "prices": { "pour": "$7.00" } }
+            { "name": "“JStewie (half Sangria/half Cider)”", "prices": { "pour": "$7.00" } },
+            { "name": "Shell Jelly Cider", "prices": { "pour": "$7.00" } }
           ]
         }
       ]

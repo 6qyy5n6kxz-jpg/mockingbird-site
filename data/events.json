@@ -89,6 +89,13 @@
       },
       "image_url": "assets/events/He Lives BL.jpg",
       "image_alt": "Three crosses at sunrise with tree silhouette and birds – Christian Easter painting"
+    },
+    {
+      "date": "2026-03-14T18:00:00",
+      "title": "Live Music: A Change of Plans",
+      "description": "Live music by A Change of Plans, 6–9 PM.",
+      "price": "No cover",
+      "payment_link_url": ""
     }
   ]
 
