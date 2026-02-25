@@ -4,9 +4,9 @@
   "dateRange": "February 19–21",
   "items": [
     {
-      "name": "Cabbage Roll Soup",
+      "name": "Vegetable Barley Soup",
       "label": "Soup of the Day",
-      "description": "Ground beef, green cabbage, tomatoes, and rice simmered slowly with garlic and herbs. Deep, savory comfort.",
+      "description": "A slow-simmered blend of hearty vegetables and tender barley in a savory broth.",
       "notes": [
         "Available as cup or bowl",
         "Available as a combo add-on"
@@ -19,23 +19,23 @@
       "notes": []
     },
     {
-      "name": "Herb Roasted Chicken & Mozzarella Pressed",
+      "name": "Chicken, Apple & Gouda Pressed",
       "label": "Featured Pressed Sandwich",
-      "description": "Roasted herb chicken thigh, mozzarella, and giardiniera, pressed crisp."
+      "description": "Seared chicken thigh layered with thin-sliced apple, gouda, and a light spread of whole grain mustard. Pressed crisp."
     },
     {
-      "name": "Garlic Parmesan Barley",
+      "name": "Garlic Herb Couscous",
       "label": "Featured Side",
-      "description": "Warm barley with olive oil, garlic, herbs, and Parmesan.",
+      "description": "Pearl couscous tossed with olive oil, garlic, parsley, and a touch of parmesan.",
       "notes": [
         "Served with all pressed sandwiches",
         "Included in combos"
       ]
     },
     {
-      "name": "Southern Chocolate Cobbler",
+      "name": "Layered Chocolate Cheesecake",
       "label": "Sweet Bite of the Day",
-      "description": "Warm, old-fashioned chocolate cobbler with a rich fudge base.",
+      "description": "White chocolate, dark chocolate and oreo cheesecake.",
       "notes": [
         "Always from scratch."
       ]
