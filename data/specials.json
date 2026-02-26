@@ -15,7 +15,7 @@
     {
       "name": "Apple, Feta & Toasted Pecan Salad",
       "label": "Seasonal Salad",
-      "description": "Romaine, fresh apple, dried cranberries, toasted pecans, and feta. Served with dressing on the side.",
+      "description": "Mixed greens, fresh apple, dried cranberries, toasted pecans, and feta. Served with dressing on the side.",
       "notes": []
     },
     {
@@ -24,9 +24,9 @@
       "description": "Seared chicken thigh layered with thin-sliced apple, gouda, and a light spread of whole grain mustard. Pressed crisp."
     },
     {
-      "name": "Garlic Herb Couscous",
+      "name": "Garlic Herb Farro",
       "label": "Featured Side",
-      "description": "Pearl couscous tossed with olive oil, garlic, parsley, and a touch of parmesan.",
+      "description": "Tender farro tossed with olive oil, garlic, parsley, and parmesan.",
       "notes": [
         "Served with all pressed sandwiches",
         "Included in combos"
@@ -35,7 +35,7 @@
     {
       "name": "Layered Chocolate Cheesecake",
       "label": "Sweet Bite of the Day",
-      "description": "White chocolate, dark chocolate and oreo cheesecake.",
+      "description": "Layered white chocolate and dark chocolate on an oreo crust.",
       "notes": [
         "Always from scratch."
       ]
