@@ -96,7 +96,16 @@
        "payment_link_url": "",
        "image_url": "assets/events/March_Book_Club.png",
        "image_alt": "Mockingbird Book Club event image for The Stolen Life of Colette Marceau by Kristin Harmel, Thursday, March 19 at 6:30 PM"
-    }
+    },
+    {
+       "date": "2026-03-22T12:00:00",
+       "title": "Easter Bunny at The Mockingbird",
+       "description": "Join us on Sunday, March 22 from 12–2 PM for a festive Easter celebration at The Mockingbird on Mill Road. Kids under 12 eat FREE (hot dog, chips, and beverage), and the Easter Bunny will be here for photos and fun. Our full menu will be available for parents and guests. No reservations needed—just hop on over and celebrate with us!",
+       "price": "Free to attend",
+       "payment_link_url": "",
+       "image_url": "assets/events/Easter_Bunny_2026.png",
+       "image_alt": "Easter Bunny at The Mockingbird on Mill Road, Sunday, March 22 from 12–2 PM"
+}
   ]
 
 }
