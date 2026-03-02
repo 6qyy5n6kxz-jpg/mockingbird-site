@@ -105,7 +105,14 @@
        "payment_link_url": "",
        "image_url": "assets/events/Easter_Bunny_2026.png",
        "image_alt": "Easter Bunny at The Mockingbird on Mill Road, Sunday, March 22 from 12–2 PM"
-}
+},
+ {
+      "date": "2026-03-28T18:00:00",
+      "title": "Live Music: Jake Pilewski",
+      "description": "Live music by Jake Pilewski, 6–9 PM.",
+      "price": "No cover",
+      "payment_link_url": ""
+    }
   ]
 
 }
