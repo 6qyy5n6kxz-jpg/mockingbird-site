@@ -112,6 +112,13 @@
       "description": "Live music by Jake Pilewski, 6–9 PM.",
       "price": "No cover",
       "payment_link_url": ""
+    },
+    {
+      "date": "2026-04-04T18:00:00",
+      "title": "Live Music: Kerry Patrick Clark",
+      "description": "Live music by Kerry Patrick Clark, 6–9 PM.",
+      "price": "No cover",
+      "payment_link_url": ""
     }
   ]
 
