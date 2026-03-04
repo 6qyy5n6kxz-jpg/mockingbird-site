@@ -43,14 +43,14 @@
   "mapsUrl": "https://www.google.com/maps/search/?api=1&query=4408+N.+Elliston-Trowbridge+Rd.,+Graytown,+OH+43432",
   "hours": [
     { "label": "Sun", "value": "Closed" },
-    { "label": "Mon", "value": "Closed" },
-    { "label": "Tue", "value": "5–9 PM", "note": "Beverage carryout only" },
-    { "label": "Wed", "value": "5–9 PM", "note": "Beverage carryout only" },
-    { "label": "Thu", "value": "4–10 PM", "note": "Full service" },
-    { "label": "Fri", "value": "4–10 PM", "note": "Full service" },
-    { "label": "Sat", "value": "4–10 PM", "note": "Full service" }
+    { "label": "Mon", "value": "5–8 PM", "note": "Beverage carryout and dine in only" },
+    { "label": "Tue", "value": "5–8 PM", "note": "Beverage carryout and dine in only" },
+    { "label": "Wed", "value": "5–8 PM", "note": "Beverage carryout and dine in only" },
+    { "label": "Thu", "value": "5–10 PM" },
+    { "label": "Fri", "value": "5–10 PM" },
+    { "label": "Sat", "value": "5–10 PM" }
   ],
-  "seasonalHoursNote": "Beverage carryout: Tue–Wed 5–9 PM · Full service: Thu–Sat 4–10 PM",
+  "seasonalHoursNote": "Beverage carryout and dine in only: Mon–Wed 5–8 PM · Thu–Sat 5–10 PM · Closed Sunday",
   "kitchenNote": "Kitchen closes at 9 PM nightly.",
   "socials": {
     "facebook": "https://www.facebook.com/themockingbirdonmillroad/",
@@ -78,7 +78,7 @@
     "assets/images/interior3.svg"
   ],
   "footer": {
-    "hours_summary": "Beverage carryout: Tue–Wed 5–9 PM • Full service: Thu–Sat 4–10 PM • Closed Sun–Mon"
+    "hours_summary": "Mon–Wed 5–8 PM beverage carryout and dine in only • Thu–Sat 5–10 PM • Closed Sunday"
   },
   "defaultSEO": {
     "title": "The Mockingbird on Mill Road",
