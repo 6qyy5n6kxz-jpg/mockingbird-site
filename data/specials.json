@@ -1,41 +1,44 @@
 {
   "_comment": "Update weekly specials. weekOf should be the Monday of the current week.",
-  "weekOf": "2026-02-16",
-  "dateRange": "February 19–21",
+  "weekOf": "2026-03-02",
+  "dateRange": "March 05–07",
   "items": [
     {
-      "name": "Vegetable Barley Soup",
+      "name": "Greek Lentil Soup",
       "label": "Soup of the Day",
-      "description": "A slow-simmered blend of hearty vegetables and tender barley in a savory broth.",
+      "description": "Green lentils simmered in vegetable broth with garlic, tomato, oregano, finished with fresh lemon and feta.",
       "notes": [
         "Available as cup or bowl",
         "Available as a combo add-on"
       ]
     },
     {
-      "name": "Apple, Feta & Toasted Pecan Salad",
+      "name": "Shaved Cabbage & Olive Salad",
       "label": "Seasonal Salad",
-      "description": "Mixed greens, fresh apple, dried cranberries, toasted pecans, and feta. Served with dressing on the side.",
+      "description": "Shaved green cabbage, red onion, and Kalamata olives tossed in a white balsamic vinaigrette and finished with olive oil and cracked pepper.",
       "notes": []
     },
     {
-      "name": "Chicken, Apple & Gouda Pressed",
+      "name": "Roast Beef, Gruyère & Caramelized Onion Pressed",
       "label": "Featured Pressed Sandwich",
-      "description": "Seared chicken thigh layered with thin-sliced apple, gouda, and a light spread of whole grain mustard. Pressed crisp."
+      "description": "Thin-sliced roast beef layered with melted Gruyère and slow-cooked sherry onions, pressed crisp.",
+      "notes": [
+        "Served with pickled and Featured Side"
+      ]
     },
     {
-      "name": "Garlic Herb Farro",
+      "name": "Champagne Grain Salad",
       "label": "Featured Side",
-      "description": "Tender farro tossed with olive oil, garlic, parsley, and parmesan.",
+      "description": "Ancient grains tossed with olive oil, champagne vinegar, cracked pepper, and herbs.",
       "notes": [
         "Served with all pressed sandwiches",
         "Included in combos"
       ]
     },
     {
-      "name": "Layered Chocolate Cheesecake",
+      "name": "Cookie Dough Brownies",
       "label": "Sweet Bite of the Day",
-      "description": "Layered white chocolate and dark chocolate on an oreo crust.",
+      "description": "Fudgy brownies layered with chocolate chip cookie dough.",
       "notes": [
         "Always from scratch."
       ]
