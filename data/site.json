@@ -43,9 +43,9 @@
   "mapsUrl": "https://www.google.com/maps/search/?api=1&query=4408+N.+Elliston-Trowbridge+Rd.,+Graytown,+OH+43432",
   "hours": [
     { "label": "Sun", "value": "Closed" },
-    { "label": "Mon", "value": "5–8 PM", "note": "Beverage carryout and dine in only" },
-    { "label": "Tue", "value": "5–8 PM", "note": "Beverage carryout and dine in only" },
-    { "label": "Wed", "value": "5–8 PM", "note": "Beverage carryout and dine in only" },
+    { "label": "Mon", "value": "5–8 PM" },
+    { "label": "Tue", "value": "5–8 PM" },
+    { "label": "Wed", "value": "5–8 PM" },
     { "label": "Thu", "value": "5–10 PM" },
     { "label": "Fri", "value": "5–10 PM" },
     { "label": "Sat", "value": "5–10 PM" }
@@ -78,7 +78,7 @@
     "assets/images/interior3.svg"
   ],
   "footer": {
-    "hours_summary": "Mon–Wed 5–8 PM beverage carryout and dine in only • Thu–Sat 5–10 PM • Closed Sunday"
+    "hours_summary": "Mon–Wed 5–8 PM • Thu–Sat 5–10 PM • Closed Sunday"
   },
   "defaultSEO": {
     "title": "The Mockingbird on Mill Road",
