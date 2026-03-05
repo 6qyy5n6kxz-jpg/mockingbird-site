@@ -126,6 +126,13 @@
       "description": "Get ready to put your knowledge to the test and have a blast with friends! Whether you're a trivia aficionado or just looking for a fun evening out, we've got a night full of challenging questions, great company, and exciting prizes. Doors open at 5:00pm, the first round begins at 6:00pm.",
       "price": "No cover",
       "payment_link_url": ""
+    },
+    {
+      "date": "2026-04-11T18:00:00",
+      "title": "Live Music: Bruce Brodie",
+      "description": "Live music by Bruce Brodie, 6–9 PM.",
+      "price": "No cover",
+      "payment_link_url": ""
     }
   ]
 
