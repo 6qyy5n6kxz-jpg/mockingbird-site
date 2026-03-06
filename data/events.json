@@ -133,7 +133,14 @@
       "description": "Live music by Bruce Brodie, 6–9 PM.",
       "price": "No cover",
       "payment_link_url": ""
-    }
+    },
+    {
+  "date": "2026-04-12T16:00:00",
+  "title": "Oak Harbor School of Rock Showcase",
+  "description": "Join us for an afternoon of live music celebrating the incredible talent of the Oak Harbor community. Featuring performances by Oak Harbor High School’s School of Rock along with Oak Harbor alumni Devin Frank, Kia Frank, Kendra German, and Sophia & Sylvia Ferguson. Music from 4–7 PM.",
+  "price": "No cover",
+  "payment_link_url": ""
+}
   ]
 
 }
