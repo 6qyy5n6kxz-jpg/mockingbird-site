@@ -140,7 +140,16 @@
   "description": "Join us for an afternoon of live music celebrating the incredible talent of the Oak Harbor community. Featuring performances by Oak Harbor High School’s School of Rock along with Oak Harbor alumni Devin Frank, Kia Frank, Kendra German, and Sophia & Sylvia Ferguson. Music from 4–7 PM.",
   "price": "No cover",
   "payment_link_url": ""
-}
+},
+{
+       "date": "2026-04-16T18:30:00",
+       "title": "Mockingbird Book Club — April",
+       "description": "Join us for Mockingbird Book Club on Thursday, April 16th at 6:30 PM as we discuss The Water Keeper by Charles Martin —an open, welcoming conversation with food and drinks available.",
+       "price": "No cover",
+       "payment_link_url": "",
+       "image_url": "assets/events/April_Book_Club.png",
+       "image_alt": "Mockingbird Book Club event image for The Water Keeper by Charles Martin, Thursday, April 16th at 6:30 PM"
+    }
   ]
 
 }
