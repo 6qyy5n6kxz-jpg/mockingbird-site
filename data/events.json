@@ -149,6 +149,13 @@
        "payment_link_url": "",
        "image_url": "assets/events/April_Book_Club.png",
        "image_alt": "Mockingbird Book Club event image for The Water Keeper by Charles Martin, Thursday, April 16th at 6:30 PM"
+    },
+    {
+      "date": "2026-04-18T18:00:00",
+      "title": "Live Music: A Change of Plans featuring Jerry Wittman",
+      "description": "Live music by A Change of Plans featuring Jerry Wittman, 6–9 PM.",
+      "price": "No cover",
+      "payment_link_url": ""
     }
   ]
 
