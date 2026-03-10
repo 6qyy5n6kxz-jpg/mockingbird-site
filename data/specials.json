@@ -4,41 +4,41 @@
   "dateRange": "March 05–07",
   "items": [
     {
-      "name": "Greek Lentil Soup",
+      "name": "Colcannon Soup",
       "label": "Soup of the Day",
-      "description": "Green lentils simmered in vegetable broth with garlic, tomato, oregano, finished with fresh lemon and feta. Bright, savory, with a gentle touch of heat.",
+      "description": "A creamy Irish classic inspired by traditional colcannon - potatoes, cabbage, and onion simmered in broth and finished with milk and butter.",
       "notes": [
         "Available as cup or bowl",
         "Available as a combo add-on"
       ]
     },
     {
-      "name": "Shaved Cabbage & Olive Salad",
+      "name": "Winter Orchard Salad",
       "label": "Seasonal Salad",
-      "description": "Shaved green cabbage, red onion, and Kalamata olives tossed in a white balsamic vinaigrette and finished with olive oil and cracked pepper.",
+      "description": "Mixed greens with feta crumbles, dried cranberries, toasted pecans, and shaved red onion with a white balsamic vinaigrette.",
       "notes": []
     },
     {
-      "name": "Gruyère Roast Beef Pressed",
+      "name": "Mockingbird Reuben Pressed",
       "label": "Featured Pressed Sandwich",
-      "description": "Thin-sliced roast beef layered with melted Gruyère and finished with a savory beef jus glaze. Pressed crisp on our house bread.",
+      "description": "Corned beef, sauerkraut, Swiss cheese, and Russian dressing pressed until crisp and melty.",
       "notes": [
         "Served with pickled and Featured Side"
       ]
     },
     {
-      "name": "Champagne Grain Salad",
+      "name": "Roasted Dijon Potatoes",
       "label": "Featured Side",
-      "description": "Ancient grains tossed with olive oil, champagne vinegar, cracked pepper, and herbs.",
+      "description": "Roasted potatoes tossed with olive oil, Dijon mustard, garlic, and herbs.",
       "notes": [
         "Served with all pressed sandwiches",
         "Included in combos"
       ]
     },
     {
-      "name": "Cookie Dough Brownies",
+      "name": "Irish Cream Cheesecake",
       "label": "Sweet Bite of the Day",
-      "description": "Fudgy brownies layered with chocolate chip cookie dough.",
+      "description": "Rich and creamy cheesecake with a hint of Irish cream liqueur on a chocolate cookie crust.",
       "notes": [
         "Always from scratch."
       ]
