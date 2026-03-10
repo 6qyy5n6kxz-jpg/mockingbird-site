@@ -1,7 +1,7 @@
 {
   "_comment": "Update weekly specials. weekOf should be the Monday of the current week.",
-  "weekOf": "2026-03-02",
-  "dateRange": "March 05–07",
+  "weekOf": "2026-03-09",
+  "dateRange": "March 12–14",
   "items": [
     {
       "name": "Colcannon Soup",
