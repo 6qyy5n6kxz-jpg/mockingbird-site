@@ -163,7 +163,33 @@
       "description": "Live music by Aaron & Susan, 6–9 PM.",
       "price": "No cover",
       "payment_link_url": ""
-    }
+    },
+    {
+  "date": "2026-04-26T18:00:00",
+  "title": "Mockingbird Wine Tasting Dinner with Rachel Nasatir",
+  "description": "Join us for a special evening at The Mockingbird as we welcome Rachel Nasatir of Cutting Edge Selections for a guided wine tasting dinner. The night features a five-course Greek-inspired menu with wine pairings presented throughout the evening. Menu includes Whipped Feta Mezze, Horiatiki, slow-simmered Mavromatika Soup, Greek Sheet Pan Chicken and Vegetables, and Yiaourtoglyko. Reservations are required and seating is limited.",
+  "price": "$75 per person | $150 per couple (includes tax and gratuity)",
+  "event_type": "ticketed",
+  "payment_link_url": "https://link.clover.com/urlshortener/Sfpc7K",
+  "payment_provider": "clover",
+  "payment_label": "Buy tickets",
+  "payment_url": "https://link.clover.com/urlshortener/Sfpc7K",
+  "payment_note": "Price includes 7% sales tax and 18% gratuity.",
+  "hide_ticketed_helper": true,
+  "seating_form": {
+    "enabled": false
+  },
+  "type": "Special Event",
+  "ticketing": {
+    "capacity": 24,
+    "sold": 0,
+    "price_display": "$75 per person | $150 per couple",
+    "clover_payment_url": "https://link.clover.com/urlshortener/Sfpc7K",
+    "sold_out_behavior": "disable"
+  },
+  "image_url": "assets/events/Mockingbird_Wine_Tasting_Dinner_Rachel_Nasatir.png",
+  "image_alt": "Mockingbird Wine Tasting Dinner with Rachel Nasatir event graphic for Sunday, April 26 from 6 to 9 PM featuring a five-course Greek menu and wine pairings"
+}
   ]
 
 }
