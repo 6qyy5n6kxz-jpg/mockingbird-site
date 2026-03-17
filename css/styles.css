@@ -188,6 +188,24 @@ nav a:focus {
   font-size: 14px;
 }
 
+.event-payment-actions {
+  flex-wrap: wrap;
+}
+
+.ticket-option-badge {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  vertical-align: middle;
+}
+
 .hero {
   position: relative;
   overflow: hidden;

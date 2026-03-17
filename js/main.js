@@ -1850,8 +1850,10 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
       const providerKey = ev.payment_provider || (paymentOverride ? 'vendor' : 'clover');
       const paymentUrl = paymentOverride ? ev.payment_url : ticketing?.clover_payment_url;
       const paymentLabel = paymentOverride ? ev.payment_label : 'Pay on Clover';
+      const paymentOptions = Array.isArray(ev.payment_options) ? ev.payment_options.filter((option) => option && option.url && option.label) : [];
       const helperProvider = providerKey === 'vendor' && /venmo/i.test(`${paymentLabel} ${paymentUrl || ''}`) ? 'venmo' : providerKey;
       const paymentHelperOverride = typeof ev.payment_helper === 'string' ? ev.payment_helper.trim() : '';
+      const paymentCtaHelper = typeof ev.payment_cta_helper === 'string' ? ev.payment_cta_helper.trim() : '';
       const paymentHelperDefault = helperProvider === 'clover'
         ? 'You’ll complete payment securely via Clover.'
         : helperProvider === 'venmo'
@@ -1859,10 +1861,18 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
           : 'You’ll complete payment on the vendor’s ticketing page.';
       const paymentHelper = paymentHelperOverride || paymentHelperDefault;
       const linkValid = ticketing && isValidPaymentLink(paymentUrl, ticketing.isPlaceholder);
+      const optionLinksValid = ticketing && paymentOptions.some((option) => isValidPaymentLink(option.url, ticketing.isPlaceholder));
       const soldOutOverride = ev.sold_out_override === true;
-      const paymentEnabled = ticketing && !soldOut && !soldOutOverride && linkValid;
+      const paymentEnabled = ticketing && !soldOut && !soldOutOverride && (paymentOptions.length ? optionLinksValid : linkValid);
       if (paymentEnabled) {
-        if (paymentOverride) {
+        if (paymentOptions.length) {
+          button = paymentOptions.map((option) => {
+            if (!isValidPaymentLink(option.url, ticketing?.isPlaceholder)) return '';
+            const buttonClass = option.style === 'secondary' ? 'btn btn-secondary btn-small' : 'btn btn-primary btn-small';
+            const badge = option.badge ? ` <span class="ticket-option-badge">${option.badge}</span>` : '';
+            return `<a class="${buttonClass}" href="${option.url}" target="_blank" rel="noopener noreferrer">${option.label}${badge}</a>`;
+          }).join('');
+        } else if (paymentOverride) {
           const paymentAttrs = providerKey === 'vendor' || providerKey === 'venmo'
             ? ' target="_blank" rel="noopener noreferrer"'
             : '';
@@ -1900,6 +1910,9 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
       if (ticketing && !linkValid) {
         ticketCopy = '<p class="note">Ticket link coming soon.</p>';
       }
+      const paymentCtaHelperLine = (paymentEnabled && paymentCtaHelper)
+        ? `<p class="note event-help">${paymentCtaHelper}</p>`
+        : '';
       const paymentHelperLine = (paymentEnabled && !ev.hide_ticketed_helper && paymentHelper)
         ? `<p class="note event-help">${paymentHelper}</p>`
         : '';
@@ -1916,7 +1929,8 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
           : `
           <div class="event-payment">
             <h4 class="event-section-title">Pay for tickets</h4>
-            <div class="form-actions">
+            ${paymentCtaHelperLine}
+            <div class="form-actions event-payment-actions">
               ${button || ''}
             </div>
             ${paymentHelperLine}
