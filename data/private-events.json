@@ -10,7 +10,8 @@
           "items": [
             { "name": "Superboard", "fixed_price": 125, "allow_quantity": true, "max_qty": 4 },
             { "name": "Breakfast Sandwich Bar", "fixed_price": 130, "allow_quantity": true, "max_qty": 4 },
-            { "name": "Pancake Bar", "fixed_price": 110, "allow_quantity": true, "max_qty": 4 }
+            { "name": "Pancake Bar", "fixed_price": 110, "allow_quantity": true, "max_qty": 4 },
+            { "name": "Fruit & Veggie Board", "fixed_price": 100 }
           ]
         },
         {
@@ -18,7 +19,7 @@
           "items": [
             { "name": "Cheesy Potatoes", "per_person_price": 3 },
             { "name": "Sausage, Biscuits & Gravy", "per_person_price": 3.5 },
-            { "name": "French Toast Casserole", "per_person_price": 3.25 },
+            { "name": "French Toast Casserole", "per_person_price": 1.25 },
             { "name": "Muffin Tin Omelets", "per_person_price": 4.5 },
             { "name": "Muffins & Breakfast Breads", "per_person_price": 2.5 }
           ]
@@ -40,7 +41,7 @@
             { "name": "Bruschetta", "per_person_price": 2 },
             { "name": "Pasta Salad", "per_person_price": 2.75 },
             { "name": "Cole Slaw", "per_person_price": 2.25 },
-            { "name": "Fruit & Veggie Board", "fixed_price": 95 }
+            { "name": "Fruit & Veggie Board", "fixed_price": 100 }
           ]
         },
         {

@@ -79,7 +79,8 @@
           title: 'Boards & Stations',
           items: [
             { name: 'Superboard', pricing_type: 'fixed', fixed_price: 125, cogs_per_batch: 95, servings_per_batch: 16, allow_quantity: true, max_qty: 4 },
-            { name: 'Breakfast Sandwich Bar', pricing_type: 'fixed', fixed_price: 130, cogs_per_batch: 100, servings_per_batch: 16, allow_quantity: true, max_qty: 4 },
+            { name: 'Fruit/Veggie Superboard', pricing_type: 'fixed', fixed_price: 125, cogs_per_batch: 95, servings_per_batch: 16, allow_quantity: true, max_qty: 4 },
+            { name: 'Breakfast Sandwich Bar', pricing_type: 'fixed', fixed_price: 300, cogs_per_batch: 100, servings_per_batch: 16, allow_quantity: true, max_qty: 4 },
             { name: 'Pancake Bar', pricing_type: 'fixed', fixed_price: 110, cogs_per_batch: 80, servings_per_batch: 18, allow_quantity: true, max_qty: 4 }
           ]
         },
@@ -88,7 +89,7 @@
           items: [
             { name: 'Cheesy Potatoes', pricing_type: 'per_person', per_person_price: 3, category: 'side', cogs_per_person: costFromPortion(0.35, COMMODITY_COSTS.russet_potatoes_lb, 0.55) + (0.094 * COMMODITY_COSTS.cheddar_lb) },
             { name: 'Sausage, Biscuits & Gravy', pricing_type: 'per_person', per_person_price: 3.5, category: 'entree', cogs_per_person: costFromPortion(0.3, COMMODITY_COSTS.sausage_lb, 0.6) },
-            { name: 'French Toast Casserole', pricing_type: 'per_person', per_person_price: 3.25, category: 'breakfast', cogs_per_person: ((COMMODITY_COSTS.eggs_dozen / 12) * 3) + (COMMODITY_COSTS.all_purpose_flour_lb * 0.2) + 0.75 },
+            { name: 'French Toast Casserole', pricing_type: 'per_person', per_person_price: 1.25, category: 'breakfast', cogs_per_person: ((COMMODITY_COSTS.eggs_dozen / 12) * 3) + (COMMODITY_COSTS.all_purpose_flour_lb * 0.2) + 0.75 },
             { name: 'Muffin Tin Omelets', pricing_type: 'per_person', per_person_price: 4.5, category: 'breakfast', cogs_per_person: ((COMMODITY_COSTS.eggs_dozen / 12) * 2) + 0.6 },
             { name: 'Muffins & Breakfast Breads', pricing_type: 'per_person', per_person_price: 2.5, category: 'breakfast', cogs_per_person: 0.95 }
           ]
