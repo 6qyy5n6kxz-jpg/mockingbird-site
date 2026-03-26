@@ -6,7 +6,7 @@
     {
       "name": "Creamy Vegetable Soup",
       "label": "Soup of the Day",
-      "description": "Seasonal vegetables simmered in a savory broth and finished with cream.",
+      "description": "Potatoes, green beans, snow peas, sweet corn, onion, celery, and carrots in a rich, creamy broth.",
       "notes": [
         "Available as cup or bowl",
         "Available as a combo add-on"
@@ -38,7 +38,7 @@
     {
       "name": "Raspberry Chocolate Parfait",
       "label": "Sweet Bite of the Day",
-      "description": "Layers of chocolate cream, raspberry filling, and crushed chocolate cookies, finished with whipped cream.",
+      "description": "Layers of chocolate cookies, vanilla pudding, and raspberry cheesecake, finished with whipped cream and a raspberry drizzle.",
       "notes": [
         "Always from scratch."
       ]
