@@ -1,44 +1,48 @@
 {
   "_comment": "Update weekly specials. weekOf should be the Monday of the current week.",
-  "weekOf": "2026-03-23",
-  "dateRange": "March 26–28",
+  "weekOf": "2026-03-30",
+  "dateRange": "April 2–4",
   "items": [
     {
-      "name": "Creamy Vegetable Soup",
+      "name": "Sausage, Potato & Cabbage Soup",
       "label": "Soup of the Day",
-      "description": "Potatoes, green beans, snow peas, sweet corn, onion, celery, and carrots in a rich, creamy broth.",
+      "description": "Savory sausage with tender potatoes and cabbage in a rich, comforting broth.",
       "notes": [
         "Available as cup or bowl",
         "Available as a combo add-on"
       ]
     },
     {
-      "name": "Apple, Pecan & Feta Salad",
+      "name": "Italian Chopped Salad",
       "label": "Seasonal Salad",
-      "description": "Mixed greens with sliced apple, toasted pecans, feta crumbles, and dried blueberries.",
-      "notes": ["Dressing served on the side."]
-    },
-    {
-      "name": "Chicken Bacon Ranch Pressed",
-      "label": "Featured Pressed Sandwich",
-      "description": "Roasted chicken, crispy bacon, mozzarella, and ranch dressing pressed on toasted bread.",
+      "description": "Mixed greens with salami, pepperoni, mozzarella, olives, pepperoncini, and tomato.",
       "notes": [
-        "Served with pickled and Featured Side"
+        "Dressing served on the side.",
+        "Gluten-Free"
       ]
     },
     {
-      "name": "Garlic Parmesan Rice",
-      "label": "Featured Side",
-      "description": "Seasoned rice with garlic, butter, and parmesan.",
+      "name": "Honey Mustard Ham & Swiss Pressed",
+      "label": "Featured Pressed Sandwich",
+      "description": "Smoky ham, melted Swiss, and house honey mustard pressed on toasted bread.",
       "notes": [
+        "Served with pickle and Featured Side"
+      ]
+    },
+    {
+      "name": "Dill Pickle Pasta Salad",
+      "label": "Featured Side",
+      "description": "Penne pasta tossed with chopped dill pickles, fresh herbs, and a light creamy dressing with black pepper.",
+      "notes": [
+        "Vegetarian",
         "Served with all pressed sandwiches",
         "Included in combos"
       ]
     },
     {
-      "name": "Raspberry Chocolate Parfait",
+      "name": "Easter Poke Cake",
       "label": "Sweet Bite of the Day",
-      "description": "Layers of chocolate cookies, vanilla pudding, and raspberry cheesecake, finished with whipped cream and a raspberry drizzle.",
+      "description": "Vanilla cake soaked with pineapple and sweet cream, topped with whipped topping and festive sprinkles.",
       "notes": [
         "Always from scratch."
       ]
