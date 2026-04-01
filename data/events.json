@@ -148,7 +148,14 @@
   },
   "image_url": "assets/events/Mockingbird_Wine_Tasting_Dinner_Rachel_Nasatir.png",
   "image_alt": "Mockingbird Wine Tasting Dinner with Rachel Nasatir event graphic for Sunday, April 26 from 6 to 9 PM featuring a five-course Greek menu and wine pairings"
-}
+},
+{
+      "date": "2026-05-02T18:00:00",
+      "title": "Live Music: Mike Bryce",
+      "description": "Live music by Aaron & Susan, 6–9 PM.",
+      "price": "No cover",
+      "payment_link_url": ""
+    }
   ]
 
 }
