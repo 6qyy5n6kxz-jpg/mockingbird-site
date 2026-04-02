@@ -6,10 +6,11 @@
     {
       "name": "Sausage, Potato & Cabbage Soup",
       "label": "Soup of the Day",
-      "description": "Savory sausage with tender potatoes and cabbage in a rich, comforting broth.",
+      "description": "Smoked kielbasa with tender potatoes and cabbage in a rich broth finished with dill.",
       "notes": [
         "Available as cup or bowl",
-        "Available as a combo add-on"
+        "Available as a combo add-on",
+        "Gluten-Free"
       ]
     },
     {
@@ -42,7 +43,7 @@
     {
       "name": "Easter Poke Cake",
       "label": "Sweet Bite of the Day",
-      "description": "Vanilla cake soaked with pineapple and sweet cream, topped with whipped topping and festive sprinkles.",
+      "description": "Vanilla cake filled with vanilla pudding and topped with whipped cream frosting and festive sprinkles.",
       "notes": [
         "Always from scratch."
       ]
