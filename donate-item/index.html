@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en" data-base="..">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Donate an Auction Item | Mockingbird Jam</title>
+  <meta name="description" content="Auction item donation form for Mockingbird Jam 2026. Donate an item or experience to support ALS fundraising.">
+  <meta property="og:title" content="Donate an Auction Item | Mockingbird Jam">
+  <meta property="og:description" content="Contribute an item, package, or experience to the Mockingbird Jam silent auction.">
+  <meta property="og:image" content="../assets/images/og.jpg">
+  <script src="../js/base.js"></script>
+  <link rel="icon" type="image/svg+xml" data-favicon="svg">
+  <link rel="alternate icon" data-favicon="ico">
+  <link rel="apple-touch-icon" data-favicon="apple">
+  <script>
+    (function() {
+      if (!window.withBase) return;
+      const svg = document.querySelector('link[data-favicon="svg"]');
+      const ico = document.querySelector('link[data-favicon="ico"]');
+      const apple = document.querySelector('link[data-favicon="apple"]');
+      if (svg) svg.href = withBase('/assets/images/favicon.svg');
+      if (ico) ico.href = withBase('/assets/images/favicon.png');
+      if (apple) apple.href = withBase('/assets/images/favicon.png');
+    })();
+  </script>
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+  <a class="sr-only" href="#main">Skip to main content</a>
+  <header id="site-header"></header>
+  <div class="announcement" role="status"></div>
+
+  <main id="main" class="section">
+    <div class="container grid-2">
+      <div class="info-block">
+        <p class="kicker">Mockingbird Jam</p>
+        <h1>Donate an Auction Item</h1>
+        <p>We’re gathering donated packages, local experiences, gift cards, and community gifts now so the Mockingbird Jam silent auction can launch strong.</p>
+        <p class="note">Online bidding opens soon, but auction donors can get involved right away.</p>
+        <ul class="table-list">
+          <li>Gift cards, baskets, experiences, services, and local goods are all welcome</li>
+          <li>Donations help fund ALS research and support ALS families</li>
+          <li>We’ll follow up to confirm delivery, restrictions, and display details</li>
+        </ul>
+        <div class="inline-links" style="margin-top:12px;">
+          <a class="btn btn-secondary btn-small" data-nav="auction">Back to Jam</a>
+          <a class="btn btn-ghost btn-small" data-nav="events">View events</a>
+        </div>
+      </div>
+      <div id="item-donation-form-wrap"></div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="meta">
+        <strong data-fill="name">Mockingbird</strong>
+        <div data-fill="address">123 Mockingbird Lane</div>
+        <div data-fill="city">Yourtown, CA</div>
+        <div class="note" data-fill="hours">Hours</div>
+        <div><a data-fill="phone-link">555-123-4567</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+  <script>
+    (async function() {
+      const auction = await Mockingbird.fetchJSON('auction.json', { event: {} });
+      const action = auction.event?.item_donation_form_action || 'https://formspree.io/f/xbddjoek';
+      const container = document.getElementById('item-donation-form-wrap');
+      container.innerHTML = `
+        <form action="${action}" method="POST" data-formspree data-success-message="Thanks. We received your auction donation form and will follow up soon." data-error-message="Something went wrong. Please try again.">
+          <p class="kicker">Auction Donation</p>
+          <h2>Tell us about the item or experience</h2>
+          <label for="donor-name">Donor or business name</label>
+          <input id="donor-name" name="donor_business_name" required>
+          <label for="donor-contact-name">Contact name</label>
+          <input id="donor-contact-name" name="contact_name" autocomplete="name" required>
+          <label for="donor-email">Email</label>
+          <input id="donor-email" name="email" type="email" autocomplete="email" required>
+          <label for="donor-phone">Phone</label>
+          <input id="donor-phone" name="phone" type="tel" autocomplete="tel" required>
+          <label for="item-title">Item or experience title</label>
+          <input id="item-title" name="item_title" required>
+          <label for="item-description">Description</label>
+          <textarea id="item-description" name="description" required placeholder="Describe the item, package, or experience."></textarea>
+          <label for="estimated-value">Estimated value</label>
+          <input id="estimated-value" name="estimated_value" required placeholder="$150">
+          <label for="restrictions">Restrictions or expiration</label>
+          <input id="restrictions" name="restrictions_expiration" placeholder="Optional">
+          <label for="delivery-method">Delivery method</label>
+          <input id="delivery-method" name="delivery_method" placeholder="Pickup, drop-off, mailed certificate, etc.">
+          <label for="donation-notes">Notes</label>
+          <textarea id="donation-notes" name="notes" placeholder="Optional"></textarea>
+          <input type="hidden" name="source" value="mockingbird_jam_item_donation">
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Submit auction donation</button>
+          </div>
+          <p class="form-status" role="status" aria-live="polite" aria-atomic="true" style="display:none;"></p>
+        </form>
+      `;
+      Mockingbird.initFormspreeForm(container.querySelector('form'));
+    })();
+  </script>
+</body>
+</html>

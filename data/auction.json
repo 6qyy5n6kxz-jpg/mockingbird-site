@@ -9,18 +9,28 @@
       "kicker": "Mockingbird Jam 2026",
       "headline": "Music, movement, and community support for ALS families",
       "subhead": "Spend the day with yoga, church, live music, food trucks, a silent auction, and all-day fundraising that helps ALS research and families living with ALS.",
-      "primary_cta_label": "View Auction",
-      "primary_cta_url": "/auction/",
-      "secondary_cta_label": "Donate to ALS",
-      "secondary_cta_url": "https://example.com/mockingbird-jam-als-donate"
+      "primary_cta_label": "Auction Coming Soon",
+      "primary_cta_url": "#auction-coming-soon",
+      "secondary_cta_label": "Donate Through Mockingbird Jam",
+      "secondary_cta_url": "https://example.com/mockingbird-jam-donate",
+      "secondary_cta_note": "Replace this placeholder donation URL with the final Mockingbird Jam fundraising or payment link."
     },
     "countdown_label": "Countdown to Mockingbird Jam",
     "post_event_message": "Mockingbird Jam 2026 has wrapped. Thank you for showing up for the music, the auction, and the ALS mission.",
     "auction_visible": false,
     "auction_hidden_message": "Auction items are not public yet. Check back soon for the full silent auction lineup.",
+    "auction_intro_badge": "Coming Soon",
+    "auction_intro_heading": "Mockingbird Jam silent auction",
+    "auction_intro_copy": "Online bidding opens soon. Check back for donated packages, local experiences, and community gifts supporting ALS research and ALS families.",
     "auction_status_note": "Bid submissions are reviewed manually and confirmed by email or phone.",
     "auction_form_action": "https://formspree.io/f/xbddjoek",
     "signup_form_action": "https://formspree.io/f/xbddjoek",
+    "sponsor_form_action": "https://formspree.io/f/xbddjoek",
+    "item_donation_form_action": "https://formspree.io/f/xbddjoek",
+    "sponsor_page_url": "/sponsor/",
+    "item_donation_page_url": "/donate-item/",
+    "donation_url": "https://example.com/mockingbird-jam-donate",
+    "donation_url_note": "Replace this placeholder donation URL with the final Mockingbird Jam donation or payment destination.",
     "als_mission": {
       "title": "Supporting ALS research and ALS families",
       "body": "Mockingbird Jam raises funds for ALS research while also helping families facing the day-to-day impact of ALS. Every bid, sponsorship, and donation helps extend that support."
@@ -34,20 +44,20 @@
     ],
     "ctas": [
       {
-        "label": "Donate to ALS",
-        "url": "https://example.com/mockingbird-jam-als-donate",
+        "label": "Support the Jam",
+        "url": "https://example.com/mockingbird-jam-donate",
         "style": "primary",
-        "description": "Make a direct fundraising gift."
+        "description": "Event proceeds support ALS research and ALS families."
       },
       {
         "label": "Become a Sponsor",
-        "url": "https://example.com/mockingbird-jam-sponsor",
+        "url": "/sponsor/",
         "style": "secondary",
         "description": "Support the event as a business or family sponsor."
       },
       {
         "label": "Donate an Auction Item",
-        "url": "https://example.com/mockingbird-jam-auction-donate",
+        "url": "/donate-item/",
         "style": "secondary",
         "description": "Contribute an item, gift card, package, or experience."
       },
@@ -63,6 +73,12 @@
       "description": "Sign up for event updates, auction reminders, sponsor announcements, and ALS donation reminders.",
       "success_message": "Thanks. You’re on the Mockingbird Jam update list.",
       "error_message": "We couldn’t save your signup. Please try again."
+    },
+    "support_section": {
+      "title": "Support Mockingbird Jam",
+      "description": "Help grow Mockingbird Jam by sponsoring the fundraiser, donating an auction item, or signing up for auction updates.",
+      "note": "Sponsors and auction donors can get involved now. Online bidding opens soon.",
+      "donation_microcopy": "Event proceeds support ALS research and ALS families."
     }
   },
   "items": [

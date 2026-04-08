@@ -32,10 +32,7 @@
 
   <main id="main">
     <section class="section">
-      <div class="container">
-        <p class="kicker">Auction</p>
-        <h1>Mockingbird Jam silent auction</h1>
-        <p class="lead">Bid on donated packages, experiences, and local gifts that support ALS research and ALS families through Mockingbird Jam 2026.</p>
+      <div class="container" id="auction-intro">
         <div class="inline-links">
           <a class="btn btn-secondary btn-small" data-nav="events">Back to events</a>
           <a class="btn btn-ghost btn-small" href="#event-updates-signup">Join event updates</a>
@@ -95,8 +92,9 @@
             <p class="kicker">Support</p>
             <div class="inline-links">
               <a data-nav="auction">Auction</a>
-              <a href="https://example.com/mockingbird-jam-als-donate" target="_blank" rel="noopener noreferrer">Donate to ALS</a>
-              <a href="https://example.com/mockingbird-jam-sponsor" target="_blank" rel="noopener noreferrer">Become a Sponsor</a>
+              <a href="https://example.com/mockingbird-jam-donate" target="_blank" rel="noopener noreferrer">Support the Jam</a>
+              <a href="../sponsor/">Become a Sponsor</a>
+              <a href="../donate-item/">Donate an Auction Item</a>
             </div>
           </div>
           <div>
@@ -139,9 +137,11 @@
       ]);
       Mockingbird.state.auction = auction;
       Mockingbird.state.sponsors = sponsors;
+      Mockingbird.renderAuctionIntro('auction-intro', auction);
       Mockingbird.renderFundraisingCtas('auction-cta-band', auction, {
-        title: 'Support Mockingbird Jam',
-        body: 'Bid generously, donate to ALS, sponsor the fundraiser, or donate an auction item.'
+        title: auction.event?.support_section?.title || 'Support Mockingbird Jam',
+        body: auction.event?.support_section?.description || 'Help grow Mockingbird Jam by sponsoring the fundraiser, donating an auction item, or signing up for auction updates.',
+        note: auction.event?.support_section?.note || 'Sponsors and auction donors can get involved now. Online bidding opens soon.'
       });
       Mockingbird.renderEventCountdown('auction-countdown', auction, {
         label: 'Time until bidding closes'

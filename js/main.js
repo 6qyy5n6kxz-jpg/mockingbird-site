@@ -191,7 +191,10 @@
           ? 'btn btn-ghost'
           : 'btn btn-primary';
       const targetAttrs = /^https?:\/\//i.test(href) ? ' target="_blank" rel="noopener noreferrer"' : '';
-      return `<a class="${buttonClass}" href="${href}"${targetAttrs}>${item.label}</a>`;
+      const disabledClass = item.disabled ? ' is-disabled-link' : '';
+      const ariaDisabled = item.disabled ? ' aria-disabled="true"' : '';
+      const note = item.description ? `<span class="action-microcopy">${item.description}</span>` : '';
+      return `<div class="action-link-wrap"><a class="${buttonClass}${disabledClass}" href="${href}"${targetAttrs}${ariaDisabled}>${item.label}</a>${note}</div>`;
     });
     return `<div class="${className}">${links.join('')}</div>`;
   }
@@ -199,9 +202,14 @@
   function getFundraisingCtas(auctionData) {
     const event = auctionData?.event || {};
     const configured = Array.isArray(event.ctas) ? event.ctas.slice() : [];
-    const hasAuction = configured.some((item) => item.url === '/auction/' || item.url === '#auction');
-    if (!hasAuction) {
-      configured.unshift({ label: 'View Auction', url: '/auction/', style: 'primary' });
+    if (event.auction_visible === false) {
+      configured.unshift({
+        label: 'Auction Coming Soon',
+        url: '#auction-coming-soon',
+        style: 'ghost',
+        disabled: true,
+        description: 'Online bidding opens soon.'
+      });
     }
     return configured;
   }
@@ -2117,14 +2125,33 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
     const container = document.getElementById(containerId);
     const event = auctionData?.event;
     if (!container || !event) return;
+    const hero = event.hero || {};
+    const heroActions = [];
+    if (hero.primary_cta_label && hero.primary_cta_url) {
+      heroActions.push({
+        label: hero.primary_cta_label,
+        url: hero.primary_cta_url,
+        style: 'ghost',
+        disabled: true,
+        description: 'Online bidding opens soon.'
+      });
+    }
+    if (hero.secondary_cta_label && (event.donation_url || hero.secondary_cta_url)) {
+      heroActions.push({
+        label: hero.secondary_cta_label,
+        url: event.donation_url || hero.secondary_cta_url,
+        style: 'primary',
+        description: event.support_section?.donation_microcopy || 'Event proceeds support ALS research and ALS families.'
+      });
+    }
     container.innerHTML = `
       <div class="final-cta fade-in">
         <div>
-          <p class="kicker">Mockingbird Jam 2026</p>
-          <h2>${event.title}</h2>
-          <p class="note">${event.subtitle || ''}</p>
+          <p class="kicker">${hero.kicker || 'Mockingbird Jam 2026'}</p>
+          <h2>${hero.headline || event.title}</h2>
+          <p class="note">${hero.subhead || event.subtitle || ''}</p>
         </div>
-        ${buildActionLinks(getFundraisingCtas(auctionData))}
+        ${buildActionLinks(heroActions.length ? heroActions : getFundraisingCtas(auctionData))}
       </div>
     `;
     enableFadeIn();
@@ -2153,15 +2180,39 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
   function renderFundraisingCtas(containerId, auctionData, options = {}) {
     const container = document.getElementById(containerId);
     if (!container || !auctionData?.event) return;
-    const title = options.title || 'Support the cause';
-    const body = options.body || auctionData.event.als_mission?.body || '';
+    const support = auctionData.event.support_section || {};
+    const title = options.title || support.title || 'Support the cause';
+    const body = options.body || support.description || auctionData.event.als_mission?.body || '';
+    const note = options.note || support.note || '';
     container.innerHTML = `
       <div class="cta-band fade-in">
         <div>
           <p class="kicker">${title}</p>
           <p>${body}</p>
+          ${note ? `<p class="note">${note}</p>` : ''}
         </div>
         ${buildActionLinks(getFundraisingCtas(auctionData))}
+      </div>
+    `;
+    enableFadeIn();
+  }
+
+  function renderAuctionIntro(containerId, auctionData) {
+    const container = document.getElementById(containerId);
+    const event = auctionData?.event;
+    if (!container || !event) return;
+    container.innerHTML = `
+      <div class="fade-in">
+        <div class="inline-links">
+          <span class="badge">${event.auction_intro_badge || 'Coming Soon'}</span>
+        </div>
+        <h1>${event.auction_intro_heading || 'Mockingbird Jam silent auction'}</h1>
+        <p class="lead">${event.auction_intro_copy || event.auction_hidden_message || ''}</p>
+        <p class="note">${event.support_section?.note || 'Sponsors and auction donors can get involved now. Online bidding opens soon.'}</p>
+        <div class="inline-links" style="margin-top:12px;">
+          <a class="btn btn-secondary btn-small" href="${withBase('/events/')}">Back to events</a>
+          <a class="btn btn-ghost btn-small" href="#event-updates-signup">Join event updates</a>
+        </div>
       </div>
     `;
     enableFadeIn();
@@ -2304,7 +2355,7 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
           <h2>Silent auction items are coming soon</h2>
           <p class="note">${auctionData?.event?.auction_hidden_message || 'Check back soon for the full silent auction lineup.'}</p>
           <div class="form-actions">
-            <a class="btn btn-secondary btn-small" href="${withBase('/auction/')}">Visit Jam page</a>
+            <a class="btn btn-secondary btn-small" href="${withBase('/auction/')}#auction-coming-soon">Auction Coming Soon</a>
           </div>
         </div>
       `;
@@ -2434,11 +2485,11 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
     if (!container) return;
     if (auctionData?.event?.auction_visible === false) {
       container.innerHTML = `
-        <div class="card fade-in">
+        <div class="card fade-in" id="auction-coming-soon">
           <p class="kicker">Auction</p>
           <h2>Silent auction lineup coming soon</h2>
           <p class="note">${auctionData?.event?.auction_hidden_message || 'Check back soon for the full silent auction lineup.'}</p>
-          <p class="note">You can still sign up for updates, donate to ALS, become a sponsor, or donate an auction item in the meantime.</p>
+          <p class="note">${auctionData?.event?.support_section?.note || 'Sponsors and auction donors can get involved now. Online bidding opens soon.'}</p>
         </div>
       `;
       enableFadeIn();
@@ -3585,10 +3636,12 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
     renderSponsors,
     renderEmailSignup,
     renderEventCountdown,
+    renderAuctionIntro,
     renderFeaturedAuctionItems,
     renderFundraisingCtas,
     renderJamPromo,
     renderJamSchedule,
+    initFormspreeForm,
     renderFeaturedItems,
     renderSpecialsPreview,
     renderEventsPreview,

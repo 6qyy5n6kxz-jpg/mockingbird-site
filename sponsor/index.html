@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en" data-base="..">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Become a Sponsor | Mockingbird Jam</title>
+  <meta name="description" content="Sponsor inquiry form for Mockingbird Jam 2026. Support ALS fundraising through community sponsorship.">
+  <meta property="og:title" content="Become a Sponsor | Mockingbird Jam">
+  <meta property="og:description" content="Support Mockingbird Jam 2026 as a sponsor and help fund ALS research and ALS family support.">
+  <meta property="og:image" content="../assets/images/og.jpg">
+  <script src="../js/base.js"></script>
+  <link rel="icon" type="image/svg+xml" data-favicon="svg">
+  <link rel="alternate icon" data-favicon="ico">
+  <link rel="apple-touch-icon" data-favicon="apple">
+  <script>
+    (function() {
+      if (!window.withBase) return;
+      const svg = document.querySelector('link[data-favicon="svg"]');
+      const ico = document.querySelector('link[data-favicon="ico"]');
+      const apple = document.querySelector('link[data-favicon="apple"]');
+      if (svg) svg.href = withBase('/assets/images/favicon.svg');
+      if (ico) ico.href = withBase('/assets/images/favicon.png');
+      if (apple) apple.href = withBase('/assets/images/favicon.png');
+    })();
+  </script>
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+  <a class="sr-only" href="#main">Skip to main content</a>
+  <header id="site-header"></header>
+  <div class="announcement" role="status"></div>
+
+  <main id="main" class="section">
+    <div class="container">
+      <div class="info-block" style="margin-bottom:22px;">
+        <p class="kicker">Mockingbird Jam</p>
+        <h1>Become a Sponsor</h1>
+        <p>Support Mockingbird Jam 2026 and help fund ALS research and local family support through a day of music, yoga, church, food trucks, and community fundraising.</p>
+        <p class="note">We’re currently welcoming sponsor interest while the auction lineup is still being finalized.</p>
+        <div class="inline-links" style="margin-top:12px;">
+          <a class="btn btn-secondary btn-small" data-nav="auction">Back to Jam</a>
+          <a class="btn btn-ghost btn-small" data-nav="events">View events</a>
+        </div>
+      </div>
+
+      <section class="section alt" style="padding:28px 0;">
+        <div class="container">
+          <p class="kicker">Sponsorship Tiers</p>
+          <h2>Choose the right way to support the fundraiser</h2>
+          <div class="list-flex">
+            <article class="card">
+              <div class="inline-links"><span class="badge">Friend Sponsor</span><span class="badge badge-soft">$250</span></div>
+              <h3>Friend Sponsor</h3>
+              <p class="note">A simple way to support the day and help us grow the fundraiser.</p>
+              <ul class="table-list">
+                <li>Name on website</li>
+                <li>Social shoutout</li>
+              </ul>
+            </article>
+            <article class="card">
+              <div class="inline-links"><span class="badge">Supporting Sponsor</span><span class="badge badge-soft">$500</span></div>
+              <h3>Supporting Sponsor</h3>
+              <p class="note">Great for businesses that want visible community presence during the event.</p>
+              <ul class="table-list">
+                <li>Logo on signage</li>
+                <li>Stage mention</li>
+                <li>Optional vendor booth</li>
+              </ul>
+            </article>
+            <article class="card">
+              <div class="inline-links"><span class="badge">Headline Sponsor</span><span class="badge badge-soft">$1,000</span></div>
+              <h3>Headline Sponsor</h3>
+              <p class="note">Expanded event-wide visibility across the full Mockingbird Jam campaign.</p>
+              <ul class="table-list">
+                <li>Banner placement</li>
+                <li>Multiple stage mentions</li>
+                <li>Logo on all promo materials</li>
+                <li>Featured social and email placement</li>
+              </ul>
+            </article>
+            <article class="card">
+              <div class="inline-links"><span class="badge">Presenting Sponsor</span><span class="badge badge-soft">$2,500+</span></div>
+              <h3>Presenting Sponsor</h3>
+              <p class="note">The highest-visibility partnership for businesses leading the fundraiser effort.</p>
+              <ul class="table-list">
+                <li>“Presented by” naming</li>
+                <li>Premium branding</li>
+                <li>Speaking opportunity</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <div class="grid-2" style="margin-top:22px;">
+        <div class="info-block">
+          <p class="kicker">Sponsor Inquiry</p>
+          <h2>Tell us how you’d like to support</h2>
+          <p>We’re limiting the number of Headline and Presenting Sponsors.</p>
+          <p class="note">If you’re not sure which tier fits best, choose the discussion option and we’ll reach out with the sponsorship package and next steps.</p>
+        </div>
+        <div id="sponsor-form-wrap"></div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="meta">
+        <strong data-fill="name">Mockingbird</strong>
+        <div data-fill="address">123 Mockingbird Lane</div>
+        <div data-fill="city">Yourtown, CA</div>
+        <div class="note" data-fill="hours">Hours</div>
+        <div><a data-fill="phone-link">555-123-4567</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+  <script>
+    (async function() {
+      const auction = await Mockingbird.fetchJSON('auction.json', { event: {} });
+      const action = auction.event?.sponsor_form_action || 'https://formspree.io/f/xbddjoek';
+      const container = document.getElementById('sponsor-form-wrap');
+      container.innerHTML = `
+        <form action="${action}" method="POST" data-formspree data-success-message="Thanks. We received your sponsor inquiry and will follow up soon." data-error-message="Something went wrong. Please try again.">
+          <p class="kicker">Sponsor Inquiry</p>
+          <h2>Tell us about your sponsorship interest</h2>
+          <label for="business-name">Business name</label>
+          <input id="business-name" name="business_name" required>
+          <label for="contact-name">Contact name</label>
+          <input id="contact-name" name="contact_name" autocomplete="name" required>
+          <label for="contact-email">Email</label>
+          <input id="contact-email" name="email" type="email" autocomplete="email" required>
+          <label for="contact-phone">Phone</label>
+          <input id="contact-phone" name="phone" type="tel" autocomplete="tel" required>
+          <label for="sponsorship-tier">Sponsorship Tier</label>
+          <select id="sponsorship-tier" name="sponsorship_tier" required>
+            <option value="">Select…</option>
+            <option>Friend Sponsor – $250</option>
+            <option>Supporting Sponsor – $500</option>
+            <option>Headline Sponsor – $1,000</option>
+            <option>Presenting Sponsor – $2,500+</option>
+            <option>Not sure / Let’s discuss</option>
+          </select>
+          <label for="business-website">Website</label>
+          <input id="business-website" name="website" type="url" placeholder="https://">
+          <label for="send-package">Would you like us to send a sponsorship package?</label>
+          <select id="send-package" name="send_sponsorship_package" required>
+            <option value="">Select…</option>
+            <option>Yes</option>
+            <option>No</option>
+          </select>
+          <label for="sponsor-message">Message</label>
+          <textarea id="sponsor-message" name="message" required placeholder="Tell us about your business, sponsorship goals, or any questions."></textarea>
+          <input type="hidden" name="source" value="mockingbird_jam_sponsor_inquiry">
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Send sponsor inquiry</button>
+          </div>
+          <p class="form-status" role="status" aria-live="polite" aria-atomic="true" style="display:none;"></p>
+        </form>
+      `;
+      Mockingbird.initFormspreeForm(container.querySelector('form'));
+    })();
+  </script>
+</body>
+</html>
