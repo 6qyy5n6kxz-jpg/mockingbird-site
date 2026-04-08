@@ -5,8 +5,19 @@
     "subtitle": "A full day of music, community, and fundraising to support ALS research and local families navigating ALS.",
     "date": "2026-08-22T09:00:00",
     "location": "The Mockingbird on Mill Road",
+    "hero": {
+      "kicker": "Mockingbird Jam 2026",
+      "headline": "Music, movement, and community support for ALS families",
+      "subhead": "Spend the day with yoga, church, live music, food trucks, a silent auction, and all-day fundraising that helps ALS research and families living with ALS.",
+      "primary_cta_label": "View Auction",
+      "primary_cta_url": "/auction/",
+      "secondary_cta_label": "Donate to ALS",
+      "secondary_cta_url": "https://example.com/mockingbird-jam-als-donate"
+    },
     "countdown_label": "Countdown to Mockingbird Jam",
     "post_event_message": "Mockingbird Jam 2026 has wrapped. Thank you for showing up for the music, the auction, and the ALS mission.",
+    "auction_visible": false,
+    "auction_hidden_message": "Auction items are not public yet. Check back soon for the full silent auction lineup.",
     "auction_status_note": "Bid submissions are reviewed manually and confirmed by email or phone.",
     "auction_form_action": "https://formspree.io/f/xbddjoek",
     "signup_form_action": "https://formspree.io/f/xbddjoek",
@@ -143,6 +154,36 @@
       "bidIncrement": 10,
       "auctionEnd": "2026-08-22T20:00:00",
       "featured": false,
+      "status": "open"
+    },
+    {
+      "id": "jam-007",
+      "title": "Yoga + Wellness Morning for Eight",
+      "description": "A private yoga session with light breakfast snacks and coffee service for a group of eight.",
+      "image": "assets/images/interior2.jpg",
+      "category": "Wellness",
+      "donor": "Lake Breeze Yoga Studio",
+      "retailValue": 360,
+      "openingBid": 140,
+      "currentBid": 185,
+      "bidIncrement": 15,
+      "auctionEnd": "2026-08-22T20:00:00",
+      "featured": false,
+      "status": "open"
+    },
+    {
+      "id": "jam-008",
+      "title": "Food Truck Night for Ten",
+      "description": "Reserved seating, food truck vouchers, and Mockingbird drink tickets for a group of ten during a future music night.",
+      "image": "assets/images/hero.jpg",
+      "category": "Community",
+      "donor": "Mockingbird Jam Food Truck Partners",
+      "retailValue": 500,
+      "openingBid": 200,
+      "currentBid": 275,
+      "bidIncrement": 20,
+      "auctionEnd": "2026-08-22T20:00:00",
+      "featured": true,
       "status": "open"
     }
   ]

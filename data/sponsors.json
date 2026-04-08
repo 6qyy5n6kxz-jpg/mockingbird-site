@@ -35,6 +35,20 @@
       "tier": "community",
       "logo": "assets/sponsors/friends-of-graytown-music.svg",
       "blurb": "Championing live music and hometown fundraising."
+    },
+    {
+      "name": "Elliston Community Church",
+      "url": "https://example.com/elliston-community-church",
+      "tier": "headline",
+      "logo": "assets/sponsors/elliston-community-church.svg",
+      "blurb": "Helping host the morning service and rally the community around ALS support."
+    },
+    {
+      "name": "Portside Food Truck Collective",
+      "url": "https://example.com/portside-food-truck-collective",
+      "tier": "community",
+      "logo": "assets/sponsors/portside-food-truck-collective.svg",
+      "blurb": "Bringing local food trucks together for a full day of community fundraising."
     }
   ]
 }

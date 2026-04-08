@@ -992,7 +992,7 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
             <li><a data-nav="drinks">Drinks</a></li>
             <li><a data-nav="specials">Specials</a></li>
             <li><a data-nav="events">Events</a></li>
-            <li><a data-nav="auction">Auction</a></li>
+            <li><a data-nav="auction">Jam</a></li>
             <li><a data-nav="private-parties">Private Parties</a></li>
           </ul>
           <div class="nav-divider" aria-hidden="true"></div>
@@ -2297,6 +2297,20 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
   function renderFeaturedAuctionItems(containerId, auctionData) {
     const container = document.getElementById(containerId);
     if (!container) return;
+    if (auctionData?.event?.auction_visible === false) {
+      container.innerHTML = `
+        <div class="card fade-in">
+          <p class="kicker">Auction Preview</p>
+          <h2>Silent auction items are coming soon</h2>
+          <p class="note">${auctionData?.event?.auction_hidden_message || 'Check back soon for the full silent auction lineup.'}</p>
+          <div class="form-actions">
+            <a class="btn btn-secondary btn-small" href="${withBase('/auction/')}">Visit Jam page</a>
+          </div>
+        </div>
+      `;
+      enableFadeIn();
+      return;
+    }
     const items = getAuctionFeaturedItems(auctionData, 3);
     if (!items.length) {
       container.innerHTML = '<p class="note">Featured auction items will be posted soon.</p>';
@@ -2418,6 +2432,18 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
     const container = document.getElementById('auction-items');
     const items = Array.isArray(auctionData?.items) ? auctionData.items : [];
     if (!container) return;
+    if (auctionData?.event?.auction_visible === false) {
+      container.innerHTML = `
+        <div class="card fade-in">
+          <p class="kicker">Auction</p>
+          <h2>Silent auction lineup coming soon</h2>
+          <p class="note">${auctionData?.event?.auction_hidden_message || 'Check back soon for the full silent auction lineup.'}</p>
+          <p class="note">You can still sign up for updates, donate to ALS, become a sponsor, or donate an auction item in the meantime.</p>
+        </div>
+      `;
+      enableFadeIn();
+      return;
+    }
     if (!items.length) {
       container.innerHTML = '<p class="note">Auction items will be posted soon.</p>';
       return;

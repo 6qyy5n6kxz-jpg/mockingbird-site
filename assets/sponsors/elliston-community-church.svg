@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 120" role="img" aria-labelledby="title desc">
+  <title id="title">Elliston Community Church</title>
+  <desc id="desc">Placeholder logo for Elliston Community Church</desc>
+  <rect width="280" height="120" rx="18" fill="#f5efe7"/>
+  <path d="M52 84V38M40 50h24" stroke="#8f4c1b" stroke-width="6" stroke-linecap="round"/>
+  <path d="M36 84h32" stroke="#2f2b28" stroke-width="5" stroke-linecap="round"/>
+  <text x="94" y="50" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="700" fill="#2f2b28">Elliston</text>
+  <text x="94" y="72" font-family="Segoe UI, Arial, sans-serif" font-size="16" fill="#2f2b28">Community Church</text>
+</svg>
