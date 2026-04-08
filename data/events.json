@@ -2,45 +2,6 @@
   "_comment": "Upcoming events. Remove past dates as needed.",
   "events": [
     {
-      "date": "2026-03-21T18:00:00",
-      "title": "Live Music: Jeff Stewart",
-      "description": "Live music by Jeff Stewart, 6–9 PM.",
-      "price": "No cover",
-      "payment_link_url": ""
-    },
-    {
-       "date": "2026-03-19T18:30:00",
-       "title": "Mockingbird Book Club — March",
-       "description": "Join us for Mockingbird Book Club on Thursday, March 19 at 6:30 PM as we discuss The Stolen Life of Colette Marceau by Kristin Harmel —an open, welcoming conversation with food and drinks available.",
-       "price": "No cover",
-       "payment_link_url": "",
-       "image_url": "assets/events/March_Book_Club.png",
-       "image_alt": "Mockingbird Book Club event image for The Stolen Life of Colette Marceau by Kristin Harmel, Thursday, March 19 at 6:30 PM"
-    },
-    {
-       "date": "2026-03-22T12:00:00",
-       "title": "Easter Bunny at The Mockingbird",
-       "description": "Join us on Sunday, March 22 from 12–2 PM for a festive Easter celebration at The Mockingbird on Mill Road. Kids under 12 eat FREE (hot dog, chips, and beverage), and the Easter Bunny will be here for photos and fun. Our full menu will be available for parents and guests. No reservations needed—just hop on over and celebrate with us!",
-       "price": "Free to attend",
-       "payment_link_url": "",
-       "image_url": "assets/events/Easter_Bunny_2026.png",
-       "image_alt": "Easter Bunny at The Mockingbird on Mill Road, Sunday, March 22 from 12–2 PM"
-},
- {
-      "date": "2026-03-28T18:00:00",
-      "title": "Live Music: Jake Pilewski",
-      "description": "Live music by Jake Pilewski, 6–9 PM.",
-      "price": "No cover",
-      "payment_link_url": ""
-    },
-    {
-      "date": "2026-04-04T18:00:00",
-      "title": "Live Music: Kerry Patrick Clark",
-      "description": "Live music by Kerry Patrick Clark, 6–9 PM.",
-      "price": "No cover",
-      "payment_link_url": ""
-    },
-    {
       "date": "2026-04-09T18:00:00",
       "title": "Trivia Night at The Mockingbird",
       "description": "Get ready to put your knowledge to the test and have a blast with friends! Whether you're a trivia aficionado or just looking for a fun evening out, we've got a night full of challenging questions, great company, and exciting prizes. Doors open at 5:00pm, the first round begins at 6:00pm.",
@@ -155,7 +116,45 @@
       },
       "image_url": "assets/events/Sunset_Toast.png",
       "image_alt": "Wood pallet painting of a beach sunset with two wine glasses, ocean waves, and tropical flowers"
+    },
+    {
+  "date": "2026-05-02T12:00:00",
+  "title": "Mother’s Day Floral Workshop with Meregold Creations",
+  "description": "Join us at The Mockingbird for a special Mother’s Day floral workshop with Meredith of Meregold Creations. Create your own beautiful floral arrangement in a wine bottle with all supplies and instruction provided. No experience needed — just come ready to sip, create, and enjoy a relaxing afternoon. Doors open at 11 AM, crafting begins at 12 PM. Food and drinks will be available for purchase from The Mockingbird. $35 per person.",
+  "price": "$35 per person",
+  "event_type": "ticketed",
+  "payment_link_url": "https://venmo.com/u/Meredith-Wolfe-4",
+  "payment_provider": "vendor",
+  "payment_label": "Pay with Venmo",
+  "payment_url": "https://venmo.com/u/Meredith-Wolfe-4",
+  "payment_cta_helper": "Reserve your spot with Meregold Creations via Venmo. Payment opens in a new tab.",
+  "payment_options": [
+    {
+      "label": "Pay $35 with Venmo",
+      "url": "https://venmo.com/u/Meredith-Wolfe-4",
+      "style": "primary"
     }
+  ],
+  "payment_note": "Payment is collected directly by Meregold Creations.",
+  "hide_ticketed_helper": true,
+  "seating_form": {
+    "enabled": true,
+    "form_action": "https://formspree.io/f/xbddjoek",
+    "title": "Seating Details",
+    "description": "Already purchased your spot? Use this form to let us know who you'd like to sit with.",
+    "submit_label": "Submit seating request"
+  },
+  "type": "Special Event",
+  "ticketing": {
+    "capacity": 0,
+    "sold": 0,
+    "price_display": "$35 per person",
+    "clover_payment_url": "https://venmo.com/u/Meredith-Wolfe-4",
+    "sold_out_behavior": "disable"
+  },
+  "image_url": "assets/events/Mothers_Day_Floral_Workshop.png",
+  "image_alt": "Mother’s Day Floral Workshop at The Mockingbird with Meregold Creations on Saturday, May 2 at 12 PM featuring wine bottle floral arrangements"
+}
   ]
 
 }
