@@ -1,0 +1,149 @@
+{
+  "event": {
+    "id": "mockingbird-jam-2026",
+    "title": "Mockingbird Jam 2026",
+    "subtitle": "A full day of music, community, and fundraising to support ALS research and local families navigating ALS.",
+    "date": "2026-08-22T09:00:00",
+    "location": "The Mockingbird on Mill Road",
+    "countdown_label": "Countdown to Mockingbird Jam",
+    "post_event_message": "Mockingbird Jam 2026 has wrapped. Thank you for showing up for the music, the auction, and the ALS mission.",
+    "auction_status_note": "Bid submissions are reviewed manually and confirmed by email or phone.",
+    "auction_form_action": "https://formspree.io/f/xbddjoek",
+    "signup_form_action": "https://formspree.io/f/xbddjoek",
+    "als_mission": {
+      "title": "Supporting ALS research and ALS families",
+      "body": "Mockingbird Jam raises funds for ALS research while also helping families facing the day-to-day impact of ALS. Every bid, sponsorship, and donation helps extend that support."
+    },
+    "schedule": [
+      { "time": "9:00 AM", "title": "Yoga on the lawn", "description": "A gentle morning class to open the fundraiser." },
+      { "time": "10:00 AM", "title": "Church service", "description": "A brief community service before the day’s music begins." },
+      { "time": "11:00 AM - 8:00 PM", "title": "Live music all day", "description": "Regional musicians play throughout the day on the Mockingbird Jam stage." },
+      { "time": "All day", "title": "Food trucks + drinks", "description": "Festival-style food, Mockingbird drinks, and room to gather." },
+      { "time": "All day", "title": "Silent auction", "description": "Bid on donated packages, local experiences, and one-of-a-kind items." }
+    ],
+    "ctas": [
+      {
+        "label": "Donate to ALS",
+        "url": "https://example.com/mockingbird-jam-als-donate",
+        "style": "primary",
+        "description": "Make a direct fundraising gift."
+      },
+      {
+        "label": "Become a Sponsor",
+        "url": "https://example.com/mockingbird-jam-sponsor",
+        "style": "secondary",
+        "description": "Support the event as a business or family sponsor."
+      },
+      {
+        "label": "Donate an Auction Item",
+        "url": "https://example.com/mockingbird-jam-auction-donate",
+        "style": "secondary",
+        "description": "Contribute an item, gift card, package, or experience."
+      },
+      {
+        "label": "Join Event Updates",
+        "url": "#event-updates-signup",
+        "style": "ghost",
+        "description": "Get reminders about the fundraiser and auction."
+      }
+    ],
+    "signup": {
+      "title": "Get Mockingbird Jam updates",
+      "description": "Sign up for event updates, auction reminders, sponsor announcements, and ALS donation reminders.",
+      "success_message": "Thanks. You’re on the Mockingbird Jam update list.",
+      "error_message": "We couldn’t save your signup. Please try again."
+    }
+  },
+  "items": [
+    {
+      "id": "jam-001",
+      "title": "Dinner for Four at The Mockingbird",
+      "description": "A hosted dinner for four with chef-selected small plates and wine pairings.",
+      "image": "assets/images/food1.jpg",
+      "category": "Dining",
+      "donor": "The Mockingbird on Mill Road",
+      "retailValue": 320,
+      "openingBid": 125,
+      "currentBid": 180,
+      "bidIncrement": 10,
+      "auctionEnd": "2026-08-22T20:00:00",
+      "featured": true,
+      "status": "open"
+    },
+    {
+      "id": "jam-002",
+      "title": "Private Wine Tasting for Six",
+      "description": "An after-hours tasting built around six curated pours and paired bites.",
+      "image": "assets/images/bar1.jpg",
+      "category": "Experience",
+      "donor": "Mockingbird Wine Team",
+      "retailValue": 450,
+      "openingBid": 175,
+      "currentBid": 245,
+      "bidIncrement": 15,
+      "auctionEnd": "2026-08-22T20:00:00",
+      "featured": true,
+      "status": "open"
+    },
+    {
+      "id": "jam-003",
+      "title": "Local Makers Gift Basket",
+      "description": "A basket of candles, pantry goods, ceramics, and gift cards from local businesses.",
+      "image": "assets/images/food2.jpg",
+      "category": "Gift Basket",
+      "donor": "Community Donors",
+      "retailValue": 220,
+      "openingBid": 80,
+      "currentBid": 110,
+      "bidIncrement": 10,
+      "auctionEnd": "2026-08-22T20:00:00",
+      "featured": false,
+      "status": "open"
+    },
+    {
+      "id": "jam-004",
+      "title": "Front Porch Concert Package",
+      "description": "A private acoustic set for a backyard gathering, donated by a Mockingbird Jam performer.",
+      "image": "assets/images/interior1.jpg",
+      "category": "Music",
+      "donor": "Mockingbird Jam Artists",
+      "retailValue": 600,
+      "openingBid": 250,
+      "currentBid": 325,
+      "bidIncrement": 25,
+      "auctionEnd": "2026-08-22T20:00:00",
+      "featured": true,
+      "status": "open"
+    },
+    {
+      "id": "jam-005",
+      "title": "Weekend Lake Escape",
+      "description": "Two-night stay near the lake with a dining gift certificate and local welcome basket.",
+      "image": "assets/images/interior3.jpg",
+      "category": "Travel",
+      "donor": "Harbor House Rentals",
+      "retailValue": 780,
+      "openingBid": 300,
+      "currentBid": 420,
+      "bidIncrement": 25,
+      "auctionEnd": "2026-08-22T20:00:00",
+      "featured": false,
+      "status": "open"
+    },
+    {
+      "id": "jam-006",
+      "title": "Family Brunch + Bakery Box",
+      "description": "A brunch certificate and seasonal pastry box for a future Sunday gathering.",
+      "image": "assets/images/food3.jpg",
+      "category": "Dining",
+      "donor": "Neighbor Table Bakery",
+      "retailValue": 140,
+      "openingBid": 55,
+      "currentBid": 75,
+      "bidIncrement": 10,
+      "auctionEnd": "2026-08-22T20:00:00",
+      "featured": false,
+      "status": "open"
+    }
+  ]
+}

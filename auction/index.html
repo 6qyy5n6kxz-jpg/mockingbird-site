@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Events in Graytown, OH | The Mockingbird</title>
-  <meta name="description" content="Upcoming events in Graytown, OH at The Mockingbird on Mill Road—live music, trivia, ticketed dinners, and more.">
-  <meta property="og:title" content="Events | Mockingbird">
-  <meta property="og:description" content="Dinners, tastings, and live music at Mockingbird.">
+  <title>Mockingbird Jam Auction | The Mockingbird on Mill Road</title>
+  <meta name="description" content="Browse and bid on Mockingbird Jam 2026 auction items supporting ALS research and families dealing with ALS.">
+  <meta property="og:title" content="Mockingbird Jam Auction | Mockingbird">
+  <meta property="og:description" content="Silent auction packages, sponsor support, event updates, and ALS donation calls to action.">
   <meta property="og:image" content="../assets/images/og.jpg">
   <script src="../js/base.js"></script>
   <link rel="icon" type="image/svg+xml" data-favicon="svg">
@@ -30,51 +30,44 @@
   <header id="site-header"></header>
   <div class="announcement" role="status"></div>
 
-  <main id="main" class="section">
-    <div class="container">
-      <p class="kicker">Events</p>
-      <h1>Dinners, tastings, and neighborhood nights</h1>
-      <p class="lead">Ticketed events include a ‘Pay for tickets’ button. RSVP nights are noted on each event card.</p>
-      <p class="note">Looking for live music, trivia, and special events near Toledo? Our Graytown wine café hosts a rotating calendar of gatherings — easy to reach from Oregon, Port Clinton, and the Northwest Ohio area.</p>
-      <div id="events-list" class="table-grid" style="margin-top:20px;"></div>
-    </div>
-  </main>
-
-  <section class="section alt">
-    <div class="container" id="jam-events-cta"></div>
-  </section>
-
-  <section class="section">
-    <div class="container grid-2">
-      <div id="jam-events-countdown"></div>
-      <div id="jam-signage"></div>
-    </div>
-  </section>
-
-  <section class="section alt">
-    <div class="container" id="events-sponsors"></div>
-  </section>
-
-  <section class="section">
-    <div class="container" id="event-updates-signup"></div>
-  </section>
-
-  <section class="section alt events-cta-tight">
-    <div class="container">
-      <div class="final-cta">
-        <div>
-          <p class="kicker">Plan ahead</p>
-          <h2>Planning a night at Mockingbird?</h2>
-          <p class="note">Explore upcoming events, or plan something private.</p>
-        </div>
-        <div class="hero-cta">
-          <a class="btn btn-secondary" data-nav="auction">View Auction</a>
-          <a class="btn btn-primary" data-nav="gift-cards">Buy Gift Card</a>
-          <a class="btn btn-ghost" data-nav="private-parties">Private Events</a>
+  <main id="main">
+    <section class="section">
+      <div class="container">
+        <p class="kicker">Auction</p>
+        <h1>Mockingbird Jam silent auction</h1>
+        <p class="lead">Bid on donated packages, experiences, and local gifts that support ALS research and ALS families through Mockingbird Jam 2026.</p>
+        <div class="inline-links">
+          <a class="btn btn-secondary btn-small" data-nav="events">Back to events</a>
+          <a class="btn btn-ghost btn-small" href="#event-updates-signup">Join event updates</a>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+
+    <section class="section alt">
+      <div class="container" id="auction-cta-band"></div>
+    </section>
+
+    <section class="section">
+      <div class="container grid-2">
+        <div id="auction-countdown"></div>
+        <div id="auction-signage"></div>
+      </div>
+    </section>
+
+    <section class="section alt">
+      <div class="container">
+        <div id="auction-items" class="auction-grid"></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container" id="auction-sponsors"></div>
+    </section>
+
+    <section class="section alt">
+      <div class="container" id="event-updates-signup"></div>
+    </section>
+  </main>
 
   <footer class="footer">
     <div class="container">
@@ -95,15 +88,15 @@
               <a data-nav="home">Home</a>
               <a data-nav="menu">Menu</a>
               <a data-nav="drinks">Drinks</a>
-              <a data-nav="specials">Specials</a>
+              <a data-nav="events">Events</a>
             </div>
           </div>
           <div>
-            <p class="kicker">Happenings</p>
+            <p class="kicker">Support</p>
             <div class="inline-links">
-              <a data-nav="events">Events</a>
-              <a data-nav="private-parties">Private Parties</a>
-              <a data-nav="gallery">Gallery</a>
+              <a data-nav="auction">Auction</a>
+              <a href="https://example.com/mockingbird-jam-als-donate" target="_blank" rel="noopener noreferrer">Donate to ALS</a>
+              <a href="https://example.com/mockingbird-jam-sponsor" target="_blank" rel="noopener noreferrer">Become a Sponsor</a>
             </div>
           </div>
           <div>
@@ -140,29 +133,26 @@
   <script>
     (async function() {
       const cacheBuster = Date.now();
-      const [events, site, auction, sponsors] = await Promise.all([
-        Mockingbird.fetchJSON(`events.json?cb=${cacheBuster}`, { events: [] }),
-        Mockingbird.sitePromise,
+      const [auction, sponsors] = await Promise.all([
         Mockingbird.fetchJSON(`auction.json?cb=${cacheBuster}`, { items: [], event: {} }),
         Mockingbird.fetchJSON(`sponsors.json?cb=${cacheBuster}`, { sponsors: [] })
       ]);
       Mockingbird.state.auction = auction;
       Mockingbird.state.sponsors = sponsors;
-      if (window.location.search.includes('debug=1')) {
-        console.log('events init', { events: events?.events?.length || 0, hasContainer: !!document.getElementById('events-list') });
-      }
-      Mockingbird.renderEvents(events, site.email);
-      Mockingbird.renderFundraisingCtas('jam-events-cta', auction, {
-        title: 'ALS fundraising at Mockingbird Jam',
-        body: 'Support the fundraiser by donating to ALS, sponsoring the event, donating an auction item, or signing up for updates.'
+      Mockingbird.renderFundraisingCtas('auction-cta-band', auction, {
+        title: 'Support Mockingbird Jam',
+        body: 'Bid generously, donate to ALS, sponsor the fundraiser, or donate an auction item.'
       });
-      Mockingbird.renderEventCountdown('jam-events-countdown', auction);
-      Mockingbird.renderJamSchedule('jam-signage', auction);
-      Mockingbird.renderSponsors(sponsors, 'events-sponsors');
+      Mockingbird.renderEventCountdown('auction-countdown', auction, {
+        label: 'Time until bidding closes'
+      });
+      Mockingbird.renderJamSchedule('auction-signage', auction);
+      Mockingbird.renderAuction(auction);
+      Mockingbird.renderSponsors(sponsors, 'auction-sponsors');
       Mockingbird.renderEmailSignup('event-updates-signup', {
         ...(auction.event?.signup || {}),
         action: auction.event?.signup_form_action,
-        source: 'events_page_updates'
+        source: 'auction_page_updates'
       });
     })();
   </script>

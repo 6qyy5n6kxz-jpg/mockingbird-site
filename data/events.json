@@ -84,12 +84,25 @@
   "image_url": "assets/events/Mockingbird_Wine_Tasting_Dinner_Rachel_Nasatir.png",
   "image_alt": "Mockingbird Wine Tasting Dinner with Rachel Nasatir event graphic for Sunday, April 26 from 6 to 9 PM featuring a five-course Greek menu and wine pairings"
 },
-{
+    {
       "date": "2026-05-02T18:00:00",
       "title": "Live Music: Mike Bryce",
       "description": "Live music by Mike Bryce, 6–9 PM.",
       "price": "No cover",
       "payment_link_url": ""
+    },
+    {
+      "date": "2026-08-22T09:00:00",
+      "title": "Mockingbird Jam 2026",
+      "slug": "mockingbird-jam-2026",
+      "campaign": "mockingbird_jam",
+      "description": "Mockingbird Jam is our 2026 community fundraiser for ALS research and families dealing with ALS. Join us for yoga at 9 AM, church service at 10 AM, live music from 11 AM to 8 PM, food trucks, a silent auction, and all-day fundraising throughout the property.",
+      "price": "Free admission | Donations encouraged",
+      "event_type": "rsvp",
+      "payment_link_url": "",
+      "type": "Fundraiser",
+      "image_url": "assets/images/hero.jpg",
+      "image_alt": "Mockingbird Jam fundraiser crowd gathered for live music and community support"
     },
     {
       "date": "2026-04-27T18:00:00",

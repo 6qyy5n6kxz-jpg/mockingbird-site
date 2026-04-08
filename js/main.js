@@ -42,6 +42,12 @@
     return `${base}${normalized}`;
   }
 
+  function resolveLink(url) {
+    if (!url) return '';
+    if (/^(https?:|mailto:|tel:|#)/i.test(url)) return url;
+    return withBase(url);
+  }
+
   function isPlaceholderUrl(url, isPlaceholderFlag) {
     if (isPlaceholderFlag === true) return true;
     if (!url) return true;
@@ -125,6 +131,79 @@
     const capacity = Number(ticketing.capacity) || 0;
     const sold = Number(ticketing.sold) || 0;
     return Math.max(0, capacity - sold);
+  }
+
+  function formatCurrency(value) {
+    const num = Number(value);
+    if (!Number.isFinite(num)) return value ? String(value) : '';
+    return new Intl.NumberFormat(undefined, {
+      style: 'currency',
+      currency: 'USD',
+      maximumFractionDigits: 0
+    }).format(num);
+  }
+
+  function formatCountdown(targetDate) {
+    const target = new Date(targetDate);
+    if (Number.isNaN(target.getTime())) return null;
+    const diff = target.getTime() - Date.now();
+    if (diff <= 0) {
+      return {
+        complete: true,
+        text: 'Event is live or has ended.'
+      };
+    }
+    const totalSeconds = Math.floor(diff / 1000);
+    const days = Math.floor(totalSeconds / 86400);
+    const hours = Math.floor((totalSeconds % 86400) / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const seconds = totalSeconds % 60;
+    return {
+      complete: false,
+      text: `${days}d ${hours}h ${minutes}m ${seconds}s`
+    };
+  }
+
+  function startCountdown(el, targetDate, options = {}) {
+    if (!el || !targetDate) return;
+    const completeText = options.completeText || 'Thanks for supporting Mockingbird Jam.';
+    const prefix = options.prefix || '';
+    const tick = () => {
+      const value = formatCountdown(targetDate);
+      if (!value) {
+        el.textContent = '';
+        return;
+      }
+      el.textContent = value.complete ? completeText : `${prefix}${value.text}`.trim();
+    };
+    tick();
+    window.setInterval(tick, 1000);
+  }
+
+  function buildActionLinks(actions, className = 'hero-cta') {
+    const list = Array.isArray(actions) ? actions.filter((item) => item && item.label && item.url) : [];
+    if (!list.length) return '';
+    const links = list.map((item) => {
+      const href = resolveLink(item.url);
+      const buttonClass = item.style === 'secondary'
+        ? 'btn btn-secondary'
+        : item.style === 'ghost'
+          ? 'btn btn-ghost'
+          : 'btn btn-primary';
+      const targetAttrs = /^https?:\/\//i.test(href) ? ' target="_blank" rel="noopener noreferrer"' : '';
+      return `<a class="${buttonClass}" href="${href}"${targetAttrs}>${item.label}</a>`;
+    });
+    return `<div class="${className}">${links.join('')}</div>`;
+  }
+
+  function getFundraisingCtas(auctionData) {
+    const event = auctionData?.event || {};
+    const configured = Array.isArray(event.ctas) ? event.ctas.slice() : [];
+    const hasAuction = configured.some((item) => item.url === '/auction/' || item.url === '#auction');
+    if (!hasAuction) {
+      configured.unshift({ label: 'View Auction', url: '/auction/', style: 'primary' });
+    }
+    return configured;
   }
 
   function buildSubmissionLink(submission, tokens, fallbackSubject = '', fallbackBody = '') {
@@ -529,7 +608,7 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
     return wrap;
   }
 
-  const state = { site: null, payments: null };
+  const state = { site: null, payments: null, auction: null, sponsors: null };
   const debugSummary = {
     menuItems: 0,
     menuPriced: 0,
@@ -913,6 +992,7 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
             <li><a data-nav="drinks">Drinks</a></li>
             <li><a data-nav="specials">Specials</a></li>
             <li><a data-nav="events">Events</a></li>
+            <li><a data-nav="auction">Auction</a></li>
             <li><a data-nav="private-parties">Private Parties</a></li>
           </ul>
           <div class="nav-divider" aria-hidden="true"></div>
@@ -1945,6 +2025,9 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
           <p class="note event-help">Seating details are now closed for this event.</p>
         </div>`
         : '';
+      const isJamEvent = ev.slug === 'mockingbird-jam-2026' || ev.campaign === 'mockingbird_jam';
+      const jamBlock = isJamEvent ? buildJamEventMarkup(state.auction) : '';
+
       card.innerHTML = `
         ${img}
         <div class="inline-links"><span class="badge">${formatDate(ev.date)}</span>${priceBadge}${availabilityBadge}${typeBadge}${eventTypeBadge}</div>
@@ -1952,6 +2035,7 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
         <p>${ev.description}</p>
         ${soldOutNote}
         ${ticketing?.policy ? `<p class="note">${ticketing.policy}</p>` : ''}
+        ${jamBlock}
         ${paymentBlock}
         ${lowInventory ? '<p class="note">Limited tickets remain. Availability isn’t held until payment completes.</p>' : ''}
         ${seatingClosedBlock}
@@ -2027,6 +2111,388 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
       container.appendChild(card);
     });
     enableFadeIn();
+  }
+
+  function renderJamPromo(containerId, auctionData) {
+    const container = document.getElementById(containerId);
+    const event = auctionData?.event;
+    if (!container || !event) return;
+    container.innerHTML = `
+      <div class="final-cta fade-in">
+        <div>
+          <p class="kicker">Mockingbird Jam 2026</p>
+          <h2>${event.title}</h2>
+          <p class="note">${event.subtitle || ''}</p>
+        </div>
+        ${buildActionLinks(getFundraisingCtas(auctionData))}
+      </div>
+    `;
+    enableFadeIn();
+  }
+
+  function renderEventCountdown(containerId, auctionData, options = {}) {
+    const container = document.getElementById(containerId);
+    const event = auctionData?.event;
+    if (!container || !event?.date) return;
+    const label = options.label || event.countdown_label || 'Countdown';
+    const message = options.completeText || event.post_event_message || 'Thanks for supporting Mockingbird Jam.';
+    container.innerHTML = `
+      <div class="countdown-card fade-in">
+        <p class="kicker">${label}</p>
+        <h2>${event.title}</h2>
+        <p class="note">${event.location || ''}</p>
+        <p class="countdown-value" data-countdown-target="${event.date}"></p>
+        <p class="note">${event.als_mission?.body || ''}</p>
+      </div>
+    `;
+    const target = container.querySelector('[data-countdown-target]');
+    startCountdown(target, event.date, { completeText: message });
+    enableFadeIn();
+  }
+
+  function renderFundraisingCtas(containerId, auctionData, options = {}) {
+    const container = document.getElementById(containerId);
+    if (!container || !auctionData?.event) return;
+    const title = options.title || 'Support the cause';
+    const body = options.body || auctionData.event.als_mission?.body || '';
+    container.innerHTML = `
+      <div class="cta-band fade-in">
+        <div>
+          <p class="kicker">${title}</p>
+          <p>${body}</p>
+        </div>
+        ${buildActionLinks(getFundraisingCtas(auctionData))}
+      </div>
+    `;
+    enableFadeIn();
+  }
+
+  function renderJamSchedule(containerId, auctionData) {
+    const container = document.getElementById(containerId);
+    const event = auctionData?.event;
+    const schedule = Array.isArray(event?.schedule) ? event.schedule : [];
+    if (!container || !event || !schedule.length) return;
+    const rows = schedule.map((item) => `
+      <div class="schedule-row">
+        <strong>${item.time}</strong>
+        <div>
+          <div>${item.title}</div>
+          ${item.description ? `<p class="note">${item.description}</p>` : ''}
+        </div>
+      </div>
+    `).join('');
+    container.innerHTML = `
+      <div class="card fade-in">
+        <p class="kicker">Event Day Schedule</p>
+        <h2>What’s happening at Mockingbird Jam</h2>
+        <div class="schedule-list">${rows}</div>
+        <p class="note">${event.als_mission?.body || ''}</p>
+      </div>
+    `;
+    enableFadeIn();
+  }
+
+  function renderSponsors(data, containerId, options = {}) {
+    const container = document.getElementById(containerId);
+    const sponsors = Array.isArray(data?.sponsors) ? data.sponsors : [];
+    const tiers = Array.isArray(data?.tiers) ? data.tiers : [];
+    if (!container) return;
+    if (!sponsors.length) {
+      container.innerHTML = '<p class="note">Sponsor details coming soon.</p>';
+      return;
+    }
+    const intro = options.intro || data.intro || '';
+    const title = options.title || data.title || 'Sponsors';
+    const limit = Number(options.limit) > 0 ? Number(options.limit) : 0;
+    const filterTiers = Array.isArray(options.tiers) && options.tiers.length ? new Set(options.tiers) : null;
+    const grouped = tiers.map((tier) => {
+      const items = sponsors.filter((sponsor) => sponsor.tier === tier.id && (!filterTiers || filterTiers.has(tier.id)));
+      if (limit) return { ...tier, items: items.slice(0, limit) };
+      return { ...tier, items };
+    }).filter((tier) => tier.items.length);
+
+    if (!grouped.length) {
+      container.innerHTML = '<p class="note">Sponsor details coming soon.</p>';
+      return;
+    }
+
+    container.innerHTML = `
+      <div class="fade-in">
+        <p class="kicker">Sponsors</p>
+        <h2>${title}</h2>
+        ${intro ? `<p class="lead">${intro}</p>` : ''}
+        ${grouped.map((tier) => `
+          <div class="sponsor-tier">
+            <h3>${tier.label}</h3>
+            <div class="sponsor-grid">
+              ${tier.items.map((sponsor) => {
+                const href = resolveLink(sponsor.url);
+                const logo = sponsor.logo ? `<img src="${withBase(sponsor.logo)}" alt="${sponsor.name} logo" loading="lazy">` : `<div class="sponsor-wordmark">${sponsor.name}</div>`;
+                const targetAttrs = /^https?:\/\//i.test(href) ? ' target="_blank" rel="noopener noreferrer"' : '';
+                return `
+                  <a class="sponsor-card" href="${href}"${targetAttrs}>
+                    <div class="sponsor-logo">${logo}</div>
+                    <strong>${sponsor.name}</strong>
+                    <span class="badge badge-soft">${tier.label}</span>
+                    ${sponsor.blurb ? `<p class="note">${sponsor.blurb}</p>` : ''}
+                  </a>
+                `;
+              }).join('')}
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    `;
+    enableFadeIn();
+  }
+
+  function createSignupCheckbox(name, label) {
+    return `
+      <label class="check-row">
+        <input type="checkbox" name="interests" value="${name}">
+        <span>${label}</span>
+      </label>
+    `;
+  }
+
+  function renderEmailSignup(containerId, config = {}) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+    const action = config.action || 'https://formspree.io/f/xbddjoek';
+    const title = config.title || 'Join Event Updates';
+    const description = config.description || 'Get event updates, auction reminders, sponsor announcements, and donation reminders.';
+    container.innerHTML = `
+      <form class="fade-in signup-form" action="${action}" method="POST" data-formspree data-success-message="${config.success_message || 'Thanks. You’re signed up.'}" data-error-message="${config.error_message || 'Something went wrong. Please try again.'}">
+        <p class="kicker">Join Event Updates</p>
+        <h2>${title}</h2>
+        <p class="note">${description}</p>
+        <label for="${containerId}-first-name">First name</label>
+        <input id="${containerId}-first-name" name="first_name" autocomplete="given-name" required>
+        <label for="${containerId}-email">Email</label>
+        <input id="${containerId}-email" name="email" type="email" autocomplete="email" required>
+        <input type="hidden" name="source" value="${config.source || 'mockingbird_jam_updates'}">
+        <div class="signup-interests">
+          <span class="signup-interests-label">I’m interested in:</span>
+          ${createSignupCheckbox('event-updates', 'Event updates')}
+          ${createSignupCheckbox('auction', 'Auction')}
+          ${createSignupCheckbox('volunteering', 'Volunteering')}
+          ${createSignupCheckbox('sponsorship', 'Sponsorship')}
+          ${createSignupCheckbox('als-donations', 'ALS donations')}
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary">Join event updates</button>
+        </div>
+        <p class="form-status" role="status" aria-live="polite" aria-atomic="true" style="display:none;"></p>
+      </form>
+    `;
+    initFormspreeForm(container.querySelector('form'));
+    enableFadeIn();
+  }
+
+  function getAuctionFeaturedItems(data, limit = 3) {
+    const items = Array.isArray(data?.items) ? data.items : [];
+    return items.filter((item) => item.featured).slice(0, limit);
+  }
+
+  function renderFeaturedAuctionItems(containerId, auctionData) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+    const items = getAuctionFeaturedItems(auctionData, 3);
+    if (!items.length) {
+      container.innerHTML = '<p class="note">Featured auction items will be posted soon.</p>';
+      return;
+    }
+    container.innerHTML = `
+      <div class="fade-in">
+        <p class="kicker">Featured Auction Items</p>
+        <h2>Bid on standout packages for the ALS mission</h2>
+        <div class="auction-grid">
+          ${items.map((item) => `
+            <article class="auction-card">
+              <img src="${withBase(item.image)}" alt="${item.title}" loading="lazy">
+              <div class="auction-card-body">
+                <div class="inline-links"><span class="badge">${item.category}</span><span class="badge badge-soft">${item.status}</span></div>
+                <h3>${item.title}</h3>
+                <p class="note">Donated by ${item.donor}</p>
+                <p>${item.description}</p>
+                <div class="auction-meta">
+                  <span><strong>Current bid:</strong> ${formatCurrency(item.currentBid)}</span>
+                  <span><strong>Retail value:</strong> ${formatCurrency(item.retailValue)}</span>
+                </div>
+                <div class="form-actions">
+                  <a class="btn btn-primary btn-small" href="${withBase('/auction/')}">View item</a>
+                </div>
+              </div>
+            </article>
+          `).join('')}
+        </div>
+      </div>
+    `;
+    enableFadeIn();
+  }
+
+  function createBidPanel(item, auctionData) {
+    const minBid = Number(item.currentBid) + Number(item.bidIncrement || 0);
+    const form = document.createElement('form');
+    form.className = 'bid-form';
+    form.action = auctionData?.event?.auction_form_action || 'https://formspree.io/f/xbddjoek';
+    form.method = 'POST';
+    form.innerHTML = `
+      <input type="hidden" name="item_id" value="${item.id}">
+      <input type="hidden" name="item_title" value="${item.title}">
+      <input type="hidden" name="source" value="auction_bid">
+      <label for="bidder-name-${item.id}">Name</label>
+      <input id="bidder-name-${item.id}" name="bidder_name" autocomplete="name" required>
+      <label for="bidder-email-${item.id}">Email</label>
+      <input id="bidder-email-${item.id}" name="bidder_email" type="email" autocomplete="email" required>
+      <label for="bidder-phone-${item.id}">Phone</label>
+      <input id="bidder-phone-${item.id}" name="bidder_phone" type="tel" autocomplete="tel" required>
+      <label for="bid-amount-${item.id}">Bid amount</label>
+      <input id="bid-amount-${item.id}" name="bid_amount" type="number" min="${minBid}" step="${item.bidIncrement || 1}" value="${minBid}" required>
+      <label for="bid-note-${item.id}">Optional note</label>
+      <textarea id="bid-note-${item.id}" name="note" rows="3" placeholder="Pickup notes or questions"></textarea>
+      <p class="note">Minimum bid for this item is ${formatCurrency(minBid)}.</p>
+      <p class="form-status" role="status" aria-live="polite" aria-atomic="true" style="display:none;"></p>
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary btn-small">Submit bid</button>
+      </div>
+    `;
+
+    const status = form.querySelector('.form-status');
+    const button = form.querySelector('button[type="submit"]');
+    const amountInput = form.querySelector(`#bid-amount-${item.id}`);
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+      const bidValue = Number(amountInput.value);
+      if (!Number.isFinite(bidValue) || bidValue < minBid) {
+        status.textContent = `Please enter at least ${formatCurrency(minBid)}.`;
+        status.classList.remove('is-success');
+        status.classList.add('is-error');
+        status.style.display = 'block';
+        return;
+      }
+
+      status.style.display = 'none';
+      button.disabled = true;
+      const originalLabel = button.textContent;
+      button.textContent = 'Sending...';
+
+      const formData = new FormData(form);
+      formData.append('minimum_allowed_bid', String(minBid));
+
+      // Future Firebase upgrade path:
+      // Replace this Formspree POST with a write to a live bids collection and
+      // refresh current bid state from the backend after the write succeeds.
+      fetch(form.action, {
+        method: 'POST',
+        body: formData,
+        headers: { Accept: 'application/json' }
+      }).then((res) => {
+        if (!res.ok) throw new Error('Bid submission failed');
+        status.textContent = 'Thanks. Your bid was submitted and will be reviewed shortly.';
+        status.classList.remove('is-error');
+        status.classList.add('is-success');
+        status.style.display = 'block';
+        form.reset();
+        amountInput.value = String(minBid);
+      }).catch(() => {
+        status.textContent = 'Something went wrong. Please try again.';
+        status.classList.remove('is-success');
+        status.classList.add('is-error');
+        status.style.display = 'block';
+      }).finally(() => {
+        button.disabled = false;
+        button.textContent = originalLabel;
+      });
+    });
+
+    return form;
+  }
+
+  function renderAuction(auctionData) {
+    const container = document.getElementById('auction-items');
+    const items = Array.isArray(auctionData?.items) ? auctionData.items : [];
+    if (!container) return;
+    if (!items.length) {
+      container.innerHTML = '<p class="note">Auction items will be posted soon.</p>';
+      return;
+    }
+
+    const sorted = items.slice().sort((a, b) => {
+      if (a.featured === b.featured) return String(a.title || '').localeCompare(String(b.title || ''));
+      return a.featured ? -1 : 1;
+    });
+    container.innerHTML = '';
+
+    sorted.forEach((item) => {
+      const minBid = Number(item.currentBid) + Number(item.bidIncrement || 0);
+      const card = document.createElement('article');
+      card.className = 'auction-card fade-in';
+      card.innerHTML = `
+        <img src="${withBase(item.image)}" alt="${item.title}" loading="lazy">
+        <div class="auction-card-body">
+          <div class="inline-links">
+            <span class="badge">${item.category}</span>
+            ${item.featured ? '<span class="badge badge-soft">Featured</span>' : ''}
+            <span class="badge badge-soft">${item.status}</span>
+          </div>
+          <h3>${item.title}</h3>
+          <p>${item.description}</p>
+          <p class="note">Donated by ${item.donor}</p>
+          <div class="auction-meta">
+            <span><strong>Retail value:</strong> ${formatCurrency(item.retailValue)}</span>
+            <span><strong>Opening bid:</strong> ${formatCurrency(item.openingBid)}</span>
+            <span><strong>Current bid:</strong> ${formatCurrency(item.currentBid)}</span>
+            <span><strong>Increment:</strong> ${formatCurrency(item.bidIncrement)}</span>
+          </div>
+          <p class="countdown-inline" data-auction-countdown="${item.auctionEnd}"></p>
+          <p class="note">Next valid bid starts at ${formatCurrency(minBid)}.</p>
+          <div class="form-actions">
+            <button type="button" class="btn btn-primary btn-small" data-bid-toggle="${item.id}">Place Bid</button>
+          </div>
+          <div class="bid-panel is-hidden" data-bid-panel="${item.id}"></div>
+        </div>
+      `;
+
+      const countdown = card.querySelector('[data-auction-countdown]');
+      startCountdown(countdown, item.auctionEnd, { prefix: 'Ends in ', completeText: 'Bidding closed.' });
+
+      const toggle = card.querySelector(`[data-bid-toggle="${item.id}"]`);
+      const panel = card.querySelector(`[data-bid-panel="${item.id}"]`);
+      let initialized = false;
+      toggle.addEventListener('click', () => {
+        const hidden = panel.classList.contains('is-hidden');
+        panel.classList.toggle('is-hidden');
+        toggle.textContent = hidden ? 'Hide Bid Form' : 'Place Bid';
+        if (hidden && !initialized) {
+          panel.appendChild(createBidPanel(item, auctionData));
+          initialized = true;
+        }
+      });
+
+      container.appendChild(card);
+    });
+    enableFadeIn();
+  }
+
+  function buildJamEventMarkup(auctionData) {
+    const event = auctionData?.event;
+    if (!event) return '';
+    const schedule = Array.isArray(event.schedule) ? event.schedule.slice(0, 3) : [];
+    return `
+      <div class="jam-event-block">
+        <p class="kicker">Fundraiser Spotlight</p>
+        <h4>${event.title}</h4>
+        <p class="note">${event.subtitle || ''}</p>
+        ${schedule.length ? `<div class="jam-mini-schedule">${schedule.map((item) => `<div><strong>${item.time}</strong> · ${item.title}</div>`).join('')}</div>` : ''}
+        ${buildActionLinks(getFundraisingCtas(auctionData), 'hero-cta jam-actions')}
+      </div>
+    `;
   }
 
   function renderFeaturedItems(site, menuData) {
@@ -3089,6 +3555,14 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
     renderMenu,
     renderSpecials,
     renderEvents,
+    renderAuction,
+    renderSponsors,
+    renderEmailSignup,
+    renderEventCountdown,
+    renderFeaturedAuctionItems,
+    renderFundraisingCtas,
+    renderJamPromo,
+    renderJamSchedule,
     renderFeaturedItems,
     renderSpecialsPreview,
     renderEventsPreview,

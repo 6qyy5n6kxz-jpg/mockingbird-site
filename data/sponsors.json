@@ -1,0 +1,40 @@
+{
+  "title": "Mockingbird Jam Sponsors",
+  "intro": "Local businesses and families are helping power Mockingbird Jam 2026. Sponsor support makes the music, auction, and ALS fundraising mission possible.",
+  "tiers": [
+    { "id": "presenting", "label": "Presenting Sponsor" },
+    { "id": "headline", "label": "Headline Sponsor" },
+    { "id": "supporting", "label": "Supporting Sponsor" },
+    { "id": "community", "label": "Community Sponsor" }
+  ],
+  "sponsors": [
+    {
+      "name": "Lakeshore Physical Therapy",
+      "url": "https://example.com/lakeshore-physical-therapy",
+      "tier": "presenting",
+      "logo": "assets/sponsors/lakeshore-physical-therapy.svg",
+      "blurb": "Helping families stay strong with compassionate rehabilitation support."
+    },
+    {
+      "name": "Harbor State Bank",
+      "url": "https://example.com/harbor-state-bank",
+      "tier": "headline",
+      "logo": "assets/sponsors/harbor-state-bank.svg",
+      "blurb": "Proud to support local fundraising that stays rooted in community."
+    },
+    {
+      "name": "North Coast Market",
+      "url": "https://example.com/north-coast-market",
+      "tier": "supporting",
+      "logo": "assets/sponsors/north-coast-market.svg",
+      "blurb": "Backing neighborhood events, local makers, and the auction table."
+    },
+    {
+      "name": "Friends of Graytown Music",
+      "url": "https://example.com/friends-of-graytown-music",
+      "tier": "community",
+      "logo": "assets/sponsors/friends-of-graytown-music.svg",
+      "blurb": "Championing live music and hometown fundraising."
+    }
+  ]
+}

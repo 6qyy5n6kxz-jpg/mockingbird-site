@@ -88,11 +88,31 @@
       <div class="container">
         <p class="kicker">More to explore</p>
         <div class="inline-links">
+          <a data-nav="auction">Auction</a>
           <a data-nav="gift-cards">Gift Cards</a>
           <a data-nav="gallery">Gallery</a>
           <a data-nav="contact">Contact</a>
         </div>
       </div>
+    </section>
+
+    <section class="section fade-in">
+      <div class="container" id="jam-home-band"></div>
+    </section>
+
+    <section class="section alt fade-in">
+      <div class="container grid-2">
+        <div id="jam-home-countdown"></div>
+        <div id="event-updates-signup"></div>
+      </div>
+    </section>
+
+    <section class="section fade-in">
+      <div class="container" id="featured-auction-items"></div>
+    </section>
+
+    <section class="section alt fade-in">
+      <div class="container" id="home-sponsors"></div>
     </section>
 
     <section class="section fade-in">
@@ -191,12 +211,28 @@
   <script src="js/main.js"></script>
   <script>
     (async function() {
-      const [site, menu] = await Promise.all([
+      const [site, menu, auction, sponsors] = await Promise.all([
         Mockingbird.sitePromise,
-        Mockingbird.fetchJSON('menu.json', { categories: [] })
+        Mockingbird.fetchJSON('menu.json', { categories: [] }),
+        Mockingbird.fetchJSON('auction.json', { items: [], event: {} }),
+        Mockingbird.fetchJSON('sponsors.json', { sponsors: [] })
       ]);
+      Mockingbird.state.auction = auction;
+      Mockingbird.state.sponsors = sponsors;
       Mockingbird.renderFeaturedItems(site, menu);
       Mockingbird.renderHoursTable(site, 'hours-table-home');
+      Mockingbird.renderJamPromo('jam-home-band', auction);
+      Mockingbird.renderEventCountdown('jam-home-countdown', auction);
+      Mockingbird.renderEmailSignup('event-updates-signup', {
+        ...(auction.event?.signup || {}),
+        action: auction.event?.signup_form_action,
+        source: 'homepage_event_updates'
+      });
+      Mockingbird.renderFeaturedAuctionItems('featured-auction-items', auction);
+      Mockingbird.renderSponsors(sponsors, 'home-sponsors', {
+        title: 'Sponsor Mockingbird Jam 2026',
+        intro: 'Sponsor visibility runs across the event page, auction page, and fundraiser promotion throughout the site.'
+      });
     })();
   </script>
 </body>

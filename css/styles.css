@@ -327,6 +327,11 @@ nav a:focus {
   letter-spacing: 0.01em;
 }
 
+.badge-soft {
+  background: rgba(47, 43, 40, 0.08);
+  color: var(--text);
+}
+
 .grid-2 {
   display: grid;
   gap: 22px;
@@ -797,6 +802,11 @@ input, textarea, select {
   font-family: inherit;
 }
 
+input[type="checkbox"] {
+  width: auto;
+  padding: 0;
+}
+
 input:focus, textarea:focus, select:focus {
   outline: 2px solid var(--accent);
   border-color: transparent;
@@ -1065,6 +1075,151 @@ textarea {
 .event-payment,
 .event-seating {
   margin-top: 12px;
+}
+
+.jam-event-block {
+  margin-top: 14px;
+  padding: 14px;
+  border-radius: var(--radius);
+  background: linear-gradient(120deg, rgba(176, 109, 60, 0.1), rgba(59, 58, 54, 0.06));
+  border: 1px solid var(--border);
+}
+
+.jam-mini-schedule {
+  display: grid;
+  gap: 6px;
+  margin: 10px 0 14px;
+  font-size: 14px;
+}
+
+.cta-band,
+.countdown-card {
+  background: linear-gradient(120deg, rgba(176, 109, 60, 0.12), rgba(59, 58, 54, 0.08));
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 22px;
+  box-shadow: var(--shadow);
+}
+
+.countdown-value,
+.countdown-inline {
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--accent-strong);
+}
+
+.countdown-value {
+  font-size: clamp(24px, 4vw, 36px);
+  margin: 10px 0 12px;
+}
+
+.auction-grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.auction-card {
+  overflow: hidden;
+  padding: 0;
+}
+
+.auction-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 0;
+}
+
+.auction-card-body {
+  padding: 18px;
+}
+
+.auction-meta {
+  display: grid;
+  gap: 6px;
+  margin: 14px 0 10px;
+  font-size: 14px;
+}
+
+.bid-panel {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+}
+
+.bid-form {
+  margin-top: 0;
+}
+
+.sponsor-tier + .sponsor-tier {
+  margin-top: 28px;
+}
+
+.sponsor-grid {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.sponsor-card {
+  display: grid;
+  gap: 10px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  box-shadow: var(--shadow);
+}
+
+.sponsor-logo {
+  display: grid;
+  place-items: center;
+  min-height: 96px;
+  padding: 10px;
+  border-radius: 12px;
+  background: #faf6f1;
+  border: 1px solid var(--border);
+}
+
+.sponsor-logo img {
+  max-height: 72px;
+  width: auto;
+}
+
+.sponsor-wordmark {
+  font-weight: 700;
+  text-align: center;
+}
+
+.signup-form {
+  max-width: 680px;
+}
+
+.signup-interests {
+  display: grid;
+  gap: 4px;
+  margin-top: 10px;
+}
+
+.signup-interests-label {
+  font-weight: 600;
+}
+
+.schedule-list {
+  display: grid;
+  gap: 12px;
+}
+
+.schedule-row {
+  display: grid;
+  gap: 4px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.schedule-row:last-child {
+  border-bottom: none;
 }
 
 .required {

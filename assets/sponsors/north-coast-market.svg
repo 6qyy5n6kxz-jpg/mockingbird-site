@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 120" role="img" aria-labelledby="title desc">
+  <title id="title">North Coast Market</title>
+  <desc id="desc">Placeholder logo for North Coast Market</desc>
+  <rect width="280" height="120" rx="18" fill="#f7f2ea"/>
+  <rect x="32" y="34" width="48" height="52" rx="10" fill="#b06d3c"/>
+  <path d="M42 48h28M42 60h28M42 72h18" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
+  <text x="98" y="52" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="700" fill="#2f2b28">North Coast</text>
+  <text x="98" y="74" font-family="Segoe UI, Arial, sans-serif" font-size="16" fill="#2f2b28">Market</text>
+</svg>
