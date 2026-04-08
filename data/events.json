@@ -127,7 +127,7 @@
   "payment_provider": "vendor",
   "payment_label": "Pay with Venmo",
   "payment_url": "https://venmo.com/u/Meredith-Wolfe-4",
-  "payment_cta_helper": "Reserve your spot with Meregold Creations via Venmo. Payment opens in a new tab.",
+  "payment_cta_helper": "Step 1: Send payment with Venmo. Then complete the reservation form below.",
   "payment_options": [
     {
       "label": "Pay $35 with Venmo",
@@ -135,14 +135,14 @@
       "style": "primary"
     }
   ],
-  "payment_note": "Payment is collected directly by Meregold Creations.",
-  "hide_ticketed_helper": true,
+  "payment_note": "Reservation requires payment + form submission.",
+  "hide_ticketed_helper": false,
   "seating_form": {
     "enabled": true,
     "form_action": "https://formspree.io/f/xbddjoek",
-    "title": "Seating Details",
-    "description": "Already purchased your spot? Use this form to let us know who you'd like to sit with.",
-    "submit_label": "Submit seating request"
+    "title": "Step 2: Complete reservation details",
+    "description": "After sending payment, please complete this short form so we can confirm your reservation and seat you with your group. If you want to sit with friends, list their names on the form.",
+    "submit_label": "Complete reservation form"
   },
   "type": "Special Event",
   "ticketing": {
