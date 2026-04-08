@@ -146,7 +146,7 @@
   },
   "type": "Special Event",
   "ticketing": {
-    "capacity": 0,
+    "capacity": 25,
     "sold": 0,
     "price_display": "$35 per person",
     "clover_payment_url": "https://venmo.com/u/Meredith-Wolfe-4",
