@@ -4,9 +4,9 @@
   "dateRange": "April 2–4",
   "items": [
     {
-      "name": "Sausage, Potato & Cabbage Soup",
+      "name": "Herb-Roasted Ham & Potato Soup Soup",
       "label": "Soup of the Day",
-      "description": "Smoked kielbasa with tender potatoes and cabbage in a rich broth finished with dill.",
+      "description": "Hearty ham with tender yellow potatoes in a savor herb broth.",
       "notes": [
         "Available as cup or bowl",
         "Available as a combo add-on",
@@ -23,29 +23,30 @@
       ]
     },
     {
-      "name": "Honey Mustard Ham & Swiss Pressed",
+      "name": "Meatball & Mozzarella Pressed",
       "label": "Featured Pressed Sandwich",
-      "description": "Smoky ham, melted Swiss, and house honey mustard pressed on toasted bread.",
+      "description": "House-seasoned meatballs , red sauce, and melted mozzarella pressed on toasted bread.",
       "notes": [
         "Served with pickle and Featured Side"
       ]
     },
     {
-      "name": "Dill Pickle Pasta Salad",
+      "name": "Roasted Herb Potatoes",
       "label": "Featured Side",
       "description": "Penne pasta tossed with chopped dill pickles, fresh herbs, and a light creamy dressing with black pepper.",
       "notes": [
         "Vegetarian",
+        "Gluten-Free",
         "Served with all pressed sandwiches",
         "Included in combos"
       ]
     },
     {
-      "name": "Easter Poke Cake",
+      "name": "Butter Pecan Ice Cream with Chocolate & Frangelico Cream",
       "label": "Sweet Bite of the Day",
-      "description": "Vanilla cake filled with vanilla pudding and topped with whipped cream frosting and festive sprinkles.",
+      "description": "Butter pecan ice cream finished with chocolate drizzle, graham crumble, and Frangelico whipped cream.",
       "notes": [
-        "Always from scratch."
+        "Contains alcohol."
       ]
     }
   ]
