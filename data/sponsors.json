@@ -9,46 +9,25 @@
   ],
   "sponsors": [
     {
-      "name": "Lakeshore Physical Therapy",
-      "url": "https://example.com/lakeshore-physical-therapy",
-      "tier": "presenting",
-      "logo": "assets/sponsors/lakeshore-physical-therapy.svg",
-      "blurb": "Helping families stay strong with compassionate rehabilitation support."
-    },
-    {
-      "name": "Harbor State Bank",
-      "url": "https://example.com/harbor-state-bank",
+      "name": "AVL Systems",
+      "url": "https://avl.systems/",
       "tier": "headline",
-      "logo": "assets/sponsors/harbor-state-bank.svg",
-      "blurb": "Proud to support local fundraising that stays rooted in community."
+      "logo": "assets/sponsors/avl-systems.jpeg",
+      "blurb": "Headline sponsor helping power the sound, video, and production side of Mockingbird Jam."
     },
     {
-      "name": "North Coast Market",
-      "url": "https://example.com/north-coast-market",
+      "name": "Wine & Canvas Toledo",
+      "url": "https://wineandcanvas.com/toledo/",
       "tier": "supporting",
-      "logo": "assets/sponsors/north-coast-market.svg",
-      "blurb": "Backing neighborhood events, local makers, and the auction table."
+      "logo": "assets/sponsors/wine-and-canvas-toledo.png",
+      "blurb": "Supporting sponsor bringing creativity, community energy, and local event partnership to the fundraiser."
     },
     {
-      "name": "Friends of Graytown Music",
-      "url": "https://example.com/friends-of-graytown-music",
+      "name": "Elliston Zion United Methodist Church",
+      "url": "https://www.umc.org/en/find-a-church/church?id=001Um00000PFOCoIAP",
       "tier": "community",
-      "logo": "assets/sponsors/friends-of-graytown-music.svg",
-      "blurb": "Championing live music and hometown fundraising."
-    },
-    {
-      "name": "Elliston Community Church",
-      "url": "https://example.com/elliston-community-church",
-      "tier": "headline",
-      "logo": "assets/sponsors/elliston-community-church.svg",
-      "blurb": "Helping host the morning service and rally the community around ALS support."
-    },
-    {
-      "name": "Portside Food Truck Collective",
-      "url": "https://example.com/portside-food-truck-collective",
-      "tier": "community",
-      "logo": "assets/sponsors/portside-food-truck-collective.svg",
-      "blurb": "Bringing local food trucks together for a full day of community fundraising."
+      "logo": "assets/sponsors/elliston-zion-united-methodist-church.jpg",
+      "blurb": "Community sponsor helping anchor the church service and local support behind the day."
     }
   ]
 }

@@ -2141,7 +2141,7 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
         label: hero.secondary_cta_label,
         url: event.donation_url || hero.secondary_cta_url,
         style: 'primary',
-        description: event.support_section?.donation_microcopy || 'Event proceeds support ALS research and ALS families.'
+        description: event.support_section?.donation_microcopy || 'All proceeds benefit ALS-TDI and local families affected by ALS.'
       });
     }
     container.innerHTML = `

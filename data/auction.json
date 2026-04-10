@@ -2,13 +2,13 @@
   "event": {
     "id": "mockingbird-jam-2026",
     "title": "Mockingbird Jam 2026",
-    "subtitle": "A full day of music, community, and fundraising to support ALS research and local families navigating ALS.",
+    "subtitle": "A full day of music, community, and fundraising. All proceeds benefit ALS-TDI and local families affected by ALS.",
     "date": "2026-08-22T09:00:00",
     "location": "The Mockingbird on Mill Road",
     "hero": {
       "kicker": "Mockingbird Jam 2026",
       "headline": "Music, movement, and community support for ALS families",
-      "subhead": "Spend the day with yoga, church, live music, food trucks, a silent auction, and all-day fundraising that helps ALS research and families living with ALS.",
+      "subhead": "Spend the day with yoga, church, live music, food trucks, and a silent auction. All proceeds benefit ALS-TDI and local families affected by ALS.",
       "primary_cta_label": "Auction Coming Soon",
       "primary_cta_url": "#auction-coming-soon",
       "secondary_cta_label": "Donate Through Mockingbird Jam",
@@ -21,7 +21,7 @@
     "auction_hidden_message": "Auction items are not public yet. Check back soon for the full silent auction lineup.",
     "auction_intro_badge": "Coming Soon",
     "auction_intro_heading": "Mockingbird Jam silent auction",
-    "auction_intro_copy": "Online bidding opens soon. Check back for donated packages, local experiences, and community gifts supporting ALS research and ALS families.",
+    "auction_intro_copy": "Online bidding opens soon. Check back for donated packages, local experiences, and community gifts. All proceeds benefit ALS-TDI and local families affected by ALS.",
     "auction_status_note": "Bid submissions are reviewed manually and confirmed by email or phone.",
     "auction_form_action": "https://formspree.io/f/xbddjoek",
     "signup_form_action": "https://formspree.io/f/xbddjoek",
@@ -32,8 +32,8 @@
     "donation_url": "https://example.com/mockingbird-jam-donate",
     "donation_url_note": "Replace this placeholder donation URL with the final Mockingbird Jam donation or payment destination.",
     "als_mission": {
-      "title": "Supporting ALS research and ALS families",
-      "body": "Mockingbird Jam raises funds for ALS research while also helping families facing the day-to-day impact of ALS. Every bid, sponsorship, and donation helps extend that support."
+      "title": "Benefiting ALS-TDI and local families affected by ALS",
+      "body": "All proceeds benefit ALS-TDI and local families affected by ALS. Every sponsorship, donation, and future auction bid helps extend that support."
     },
     "schedule": [
       { "time": "9:00 AM", "title": "Yoga on the lawn", "description": "A gentle morning class to open the fundraiser." },
@@ -47,7 +47,7 @@
         "label": "Support the Jam",
         "url": "https://example.com/mockingbird-jam-donate",
         "style": "primary",
-        "description": "Event proceeds support ALS research and ALS families."
+        "description": "All proceeds benefit ALS-TDI and local families affected by ALS."
       },
       {
         "label": "Become a Sponsor",
@@ -78,7 +78,7 @@
       "title": "Support Mockingbird Jam",
       "description": "Help grow Mockingbird Jam by sponsoring the fundraiser, donating an auction item, or signing up for auction updates.",
       "note": "Sponsors and auction donors can get involved now. Online bidding opens soon.",
-      "donation_microcopy": "Event proceeds support ALS research and ALS families."
+      "donation_microcopy": "All proceeds benefit ALS-TDI and local families affected by ALS."
     }
   },
   "items": [
