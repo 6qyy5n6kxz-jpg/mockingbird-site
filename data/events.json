@@ -2,12 +2,14 @@
   "_comment": "Upcoming events. Remove past dates as needed.",
   "events": [
     {
-  "date": "2026-05-03T16:00:00",
-  "title": "Live Music: Bumblepuppy + Oak Harbor Jazz Band",
-  "description": "Live music with Bumblepuppy, joined by the Oak Harbor Jazz Band (weather permitting), 4–7 PM. A dynamic mix of jazz, funk, soul, and rock in a relaxed Sunday setting. $5 cover at the door.",
-  "price": "$5 cover",
-  "payment_link_url": ""
-},
+      "date": "2026-05-03T16:00:00",
+      "title": "Live Music: Bumblepuppy + Oak Harbor Jazz Band",
+      "description": "Live music with Bumblepuppy, joined by the Oak Harbor Jazz Band (weather permitting), 4–7 PM. A dynamic mix of jazz, funk, soul, and rock in a relaxed Sunday setting. $5 cover at the door.",
+      "price": "$5 cover",
+      "payment_link_url": "",
+      "image_url": "assets/events/Bumblepuppy.jpg",
+      "image_alt": "Promotional image for Bumblepuppy at The Mockingbird featuring the courtyard and text 'First Sundays of Every Month 4-7 PM'"
+    },
   {
        "date": "2026-04-16T18:30:00",
        "title": "Mockingbird Book Club — April",
@@ -78,7 +80,7 @@
       "payment_link_url": ""
     },
     {
-      "date": "2026-08-22T09:00:00",
+      "date": "2026-09-13T09:00:00",
       "title": "Mockingbird Jam 2026",
       "slug": "mockingbird-jam-2026",
       "campaign": "mockingbird_jam",
@@ -87,8 +89,8 @@
       "event_type": "rsvp",
       "payment_link_url": "",
       "type": "Fundraiser",
-      "image_url": "assets/images/hero.jpg",
-      "image_alt": "Mockingbird Jam fundraiser crowd gathered for live music and community support"
+      "image_url": "assets/events/Mockingbird_Jam_September_13.jpg",
+      "image_alt": "Mockingbird Jam to Defeat ALS fundraiser graphic announcing Sunday, September 13 at The Mockingbird on Mill Road"
     },
     {
       "date": "2026-04-27T18:00:00",

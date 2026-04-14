@@ -3,7 +3,7 @@
     "id": "mockingbird-jam-2026",
     "title": "Mockingbird Jam 2026",
     "subtitle": "A full day of music, community, and fundraising. All proceeds benefit ALS-TDI and local families affected by ALS.",
-    "date": "2026-08-22T09:00:00",
+    "date": "2026-09-13T09:00:00",
     "location": "The Mockingbird on Mill Road",
     "hero": {
       "kicker": "Mockingbird Jam 2026",
@@ -93,7 +93,7 @@
       "openingBid": 125,
       "currentBid": 180,
       "bidIncrement": 10,
-      "auctionEnd": "2026-08-22T20:00:00",
+      "auctionEnd": "2026-09-13T20:00:00",
       "featured": true,
       "status": "open"
     },
@@ -108,7 +108,7 @@
       "openingBid": 175,
       "currentBid": 245,
       "bidIncrement": 15,
-      "auctionEnd": "2026-08-22T20:00:00",
+      "auctionEnd": "2026-09-13T20:00:00",
       "featured": true,
       "status": "open"
     },
@@ -123,7 +123,7 @@
       "openingBid": 80,
       "currentBid": 110,
       "bidIncrement": 10,
-      "auctionEnd": "2026-08-22T20:00:00",
+      "auctionEnd": "2026-09-13T20:00:00",
       "featured": false,
       "status": "open"
     },
@@ -138,7 +138,7 @@
       "openingBid": 250,
       "currentBid": 325,
       "bidIncrement": 25,
-      "auctionEnd": "2026-08-22T20:00:00",
+      "auctionEnd": "2026-09-13T20:00:00",
       "featured": true,
       "status": "open"
     },
@@ -153,7 +153,7 @@
       "openingBid": 300,
       "currentBid": 420,
       "bidIncrement": 25,
-      "auctionEnd": "2026-08-22T20:00:00",
+      "auctionEnd": "2026-09-13T20:00:00",
       "featured": false,
       "status": "open"
     },
@@ -168,7 +168,7 @@
       "openingBid": 55,
       "currentBid": 75,
       "bidIncrement": 10,
-      "auctionEnd": "2026-08-22T20:00:00",
+      "auctionEnd": "2026-09-13T20:00:00",
       "featured": false,
       "status": "open"
     },
@@ -183,7 +183,7 @@
       "openingBid": 140,
       "currentBid": 185,
       "bidIncrement": 15,
-      "auctionEnd": "2026-08-22T20:00:00",
+      "auctionEnd": "2026-09-13T20:00:00",
       "featured": false,
       "status": "open"
     },
@@ -198,7 +198,7 @@
       "openingBid": 200,
       "currentBid": 275,
       "bidIncrement": 20,
-      "auctionEnd": "2026-08-22T20:00:00",
+      "auctionEnd": "2026-09-13T20:00:00",
       "featured": true,
       "status": "open"
     }
