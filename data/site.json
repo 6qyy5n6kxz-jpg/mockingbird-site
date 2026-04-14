@@ -46,11 +46,11 @@
     { "label": "Mon", "value": "5–8 PM" },
     { "label": "Tue", "value": "5–8 PM" },
     { "label": "Wed", "value": "5–8 PM" },
-    { "label": "Thu", "value": "5–10 PM" },
-    { "label": "Fri", "value": "5–10 PM" },
-    { "label": "Sat", "value": "5–10 PM" }
+    { "label": "Thu", "value": "4–10 PM" },
+    { "label": "Fri", "value": "4–10 PM" },
+    { "label": "Sat", "value": "4–10 PM" }
   ],
-  "seasonalHoursNote": "Beverage carryout and dine in only: Mon–Wed 5–8 PM · Thu–Sat 5–10 PM · Closed Sunday",
+  "seasonalHoursNote": "Beverage carryout and dine in only: Mon–Wed 5–8 PM · Thu–Sat 4–10 PM · Closed Sunday",
   "kitchenNote": "Kitchen closes at 9 PM nightly.",
   "socials": {
     "facebook": "https://www.facebook.com/themockingbirdonmillroad/",
@@ -78,7 +78,7 @@
     "assets/images/interior3.svg"
   ],
   "footer": {
-    "hours_summary": "Mon–Wed 5–8 PM • Thu–Sat 5–10 PM • Closed Sunday"
+    "hours_summary": "Mon–Wed 5–8 PM • Thu–Sat 4–10 PM • Closed Sunday"
   },
   "defaultSEO": {
     "title": "The Mockingbird on Mill Road",

@@ -2,27 +2,13 @@
   "_comment": "Upcoming events. Remove past dates as needed.",
   "events": [
     {
-      "date": "2026-04-09T18:00:00",
-      "title": "Trivia Night at The Mockingbird",
-      "description": "Get ready to put your knowledge to the test and have a blast with friends! Whether you're a trivia aficionado or just looking for a fun evening out, we've got a night full of challenging questions, great company, and exciting prizes. Doors open at 5:00pm, the first round begins at 6:00pm.",
-      "price": "No cover",
-      "payment_link_url": ""
-    },
-    {
-      "date": "2026-04-11T18:00:00",
-      "title": "Live Music: Bruce Brodie",
-      "description": "Live music by Bruce Brodie, 6–9 PM.",
-      "price": "No cover",
-      "payment_link_url": ""
-    },
-    {
-  "date": "2026-04-12T16:00:00",
-  "title": "Oak Harbor School of Rock Showcase",
-  "description": "Join us for an afternoon of live music celebrating the incredible talent of the Oak Harbor community. Featuring performances by Oak Harbor High School’s School of Rock along with Oak Harbor alumni Devin Frank, Kia Frank, Kendra German, and Sophia & Sylvia Ferguson. Music from 4–7 PM.",
-  "price": "No cover",
+  "date": "2026-05-03T16:00:00",
+  "title": "Live Music: Bumblepuppy + Oak Harbor Jazz Band",
+  "description": "Live music with Bumblepuppy, joined by the Oak Harbor Jazz Band (weather permitting), 4–7 PM. A dynamic mix of jazz, funk, soul, and rock in a relaxed Sunday setting. $5 cover at the door.",
+  "price": "$5 cover",
   "payment_link_url": ""
 },
-{
+  {
        "date": "2026-04-16T18:30:00",
        "title": "Mockingbird Book Club — April",
        "description": "Join us for Mockingbird Book Club on Thursday, April 16th at 6:30 PM as we discuss The Water Keeper by Charles Martin —an open, welcoming conversation with food and drinks available.",
@@ -97,7 +83,7 @@
       "slug": "mockingbird-jam-2026",
       "campaign": "mockingbird_jam",
       "description": "Mockingbird Jam is our 2026 community fundraiser for ALS research and families dealing with ALS. Join us for yoga at 9 AM, church service at 10 AM, live music from 11 AM to 8 PM, food trucks, a silent auction, and all-day fundraising throughout the property.",
-      "price": "Free admission | Donations encouraged",
+      "price": "$10 admission",
       "event_type": "rsvp",
       "payment_link_url": "",
       "type": "Fundraiser",
