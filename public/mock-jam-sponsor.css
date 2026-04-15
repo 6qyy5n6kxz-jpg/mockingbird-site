@@ -121,6 +121,12 @@ body.sponsor-sheet-body {
   border-left: 1px solid rgba(229, 217, 204, 0.95);
 }
 
+.snapshot-list li.snapshot-wide {
+  grid-column: 1 / -1;
+  padding-left: 14px;
+  border-left: none;
+}
+
 .snapshot-list li::before {
   content: "";
   position: absolute;
@@ -303,6 +309,10 @@ body.sponsor-sheet-body {
   .snapshot-list li:nth-child(2n) {
     padding-left: 14px;
     border-left: none;
+  }
+
+  .snapshot-list li.snapshot-wide {
+    grid-column: auto;
   }
 
   .contact-line {
