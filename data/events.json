@@ -80,6 +80,20 @@
       "payment_link_url": ""
     },
     {
+      "date": "2026-05-02T18:00:00",
+      "title": "Live Music: Devin Frank featuring Sylv & Soph ",
+      "description": "Live music by Devin Frank featuring Sylv & Soph, 6–9 PM.",
+      "price": "No cover",
+      "payment_link_url": ""
+    },
+    {
+      "date": "2026-05-16T18:00:00",
+      "title": "Live Music: Jake Pilewski",
+      "description": "Live music by Jake Pilewski, 6–9 PM.",
+      "price": "No cover",
+      "payment_link_url": ""
+    },
+    {
       "date": "2026-09-13T09:00:00",
       "title": "Mockingbird Jam 2026",
       "slug": "mockingbird-jam-2026",
