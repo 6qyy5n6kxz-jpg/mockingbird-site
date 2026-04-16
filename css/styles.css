@@ -1191,7 +1191,7 @@ textarea {
   min-height: 96px;
   padding: 10px;
   border-radius: 12px;
-  background: #faf6f1;
+  background: var(--sponsor-logo-bg, #faf6f1);
   border: 1px solid var(--border);
 }
 

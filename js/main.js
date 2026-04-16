@@ -2278,14 +2278,25 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
             <div class="sponsor-grid">
               ${tier.items.map((sponsor) => {
                 const href = resolveLink(sponsor.url);
+                const logoStyle = sponsor.logoBackground ? ` style="--sponsor-logo-bg: ${sponsor.logoBackground};"` : '';
                 const logo = sponsor.logo ? `<img src="${withBase(sponsor.logo)}" alt="${sponsor.name} logo" loading="lazy">` : `<div class="sponsor-wordmark">${sponsor.name}</div>`;
                 const targetAttrs = /^https?:\/\//i.test(href) ? ' target="_blank" rel="noopener noreferrer"' : '';
-                return `
-                  <a class="sponsor-card" href="${href}"${targetAttrs}>
-                    <div class="sponsor-logo">${logo}</div>
+                const cardInner = `
+                    <div class="sponsor-logo"${logoStyle}>${logo}</div>
                     <strong>${sponsor.name}</strong>
                     <span class="badge badge-soft">${tier.label}</span>
                     ${sponsor.blurb ? `<p class="note">${sponsor.blurb}</p>` : ''}
+                `;
+                if (!href) {
+                  return `
+                  <div class="sponsor-card">
+                    ${cardInner}
+                  </div>
+                `;
+                }
+                return `
+                  <a class="sponsor-card" href="${href}"${targetAttrs}>
+                    ${cardInner}
                   </a>
                 `;
               }).join('')}

@@ -5,7 +5,8 @@
     { "id": "presenting", "label": "Presenting Sponsor" },
     { "id": "headline", "label": "Headline Sponsor" },
     { "id": "supporting", "label": "Supporting Sponsor" },
-    { "id": "community", "label": "Community Sponsor" }
+    { "id": "community", "label": "Community Sponsor" },
+    { "id": "friend", "label": "Friend Sponsor" }
   ],
   "sponsors": [
     {
@@ -28,6 +29,14 @@
       "tier": "community",
       "logo": "assets/sponsors/elliston-zion-united-methodist-church.jpg",
       "blurb": "Community sponsor helping anchor the church service and local support behind the day."
+    },
+    {
+      "name": "Genoa Bank",
+      "url": "https://www.genoabank.com/",
+      "tier": "friend",
+      "logo": "assets/sponsors/genoa-bank-logo.svg",
+      "logoBackground": "var(--text)",
+      "blurb": "Friend sponsor supporting Mockingbird Jam and its ALS fundraising mission."
     }
   ]
 }
