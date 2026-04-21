@@ -10,22 +10,6 @@
       "image_url": "assets/events/Bumblepuppy.jpg",
       "image_alt": "Promotional image for Bumblepuppy at The Mockingbird featuring the courtyard and text 'First Sundays of Every Month 4-7 PM'"
     },
-  {
-       "date": "2026-04-16T18:30:00",
-       "title": "Mockingbird Book Club — April",
-       "description": "Join us for Mockingbird Book Club on Thursday, April 16th at 6:30 PM as we discuss The Water Keeper by Charles Martin —an open, welcoming conversation with food and drinks available.",
-       "price": "No cover",
-       "payment_link_url": "",
-       "image_url": "assets/events/April_Book_Club.png",
-       "image_alt": "Mockingbird Book Club event image for The Water Keeper by Charles Martin, Thursday, April 16th at 6:30 PM"
-    },
-    {
-      "date": "2026-04-18T18:00:00",
-      "title": "Live Music: A Change of Plans featuring Jerry Wittman",
-      "description": "Live music by A Change of Plans featuring Jerry Wittman, 6–9 PM.",
-      "price": "No cover",
-      "payment_link_url": ""
-    },
     {
       "date": "2026-04-25T18:00:00",
       "title": "Live Music: Aaron & Susan",
@@ -90,6 +74,20 @@
       "date": "2026-05-16T18:00:00",
       "title": "Live Music: Jake Pilewski",
       "description": "Live music by Jake Pilewski, 6–9 PM.",
+      "price": "No cover",
+      "payment_link_url": ""
+    },
+    {
+      "date": "2026-05-23T18:00:00",
+      "title": "Live Music: Kevin VanSickle",
+      "description": "Live music by Kevin VanSickle, 6–9 PM.",
+      "price": "No cover",
+      "payment_link_url": ""
+    },
+    {
+      "date": "2026-05-30T18:00:00",
+      "title": "Live Music: Everywhen",
+      "description": "Live music by Everywhen, 6–9 PM.",
       "price": "No cover",
       "payment_link_url": ""
     },
