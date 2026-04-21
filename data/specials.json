@@ -4,9 +4,9 @@
   "dateRange": "April 2–4",
   "items": [
     {
-      "name": "Herb-Roasted Ham & Potato Soup Soup",
+      "name": "Tuscan White Bean & Chicken Soup",
       "label": "Soup of the Day",
-      "description": "Hearty ham with tender yellow potatoes in a savor herb broth.",
+      "description": "Tender chicken with white beans, garlic, herbs, and tomato in a savor, slow-simmered broth.",
       "notes": [
         "Available as cup or bowl",
         "Available as a combo add-on",
@@ -14,18 +14,18 @@
       ]
     },
     {
-      "name": "Italian Chopped Salad",
+      "name": "Apple, Feta, Olive & Ancient Grain Salad",
       "label": "Seasonal Salad",
-      "description": "Mixed greens with salami, pepperoni, mozzarella, olives, pepperoncini, and tomato.",
+      "description": "Mixed greens with sliced apple, feta crumbles, Castelvetrano olives, and ancient grains.",
       "notes": [
         "Dressing served on the side.",
         "Gluten-Free"
       ]
     },
     {
-      "name": "Meatball & Mozzarella Pressed",
+      "name": "Chicken, Gouda & Fig Pressed",
       "label": "Featured Pressed Sandwich",
-      "description": "House-seasoned meatballs , red sauce, and melted mozzarella pressed on toasted bread.",
+      "description": "Roasted Chicken layered with melted gouda and fig preserves, pressed crisp on our house bread.",
       "notes": [
         "Served with pickle and Featured Side"
       ]
@@ -33,7 +33,7 @@
     {
       "name": "Roasted Herb Potatoes",
       "label": "Featured Side",
-      "description": "Penne pasta tossed with chopped dill pickles, fresh herbs, and a light creamy dressing with black pepper.",
+      "description": "Crispy roasted potatoes with olive oil, garlic, and herbs.",
       "notes": [
         "Vegetarian",
         "Gluten-Free",
@@ -42,12 +42,9 @@
       ]
     },
     {
-      "name": "Butter Pecan Ice Cream with Chocolate & Frangelico Cream",
+      "name": "Salted Caramel Chocolate Bread Pudding",
       "label": "Sweet Bite of the Day",
-      "description": "Butter pecan ice cream finished with chocolate drizzle, graham crumble, and Frangelico whipped cream.",
-      "notes": [
-        "Contains alcohol."
-      ]
+      "description": "Warm bread pudding with chocolate chips, finished with a salted caramel drizzle.",
     }
   ]
 }
