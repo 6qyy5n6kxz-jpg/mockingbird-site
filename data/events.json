@@ -47,8 +47,8 @@
   },
   "type": "Special Event",
   "ticketing": {
-    "capacity": 24,
-    "sold": 0,
+    "capacity": 20,
+    "sold": 20,
     "price_display": "$75 per person | $150 per couple",
     "clover_payment_url": "https://link.clover.com/urlshortener/Sfpc7K",
     "sold_out_behavior": "disable"
@@ -122,7 +122,7 @@
       "type": "Paint & Sip",
       "ticketing": {
         "capacity": 12,
-        "sold": 0,
+        "sold": 7,
         "price_display": "$50 per person",
         "clover_payment_url": "https://wineandcanvas.com/toledo/event/graytown-paint-and-sip-party-sunset-toast/",
         "sold_out_behavior": "disable"
