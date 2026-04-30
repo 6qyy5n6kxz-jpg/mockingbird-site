@@ -1,39 +1,41 @@
 {
   "_comment": "Update weekly specials. weekOf should be the Monday of the current week.",
-  "weekOf": "2026-03-30",
-  "dateRange": "April 2–4",
+  "weekOf": "2026-04-27",
+  "dateRange": "April 30–May 2",
   "items": [
     {
-      "name": "Tuscan White Bean & Chicken Soup",
+      "name": "Vegetable Soup",
       "label": "Soup of the Day",
-      "description": "Tender chicken with white beans, garlic, herbs, and tomato in a savor, slow-simmered broth.",
+      "description": "Celery, onion, leeks, carrots, garlic, zucchini, potatoes, cabbage, sweet corn, peas, and green beans in tomato broth.",
       "notes": [
         "Available as cup or bowl",
         "Available as a combo add-on",
+        "Vegetarian",
         "Gluten-Free"
       ]
     },
     {
-      "name": "Apple, Feta, Olive & Ancient Grain Salad",
+      "name": "Apple, Mandarin & Feta Salad",
       "label": "Seasonal Salad",
-      "description": "Mixed greens with sliced apple, feta crumbles, Castelvetrano olives, and ancient grains.",
+      "description": "Mixed greens with sliced Honeycrisp apple, mandarin oranges, dried cranberries, and feta crumbles.",
       "notes": [
         "Dressing served on the side.",
+        "Vegetarian",
         "Gluten-Free"
       ]
     },
     {
-      "name": "Chicken, Gouda & Fig Pressed",
+      "name": "Garlic Herb Chicken Pressed",
       "label": "Featured Pressed Sandwich",
-      "description": "Roasted Chicken layered with melted gouda and fig preserves, pressed crisp on our house bread.",
+      "description": "Oven-roasted chicken thighs with roasted red peppers, melted mozzarella, and garlic herb mayo on our house bread, pressed crisp.",
       "notes": [
         "Served with pickle and Featured Side"
       ]
     },
     {
-      "name": "Roasted Herb Potatoes",
+      "name": "Herb Roasted Potatoes",
       "label": "Featured Side",
-      "description": "Crispy roasted potatoes with olive oil, garlic, and herbs.",
+      "description": "Roasted potatoes with olive oil, garlic, and herbs.",
       "notes": [
         "Vegetarian",
         "Gluten-Free",
@@ -42,9 +44,9 @@
       ]
     },
     {
-      "name": "Salted Caramel Chocolate Bread Pudding",
+      "name": "Lemon Berry Yogurt Cake Trifle",
       "label": "Sweet Bite of the Day",
-      "description": "Warm bread pudding with chocolate chips, finished with a salted caramel drizzle.",
+      "description": "Layers of lemon cake and mixed berries, finished with whipped cream."
     }
   ]
 }
