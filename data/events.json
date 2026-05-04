@@ -2,69 +2,7 @@
   "_comment": "Upcoming events. Remove past dates as needed.",
   "events": [
     {
-      "date": "2026-05-03T16:00:00",
-      "title": "Live Music: Bumblepuppy + Oak Harbor Jazz Band",
-      "description": "Live music with Bumblepuppy, joined by the Oak Harbor Jazz Band (weather permitting), 4–7 PM. A dynamic mix of jazz, funk, soul, and rock in a relaxed Sunday setting. $5 cover at the door.",
-      "price": "$5 cover",
-      "payment_link_url": "",
-      "image_url": "assets/events/Bumblepuppy.jpg",
-      "image_alt": "Promotional image for Bumblepuppy at The Mockingbird featuring the courtyard and text 'First Sundays of Every Month 4-7 PM'"
-    },
-    {
-      "date": "2026-04-25T18:00:00",
-      "title": "Live Music: Aaron & Susan",
-      "description": "Live music by Aaron & Susan, 6–9 PM.",
-      "price": "No cover",
-      "payment_link_url": ""
-    },
-    {
-  "date": "2026-04-26T18:00:00",
-  "title": "Mockingbird Wine Tasting Dinner with Rachel Nasatir",
-  "description": "Join us for a special evening at The Mockingbird as we welcome Rachel Nasatir of Cutting Edge Selections for a guided wine tasting dinner. The night features a five-course Greek-inspired menu with wine pairings presented throughout the evening. Menu includes Whipped Feta Mezze, Horiatiki, slow-simmered Mavromatika Soup, Greek Sheet Pan Chicken and Vegetables, and Yiaourtoglyko. Reservations are required and seating is limited.",
-  "price": "$75 per person | $150 per couple (includes tax and gratuity)",
-  "event_type": "ticketed",
-  "payment_link_url": "https://link.clover.com/urlshortener/Sfpc7K",
-  "payment_provider": "clover",
-  "payment_label": "Buy tickets",
-  "payment_url": "https://link.clover.com/urlshortener/Sfpc7K",
-  "payment_cta_helper": "Choose your ticket option below. Checkout opens in a new tab.",
-  "payment_options": [
-    {
-      "label": "Buy 1 Seat — $75",
-      "url": "https://link.clover.com/urlshortener/Sfpc7K",
-      "style": "secondary"
-    },
-    {
-      "label": "Buy 2 Seats — $150",
-      "url": "https://link.clover.com/urlshortener/TY9jWv",
-      "style": "primary"
-    }
-  ],
-  "payment_note": "Price includes 7% sales tax and 18% gratuity.",
-  "hide_ticketed_helper": true,
-  "seating_form": {
-    "enabled": false
-  },
-  "type": "Special Event",
-  "ticketing": {
-    "capacity": 20,
-    "sold": 20,
-    "price_display": "$75 per person | $150 per couple",
-    "clover_payment_url": "https://link.clover.com/urlshortener/Sfpc7K",
-    "sold_out_behavior": "disable"
-  },
-  "image_url": "assets/events/Mockingbird_Wine_Tasting_Dinner_Rachel_Nasatir.png",
-  "image_alt": "Mockingbird Wine Tasting Dinner with Rachel Nasatir event graphic for Sunday, April 26 from 6 to 9 PM featuring a five-course Greek menu and wine pairings"
-},
-    {
-      "date": "2026-05-02T18:00:00",
-      "title": "Live Music: Mike Bryce",
-      "description": "Live music by Mike Bryce, 6–9 PM.",
-      "price": "No cover",
-      "payment_link_url": ""
-    },
-    {
-      "date": "2026-05-02T18:00:00",
+      "date": "2026-05-09T18:00:00",
       "title": "Live Music: Devin Frank featuring Sylv & Soph ",
       "description": "Live music by Devin Frank featuring Sylv & Soph, 6–9 PM.",
       "price": "No cover",
@@ -105,15 +43,15 @@
       "image_alt": "Mockingbird Jam to Defeat ALS fundraiser graphic announcing Sunday, September 13 at The Mockingbird on Mill Road"
     },
     {
-      "date": "2026-04-27T18:00:00",
-      "title": "Wine & Canvas: Sunset Toast",
-      "description": "🌅🎨🍷 Paint Sunset Toast on a rustic staggered wood pallet at The Mockingbird on Mill Road. This guided, beginner-friendly experience walks you step by step through a glowing coastal sunset with ocean waves, wine glasses, and tropical flair. No experience needed — just sip, relax, and create. Food, wine, flatbreads, and more available for purchase. $50 per guest.",
+      "date": "2026-05-14T18:00:00",
+      "title": "Wine & Canvas: Wine Glass Painting Party — Pick Your Design",
+      "description": "✨🍷 Creative freedom. Personal style. Functional art you’ll actually use. Join us at the The Mockingbird on Mill Road for Pick Your Design, a relaxed and creative Wine Glass Paint & Sip Party where you choose what you paint. Instead of following one design, guests can select from a variety of wine glass painting ideas — or create something entirely their own. Includes 2 wine glasses",
       "price": "Tickets via Wine & Canvas",
       "event_type": "ticketed",
-      "payment_link_url": "https://wineandcanvas.com/toledo/event/graytown-paint-and-sip-party-sunset-toast/",
+      "payment_link_url": "https://wineandcanvas.com/toledo/event/graytown-wine-glass-paint-and-sip-party-pick-your-design/",
       "payment_provider": "vendor",
       "payment_label": "Buy tickets",
-      "payment_url": "https://wineandcanvas.com/toledo/event/graytown-paint-and-sip-party-sunset-toast/",
+      "payment_url": "https://wineandcanvas.com/toledo/event/graytown-wine-glass-paint-and-sip-party-pick-your-design/",
       "payment_note": "",
       "hide_ticketed_helper": true,
       "seating_form": {
@@ -122,52 +60,14 @@
       "type": "Paint & Sip",
       "ticketing": {
         "capacity": 12,
-        "sold": 7,
-        "price_display": "$50 per person",
-        "clover_payment_url": "https://wineandcanvas.com/toledo/event/graytown-paint-and-sip-party-sunset-toast/",
+        "sold": 0,
+        "price_display": "$30 per person",
+        "clover_payment_url": "https://wineandcanvas.com/toledo/event/graytown-wine-glass-paint-and-sip-party-pick-your-design/",
         "sold_out_behavior": "disable"
       },
       "image_url": "assets/events/Sunset_Toast.png",
-      "image_alt": "Wood pallet painting of a beach sunset with two wine glasses, ocean waves, and tropical flowers"
+      "image_alt": "Example wine glass painting images"
     },
-    {
-  "date": "2026-05-02T12:00:00",
-  "title": "Mother’s Day Floral Workshop with Meregold Creations",
-  "description": "Join us at The Mockingbird for a special Mother’s Day floral workshop with Meredith of Meregold Creations. Create your own beautiful floral arrangement in a wine bottle with all supplies and instruction provided. No experience needed — just come ready to sip, create, and enjoy a relaxing afternoon. Doors open at 11 AM, crafting begins at 12 PM. Food and drinks will be available for purchase from The Mockingbird. $35 per person.",
-  "price": "$35 per person",
-  "event_type": "ticketed",
-  "payment_link_url": "https://venmo.com/u/Meredith-Wolfe-4",
-  "payment_provider": "vendor",
-  "payment_label": "Pay with Venmo",
-  "payment_url": "https://venmo.com/u/Meredith-Wolfe-4",
-  "payment_cta_helper": "Step 1: Send payment with Venmo. Then complete the reservation form below.",
-  "payment_options": [
-    {
-      "label": "Pay $35 with Venmo",
-      "url": "https://venmo.com/u/Meredith-Wolfe-4",
-      "style": "primary"
-    }
-  ],
-  "payment_note": "Reservation requires payment + form submission.",
-  "hide_ticketed_helper": false,
-  "seating_form": {
-    "enabled": true,
-    "form_action": "https://formspree.io/f/xbddjoek",
-    "title": "Step 2: Complete reservation details",
-    "description": "After sending payment, please complete this short form so we can confirm your reservation and seat you with your group. If you want to sit with friends, list their names on the form.",
-    "submit_label": "Complete reservation form"
-  },
-  "type": "Special Event",
-  "ticketing": {
-    "capacity": 25,
-    "sold": 0,
-    "price_display": "$35 per person",
-    "clover_payment_url": "https://venmo.com/u/Meredith-Wolfe-4",
-    "sold_out_behavior": "disable"
-  },
-  "image_url": "assets/events/Mothers_Day_Floral_Workshop.png",
-  "image_alt": "Mother’s Day Floral Workshop at The Mockingbird with Meregold Creations on Saturday, May 2 at 12 PM featuring wine bottle floral arrangements"
-},
 {
   "date": "2026-05-21T18:30:00",
   "title": "Mockingbird Book Club — May",
