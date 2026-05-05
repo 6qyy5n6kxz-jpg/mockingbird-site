@@ -76,6 +76,32 @@
   "payment_link_url": "",
   "image_url": "assets/events/May_Book_Club.png",
   "image_alt": "Mockingbird Book Club event image for The Great Alone by Kristin Hannah, Thursday, May 21st at 6:30 PM"
+},
+{
+  "date": "2026-05-31T11:00:00",
+  "title": "MuMu & Mimosas Brunch",
+  "description": "Grab your girls, throw on your boldest MuMu, and join us at The Mockingbird for the ultimate Sunday Funday! MuMu & Mimosas is a laid-back, high-energy brunch experience filled with bubbles, bites, and good vibes.\n\nYour ticket includes 2 refreshing mimosas, a full brunch buffet, plus access to games, photo ops, and more. Show up in your BEST MuMu for a chance to win prizes and bragging rights!\n\nTickets are all-inclusive — no surprises at checkout.",
+  "price": "$45 per person (includes tax & gratuity)",
+  "event_type": "ticketed",
+  "payment_link_url": "https://link.clover.com/urlshortener/zgZqsd",
+  "payment_provider": "clover",
+  "payment_label": "Buy tickets",
+  "payment_url": "https://link.clover.com/urlshortener/zgZqsd",
+  "payment_note": "Includes 2 mimosas, brunch buffet, tax & gratuity",
+  "hide_ticketed_helper": true,
+  "seating_form": {
+    "enabled": false
+  },
+  "type": "Special Event",
+  "ticketing": {
+    "capacity": 40,
+    "sold": 0,
+    "price_display": "$45 all-in",
+    "clover_payment_url": "https://link.clover.com/urlshortener/zgZqsd",
+    "sold_out_behavior": "disable"
+  },
+  "image_url": "assets/events/MuMu_Mimosas.png",
+  "image_alt": "MuMu & Mimosas brunch event at The Mockingbird featuring brunch, mimosas, and themed attire"
 }
   ]
 
