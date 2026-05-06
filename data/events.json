@@ -102,7 +102,14 @@
   },
   "image_url": "assets/events/MuMu_Mimosas.png",
   "image_alt": "MuMu & Mimosas brunch event at The Mockingbird featuring brunch, mimosas, and themed attire"
-}
+},
+    {
+      "date": "2026-06-06T18:00:00",
+      "title": "Live Music: Jack & Lucky",
+      "description": "Live music by Jack & Lucky, 6–9 PM.",
+      "price": "No cover",
+      "payment_link_url": ""
+    }
   ]
 
 }
