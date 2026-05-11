@@ -1,23 +1,21 @@
 {
   "_comment": "Update weekly specials. weekOf should be the Monday of the current week.",
-  "weekOf": "2026-04-27",
-  "dateRange": "April 30–May 2",
+  "weekOf": "2026-05-11",
+  "dateRange": "May 11–14",
   "items": [
     {
-      "name": "Vegetable Soup",
+      "name": "Chicken Gnocchi Soup",
       "label": "Soup of the Day",
-      "description": "Celery, onion, leeks, carrots, garlic, zucchini, potatoes, cabbage, sweet corn, peas, and green beans in tomato broth.",
+      "description": "Tender chicken, pillowy gnocchi, and vegetables in a rich, creamy broth.",
       "notes": [
         "Available as cup or bowl",
-        "Available as a combo add-on",
-        "Vegetarian",
-        "Gluten-Free"
+        "Available as a combo add-on"
       ]
     },
     {
-      "name": "Apple, Mandarin & Feta Salad",
+      "name": "Apple, Pecan & Feta Salad",
       "label": "Seasonal Salad",
-      "description": "Mixed greens with sliced Honeycrisp apple, mandarin oranges, dried cranberries, and feta crumbles.",
+      "description": "Mixed greens with sliced Honeycrisp apple, toasted pecans, dried cranberries, and feta crumbles.",
       "notes": [
         "Dressing served on the side.",
         "Vegetarian",
@@ -25,17 +23,17 @@
       ]
     },
     {
-      "name": "Garlic Herb Chicken Pressed",
+      "name": "BBQ Chicken & Cheddar Pressed",
       "label": "Featured Pressed Sandwich",
-      "description": "Oven-roasted chicken thighs with roasted red peppers, melted mozzarella, and garlic herb mayo on our house bread, pressed crisp.",
+      "description": "Slow-roasted chicken thighs layered with melted cheddar, finished with house BBQ sauce and pickled red onions on our house bread, pressed crisp.",
       "notes": [
         "Served with pickle and Featured Side"
       ]
     },
     {
-      "name": "Herb Roasted Potatoes",
+      "name": "Smashed Potatoes",
       "label": "Featured Side",
-      "description": "Roasted potatoes with olive oil, garlic, and herbs.",
+      "description": "Smashed potatoes with garlic and herbs.",
       "notes": [
         "Vegetarian",
         "Gluten-Free",
@@ -44,9 +42,9 @@
       ]
     },
     {
-      "name": "Lemon Berry Yogurt Cake Trifle",
+      "name": "Chocolate Chocolate Chip Cheesecake",
       "label": "Sweet Bite of the Day",
-      "description": "Layers of lemon cake and mixed berries, finished with whipped cream."
+      "description": "No-bake chocolate cheesecake with chocolate chips on a graham cracker crust."
     }
   ]
 }
