@@ -1,7 +1,7 @@
 {
   "_comment": "Update weekly specials. weekOf should be the Monday of the current week.",
   "weekOf": "2026-05-11",
-  "dateRange": "May 11–14",
+  "dateRange": "May 13–16",
   "items": [
     {
       "name": "Chicken Gnocchi Soup",
@@ -15,7 +15,7 @@
     {
       "name": "Apple, Pecan & Feta Salad",
       "label": "Seasonal Salad",
-      "description": "Mixed greens with sliced Honeycrisp apple, toasted pecans, dried cranberries, and feta crumbles.",
+      "description": "Mixed greens with sliced Honeycrisp apple, toasted pecans, dried blueberries, and feta crumbles.",
       "notes": [
         "Dressing served on the side.",
         "Vegetarian",
@@ -23,28 +23,27 @@
       ]
     },
     {
-      "name": "BBQ Chicken & Cheddar Pressed",
+      "name": "Turkye, Bacon & Swiss Pressed",
       "label": "Featured Pressed Sandwich",
-      "description": "Slow-roasted chicken thighs layered with melted cheddar, finished with house BBQ sauce and pickled red onions on our house bread, pressed crisp.",
+      "description": "Smoked turkey layered with crisp bacon, melted Swiss, and honey mustard on our house bread, pressed crisp.",
       "notes": [
         "Served with pickle and Featured Side"
       ]
     },
     {
-      "name": "Smashed Potatoes",
+      "name": "Italian Pasta Salad",
       "label": "Featured Side",
-      "description": "Smashed potatoes with garlic and herbs.",
+      "description": "Pasta salad with olives, peppers, tomatoes, onions, and Italian dressing.",
       "notes": [
         "Vegetarian",
-        "Gluten-Free",
         "Served with all pressed sandwiches",
         "Included in combos"
       ]
     },
     {
-      "name": "Chocolate Chocolate Chip Cheesecake",
+      "name": "Mixed Berry Crisp",
       "label": "Sweet Bite of the Day",
-      "description": "No-bake chocolate cheesecake with chocolate chips on a graham cracker crust."
+      "description": "Warm mixed berry crisp topped with homemade whipped cream."
     }
   ]
 }

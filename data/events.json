@@ -116,7 +116,14 @@
   "description": "Live music with Bumblepuppy, 4–7 PM. A dynamic blend of jazz, funk, soul, and rock in a relaxed Sunday setting. $5 cover at the door.",
   "price": "$5 cover",
   "payment_link_url": ""
-}
+},
+{
+      "date": "2026-06-06T18:00:00",
+      "title": "Live Music: Jeff Stewart",
+      "description": "Live music by Jeff Stewart, 6–9 PM.",
+      "price": "No cover",
+      "payment_link_url": ""
+    }
   ]
 
 }
