@@ -123,7 +123,16 @@
       "description": "Live music by Jeff Stewart, 6–9 PM.",
       "price": "No cover",
       "payment_link_url": ""
-    }
+    },
+    {
+  "date": "2026-06-18T18:30:00",
+  "title": "Mockingbird Book Club — June",
+  "description": "Join us for Mockingbird Book Club on Thursday, June 18th at 6:30 PM as we discuss Then Came You by Jennifer Weiner — a sharp, heartfelt novel that follows four very different women whose lives become unexpectedly intertwined through a surrogacy arrangement. Enjoy an open, welcoming conversation with food and drinks available.",
+  "price": "No cover",
+  "payment_link_url": "",
+  "image_url": "assets/events/June_Book_Club.png",
+  "image_alt": "Mockingbird Book Club event image for Then Came You by Jennifer Weiner, Thursday, June 18th at 6:30 PM"
+}
   ]
 
 }
