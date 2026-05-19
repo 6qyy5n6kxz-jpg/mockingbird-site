@@ -132,7 +132,14 @@
   "payment_link_url": "",
   "image_url": "assets/events/June_Book_Club.png",
   "image_alt": "Mockingbird Book Club event image for Then Came You by Jennifer Weiner, Thursday, June 18th at 6:30 PM"
-}
+},
+{
+      "date": "2026-06-20T18:00:00",
+      "title": "Live Music: Bruce Brodie",
+      "description": "Live music by Bruce Brodie, 6–9 PM.",
+      "price": "No cover",
+      "payment_link_url": ""
+    }
   ]
 
 }
