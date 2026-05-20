@@ -2,20 +2,6 @@
   "_comment": "Upcoming events. Remove past dates as needed.",
   "events": [
     {
-      "date": "2026-05-09T18:00:00",
-      "title": "Live Music: Devin Frank featuring Sylv & Soph ",
-      "description": "Live music by Devin Frank featuring Sylv & Soph, 6–9 PM.",
-      "price": "No cover",
-      "payment_link_url": ""
-    },
-    {
-      "date": "2026-05-16T18:00:00",
-      "title": "Live Music: Jake Pilewski",
-      "description": "Live music by Jake Pilewski, 6–9 PM.",
-      "price": "No cover",
-      "payment_link_url": ""
-    },
-    {
       "date": "2026-05-23T18:00:00",
       "title": "Live Music: Kevin VanSickle",
       "description": "Live music by Kevin VanSickle, 6–9 PM.",
@@ -41,32 +27,6 @@
       "type": "Fundraiser",
       "image_url": "assets/events/Mockingbird_Jam_September_13.jpg",
       "image_alt": "Mockingbird Jam to Defeat ALS fundraiser graphic announcing Sunday, September 13 at The Mockingbird on Mill Road"
-    },
-    {
-      "date": "2026-05-18T18:00:00",
-      "title": "Wine & Canvas: Wine Glass Painting Party — Pick Your Design",
-      "description": "✨🍷 Creative freedom. Personal style. Functional art you’ll actually use. Join us at the The Mockingbird on Mill Road for Pick Your Design, a relaxed and creative Wine Glass Paint & Sip Party where you choose what you paint. Instead of following one design, guests can select from a variety of wine glass painting ideas — or create something entirely their own. Includes 2 wine glasses",
-      "price": "Tickets via Wine & Canvas",
-      "event_type": "ticketed",
-      "payment_link_url": "https://wineandcanvas.com/toledo/event/graytown-wine-glass-paint-and-sip-party-pick-your-design/",
-      "payment_provider": "vendor",
-      "payment_label": "Buy tickets",
-      "payment_url": "https://wineandcanvas.com/toledo/event/graytown-wine-glass-paint-and-sip-party-pick-your-design/",
-      "payment_note": "",
-      "hide_ticketed_helper": true,
-      "seating_form": {
-        "enabled": false
-      },
-      "type": "Paint & Sip",
-      "ticketing": {
-        "capacity": 12,
-        "sold": 0,
-        "price_display": "$30 per person",
-        "clover_payment_url": "https://wineandcanvas.com/toledo/event/graytown-wine-glass-paint-and-sip-party-pick-your-design/",
-        "sold_out_behavior": "disable"
-      },
-      "image_url": "assets/events/Wine_glasses.png",
-      "image_alt": "Example wine glass painting images"
     },
 {
   "date": "2026-05-21T18:30:00",
@@ -139,7 +99,17 @@
       "description": "Live music by Bruce Brodie, 6–9 PM.",
       "price": "No cover",
       "payment_link_url": ""
-    }
+    },
+    {
+  "date": "2026-06-21T15:00:00",
+  "title": "Father’s Day Backyard BBQ & Ohio Beer Flight",
+  "description": "Celebrate Father’s Day at The Mockingbird with a laid-back afternoon of cold Ohio beer, backyard BBQ specials, cornhole, and good company. Join us from 3–7 PM for a relaxed backyard-style cookout featuring all-Ohio beer flights, BBQ-inspired food specials, patio games, and summer vibes throughout our outdoor space. No tickets required — all are welcome.",
+  "price": "No cover",
+  "payment_link_url": "",
+  "type": "Special Event",
+  "image_url": "assets/events/Fathers_Day_Backyard_BBQ.png",
+  "image_alt": "Father’s Day Backyard BBQ and Ohio Beer Flight event at The Mockingbird on Sunday, June 21 from 3 to 7 PM"
+}
   ]
 
 }
