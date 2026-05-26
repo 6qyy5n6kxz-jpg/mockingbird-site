@@ -115,7 +115,14 @@
   "type": "Paint & Sip",
   "image_url": "assets/events/Twilight_on_the_Farm.jpg",
   "image_alt": "Peaceful farm sunset painting featuring a silhouetted tree, barn, silo, and windmill against a glowing twilight sky"
-}
+},
+{
+      "date": "2026-06-27T18:00:00",
+      "title": "Live Music: Clay Kirchenbauer",
+      "description": "Live music by Clay Kirchenbauer, 6–9 PM.",
+      "price": "No cover",
+      "payment_link_url": ""
+    }
   ]
 
 }
