@@ -122,6 +122,13 @@
       "description": "Live music by Clay Kirchenbauer, 6–9 PM.",
       "price": "No cover",
       "payment_link_url": ""
+    },
+    {
+      "date": "2026-07-04T18:00:00",
+      "title": "Live Music: A Change Of Plans",
+      "description": "Live music by A Change Of Plans, 6–9 PM.",
+      "price": "No cover",
+      "payment_link_url": ""
     }
   ]
 
