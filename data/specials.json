@@ -1,49 +1,49 @@
 {
-  "_comment": "Update weekly specials. weekOf should be the Monday of the current week.",
-  "weekOf": "2026-05-11",
-  "dateRange": "May 13–16",
-  "items": [
-    {
-      "name": "Chicken Gnocchi Soup",
-      "label": "Soup of the Day",
-      "description": "Tender chicken, pillowy gnocchi, and vegetables in a rich, creamy broth.",
-      "notes": [
-        "Available as cup or bowl",
-        "Available as a combo add-on"
-      ]
-    },
-    {
-      "name": "Apple, Pecan & Feta Salad",
-      "label": "Seasonal Salad",
-      "description": "Mixed greens with sliced Honeycrisp apple, toasted pecans, dried blueberries, and feta crumbles.",
-      "notes": [
-        "Dressing served on the side.",
-        "Vegetarian",
-        "Gluten-Free"
-      ]
-    },
-    {
-      "name": "Turkye, Bacon & Swiss Pressed",
-      "label": "Featured Pressed Sandwich",
-      "description": "Smoked turkey layered with crisp bacon, melted Swiss, and honey mustard on our house bread, pressed crisp.",
-      "notes": [
-        "Served with pickle and Featured Side"
-      ]
-    },
-    {
-      "name": "Italian Pasta Salad",
-      "label": "Featured Side",
-      "description": "Pasta salad with olives, peppers, tomatoes, onions, and Italian dressing.",
-      "notes": [
-        "Vegetarian",
-        "Served with all pressed sandwiches",
-        "Included in combos"
-      ]
-    },
-    {
-      "name": "Mixed Berry Crisp",
-      "label": "Sweet Bite of the Day",
-      "description": "Warm mixed berry crisp topped with homemade whipped cream."
-    }
-  ]
+"_comment": "Update weekly specials. weekOf should be the Monday of the current week.",
+"weekOf": "2026-06-15",
+"dateRange": "June 18–21",
+"items": [
+{
+"name": "Chili",
+"label": "Soup of the Day",
+"description": "A hearty chili slow-simmered with beef, beans, tomatoes, and savory spices.",
+"notes": [
+"Available as cup or bowl",
+"Available as a combo add-on",
+"Gluten-Free"
+]
+},
+{
+"name": "Southwest Crunch Salad",
+"label": "Seasonal Salad",
+"description": "Mixed greens topped with sweet corn, tomatoes, cheddar cheese, red onion, and crispy onion straws.",
+"notes": [
+"Ranch served on the side.",
+"Vegetarian"
+]
+},
+{
+"name": "BBQ Chicken Pressed",
+"label": "Featured Pressed Sandwich",
+"description": "Slow-roasted chicken topped with house BBQ sauce, melted cheddar, and pickled red onions on our house bread, pressed crisp.",
+"notes": [
+"Served with pickle and Featured Side"
+]
+},
+{
+"name": "Mac & Cheese",
+"label": "Featured Side",
+"description": "Creamy macaroni and cheese.",
+"notes": [
+"Vegetarian",
+"Served with all pressed sandwiches",
+"Included in combos"
+]
+},
+{
+"name": "No-Bake Cherry Cheesecake",
+"label": "Sweet Bite of the Day",
+"description": "Creamy no-bake cheesecake topped with cherry pie filling on a graham cracker crust."
+}
+]
 }
