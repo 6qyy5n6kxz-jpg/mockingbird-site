@@ -3,11 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Private Parties | The Mockingbird on Mill Road</title>
-  <meta name="description" content="Host private parties at The Mockingbird on Mill Road in Graytown, OH with food, drinks, and flexible space.">
-  <meta property="og:title" content="Private Parties | Mockingbird">
-  <meta property="og:description" content="Reserve the dining room or patio with a quick private party inquiry.">
-  <meta property="og:image" content="../assets/images/og.jpg">
+  <title>Private Event Venue in Graytown, Ohio | The Mockingbird</title>
+  <meta name="description" content="Plan a private party at The Mockingbird on Mill Road in Graytown, Ohio. Explore food, drinks, flexible spaces, live music, a photo booth, uplighting, and more." data-page-seo>
+  <link rel="canonical" href="https://themockingbirdonmillroad.com/private-parties/">
+  <meta name="robots" content="index,follow">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://themockingbirdonmillroad.com/private-parties/">
+  <meta property="og:title" content="Private Events at The Mockingbird on Mill Road">
+  <meta property="og:description" content="Plan food, drinks, atmosphere, entertainment, and optional event enhancements through one easy process in Graytown, Ohio." data-page-seo>
+  <meta property="og:image" content="https://themockingbirdonmillroad.com/assets/images/private-party1.jpg" data-page-seo>
   <script src="../js/base.js"></script>
   <link rel="icon" type="image/svg+xml" data-favicon="svg">
   <link rel="alternate icon" data-favicon="ico">
@@ -30,11 +34,16 @@
   <header id="site-header"></header>
   <div class="announcement" role="status"></div>
 
-  <main id="main" class="section">
+  <main id="main">
+  <section class="pp-hero section">
     <div class="container">
       <p class="kicker">Private Parties</p>
-      <h1>Host your celebration</h1>
-      <p class="lead">Flexible spaces for birthdays, company mixers or meetings, wedding and baby showers, and company or family holiday parties. Responses within one business day.</p>
+      <h1>Host your celebration at The Mockingbird</h1>
+      <p class="lead">A warm private event venue in Graytown, Ohio, with flexible spaces, from-scratch food, drinks, and optional enhancements—all coordinated through one planning process.</p>
+      <div class="hero-cta pp-hero-actions">
+        <a class="btn btn-primary" href="#event-estimate" data-track="estimate_click">Estimate My Event</a>
+        <a class="btn btn-secondary" href="#party-form" data-track="request_availability_click">Request Availability</a>
+      </div>
       <div class="info-block" style="margin-top:12px;">
         <p class="note">Note: Our event calendar and pricing tool are currently a work in progress and not yet finalized. Availability, pricing, and options may change as we continue refining the experience. Please reach out with any questions — we’re happy to help.</p>
       </div>
@@ -42,7 +51,7 @@
         <p class="kicker">Private Event Reservations</p>
         <p class="note">A $250 reservation fee is required for private events, with a $100 deposit due to secure your date and time. The remaining balance is applied to your final event total.</p>
       </div>
-      <div class="pp-builder-grid">
+      <div class="pp-builder-grid" id="event-estimate">
         <div class="pp-builder-left">
           <div id="private-menu-builder" class="card menu-builder">
             <p class="kicker">Build Your Event Menu</p>
@@ -68,7 +77,9 @@
         <div class="pp-builder-right">
           <div class="card pp-inquiry-card">
             <div class="pp-inquiry-body">
-              <form id="party-form" data-subject="Private Party Inquiry">
+              <form id="party-form" action="https://formspree.io/f/xbddjoek" method="POST" data-formspree data-subject="Private Party Inquiry" data-success-message="Thanks—we received your event request and will be in touch soon." data-error-message="We couldn't send your request. Please try again or call 419-504-4900.">
+                <p class="kicker">Start Planning</p>
+                <h2>Request availability</h2>
                 <div class="availability-card" id="availability-card">
                   <div class="availability-header">
                     <p class="kicker">Availability</p>
@@ -121,11 +132,25 @@
           <label for="party-budget">Budget or spend target</label>
           <input id="party-budget" name="Budget" placeholder="$500">
 
+          <fieldset class="enhancement-fieldset">
+            <legend>Which event enhancements interest you? <span class="optional-label">Optional</span></legend>
+            <div class="checkbox-grid">
+              <label><input type="checkbox" name="Event enhancements" value="Photo Booth"> Photo Booth</label>
+              <label><input type="checkbox" name="Event enhancements" value="Uplighting"> Uplighting</label>
+              <label><input type="checkbox" name="Event enhancements" value="Indoor and outdoor audio"> Indoor and outdoor audio</label>
+              <label><input type="checkbox" name="Event enhancements" value="Live music"> Live music</label>
+              <label><input type="checkbox" name="Event enhancements" value="Wine &amp; Canvas activity"> Wine &amp; Canvas activity</label>
+              <label><input type="checkbox" name="Event enhancements" value="I'm not sure yet"> I’m not sure yet</label>
+              <label><input type="checkbox" name="Event enhancements" value="Something else"> Something else</label>
+            </div>
+          </fieldset>
+
           <label for="party-notes">Notes</label>
           <textarea id="party-notes" name="Notes" placeholder="Menu preferences, AV needs, timing, etc."></textarea>
 
                 <div class="inline-links" style="margin-top:12px;">
-                  <button type="button" class="btn btn-primary" data-copy-form="party-form">Copy details</button>
+                  <button type="submit" class="btn btn-primary">Send Event Request</button>
+                  <button type="button" class="btn btn-ghost btn-small" data-copy-form="party-form">Copy details</button>
                 </div>
                 <p class="note">We reply within one business day.</p>
               </form>
@@ -133,7 +158,7 @@
           </div>
         </div>
       </div>
-      <div class="info-block" style="margin-top:18px;">
+      <div class="info-block pp-process" style="margin-top:18px;">
         <p class="kicker">How booking works</p>
         <h2>How booking works</h2>
         <ul class="table-list">
@@ -145,28 +170,69 @@
           <a class="btn btn-ghost btn-small" data-nav="reserve-date">Already confirmed with us? Reserve your date</a>
         </div>
       </div>
-      <div class="info-block" style="margin-top:18px;">
-        <p class="kicker">What to expect</p>
-        <ul class="table-list">
-          <li>Pre-set or family-style menus tailored to your group</li>
-          <li>Bar packages with classic, low-proof, and no-proof options</li>
-          <li>Dedicated host to coordinate timeline and dietary needs</li>
-        </ul>
-        <p class="note">Special requests (menu adjustments, custom timing, rentals, AV, etc.) are reviewed and priced individually.</p>
+    </div>
+  </section>
+
+  <section class="section alt" aria-labelledby="enhancements-title">
+    <div class="container">
+      <div class="section-heading">
+        <p class="kicker">Available event enhancements</p>
+        <h2 id="enhancements-title">Make the Event Your Own</h2>
+        <p class="lead">Go beyond the food and room reservation with optional enhancements that can help set the mood, entertain your guests, and make the celebration feel personal.</p>
+      </div>
+      <div class="enhancement-grid">
+        <article class="enhancement-card"><div class="enhancement-placeholder" aria-hidden="true"><span>Photo Booth</span><small>Event photo coming soon</small></div><div class="enhancement-copy"><h3>Photo Booth</h3><p>Give guests an easy, interactive way to capture the celebration. Ask about a photo booth experience with a custom event template and a digital collection of the photos taken during your event.</p><button class="text-button" type="button" data-enhancement="Photo Booth" data-track="enhancement_click">Ask About This</button></div></article>
+        <article class="enhancement-card"><div class="enhancement-placeholder lighting" aria-hidden="true"><span>Uplighting</span><small>Event photo coming soon</small></div><div class="enhancement-copy"><h3>Uplighting</h3><p>Transform the room with event uplighting selected to complement your celebration, theme, or colors.</p><button class="text-button" type="button" data-enhancement="Uplighting" data-track="enhancement_click">Ask About This</button></div></article>
+        <article class="enhancement-card"><img src="../assets/images/interior3.jpg" alt="Outdoor seating area available to guests at The Mockingbird" width="960" height="768" loading="lazy"><div class="enhancement-copy"><h3>Indoor &amp; Outdoor Audio</h3><p>For summer events using both spaces, ask about extending the same playlist outside so the celebration feels connected wherever guests gather.</p><button class="text-button" type="button" data-enhancement="Indoor and outdoor audio" data-track="enhancement_click">Ask About This</button></div></article>
+        <article class="enhancement-card"><div class="enhancement-placeholder music" aria-hidden="true"><span>Live Music</span><small>Event photo coming soon</small></div><div class="enhancement-copy"><h3>Live Music</h3><p>Add live music for dinner, cocktails, or a special moment. Solo and small-group options may be available depending on the event and date.</p><button class="text-button" type="button" data-enhancement="Live music" data-track="enhancement_click">Ask About This</button></div></article>
+        <article class="enhancement-card"><div class="enhancement-placeholder canvas" aria-hidden="true"><span>Wine &amp; Canvas</span><small>Activity photo coming soon</small></div><div class="enhancement-copy"><h3>Wine &amp; Canvas Activity</h3><p>Turn part of your gathering into a creative experience with a guided or pre-planned Wine &amp; Canvas activity coordinated for your group.</p><button class="text-button" type="button" data-enhancement="Wine & Canvas activity" data-track="enhancement_click">Ask About This</button></div></article>
+        <article class="enhancement-card"><div class="enhancement-placeholder custom" aria-hidden="true"><span>Your Idea</span><small>Tell us what you envision</small></div><div class="enhancement-copy"><h3>Custom Event Enhancements</h3><p>Planning something unique? Tell us what you have in mind and we’ll help explore available options.</p><button class="text-button" type="button" data-enhancement="Something else" data-track="enhancement_click">Ask About This</button></div></article>
+      </div>
+      <p class="note enhancement-disclaimer">Optional enhancements are not included in the preliminary event estimate unless specifically selected. Availability and pricing may vary based on the date, event length, setup requirements, and selected services.</p>
+    </div>
+  </section>
+
+  <section class="section pp-one-process">
+    <div class="container grid-2">
+      <div><p class="kicker">A more complete celebration</p><h2>One Celebration. One Easy Planning Process.</h2><p>Instead of coordinating the venue, food, drinks, music, lighting, and entertainment separately, tell us what you are envisioning. We’ll help organize the available pieces into one clear event plan.</p><a class="btn btn-primary" href="#party-form" data-track="request_availability_click">Start Your Plan</a></div>
+      <img src="../assets/images/private-party1.jpg" alt="Private event food display prepared at The Mockingbird" width="1440" height="1080" loading="lazy">
+    </div>
+  </section>
+
+  <section class="section alt" aria-labelledby="event-types-title">
+    <div class="container">
+      <div class="section-heading"><p class="kicker">Gather your people</p><h2 id="event-types-title">What Will You Celebrate?</h2><p>From milestone parties to meaningful community gatherings, we’ll help shape the space, menu, and experience around your group.</p></div>
+      <div class="occasion-grid">
+        <article><h3>Birthdays</h3><p>Make the milestone feel personal.</p></article><article><h3>Graduations</h3><p>Bring family together for the big achievement.</p></article><article><h3>Bridal showers</h3><p>Toast the couple in a warm setting.</p></article><article><h3>Baby showers</h3><p>Gather comfortably for a joyful afternoon.</p></article><article><h3>Rehearsal dinners</h3><p>Welcome your closest people before the day.</p></article><article><h3>Anniversaries</h3><p>Celebrate the years around a shared table.</p></article><article><h3>Retirement parties</h3><p>Honor a career and the chapter ahead.</p></article><article><h3>Family reunions</h3><p>Reconnect over food, drinks, and conversation.</p></article><article><h3>Corporate gatherings</h3><p>Host a relaxed meeting or team occasion.</p></article><article><h3>Holiday parties</h3><p>Enjoy the season without hosting at home.</p></article><article><h3>Celebration of Life</h3><p>Gather with care to share memories.</p></article><article><h3>Community events</h3><p>Create a welcoming place to come together.</p></article>
       </div>
     </div>
+  </section>
+
+  <section class="section" aria-labelledby="gallery-title">
+    <div class="container">
+      <div class="section-heading"><p class="kicker">Celebrations at The Mockingbird</p><h2 id="gallery-title">A Space Made for Gathering</h2><p>Explore a curated look at the food and spaces that can become part of your event.</p></div>
+      <div class="pp-gallery">
+        <a href="../assets/images/private-party1.jpg"><img src="../assets/images/private-party1.jpg" alt="Private party buffet display with fruit, vegetables, breads, and accompaniments" width="1440" height="1080" loading="lazy"></a>
+        <a href="../assets/images/interior1.jpg"><img src="../assets/images/interior1.jpg" alt="Indoor dining room seating at The Mockingbird" width="2048" height="1536" loading="lazy"></a>
+        <a href="../assets/images/interior3.jpg"><img src="../assets/images/interior3.jpg" alt="Outdoor gathering space at The Mockingbird" width="960" height="768" loading="lazy"></a>
+        <a href="../assets/images/bar1.jpg"><img src="../assets/images/bar1.jpg" alt="Wine service available at The Mockingbird bar" width="720" height="960" loading="lazy"></a>
+      </div>
+      <p class="note">More private-event photographs and verified guest stories will be added as owner-approved material becomes available.</p>
+    </div>
+  </section>
   </main>
 
   <section class="section alt">
     <div class="container">
       <div class="final-cta">
         <div>
-          <p class="kicker">Need something specific?</p>
-          <h2>Call us and we’ll craft the right experience.</h2>
+          <p class="kicker">Preferred date · guest count · event type · menu ideas · enhancements</p>
+          <h2>Start Planning Your Event</h2>
+          <p>Share a few details and we’ll help you turn your estimate into a personalized plan.</p>
         </div>
         <div class="hero-cta">
-          <a class="btn btn-primary" data-cta="call">Call</a>
-          <a class="btn btn-secondary" data-cta="directions">Directions</a>
+          <a class="btn btn-primary" href="#party-form" data-track="request_availability_click">Request Availability</a>
+          <a class="btn btn-secondary" data-cta="call" data-track="phone_click">Call</a>
         </div>
       </div>
     </div>
@@ -235,5 +301,6 @@
   <script src="../js/private-menu-pricing.js"></script>
   <script src="../js/main.js"></script>
   <script src="../js/private-availability.js"></script>
+  <script src="../js/private-parties.js"></script>
 </body>
 </html>

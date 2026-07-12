@@ -1005,6 +1005,62 @@ textarea {
 .social .social-icon:hover {
   opacity: 1;
 }
+
+/* Private parties: scoped experience and enhancement content. */
+.pp-hero { background: linear-gradient(180deg, rgba(176, 109, 60, .09), transparent 38%); }
+.pp-hero-actions { justify-content: flex-start; margin: 20px 0 8px; }
+.section-heading { max-width: 760px; margin-bottom: 24px; }
+.section-heading h2 { margin-bottom: 8px; }
+.enhancement-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+.enhancement-card { display: flex; flex-direction: column; min-width: 0; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; }
+.enhancement-card > img, .enhancement-placeholder { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
+.enhancement-placeholder { display: grid; place-content: center; gap: 4px; padding: 18px; text-align: center; color: #fff; background: linear-gradient(135deg, #325b57, #b06d3c); }
+.enhancement-placeholder.lighting { background: linear-gradient(135deg, #4b355c, #bb6c54 55%, #e1b66f); }
+.enhancement-placeholder.music { background: linear-gradient(135deg, #253c3a, #805134); }
+.enhancement-placeholder.canvas { background: linear-gradient(135deg, #8d3f45, #d98a54 50%, #54736c); }
+.enhancement-placeholder.custom { background: linear-gradient(135deg, #3f514f, #6f8176); }
+.enhancement-placeholder span { font-family: Georgia, serif; font-size: 1.35rem; font-weight: 700; }
+.enhancement-placeholder small { opacity: .88; }
+.enhancement-copy { display: flex; flex: 1; flex-direction: column; align-items: flex-start; padding: 18px; }
+.enhancement-copy h3 { margin: 0 0 8px; }
+.enhancement-copy p { margin: 0 0 16px; }
+.text-button { margin-top: auto; padding: 4px 0; color: var(--accent-strong); background: none; border: 0; border-bottom: 1px solid currentColor; font: inherit; font-weight: 700; cursor: pointer; }
+.text-button:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+.enhancement-disclaimer { max-width: 900px; margin-top: 18px; padding-left: 12px; border-left: 3px solid var(--accent); }
+.enhancement-fieldset { margin: 16px 0; padding: 0; border: 0; }
+.enhancement-fieldset legend { margin-bottom: 8px; font-weight: 700; }
+.optional-label { color: var(--muted); font-size: .8em; font-weight: 400; }
+.checkbox-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 12px; }
+.checkbox-grid label { display: flex; gap: 8px; align-items: flex-start; margin: 0; font-weight: 400; }
+.checkbox-grid input { margin-top: 3px; flex: 0 0 auto; }
+.pp-one-process .grid-2 { align-items: center; }
+.pp-one-process img { width: 100%; max-height: 420px; border-radius: var(--radius); object-fit: cover; box-shadow: var(--shadow); }
+.occasion-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.occasion-grid article { padding: 16px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; }
+.occasion-grid h3 { margin: 0 0 5px; font-size: 1rem; }
+.occasion-grid p { margin: 0; color: var(--muted); font-size: .9rem; }
+.pp-gallery { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.pp-gallery a { display: block; border-radius: 12px; overflow: hidden; background: #eee; }
+.pp-gallery a:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+.pp-gallery img { display: block; width: 100%; height: 220px; object-fit: cover; transition: transform .2s ease; }
+.pp-gallery a:hover img { transform: scale(1.02); }
+.final-cta > div:first-child { max-width: 700px; }
+
+@media (max-width: 900px) {
+  .enhancement-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .occasion-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .pp-gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 580px) {
+  .enhancement-grid, .occasion-grid { grid-template-columns: 1fr; }
+  .checkbox-grid { grid-template-columns: 1fr; }
+  .pp-gallery img { height: 150px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pp-gallery img { transition: none; }
+}
 .footer-social-icons {
   display: flex;
   gap: 10px;

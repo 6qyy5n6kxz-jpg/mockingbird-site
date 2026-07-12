@@ -3445,6 +3445,7 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
     const lines = [];
     Array.from(form.elements).forEach((el) => {
       if (!el.name || ['submit', 'button'].includes(el.type)) return;
+      if ((el.type === 'checkbox' || el.type === 'radio') && !el.checked) return;
       if (menuSummary && el === menuSummary) return;
       const label = form.querySelector(`label[for="${el.id}"]`);
       const title = label ? label.textContent.trim() : el.name;
@@ -3562,14 +3563,14 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
     if (!site?.name) return;
     const script = document.createElement('script');
     script.type = 'application/ld+json';
-    if (site.seoDescription) {
+    if (site.seoDescription && !document.querySelector('meta[name="description"][data-page-seo]')) {
       const meta = document.querySelector('meta[name="description"]');
       if (meta) meta.setAttribute('content', site.seoDescription);
       const og = document.querySelector('meta[property="og:description"]');
       if (og) og.setAttribute('content', site.seoDescription);
     }
     const ogImg = resolveImage(site.images?.ogImage || site.defaultSEO?.ogImage || site.openGraphImage || site.heroImage);
-    if (ogImg) {
+    if (ogImg && !document.querySelector('meta[property="og:image"][data-page-seo]')) {
       const ogMeta = document.querySelector('meta[property="og:image"]');
       if (ogMeta) ogMeta.setAttribute('content', ogImg.src);
       const twMeta = document.querySelector('meta[name="twitter:image"]');
@@ -3577,7 +3578,7 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
     }
     const data = {
       '@context': 'https://schema.org',
-      '@type': 'Restaurant',
+      '@type': document.getElementById('party-form') ? ['Restaurant', 'EventVenue'] : 'Restaurant',
       name: site.name,
       description: site.description,
       telephone: site.phone,
@@ -3589,8 +3590,8 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
         postalCode: site.address?.zip,
         addressCountry: site.address?.country
       },
-      url: window.location.origin,
-      image: (site.images && site.images.ogImage) || (site.defaultSEO && site.defaultSEO.ogImage) || site.openGraphImage || site.heroImage,
+      url: window.location.href.split('#')[0],
+      image: document.querySelector('meta[property="og:image"]')?.content || (site.images && site.images.ogImage) || (site.defaultSEO && site.defaultSEO.ogImage) || site.openGraphImage || site.heroImage,
       servesCuisine: 'Seasonal',
       openingHours: site.hours?.map((h) => `${h.label} ${h.value}`)
     };
