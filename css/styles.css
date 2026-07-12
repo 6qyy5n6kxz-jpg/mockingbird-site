@@ -1009,6 +1009,12 @@ textarea {
 /* Private parties: scoped experience and enhancement content. */
 .pp-hero { background: linear-gradient(180deg, rgba(176, 109, 60, .09), transparent 38%); }
 .pp-hero-actions { justify-content: flex-start; margin: 20px 0 8px; }
+.pp-emotional-intro { margin: 40px 0 32px; padding-top: 30px; border-top: 1px solid var(--border); }
+.pp-host-benefits { margin: 32px 0; padding: 26px; border-radius: var(--radius); background: #fff; box-shadow: var(--shadow); }
+.pp-host-benefits .benefit-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+.pp-host-benefits article { min-width: 0; }
+.pp-host-benefits h3 { margin: 0 0 6px; font-size: 1rem; }
+.pp-host-benefits p { margin: 0; color: var(--muted); }
 .pp-estimate-handoff { margin-top: 14px; }
 .pp-event-summary { margin: 14px 0 18px; padding: 14px; border: 1px solid rgba(176, 109, 60, .35); border-radius: 12px; background: rgba(176, 109, 60, .07); }
 .pp-event-summary h3 { margin: 0 0 10px; font-size: 1rem; }
@@ -1043,11 +1049,24 @@ textarea {
 .enhancement-placeholder span { font-family: Georgia, serif; font-size: 1.35rem; font-weight: 700; }
 .enhancement-placeholder small { opacity: .88; }
 .enhancement-copy { display: flex; flex: 1; flex-direction: column; align-items: flex-start; padding: 18px; }
+.enhancement-copy .enhancement-label { margin: 0 0 6px; color: var(--accent-strong); font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
 .enhancement-copy h3 { margin: 0 0 8px; }
 .enhancement-copy p { margin: 0 0 16px; }
 .text-button { margin-top: auto; padding: 4px 0; color: var(--accent-strong); background: none; border: 0; border-bottom: 1px solid currentColor; font: inherit; font-weight: 700; cursor: pointer; }
 .text-button:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
 .enhancement-disclaimer { max-width: 900px; margin-top: 18px; padding-left: 12px; border-left: 3px solid var(--accent); }
+.pp-build-event .section-heading { margin-bottom: 18px; }
+.build-option-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; margin-bottom: 14px; }
+.build-option-grid span { display: flex; align-items: center; min-height: 62px; padding: 12px; border: 1px solid var(--border); border-radius: 12px; background: var(--surface); font-weight: 700; }
+.pp-section-cta { margin-top: 20px; }
+.comparison-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.comparison-grid article { min-width: 0; padding: 18px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); }
+.comparison-grid article.is-mockingbird { border-color: rgba(176, 109, 60, .55); box-shadow: var(--shadow); }
+.comparison-grid h3 { margin: 0 0 14px; }
+.comparison-grid dl { margin: 0; }
+.comparison-grid dt { margin-top: 11px; font-weight: 700; }
+.comparison-grid dt:first-child { margin-top: 0; }
+.comparison-grid dd { margin: 3px 0 0; color: var(--muted); }
 .enhancement-fieldset { margin: 16px 0; padding: 0; border: 0; }
 .enhancement-fieldset legend { margin-bottom: 8px; font-weight: 700; }
 .optional-label { color: var(--muted); font-size: .8em; font-weight: 400; }
@@ -1070,11 +1089,19 @@ textarea {
 @media (max-width: 900px) {
   .enhancement-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .occasion-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .pp-host-benefits .benefit-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .build-option-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .comparison-grid { grid-template-columns: 1fr; }
   .pp-gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 @media (max-width: 580px) {
   .enhancement-grid, .occasion-grid { grid-template-columns: 1fr; }
+  .pp-emotional-intro { margin-top: 28px; padding-top: 22px; }
+  .pp-host-benefits { padding: 18px; }
+  .pp-host-benefits .benefit-grid, .build-option-grid, .comparison-grid { grid-template-columns: 1fr; }
+  .build-option-grid span { min-height: 48px; }
+  .pp-section-cta .btn { width: 100%; min-height: 44px; }
   .checkbox-grid { grid-template-columns: 1fr; }
   .pp-form-columns { grid-template-columns: 1fr; gap: 0; }
   .pp-event-summary dl { grid-template-columns: 1fr; gap: 2px; }
