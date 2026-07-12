@@ -1009,6 +1009,27 @@ textarea {
 /* Private parties: scoped experience and enhancement content. */
 .pp-hero { background: linear-gradient(180deg, rgba(176, 109, 60, .09), transparent 38%); }
 .pp-hero-actions { justify-content: flex-start; margin: 20px 0 8px; }
+.pp-estimate-handoff { margin-top: 14px; }
+.pp-event-summary { margin: 14px 0 18px; padding: 14px; border: 1px solid rgba(176, 109, 60, .35); border-radius: 12px; background: rgba(176, 109, 60, .07); }
+.pp-event-summary h3 { margin: 0 0 10px; font-size: 1rem; }
+.pp-event-summary dl { display: grid; grid-template-columns: minmax(105px, .35fr) minmax(0, 1fr); gap: 7px 12px; margin: 0; }
+.pp-event-summary dt { font-weight: 700; }
+.pp-event-summary dd { min-width: 0; margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; }
+.pp-form-section { margin: 18px 0 0; padding: 16px 0 0; border: 0; border-top: 1px solid var(--border); }
+.pp-form-section legend { padding: 0 8px 0 0; font-size: 1.08rem; font-weight: 700; }
+.pp-form-section label { margin-top: 12px; }
+.pp-form-section legend + label, .pp-form-section legend + .field-help { margin-top: 4px; }
+.pp-form-columns { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.pp-form-columns > div { min-width: 0; }
+.pp-inquiry-card .field-help { margin: 5px 0 0; color: var(--muted); font-size: 13px; }
+.pp-inquiry-card .field-error:empty { display: none; }
+.pp-inquiry-card [aria-invalid="true"] { border-color: var(--color-error, #b00020); outline-color: var(--color-error, #b00020); }
+.pp-reservation-note { margin: 18px 0 8px; padding: 12px; border-left: 3px solid var(--accent); background: rgba(176, 109, 60, .07); font-size: 14px; }
+.pp-form-actions { margin-top: 14px; }
+.pp-success-panel { padding: 18px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); }
+.pp-success-panel:focus { outline: 3px solid var(--accent); outline-offset: 3px; }
+.pp-success-panel pre { max-height: 340px; overflow: auto; padding: 12px; border-radius: 10px; background: #f8f3ed; font: inherit; font-size: 13px; white-space: pre-wrap; overflow-wrap: anywhere; }
+.pp-success-panel .inline-links { margin-top: 14px; }
 .section-heading { max-width: 760px; margin-bottom: 24px; }
 .section-heading h2 { margin-bottom: 8px; }
 .enhancement-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
@@ -1055,6 +1076,11 @@ textarea {
 @media (max-width: 580px) {
   .enhancement-grid, .occasion-grid { grid-template-columns: 1fr; }
   .checkbox-grid { grid-template-columns: 1fr; }
+  .pp-form-columns { grid-template-columns: 1fr; gap: 0; }
+  .pp-event-summary dl { grid-template-columns: 1fr; gap: 2px; }
+  .pp-event-summary dd { margin-bottom: 8px; }
+  .pp-form-actions .btn, .pp-success-panel .btn { width: 100%; min-height: 44px; }
+  .enhancement-fieldset .checkbox-grid label { min-height: 44px; align-items: center; padding: 6px 0; }
   .pp-gallery img { height: 150px; }
 }
 

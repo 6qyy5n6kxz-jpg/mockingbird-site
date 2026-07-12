@@ -70,6 +70,7 @@
               <p class="note" data-private-menu="estimate-fixed"></p>
               <p class="note" data-private-menu="estimate-perguest"></p>
               <p class="note">Estimate includes tax + gratuity; final pricing confirmed after details.</p>
+              <button type="button" class="btn btn-primary pp-estimate-handoff" data-calculator-to-form>Request This Event</button>
             </div>
             <p class="note">Final pricing is based on guest count, menu selections, and service style. This estimate is provided for planning purposes. Our team will confirm all details and pricing before your event.</p>
           </div>
@@ -77,9 +78,13 @@
         <div class="pp-builder-right">
           <div class="card pp-inquiry-card">
             <div class="pp-inquiry-body">
-              <form id="party-form" action="https://formspree.io/f/xbddjoek" method="POST" data-formspree data-subject="Private Party Inquiry" data-success-message="Thanks—we received your event request and will be in touch soon." data-error-message="We couldn't send your request. Please try again or call 419-504-4900.">
+              <form id="party-form" action="https://formspree.io/f/xbddjoek" method="POST" data-formspree data-success-message="Your event request has been sent." data-error-message="We couldn’t send your request right now. Your information is still on this page. Please try again or call The Mockingbird at 419-504-4900." novalidate>
                 <p class="kicker">Start Planning</p>
                 <h2>Request availability</h2>
+                <section class="pp-event-summary" aria-labelledby="event-summary-title">
+                  <h3 id="event-summary-title">Your Event So Far</h3>
+                  <div data-event-summary aria-live="polite"><p class="note">You can submit an inquiry without using the estimator, or create an estimate first to give us a better starting point.</p></div>
+                </section>
                 <div class="availability-card" id="availability-card">
                   <div class="availability-header">
                     <p class="kicker">Availability</p>
@@ -102,58 +107,89 @@
                     <ul></ul>
                   </details>
                 </div>
-                <input id="party-menu-summary" name="Private Event Menu Selection" type="hidden" data-menu-summary>
-                <label for="party-name">Name</label>
-                <input id="party-name" name="Name" placeholder="Full name" required>
+                <input id="party-menu-summary" type="hidden" data-menu-summary>
+                <input id="party-calculator-submission" name="Calculator estimate" type="hidden">
+                <input id="party-inquiry-summary" name="Event inquiry summary" type="hidden">
+                <input id="party-enhancements-summary" name="Selected enhancements" type="hidden">
+                <input id="party-page-url" name="Page URL" type="hidden">
+                <input id="party-submitted-at" name="Submission timestamp" type="hidden">
+                <input id="party-subject" name="_subject" type="hidden" value="Private Event Inquiry">
 
-          <label for="party-email">Email</label>
-          <input id="party-email" name="Email" type="email" placeholder="you@example.com" required>
+                <fieldset class="pp-form-section">
+                  <legend>Contact Information</legend>
+                  <label for="party-name">Name <span aria-hidden="true">*</span></label>
+                  <input id="party-name" name="Customer name" autocomplete="name" required aria-describedby="party-name-error">
+                  <p class="field-error" id="party-name-error"></p>
+                  <div class="pp-form-columns">
+                    <div><label for="party-email">Email</label><input id="party-email" name="Email" type="email" autocomplete="email" aria-describedby="party-contact-help party-email-error"><p class="field-error" id="party-email-error"></p></div>
+                    <div><label for="party-phone">Phone</label><input id="party-phone" name="Phone" type="tel" autocomplete="tel" inputmode="tel" aria-describedby="party-contact-help party-phone-error"><p class="field-error" id="party-phone-error"></p></div>
+                  </div>
+                  <p class="field-help" id="party-contact-help">Please provide at least one reliable way for us to contact you.</p>
+                </fieldset>
 
-          <label for="party-phone">Phone</label>
-          <input id="party-phone" name="Phone" type="tel" placeholder="419-504-4900">
+                <fieldset class="pp-form-section">
+                  <legend>Event Details</legend>
+                  <label for="party-event-type">Event type <span aria-hidden="true">*</span></label>
+                  <select id="party-event-type" name="Event type" required aria-describedby="party-event-type-error"><option value="">Select an event type</option><option>Birthday</option><option>Graduation</option><option>Bridal shower</option><option>Baby shower</option><option>Rehearsal dinner</option><option>Anniversary</option><option>Retirement party</option><option>Family reunion</option><option>Corporate gathering</option><option>Holiday party</option><option>Celebration of Life</option><option>Community event</option><option>Other</option></select>
+                  <p class="field-error" id="party-event-type-error"></p>
+                  <div class="pp-form-columns">
+                    <div><label for="party-date">Preferred date <span aria-hidden="true">*</span></label><input id="party-date" name="Preferred date" type="date" required aria-describedby="party-date-help party-date-error availability-warning"><p class="field-help" id="party-date-help">If your date is flexible, include an alternate date.</p><p class="field-error" id="party-date-error"></p></div>
+                    <div><label for="party-alternate-date">Alternate date</label><input id="party-alternate-date" name="Alternate date" type="date"></div>
+                  </div>
+                  <label for="party-time-window">Preferred start time</label>
+                  <select id="party-time-window" name="Preferred start time"><option>Morning</option><option>Afternoon</option><option selected>Evening</option></select>
+                  <p class="note availability-warning" id="availability-warning" aria-live="polite"></p>
+                  <p class="note availability-warning" id="availability-warning-time" aria-live="polite"></p>
+                  <label for="party-size">Approximate guest count <span aria-hidden="true">*</span></label>
+                  <input id="party-size" name="Guest count" type="number" min="1" step="1" required aria-describedby="party-size-help party-size-error"><p class="field-help" id="party-size-help">A preliminary estimate is fine. We can update this later.</p><p class="field-error" id="party-size-error"></p>
+                  <label for="party-space">Space preference</label><select id="party-space" name="Indoor/outdoor preference"><option>Flexible / not sure yet</option><option>Indoor</option><option>Outdoor</option><option>Indoor and outdoor</option></select>
+                </fieldset>
 
-          <label for="party-date">Preferred date</label>
-          <input id="party-date" name="Preferred date" type="date">
-          <label for="party-time-window">Preferred time</label>
-          <select id="party-time-window" name="Preferred time">
-            <option>Morning</option>
-            <option>Afternoon</option>
-            <option selected>Evening</option>
-          </select>
-          <p class="note availability-warning" id="availability-warning" aria-live="polite"></p>
-          <p class="note availability-warning" id="availability-warning-time" aria-live="polite"></p>
+                <fieldset class="pp-form-section">
+                  <legend>Food and Beverage</legend>
+                  <label for="party-food">Food interests</label><textarea id="party-food" name="Food interests" rows="3" aria-describedby="party-food-help"></textarea><p class="field-help" id="party-food-help">Include anything you may be considering. You are not making a final selection yet.</p>
+                  <label for="party-beverages">Beverage interests</label><input id="party-beverages" name="Beverage interests" placeholder="Beer, wine, sangria, cider, non-alcoholic options">
+                  <label for="party-dietary">Dietary restrictions or accessibility needs</label><textarea id="party-dietary" name="Dietary or accessibility needs" rows="3"></textarea>
+                </fieldset>
 
-          <label for="party-size">Estimated headcount</label>
-          <input id="party-size" name="Headcount" type="number" min="1" placeholder="40">
+                <fieldset class="pp-form-section enhancement-fieldset">
+                  <legend>Event Enhancements <span class="optional-label">Optional</span></legend>
+                  <p class="field-help" id="party-enhancements-help">These options may affect final pricing.</p>
+                  <div class="checkbox-grid" aria-describedby="party-enhancements-help">
+                    <label><input type="checkbox" data-enhancement-option value="Photo Booth"> Photo Booth</label>
+                    <label><input type="checkbox" data-enhancement-option value="Uplighting"> Uplighting</label>
+                    <label><input type="checkbox" data-enhancement-option value="Indoor and outdoor audio"> Indoor and outdoor audio</label>
+                    <label><input type="checkbox" data-enhancement-option value="Live music"> Live music</label>
+                    <label><input type="checkbox" data-enhancement-option value="Wine &amp; Canvas activity"> Wine &amp; Canvas activity</label>
+                    <label><input type="checkbox" data-enhancement-option value="Custom event enhancement"> Custom event enhancement</label>
+                    <label><input type="checkbox" data-enhancement-option value="Not sure yet"> Not sure yet</label>
+                  </div>
+                </fieldset>
 
-          <label for="party-occasion">Occasion</label>
-          <input id="party-occasion" name="Occasion" placeholder="Birthday, rehearsal dinner, company mixer">
+                <fieldset class="pp-form-section">
+                  <legend>Additional Details</legend>
+                  <label for="party-occasion">What are you celebrating?</label><input id="party-occasion" name="Celebration details">
+                  <label for="party-special">What would make this event feel special?</label><textarea id="party-special" name="Desired atmosphere or experience" rows="3"></textarea>
+                  <label for="party-notes">Questions or notes</label><textarea id="party-notes" name="Questions or notes" rows="3" aria-describedby="party-notes-help"></textarea><p class="field-help" id="party-notes-help">Tell us anything that would help us understand the atmosphere, setup, or experience you are imagining.</p>
+                </fieldset>
 
-          <label for="party-budget">Budget or spend target</label>
-          <input id="party-budget" name="Budget" placeholder="$500">
-
-          <fieldset class="enhancement-fieldset">
-            <legend>Which event enhancements interest you? <span class="optional-label">Optional</span></legend>
-            <div class="checkbox-grid">
-              <label><input type="checkbox" name="Event enhancements" value="Photo Booth"> Photo Booth</label>
-              <label><input type="checkbox" name="Event enhancements" value="Uplighting"> Uplighting</label>
-              <label><input type="checkbox" name="Event enhancements" value="Indoor and outdoor audio"> Indoor and outdoor audio</label>
-              <label><input type="checkbox" name="Event enhancements" value="Live music"> Live music</label>
-              <label><input type="checkbox" name="Event enhancements" value="Wine &amp; Canvas activity"> Wine &amp; Canvas activity</label>
-              <label><input type="checkbox" name="Event enhancements" value="I'm not sure yet"> I’m not sure yet</label>
-              <label><input type="checkbox" name="Event enhancements" value="Something else"> Something else</label>
-            </div>
-          </fieldset>
-
-          <label for="party-notes">Notes</label>
-          <textarea id="party-notes" name="Notes" placeholder="Menu preferences, AV needs, timing, etc."></textarea>
-
-                <div class="inline-links" style="margin-top:12px;">
+                <p class="pp-reservation-note">Submitting this form does not officially reserve your date. Your event is confirmed only after availability, pricing, and reservation requirements have been reviewed and completed.</p>
+                <p class="field-help">We’ll use the information you provide only to respond to your event inquiry and help plan your event.</p>
+                <div class="inline-links pp-form-actions">
                   <button type="submit" class="btn btn-primary">Send Event Request</button>
                   <button type="button" class="btn btn-ghost btn-small" data-copy-form="party-form">Copy details</button>
                 </div>
-                <p class="note">We reply within one business day.</p>
+                <p class="field-help" data-error-phone hidden>If sending fails, your information will remain here. You can also call <a href="tel:+14195044900" data-phone-fallback>419-504-4900</a>.</p>
               </form>
+              <section class="pp-success-panel" data-inquiry-success hidden tabindex="-1" aria-live="polite">
+                <p class="kicker">Request received</p><h2>Your Event Request Has Been Sent</h2>
+                <p>Thank you for considering The Mockingbird. We’ve received your event details and will review your preferred date, guest count, and selections before following up with the next steps.</p>
+                <div data-submitted-summary></div>
+                <p class="pp-reservation-note">Submitting this form does not officially reserve your date. Your event is confirmed only after availability, pricing, and reservation requirements have been reviewed and completed.</p>
+                <p>Questions in the meantime? Call <a href="tel:+14195044900" data-phone-fallback>419-504-4900</a>.</p>
+                <div class="inline-links"><button type="button" class="btn btn-primary" data-copy-inquiry>Copy Inquiry Summary</button><a class="btn btn-secondary" href="../menu/" data-inquiry-menu>View Regular Menu</a><a class="btn btn-ghost btn-small" href="#main">Return to Top</a></div>
+                <p class="form-status" data-copy-status role="status" aria-live="polite"></p>
+              </section>
             </div>
           </div>
         </div>
@@ -163,7 +199,7 @@
         <h2>How booking works</h2>
         <ul class="table-list">
           <li>Send your preferred date and details using the form below.</li>
-          <li>We’ll confirm availability within 1 business day.</li>
+          <li>We’ll review your request and follow up about availability and next steps.</li>
           <li>Once confirmed, we’ll send you a link to reserve your date with a deposit.</li>
         </ul>
         <div class="inline-links" style="margin-top:12px;">

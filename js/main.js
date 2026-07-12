@@ -3518,6 +3518,8 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
     form.addEventListener('submit', (e) => {
       e.preventDefault();
       if (button.dataset.submitting === 'true') return;
+      const validationEvent = new CustomEvent('formspree:validate', { bubbles: false, cancelable: true });
+      if (!form.dispatchEvent(validationEvent)) return;
       if (!form.checkValidity()) {
         syncAriaInvalid();
         form.reportValidity();
@@ -3531,6 +3533,7 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
       button.disabled = true;
       const defaultLabel = button.textContent;
       button.textContent = 'Sending...';
+      form.dispatchEvent(new CustomEvent('formspree:submitting'));
       fetch(action, {
         method: 'POST',
         body: formData,
@@ -3538,10 +3541,12 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
       }).then((res) => {
         if (!res.ok) throw new Error('Formspree error');
         setStatus('success', successMessage);
+        form.dispatchEvent(new CustomEvent('formspree:success', { detail: { formData } }));
         form.reset();
         syncAriaInvalid();
       }).catch(() => {
         setStatus('error', errorMessage);
+        form.dispatchEvent(new CustomEvent('formspree:error'));
       }).finally(() => {
         button.dataset.submitting = 'false';
         button.disabled = false;
