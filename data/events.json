@@ -159,7 +159,14 @@
   "payment_link_url": "",
   "image_url": "assets/events/July_Book_Club.png",
   "image_alt": "Mockingbird Book Club event image for Falling by T.J. Newman, Thursday, July 16th at 6:30 PM"
-}
+},
+{
+      "date": "2026-07-18T18:00:00",
+      "title": "Live Music: Everywhen",
+      "description": "Live music by Everywhen, 6:00–9:00 PM.",
+      "price": "No cover",
+      "payment_link_url": ""
+    }
   ]
 
 }
