@@ -150,7 +150,16 @@
       "description": "Live music by Devin Frank, 6:00–9:00 PM.",
       "price": "No cover",
       "payment_link_url": ""
-    }
+    },
+   {
+  "date": "2026-07-16T18:30:00",
+  "title": "Mockingbird Book Club — July",
+  "description": "Join us for Mockingbird Book Club on Thursday, July 16th at 6:30 PM as we discuss Falling by T.J. Newman — a gripping thriller about a commercial airline pilot forced into an impossible choice when his family is kidnapped and he's ordered to crash the plane he's flying. Written by a former flight attendant, this suspense-filled novel is packed with authentic aviation detail, high-stakes tension, and plenty to discuss. Enjoy an open, welcoming conversation with food and drinks available.",
+  "price": "No cover",
+  "payment_link_url": "",
+  "image_url": "assets/events/July_Book_Club.png",
+  "image_alt": "Mockingbird Book Club event image for Falling by T.J. Newman, Thursday, July 16th at 6:30 PM"
+}
   ]
 
 }
