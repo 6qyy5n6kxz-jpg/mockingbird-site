@@ -173,7 +173,14 @@
       "description": "Live music by Ol' Creek Road, 6:00–9:00 PM.",
       "price": "No cover",
       "payment_link_url": ""
-    }    
+    },
+    {
+      "date": "2026-07-25T18:00:00",
+      "title": "Live Music: Sylv & Soph",
+      "description": "Live music by Sylv & Soph, 6:00–9:00 PM.",
+      "price": "No cover",
+      "payment_link_url": ""
+    }      
   ]
 
 }
