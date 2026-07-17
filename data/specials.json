@@ -1,49 +1,46 @@
 {
 "_comment": "Update weekly specials. weekOf should be the Monday of the current week.",
-"weekOf": "2026-06-15",
-"dateRange": "June 18–21",
+"weekOf": "2026-07-16",
+"dateRange": "July 16–18",
 "items": [
 {
-"name": "Chili",
-"label": "Soup of the Day",
-"description": "A hearty chili slow-simmered with beef, beans, tomatoes, and savory spices.",
-"notes": [
-"Available as cup or bowl",
-"Available as a combo add-on",
-"Gluten-Free"
-]
-},
-{
-"name": "Southwest Crunch Salad",
-"label": "Seasonal Salad",
-"description": "Mixed greens topped with sweet corn, tomatoes, cheddar cheese, red onion, and crispy onion straws.",
-"notes": [
-"Ranch served on the side.",
-"Vegetarian"
-]
-},
-{
-"name": "BBQ Chicken Pressed",
-"label": "Featured Pressed Sandwich",
-"description": "Slow-roasted chicken topped with house BBQ sauce, melted cheddar, and pickled red onions on our house bread, pressed crisp.",
-"notes": [
-"Served with pickle and Featured Side"
-]
-},
-{
-"name": "Mac & Cheese",
-"label": "Featured Side",
-"description": "Creamy macaroni and cheese.",
-"notes": [
-"Vegetarian",
-"Served with all pressed sandwiches",
-"Included in combos"
-]
-},
-{
-"name": "No-Bake Cherry Cheesecake",
-"label": "Sweet Bite of the Day",
-"description": "Creamy no-bake cheesecake topped with cherry pie filling on a graham cracker crust."
-}
-]
+      "name": "Lemon Chicken Orzo Soup",
+      "label": "Soup of the Day",
+      "description": "Tender chicken, orzo pasta, carrots, celery, onion, and spinach simmered in a bright, lemony broth.",
+      "notes": [
+        "Available as cup or bowl",
+        "Available as a combo add-on"
+      ]
+    },
+    {
+      "name": "Mediterranean Farro Salad",
+      "label": "Seasonal Salad",
+      "description": "Pearled farro tossed with cucumber, roasted red peppers, Kalamata olives, feta crumbles, and a bright lemon vinaigrette.",
+      "notes": [
+        "Vegetarian"
+      ]
+    },
+    {
+      "name": "Roast Beef & Provolone Pressed",
+      "label": "Featured Pressed Sandwich",
+      "description": "Warm roast beef layered with melted provolone, roasted red peppers, horseradish aioli, and crispy onions on our house bread, pressed crisp.",
+      "notes": [
+        "Served with pickle and Featured Side"
+      ]
+    },
+    {
+      "name": "Italian Pasta Salad",
+      "label": "Featured Side",
+      "description": "Tri-color rotini tossed with pepperoni, mozzarella, grape tomatoes, bell peppers, red onion, pepperoncini, Kalamata olives, Parmesan, and Italian dressing.",
+      "notes": [
+        "Served with all pressed sandwiches",
+        "Included in combos"
+      ]
+    },
+    {
+      "name": "Key Lime Cheesecake",
+      "label": "Sweet Bite of the Day",
+      "description": "Creamy key lime cheesecake on a buttery graham cracker crust, topped with whipped cream."
+    }
+  ]
 }

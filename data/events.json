@@ -180,7 +180,21 @@
       "description": "Live music by Sylv & Soph, 6:00–9:00 PM.",
       "price": "No cover",
       "payment_link_url": ""
-    }      
+    },
+     {
+      "date": "2026-08-01T18:00:00",
+      "title": "Live Music: Angel Tipping featuring Ash Lovegood",
+      "description": "Live music by Angel Tipping featuring Ash Lovegood, 6:00–9:00 PM.",
+      "price": "No cover",
+      "payment_link_url": ""
+    },
+     {
+      "date": "2026-08-08T18:00:00",
+      "title": "Live Music: Bruce Brodie",
+      "description": "Live music by Bruce Brodie, 6:00–9:00 PM.",
+      "price": "No cover",
+      "payment_link_url": ""
+    }           
   ]
 
 }
