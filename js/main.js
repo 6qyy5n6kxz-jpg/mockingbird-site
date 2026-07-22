@@ -3234,9 +3234,7 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
       lines.push('Estimate breakdown:');
       if (fixedTotal > 0) lines.push(`Boards/Stations: ${formatCurrency(fixedTotal)}`);
       if (perGuest > 0) lines.push(`Per-guest subtotal: ~${formatCurrency(perGuest)} x ${guestCount} = ${formatCurrency(perGuest * guestCount)}`);
-      if (taxAmount > 0) lines.push(`Tax (7%): ${formatCurrency(taxAmount)}`);
-      if (gratuityAmount > 0) lines.push(`Gratuity (18%): ${formatCurrency(gratuityAmount)}`);
-      lines.push(`Estimated total: ~${formatCurrency(estimate)}`);
+      lines.push(`Food subtotal: ${formatCurrency(estimate)}`);
       summaryField.value = lines.join('\n');
     }
 
@@ -3252,6 +3250,7 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
       let combinedPerPerson = 0;
       let estimateTotal = 0;
       let foodCostTotal = 0;
+      let foodSubtotal = 0;
       let taxAmount = 0;
       let gratuityAmount = 0;
       if (pricingModule?.computeEstimate) {
@@ -3263,6 +3262,7 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
         combinedFixedTotal = estimate.fixedSellTotal || 0;
         combinedPerPerson = estimate.perPersonSellTotal || 0;
         estimateTotal = estimate.sellTotal || 0;
+        foodSubtotal = estimate.subtotal || 0;
         foodCostTotal = estimate.foodCostTotal || 0;
         taxAmount = estimate.taxAmount || 0;
         gratuityAmount = estimate.gratuityAmount || 0;
@@ -3290,13 +3290,12 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
         combinedFixedTotal = fixedTotal + fixedAddonTotal;
         combinedPerPerson = perPersonTotal + perPersonAddonTotal;
         estimateTotal = combinedFixedTotal + (guestCount * combinedPerPerson);
+        foodSubtotal = estimateTotal;
       }
-      estimateEl.textContent = `Estimated total: ${formatCurrency(estimateTotal)}`;
+      estimateEl.textContent = `Food subtotal: ${formatCurrency(foodSubtotal)}`;
       if (estimateFixed) {
         const parts = [];
         if (combinedFixedTotal > 0) parts.push(`Boards/stations: ${formatCurrency(combinedFixedTotal)}`);
-        if (taxAmount > 0) parts.push(`Tax (7%): ${formatCurrency(taxAmount)}`);
-        if (gratuityAmount > 0) parts.push(`Gratuity (18%): ${formatCurrency(gratuityAmount)}`);
         estimateFixed.textContent = parts.join(' · ');
       }
       if (estimatePerGuest) {
@@ -3312,10 +3311,21 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
         selectedAddons,
         combinedFixedTotal,
         combinedPerPerson,
-        taxAmount,
-        gratuityAmount,
-        estimateTotal
+        0,
+        0,
+        foodSubtotal
       );
+      document.dispatchEvent(new CustomEvent('private-menu:estimate', {
+        detail: {
+          menuId: currentMenuId,
+          menuLabel,
+          guestCount,
+          groupedSelections,
+          selectedItems,
+          foodSubtotal,
+          foodSummary: summaryField?.value || ''
+        }
+      }));
       updateResetButton();
       const quantities = {};
       selectionMap.forEach((qty, name) => {

@@ -236,6 +236,69 @@
   const MENUS = applyPricing(RAW_MENUS);
   const BEVERAGE_ADDONS = [];
 
+  // Central event-planning prices. Food-item prices remain with MENUS above.
+  const EVENT_PRICING = Object.freeze({
+    venue: Object.freeze({ rental: 250, deposit: 100 }),
+    taxRate: 0.07,
+    serviceChargeRate: 0.18,
+    beverages: Object.freeze({
+      sangria: Object.freeze({ label: 'Sangria growler', price: 18, guide: 'Approximately 10 servings' }),
+      mimosas: Object.freeze({ label: 'Mimosa / sparkling-wine bottle', price: 18, guide: 'Approximately 5 glasses' }),
+      lemonade: Object.freeze({ label: 'Lemonade pitcher', price: 15, guide: 'Approximately 5 servings' }),
+      icedTea: Object.freeze({ label: 'Iced tea pitcher', price: 15, guide: 'Approximately 5 servings' }),
+      coffee: Object.freeze({ label: 'Coffee service', price: 15, guide: '' })
+    }),
+    enhancements: Object.freeze({
+      photoBooth: Object.freeze({ label: 'Digital Photo Booth', price: 200 }),
+      uplighting: Object.freeze({ label: 'Uplighting', price: 100 }),
+      partyAudio: Object.freeze({ label: 'Indoor & Outdoor Party Audio', price: 75 }),
+      liveMusicHourly: Object.freeze({ label: 'Live Music by A Change of Plans', price: 100 }),
+      wineCanvas: Object.freeze({
+        mini: Object.freeze({ label: 'Mini Painting Experience', price: 20 }),
+        standard: Object.freeze({ label: 'Standard Painting Experience', price: 30 }),
+        full: Object.freeze({ label: 'Full Painting Experience', price: 40 }),
+        minimumPainters: 8
+      })
+    })
+  });
+
+  const roundMoney = (value) => Math.round((Number(value) || 0) * 100) / 100;
+
+  const computeEventEstimate = ({
+    foodSubtotal = 0,
+    hostedBeverageSubtotal = 0,
+    enhancementItems = []
+  } = {}) => {
+    const food = Math.max(0, Number(foodSubtotal) || 0);
+    const beverages = Math.max(0, Number(hostedBeverageSubtotal) || 0);
+    const foodAndBeverageSubtotal = roundMoney(food + beverages);
+    // Existing site assumption: tax applies to food and beverages only.
+    const taxAmount = roundMoney(foodAndBeverageSubtotal * EVENT_PRICING.taxRate);
+    const serviceChargeAmount = roundMoney(foodAndBeverageSubtotal * EVENT_PRICING.serviceChargeRate);
+    const enhancementsSubtotal = roundMoney((enhancementItems || []).reduce((sum, item) => (
+      sum + Math.max(0, Number(item?.amount) || 0)
+    ), 0));
+    const estimatedTotal = roundMoney(
+      EVENT_PRICING.venue.rental +
+      foodAndBeverageSubtotal +
+      taxAmount +
+      serviceChargeAmount +
+      enhancementsSubtotal
+    );
+    return {
+      venueRental: EVENT_PRICING.venue.rental,
+      reservationDeposit: EVENT_PRICING.venue.deposit,
+      foodSubtotal: food,
+      hostedBeverageSubtotal: beverages,
+      foodAndBeverageSubtotal,
+      taxAmount,
+      serviceChargeAmount,
+      enhancementsSubtotal,
+      estimatedTotal,
+      remainingAfterDeposit: roundMoney(Math.max(0, estimatedTotal - EVENT_PRICING.venue.deposit))
+    };
+  };
+
   const computeEstimate = ({ guestCount, selections = [], addons = [] }) => {
     const guests = Number.isFinite(Number(guestCount)) ? Number(guestCount) : 0;
     let fixedSellTotal = 0;
@@ -296,7 +359,9 @@
     COMMODITY_COSTS,
     MENUS,
     BEVERAGE_ADDONS,
+    EVENT_PRICING,
     computeEstimate,
+    computeEventEstimate,
     applyPricing
   };
 })();

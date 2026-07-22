@@ -82,25 +82,89 @@
       <div class="pp-builder-grid" id="event-estimate">
         <div class="pp-builder-left">
           <div id="private-menu-builder" class="card menu-builder">
-            <p class="kicker">Build Your Event Menu</p>
-            <h2>Build Your Event Menu</h2>
+            <p class="kicker">Guided event planning</p>
+            <h2>Build Your Event</h2>
+            <p>Build a preliminary event plan by selecting your menu, beverage preferences, and optional enhancements. Your estimate will update as you make selections, while flexible or market-priced items will be confirmed after we review your request.</p>
+            <section class="planner-section" aria-labelledby="planner-food-heading">
+            <h3 id="planner-food-heading">1. Build Your Menu</h3>
             <div class="menu-builder-group">
               <p class="note">Menu type</p>
               <p class="note">Starts with our recommended menu — customize anything.</p>
               <div class="inline-links menu-builder-buttons" data-private-menu="types" role="group" aria-label="Menu type"></div>
             </div>
             <div class="menu-builder-sections" data-private-menu="sections"></div>
-            <div class="menu-builder-addons" data-private-menu="addons"></div>
             <div class="menu-builder-estimate">
               <label for="private-guest-count">Guest count</label>
               <input id="private-guest-count" type="number" min="10" step="1" value="40">
-              <p class="menu-estimate" data-private-menu="estimate" aria-live="polite">Estimated food total: —</p>
+              <p class="menu-estimate" data-private-menu="estimate" aria-live="polite">Food subtotal: —</p>
               <p class="note" data-private-menu="estimate-fixed"></p>
               <p class="note" data-private-menu="estimate-perguest"></p>
-              <p class="note">Estimate includes tax + gratuity; final pricing confirmed after details.</p>
-              <button type="button" class="btn btn-primary pp-estimate-handoff" data-calculator-to-form>Request This Event</button>
             </div>
-            <p class="note">Final pricing is based on guest count, menu selections, and service style. This estimate is provided for planning purposes. Our team will confirm all details and pricing before your event.</p>
+            </section>
+
+            <section class="planner-section" aria-labelledby="beverage-service-heading">
+              <h3 id="beverage-service-heading">2. Beverage Service</h3>
+              <p>Private events at The Mockingbird can be as flexible as your group. Guests may purchase their own drinks, or the host may provide selected beverages for the group. Choose a starting direction below and we’ll help finalize the details.</p>
+              <fieldset class="planner-fieldset">
+                <legend>How would you like beverages handled?</legend>
+                <div class="planner-choice-list">
+                  <label><input type="radio" name="beverage-method" value="guest" checked aria-controls="hosted-beverage-options" aria-expanded="false"> Guests purchase drinks individually</label>
+                  <label><input type="radio" name="beverage-method" value="hosted" aria-controls="hosted-beverage-options" aria-expanded="false"> Host provides selected beverages</label>
+                  <label><input type="radio" name="beverage-method" value="combination" aria-controls="hosted-beverage-options" aria-expanded="false"> Combination of hosted and guest-purchased drinks</label>
+                  <label><input type="radio" name="beverage-method" value="unsure" aria-controls="hosted-beverage-options" aria-expanded="false"> Not sure yet — help me plan</label>
+                </div>
+              </fieldset>
+              <p class="planner-method-note" data-beverage-method-note>Guests order and pay for their own beverages during the event. Estimated hosted beverage cost: $0.</p>
+              <div id="hosted-beverage-options" class="planner-reveal" hidden>
+                <h4>Opening hosted beverage estimate</h4>
+                <div class="planner-quantity-list" data-known-beverages></div>
+                <p class="note">These quantities create an opening beverage estimate. Additional beverages requested during the event will be added to the final bill.</p>
+                <fieldset class="planner-fieldset planner-custom-options">
+                  <legend>Selections requiring final pricing</legend>
+                  <label><input type="checkbox" data-custom-beverage="wine"> Wine bottles</label>
+                  <div class="planner-dependent" data-dependent="wine" hidden><label>Wine direction <select data-wine-preference><option>House selections</option><option>Specific wines</option><option>Need recommendations</option></select></label><label>Wine preferences <input type="text" data-wine-notes placeholder="Styles, labels, or budget preferences"></label></div>
+                  <label><input type="checkbox" data-custom-beverage="beer"> Beer cans or bottles</label>
+                  <div class="planner-dependent" data-dependent="beer" hidden><label>Beer direction <select data-beer-preference><option>Individual cans or bottles</option><option>Specific beer request</option><option>Need recommendations</option></select></label><label>Beer preferences <input type="text" data-beer-notes placeholder="Brands, styles, or brewery preferences"></label></div>
+                  <label><input type="checkbox" data-custom-beverage="keg"> Sixth-barrel beer keg</label>
+                  <div class="planner-dependent" data-dependent="keg" hidden><label>Keg direction <select data-keg-preference><option>Specific beer requested</option><option>Need recommendations</option></select></label><label>Beer preference <input type="text" data-keg-notes placeholder="Beer or brewery, if known"></label></div>
+                  <label><input type="checkbox" data-custom-beverage="nonalcoholic"> Soft drinks or nonalcoholic options</label>
+                  <div class="planner-dependent" data-dependent="nonalcoholic" hidden><label>Preferences <input type="text" data-nonalcoholic-notes placeholder="Soft drinks, mocktails, or other options"></label></div>
+                  <label><input type="checkbox" data-custom-beverage="other"> Other beverage request</label>
+                  <div class="planner-dependent" data-dependent="other" hidden><label>Other beverage request <input type="text" data-other-beverage-notes></label></div>
+                  <p class="note">Pricing depends on the selected wine, beer, brewery, package, and availability. We’ll confirm your options and pricing after reviewing the request.</p>
+                </fieldset>
+              </div>
+            </section>
+
+            <section class="planner-section" aria-labelledby="planner-enhancements-heading">
+              <h3 id="planner-enhancements-heading">3. Event Enhancements</h3>
+              <p>Select any additions you would like included in your preliminary plan.</p>
+              <div class="planner-enhancement-list">
+                <label><input type="checkbox" data-planner-enhancement="photoBooth"> <span><strong>Digital Photo Booth — $200</strong><small>Custom event template, setup and removal, digital sharing, and an event gallery.</small></span></label>
+                <label><input type="checkbox" data-planner-enhancement="uplighting"> <span><strong>Uplighting — $100</strong><small>Up to six uplights, coordinated static color, setup, and removal.</small></span></label>
+                <label><input type="checkbox" data-planner-enhancement="partyAudio"> <span><strong>Indoor &amp; Outdoor Party Audio — $75</strong><small>Line-array speaker, coordinated playlist playback, setup, sound check, and removal. This is not an actively staffed DJ service.</small></span></label>
+                <div class="planner-dependent" data-dependent-enhancement="partyAudio" hidden><label>Optional playlist notes <input type="text" data-playlist-notes></label></div>
+                <label for="planner-live-hours"><span><strong>Live Music by A Change of Plans</strong><small>Add acoustic guitar, piano, and vocals from The Mockingbird’s house band.</small></span></label>
+                <select id="planner-live-hours" data-live-hours><option value="0">Not selected</option><option value="1">1 hour — $100</option><option value="2">2 hours — $200</option><option value="3">3 hours — $300</option></select>
+                <label><input type="checkbox" data-planner-enhancement="outsideMusician"> <span><strong>I have another musician in mind</strong><small>Subject to venue approval, scheduling, sound-level expectations, and production requirements.</small></span></label>
+                <div class="planner-dependent planner-form-grid" data-dependent-enhancement="outsideMusician" hidden><label>Musician or group name <input type="text" data-musician-name></label><label>Contact information, if known <input type="text" data-musician-contact></label><label>Performance length <input type="text" data-musician-length></label><label>Equipment or production notes <textarea rows="2" data-musician-notes></textarea></label></div>
+                <label for="planner-canvas-experience"><span><strong>Wine &amp; Canvas</strong><small>Pricing is based on participating painters, not total guests. Eight paid painters minimum.</small></span></label>
+                <select id="planner-canvas-experience" data-canvas-experience><option value="none">Not selected</option><option value="mini">Mini Painting Experience — $20 per painter</option><option value="standard">Standard Painting Experience — $30 per painter</option><option value="full">Full Painting Experience — $40 per painter</option><option value="help">Not sure which experience?</option></select>
+                <div class="planner-dependent" data-canvas-painters-wrap hidden><label for="planner-canvas-painters">Participating painters <input id="planner-canvas-painters" type="number" min="8" step="1" value="8" data-canvas-painters aria-describedby="planner-canvas-error"></label><p class="field-error" id="planner-canvas-error" aria-live="polite"></p></div>
+                <label><input type="checkbox" data-planner-enhancement="custom"> <span><strong>Custom event enhancement request</strong><small>Pricing will be confirmed after review.</small></span></label>
+                <div class="planner-dependent" data-dependent-enhancement="custom" hidden><label>Tell us what you have in mind. <textarea rows="3" data-custom-enhancement-notes></textarea></label></div>
+              </div>
+            </section>
+
+            <section class="planner-section planner-estimate" aria-labelledby="planner-estimate-heading">
+              <h3 id="planner-estimate-heading">Preliminary Event Estimate</h3>
+              <div data-event-estimate></div>
+              <p class="planner-total" aria-live="polite" aria-atomic="true">Current Estimated Total: <strong data-current-estimated-total>$250</strong></p>
+              <p class="note">This preliminary estimate includes the selections with known pricing. Beverage consumption, custom products, staffing, special setup, availability, and final event details may change the confirmed total.</p>
+              <p class="note">The 18% service charge applies only to food and beverages. Venue rental and optional event enhancements are listed separately.</p>
+              <button type="button" class="btn btn-primary pp-estimate-handoff" data-calculator-to-form>Request This Event</button>
+            </section>
+            <p class="note">This tool creates a planning estimate, not a binding quote, guaranteed reservation, or final invoice. Our team will confirm availability, details, and pricing before your event.</p>
           </div>
         </div>
         <div class="pp-builder-right">
@@ -399,6 +463,7 @@
   <script src="../js/private-menu-pricing.js"></script>
   <script src="../js/main.js"></script>
   <script src="../js/private-availability.js"></script>
+  <script src="../js/private-event-planner.js"></script>
   <script src="../js/private-parties.js"></script>
 </body>
 </html>
