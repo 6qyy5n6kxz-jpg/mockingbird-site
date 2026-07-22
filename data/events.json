@@ -29,79 +29,6 @@
       "image_alt": "Mockingbird Jam to Defeat ALS fundraiser graphic announcing Sunday, September 13 at The Mockingbird on Mill Road"
     },
 {
-  "date": "2026-05-31T11:00:00",
-  "title": "MuMu & Mimosas Brunch",
-  "description": "Grab your girls, throw on your boldest MuMu, and join us at The Mockingbird for the ultimate Sunday Funday! MuMu & Mimosas is a laid-back, high-energy brunch experience filled with bubbles, bites, and good vibes.\n\nYour ticket includes 2 refreshing mimosas, a full brunch buffet, plus access to games, photo ops, and more. Show up in your BEST MuMu for a chance to win prizes and bragging rights!\n\nTickets are all-inclusive — no surprises at checkout.",
-  "price": "$45 per person (includes tax & gratuity)",
-  "event_type": "ticketed",
-  "payment_link_url": "https://link.clover.com/urlshortener/zgZqsd",
-  "payment_provider": "clover",
-  "payment_label": "Buy tickets",
-  "payment_url": "https://link.clover.com/urlshortener/zgZqsd",
-  "payment_note": "Includes 2 mimosas, brunch buffet, tax & gratuity",
-  "hide_ticketed_helper": true,
-  "seating_form": {
-    "enabled": false
-  },
-  "type": "Special Event",
-  "ticketing": {
-    "capacity": 40,
-    "sold": 0,
-    "price_display": "$45 all-in",
-    "clover_payment_url": "https://link.clover.com/urlshortener/zgZqsd",
-    "sold_out_behavior": "disable"
-  },
-  "image_url": "assets/events/MuMu_Mimosas.png",
-  "image_alt": "MuMu & Mimosas brunch event at The Mockingbird featuring brunch, mimosas, and themed attire"
-},
-    {
-      "date": "2026-06-06T18:00:00",
-      "title": "Live Music: Jack & Lucky",
-      "description": "Live music by Jack & Lucky, 6–9 PM.",
-      "price": "No cover",
-      "payment_link_url": ""
-    },
-    {
-  "date": "2026-06-07T16:00:00",
-  "title": "Live Music: Bumblepuppy",
-  "description": "Live music with Bumblepuppy, 4–7 PM. A dynamic blend of jazz, funk, soul, and rock in a relaxed Sunday setting. $5 cover at the door.",
-  "price": "$5 cover",
-  "payment_link_url": ""
-},
-{
-      "date": "2026-06-13T18:00:00",
-      "title": "Live Music: Jeff Stewart",
-      "description": "Live music by Jeff Stewart, 6–9 PM.",
-      "price": "No cover",
-      "payment_link_url": ""
-    },
-    {
-  "date": "2026-06-18T18:30:00",
-  "title": "Mockingbird Book Club — June",
-  "description": "Join us for Mockingbird Book Club on Thursday, June 18th at 6:30 PM as we discuss Then Came You by Jennifer Weiner — a sharp, heartfelt novel that follows four very different women whose lives become unexpectedly intertwined through a surrogacy arrangement. Enjoy an open, welcoming conversation with food and drinks available.",
-  "price": "No cover",
-  "payment_link_url": "",
-  "image_url": "assets/events/June_Book_Club.png",
-  "image_alt": "Mockingbird Book Club event image for Then Came You by Jennifer Weiner, Thursday, June 18th at 6:30 PM"
-},
-{
-      "date": "2026-06-20T18:00:00",
-      "title": "Live Music: Bruce Brodie",
-      "description": "Live music by Bruce Brodie, 6–9 PM.",
-      "price": "No cover",
-      "payment_link_url": ""
-    },
-    {
-  "date": "2026-06-21T15:00:00",
-  "title": "Father’s Day Backyard BBQ & Ohio Beer Flight",
-  "description": "Celebrate Father’s Day at The Mockingbird with a laid-back afternoon of cold Ohio beer, backyard BBQ specials, cornhole, and good company. Join us from 3–7 PM for a relaxed backyard-style cookout featuring all-Ohio beer flights, BBQ-inspired food specials, patio games, and summer vibes throughout our outdoor space. No tickets required — all are welcome.",
-  "price": "No cover",
-  "payment_link_url": "",
-  "type": "Special Event",
-  "image_url": "assets/events/Fathers_Day_Backyard_BBQ.png",
-  "image_alt": "Father’s Day Backyard BBQ and Ohio Beer Flight event at The Mockingbird on Sunday, June 21 from 3 to 7 PM"
-},
-{
   "date": "2026-06-22T18:00:00",
   "title": "Paint & Sip: Twilight on the Farm",
   "description": "Join Wine & Canvas at The Mockingbird on Mill Road for Twilight on the Farm, a relaxing Paint & Sip Party featuring a peaceful countryside sunset with a silhouetted tree, barn, silo, and windmill. Guests will paint a 16×20 canvas with step-by-step guidance. Food and drinks will be available for purchase from The Mockingbird.",
@@ -115,50 +42,6 @@
   "type": "Paint & Sip",
   "image_url": "assets/events/Twilight_on_the_Farm.jpg",
   "image_alt": "Peaceful farm sunset painting featuring a silhouetted tree, barn, silo, and windmill against a glowing twilight sky"
-},
-{
-      "date": "2026-06-27T18:00:00",
-      "title": "Live Music: Clay Kirchenbauer",
-      "description": "Live music by Clay Kirchenbauer, 6–9 PM.",
-      "price": "No cover",
-      "payment_link_url": ""
-    },
-    {
-      "date": "2026-07-04T18:00:00",
-      "title": "Live Music: A Change Of Plans",
-      "description": "Live music by A Change Of Plans, 6–9 PM.",
-      "price": "No cover",
-      "payment_link_url": ""
-    },
-      {
-  "date": "2026-07-05T16:00:00",
-  "title": "Live Music: Bumblepuppy",
-  "description": "Live music with Bumblepuppy, 5–8 PM. A dynamic blend of jazz, funk, soul, and rock in a relaxed Sunday setting. $5 cover at the door.",
-  "price": "$5 cover",
-  "payment_link_url": ""
-},
-{
-      "date": "2026-07-11T18:00:00",
-      "title": "Live Music: Jase Drumz",
-      "description": "Live music by Jase Drumz, 4:30–5:30 PM.",
-      "price": "No cover",
-      "payment_link_url": ""
-    },
-    {
-      "date": "2026-07-11T18:00:00",
-      "title": "Live Music: Devin Frank",
-      "description": "Live music by Devin Frank, 6:00–9:00 PM.",
-      "price": "No cover",
-      "payment_link_url": ""
-    },
-   {
-  "date": "2026-07-16T18:30:00",
-  "title": "Mockingbird Book Club — July",
-  "description": "Join us for Mockingbird Book Club on Thursday, July 16th at 6:30 PM as we discuss Falling by T.J. Newman — a gripping thriller about a commercial airline pilot forced into an impossible choice when his family is kidnapped and he's ordered to crash the plane he's flying. Written by a former flight attendant, this suspense-filled novel is packed with authentic aviation detail, high-stakes tension, and plenty to discuss. Enjoy an open, welcoming conversation with food and drinks available.",
-  "price": "No cover",
-  "payment_link_url": "",
-  "image_url": "assets/events/July_Book_Club.png",
-  "image_alt": "Mockingbird Book Club event image for Falling by T.J. Newman, Thursday, July 16th at 6:30 PM"
 },
 {
       "date": "2026-07-18T18:00:00",
@@ -194,7 +77,37 @@
       "description": "Live music by Bruce Brodie, 6:00–9:00 PM.",
       "price": "No cover",
       "payment_link_url": ""
-    }           
+    },
+    {
+      "date": "2026-08-09T18:00:00",
+      "title": "Live Music: Kevin VanSickle and The Pure Country Band",
+      "description": "Live music by Kevin VanSickle and The Pure Country Band, 4:00–7:00 PM.",
+      "price": "No cover",
+      "payment_link_url": ""
+    },
+    {
+      "date": "2026-08-15T18:00:00",
+      "title": "Live Music: Aaron Rutter",
+      "description": "Live music by Aaron Rutter, 6:00–9:00 PM.",
+      "price": "No cover",
+      "payment_link_url": ""
+    },
+    {
+      "date": "2026-08-22T18:00:00",
+      "title": "Live Music: A Change Of Plans",
+      "description": "Live music by A Change Of Plans, 6:00–9:00 PM.",
+      "price": "No cover",
+      "payment_link_url": ""
+    },
+    {
+  "date": "2026-08-20T18:30:00",
+  "title": "Mockingbird Book Club — August",
+  "description": "Join us for Mockingbird Book Club on Thursday, August 20th at 6:30 PM as we discuss The Invisible Hour by Alice Hoffman — a captivating novel that follows Mia Jacob as she escapes a controlling cult after discovering The Scarlet Letter. Blending magical realism, historical fiction, and the enduring power of literature, this unforgettable story explores freedom, family, self-discovery, and the extraordinary ways books can change our lives. Enjoy an open, welcoming conversation with food and drinks available.",
+  "price": "No cover",
+  "payment_link_url": "",
+  "image_url": "assets/events/August_Book_Club.png",
+  "image_alt": "Mockingbird Book Club event image for The Invisible Hour by Alice Hoffman, Thursday, August 20th at 6:30 PM"
+}             
   ]
 
 }
