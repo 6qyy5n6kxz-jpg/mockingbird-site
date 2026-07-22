@@ -1141,13 +1141,17 @@ textarea {
 .pp-success-panel .inline-links { margin-top: 14px; }
 .section-heading { max-width: 760px; margin-bottom: 24px; }
 .section-heading h2 { margin-bottom: 8px; }
+.enhancement-partner-label { letter-spacing: .06em; }
 .enhancement-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
 .enhancement-card { display: flex; flex-direction: column; min-width: 0; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; }
-.enhancement-card > img, .enhancement-placeholder { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
+.enhancement-media { width: 100%; aspect-ratio: 16 / 9; flex: 0 0 auto; overflow: hidden; }
+.enhancement-media img { width: 100%; height: 100%; border-radius: 0; object-fit: cover; }
+.enhancement-photo-booth img { object-position: center 38%; }
+.enhancement-live-music img { object-position: center 20%; }
+.enhancement-wine-canvas img { object-position: center 48%; }
 .enhancement-placeholder { display: grid; place-content: center; gap: 4px; padding: 18px; text-align: center; color: #fff; background: linear-gradient(135deg, #325b57, #b06d3c); }
 .enhancement-placeholder.lighting { background: linear-gradient(135deg, #4b355c, #bb6c54 55%, #e1b66f); }
-.enhancement-placeholder.music { background: linear-gradient(135deg, #253c3a, #805134); }
-.enhancement-placeholder.canvas { background: linear-gradient(135deg, #8d3f45, #d98a54 50%, #54736c); }
+.enhancement-placeholder.audio { background: linear-gradient(135deg, #263f3d, #536d65 55%, #a86639); }
 .enhancement-placeholder.custom { background: linear-gradient(135deg, #3f514f, #6f8176); }
 .enhancement-placeholder span { font-family: Georgia, serif; font-size: 1.35rem; font-weight: 700; }
 .enhancement-placeholder small { opacity: .88; }
