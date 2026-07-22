@@ -36,10 +36,20 @@
     <div class="container">
       <p class="kicker">Gallery</p>
       <h1>Inside The Mockingbird</h1>
-      <p class="lead">A glimpse at the dining room, bar, and seasonal plates.</p>
-      <div id="gallery-grid" class="gallery-grid"></div>
+      <p class="lead">Real moments from the food, atmosphere, patio, events, and gatherings at The Mockingbird.</p>
+      <div id="gallery-grid" class="gallery-collections"></div>
     </div>
   </main>
+
+  <div class="lightbox" id="gallery-lightbox" hidden role="dialog" aria-modal="true" aria-labelledby="lightbox-caption">
+    <button class="lightbox-close" type="button" aria-label="Close image viewer">×</button>
+    <button class="lightbox-control lightbox-prev" type="button" aria-label="Previous image">←</button>
+    <figure>
+      <img src="" alt="">
+      <figcaption id="lightbox-caption"></figcaption>
+    </figure>
+    <button class="lightbox-control lightbox-next" type="button" aria-label="Next image">→</button>
+  </div>
 
   <footer class="footer">
     <div class="container">

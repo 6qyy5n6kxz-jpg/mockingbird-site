@@ -10,7 +10,7 @@
   "seoDescription": "The Mockingbird on Mill Road is a wine café in Graytown, OH serving seasonal cooking, curated wines, craft beverages, and weekly specials.",
   "locationShort": "Graytown, OH",
   "images": {
-    "hero": { "src": "assets/images/hero.jpg", "fallback": "assets/images/hero.svg", "alt": "Dining room at The Mockingbird on Mill Road" },
+    "hero": { "src": "assets/images/mockingbird-private-event-buffet-room.webp", "fallback": "assets/images/hero.jpg", "alt": "Warm dining room at The Mockingbird set with a buffet of homemade food" },
     "interior1": { "src": "assets/images/interior1.jpg", "fallback": "assets/images/interior1.svg", "alt": "Cozy dining room seating" },
     "interior2": { "src": "assets/images/interior2.jpg", "fallback": "assets/images/interior2.svg", "alt": "Bar with seasonal wine and sangria pours" },
     "interior3": { "src": "assets/images/interior3.jpg", "fallback": "assets/images/interior3.svg", "alt": "Patio and exterior seating" },
@@ -19,15 +19,28 @@
     "food3": { "src": "assets/images/food3.jpg", "alt": "Fresh salad with herbs" },
     "bar1": { "src": "assets/images/bar1.jpg", "alt": "Wine poured at the bar" },
     "ogImage": { "src": "assets/images/og.jpg", "fallback": "assets/images/hero.jpg", "alt": "Seasonal dishes and drinks at The Mockingbird" },
+    "experience": [
+      { "src": "assets/images/mockingbird-private-event-buffet-room.webp", "alt": "The Mockingbird dining room set for a private buffet", "width": 1800, "height": 1350, "caption": "Gather around the table" },
+      { "src": "assets/images/hero.jpg", "alt": "The Mockingbird farmhouse exterior and patio", "width": 2048, "height": 1365, "caption": "A country setting in Graytown" },
+      { "src": "assets/images/mockingbird-party-wraps-and-sandwiches.webp", "alt": "Party platters with wraps, sandwiches, vegetables, and fruit", "width": 1600, "height": 1102 },
+      { "src": "assets/images/interior3.jpg", "alt": "Wine and two glasses at sunset on The Mockingbird patio", "width": 960, "height": 768 },
+      { "src": "assets/images/mockingbird-black-tie-dessert-table.webp", "alt": "Black tie themed cake, cupcakes, and decorated cookies", "width": 1200, "height": 1672 }
+    ],
     "gallery": [
-      { "src": "assets/images/hero.jpg", "alt": "Dining room at The Mockingbird on Mill Road" },
-      { "src": "assets/images/interior1.jpg", "fallback": "assets/images/interior1.svg", "alt": "Cozy dining room seating" },
-      { "src": "assets/images/interior2.jpg", "fallback": "assets/images/interior2.svg", "alt": "Bar with seasonal wine and sangria pours" },
-      { "src": "assets/images/interior3.jpg", "fallback": "assets/images/interior3.svg", "alt": "Patio and exterior seating" },
-      { "src": "assets/images/food1.jpg", "alt": "Seasonal plated dish" },
-      { "src": "assets/images/food2.jpg", "alt": "Shared plates on a table" },
-      { "src": "assets/images/food3.jpg", "alt": "Fresh salad with herbs" },
-      { "src": "assets/images/bar1.jpg", "alt": "Wine poured at the bar" }
+      { "src": "assets/images/mockingbird-party-wraps-and-sandwiches.webp", "alt": "Party platters with wraps, sandwiches, vegetables, and fruit", "width": 1600, "height": 1102, "category": "Food & Drinks" },
+      { "src": "assets/images/mockingbird-party-flatbreads-and-salads.webp", "alt": "Flatbreads, fruit, and pasta salads arranged for a party", "width": 1200, "height": 1600, "category": "Food & Drinks" },
+      { "src": "assets/images/mockingbird-baked-potato-bar.webp", "alt": "Baked potato bar with flavored butters, cheese, bacon, and fresh toppings", "width": 1600, "height": 1200, "category": "Food & Drinks" },
+      { "src": "assets/images/food1.jpg", "alt": "Dessert served with red wine at The Mockingbird", "width": 1536, "height": 2048, "category": "Food & Drinks" },
+      { "src": "assets/images/food3.jpg", "alt": "Colorful fruit and snack display prepared for a gathering", "width": 1440, "height": 1080, "category": "Food & Drinks" },
+      { "src": "assets/images/mockingbird-private-event-buffet-room.webp", "alt": "The Mockingbird dining room set with a buffet of homemade food", "width": 1800, "height": 1350, "category": "Inside Mockingbird" },
+      { "src": "assets/images/interior1.jpg", "alt": "Cozy dining room with fireplace at The Mockingbird", "width": 2048, "height": 1536, "category": "Inside Mockingbird" },
+      { "src": "assets/images/interior2.jpg", "alt": "The Mockingbird team behind the bar", "width": 960, "height": 640, "category": "Inside Mockingbird" },
+      { "src": "assets/images/hero.jpg", "alt": "The Mockingbird farmhouse exterior and patio", "width": 2048, "height": 1365, "category": "Patio & Grounds" },
+      { "src": "assets/images/interior3.jpg", "alt": "Wine and two glasses at sunset on The Mockingbird patio", "width": 960, "height": 768, "category": "Patio & Grounds" },
+      { "src": "assets/images/mockingbird-bridal-shower-buffet.webp", "alt": "Garden themed bridal shower buffet with salads and fresh vegetables", "width": 1600, "height": 1200, "category": "Private Celebrations" },
+      { "src": "assets/images/mockingbird-black-tie-dessert-table.webp", "alt": "Black tie themed cake, cupcakes, and decorated cookies", "width": 1200, "height": 1672, "category": "Private Celebrations" },
+      { "src": "assets/images/mockingbird-cookies-and-cupcakes.webp", "alt": "Cookies and frosted cupcakes on a lace-covered celebration table", "width": 1600, "height": 1200, "category": "Private Celebrations" },
+      { "src": "assets/images/mockingbird-adopt-a-teddy-party-table.webp", "alt": "Adopt a Teddy activity table arranged for a children's celebration", "width": 1200, "height": 1600, "category": "Private Celebrations" }
     ]
   },
   "address": {
@@ -68,9 +81,31 @@
       "Curated bottles, glass pours, sangria, beer, and NA options",
       "Warm, local hospitality — walk in or call ahead"
     ],
-    "reviewLink": "",
+    "reviewLink": "https://www.facebook.com/TheMockingbirdOnMillRoad/reviews",
     "quotes": []
   },
+  "testimonials": [
+    {
+      "quote": "We absolutely loved our evening here! The homemade Italian sausage lentil soup was delicious, the flatbreads were very good, the wine and drink options are endless, and the live musician was amazing. We can't wait to come back.",
+      "name": "Angela S.",
+      "source": "Facebook Recommendation"
+    },
+    {
+      "quote": "Absolutely love it! Great food, drinks, and atmosphere. The owners are amazing and the staff is great. Highly recommend!",
+      "name": "Nicole G.",
+      "source": "Facebook Recommendation"
+    },
+    {
+      "quote": "A cozy, welcoming atmosphere featuring so many talented musicians! Best kept secret of Ottawa County!",
+      "name": "Amy S.",
+      "source": "Facebook Recommendation"
+    },
+    {
+      "quote": "Fantastic experience. Wonderful food, huge drink selection, great music, and a lovely atmosphere. We will definitely be back.",
+      "name": "Cortney R.",
+      "source": "Facebook Recommendation"
+    }
+  ],
   "heroImage": "assets/images/hero.svg",
   "gallery": [
     "assets/images/interior1.svg",

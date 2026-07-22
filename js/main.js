@@ -864,7 +864,7 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
   function populateWhyBullets(site) {
     if (!site?.whyBullets?.length && !site?.whyBodies?.length) {
       const section = document.querySelector('[data-section="why"]');
-      if (section) section.remove();
+      if (section && !site?.trust?.bullets?.length) section.remove();
       return;
     }
     const bullets = site.whyBullets || [];
@@ -885,6 +885,73 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
     setImage('[data-img="interior1"]', imgs.interior1 || site.gallery?.[0], imgs.interior1?.alt || 'Dining room');
     setImage('[data-img="interior2"]', imgs.interior2 || site.gallery?.[1], imgs.interior2?.alt || 'Bar');
     setImage('[data-img="interior3"]', imgs.interior3 || site.gallery?.[2], imgs.interior3?.alt || 'Patio');
+  }
+
+  function renderExperience(site) {
+    const container = document.getElementById('experience-grid');
+    if (!container) return;
+    const images = site?.images?.experience || [];
+    container.innerHTML = '';
+    images.slice(0, 6).forEach((entry) => {
+      const resolved = resolveImage(entry);
+      if (!resolved) return;
+      const figure = document.createElement('figure');
+      const img = document.createElement('img');
+      img.src = resolved.src;
+      img.alt = entry.alt || resolved.alt || '';
+      img.loading = 'lazy';
+      img.width = entry.width || 1200;
+      img.height = entry.height || 800;
+      figure.appendChild(img);
+      if (entry.caption) {
+        const caption = document.createElement('figcaption');
+        caption.textContent = entry.caption;
+        figure.appendChild(caption);
+      }
+      container.appendChild(figure);
+    });
+  }
+
+  function renderTestimonials(site) {
+    const section = document.getElementById('guest-testimonials');
+    const container = document.getElementById('testimonial-grid');
+    if (!section || !container) return;
+    // Owner-editable source: only approved testimonials belong in data/site.json.
+    const testimonials = Array.isArray(site?.testimonials) ? site.testimonials : [];
+    if (!testimonials.length) {
+      section.hidden = true;
+      return;
+    }
+    container.innerHTML = '';
+    testimonials.forEach((entry) => {
+      if (!entry?.quote || !entry?.name) return;
+      const article = document.createElement('article');
+      article.className = 'testimonial-card';
+      const quote = document.createElement('blockquote');
+      quote.textContent = entry.quote;
+      article.appendChild(quote);
+      const attribution = document.createElement('footer');
+      attribution.className = 'testimonial-attribution';
+      const name = document.createElement('cite');
+      name.textContent = entry.name;
+      attribution.appendChild(name);
+      if (entry.source) attribution.append(` · ${entry.source}`);
+      article.appendChild(attribution);
+      container.appendChild(article);
+    });
+    if (!container.children.length) return;
+    const links = document.getElementById('testimonial-links');
+    const reviewLink = site?.trust?.reviewLink;
+    if (links && reviewLink) {
+      const read = document.createElement('a');
+      read.className = 'btn btn-secondary btn-small';
+      read.href = reviewLink;
+      read.target = '_blank';
+      read.rel = 'noopener noreferrer';
+      read.textContent = 'Read More Guest Recommendations';
+      links.appendChild(read);
+    }
+    section.hidden = false;
   }
 
   function populateTrust(site) {
@@ -2672,13 +2739,98 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
       return;
     }
     container.innerHTML = '';
-    images.forEach((img) => {
-      const resolved = resolveImage(img);
-      if (!resolved) return;
-      const item = document.createElement('div');
-      item.innerHTML = `<img src="${resolved.src}" alt="${img.alt || resolved.alt || site.name}" loading="lazy" width="1200" height="800">`;
-      container.appendChild(item);
+    const galleryItems = images.map((entry) => {
+      const resolved = resolveImage(entry);
+      return resolved ? { ...entry, ...resolved, alt: entry.alt || resolved.alt || site.name } : null;
+    }).filter(Boolean);
+    const groups = new Map();
+    galleryItems.forEach((item) => {
+      const category = item.category || 'The Mockingbird';
+      if (!groups.has(category)) groups.set(category, []);
+      groups.get(category).push(item);
     });
+
+    groups.forEach((items, category) => {
+      const section = document.createElement('section');
+      section.className = 'gallery-collection';
+      const heading = document.createElement('h2');
+      heading.textContent = category;
+      section.appendChild(heading);
+      const grid = document.createElement('div');
+      grid.className = 'gallery-grid';
+      items.forEach((item) => {
+        const button = document.createElement('button');
+        button.className = 'gallery-item';
+        button.type = 'button';
+        button.setAttribute('aria-label', `View larger image: ${item.alt}`);
+        const image = document.createElement('img');
+        image.src = item.src;
+        image.alt = item.alt;
+        image.loading = 'lazy';
+        image.width = item.width || 1200;
+        image.height = item.height || 800;
+        button.appendChild(image);
+        button.addEventListener('click', () => openGalleryLightbox(galleryItems, galleryItems.indexOf(item), button));
+        grid.appendChild(button);
+      });
+      section.appendChild(grid);
+      container.appendChild(section);
+    });
+  }
+
+  function openGalleryLightbox(items, startIndex, trigger) {
+    const dialog = document.getElementById('gallery-lightbox');
+    if (!dialog || !items.length) return;
+    const image = dialog.querySelector('img');
+    const caption = dialog.querySelector('figcaption');
+    const close = dialog.querySelector('.lightbox-close');
+    const previous = dialog.querySelector('.lightbox-prev');
+    const next = dialog.querySelector('.lightbox-next');
+    let current = startIndex;
+
+    function show(index) {
+      current = (index + items.length) % items.length;
+      image.src = items[current].src;
+      image.alt = items[current].alt;
+      caption.textContent = items[current].alt;
+    }
+
+    function dismiss() {
+      dialog.hidden = true;
+      document.body.classList.remove('lightbox-open');
+      document.removeEventListener('keydown', onKeydown);
+      trigger.focus();
+    }
+
+    function onKeydown(event) {
+      if (event.key === 'Escape') dismiss();
+      if (event.key === 'ArrowLeft') show(current - 1);
+      if (event.key === 'ArrowRight') show(current + 1);
+      if (event.key === 'Tab') {
+        const controls = [close, previous, next];
+        const first = controls[0];
+        const last = controls[controls.length - 1];
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first.focus();
+        }
+      }
+    }
+
+    show(current);
+    dialog.hidden = false;
+    document.body.classList.add('lightbox-open');
+    close.onclick = dismiss;
+    previous.onclick = () => show(current - 1);
+    next.onclick = () => show(current + 1);
+    dialog.onclick = (event) => {
+      if (event.target === dialog) dismiss();
+    };
+    document.addEventListener('keydown', onKeydown);
+    close.focus();
   }
 
   function renderGiftCards(payments) {
@@ -3610,6 +3762,8 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
     populateSite(site);
     populateWhyBullets(site);
     populateImages(site);
+    renderExperience(site);
+    renderTestimonials(site);
     populateTrust(site);
     setupAnnouncement(site);
     setupBottomBar();

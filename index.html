@@ -20,7 +20,7 @@
       const svg = document.querySelector('link[data-favicon="svg"]');
       const ico = document.querySelector('link[data-favicon="ico"]');
       const apple = document.querySelector('link[data-favicon="apple"]');
-      if (svg) svg.href = withBase('/assets/images/favicon.svg');f
+      if (svg) svg.href = withBase('/assets/images/favicon.svg');
       if (ico) ico.href = withBase('/assets/images/favicon.png');
       if (apple) apple.href = withBase('/assets/images/favicon.png');
     })();
@@ -34,7 +34,7 @@
 
   <main id="main">
     <section class="hero">
-      <img data-img="hero" src="assets/images/og.jpg" alt="Dining room" width="1600" height="900">
+      <img data-img="hero" src="assets/images/mockingbird-private-event-buffet-room.webp" alt="Warm dining room at The Mockingbird set with a buffet of homemade food" width="1800" height="1350" fetchpriority="high">
       <div class="hero-content">
         <div class="hero-inner">
           <p class="kicker" data-fill="tagline">Mockingbird</p>
@@ -45,7 +45,7 @@
             <a class="btn btn-secondary" data-nav="specials">Tonight's Specials</a>
           </div>
           <p class="note"><a class="hero-events-link" data-nav="events">View upcoming events →</a></p>
-          <p class="note">Located in Graytown, OH, The Mockingbird on Mill Road welcomes guests from across Northwest Ohio — including Toledo, Oregon, Port Clinton, and surrounding communities — for food, drinks, and events.</p>
+          <p class="note hero-location-note">Located in Graytown, OH, The Mockingbird on Mill Road welcomes guests from across Northwest Ohio — including Toledo, Oregon, Port Clinton, and surrounding communities — for food, drinks, and events.</p>
         </div>
       </div>
     </section>
@@ -72,15 +72,38 @@
       </div>
     </section>
 
-    <section class="section fade-in">
+    <section class="section fade-in" id="experience">
       <div class="container">
-        <p class="kicker">Inside</p>
+        <p class="kicker">Come as you are</p>
         <h2>The Mockingbird experience</h2>
-        <div class="gallery-strip" id="gallery-strip">
-          <img data-img="interior1" src="assets/images/interior1.svg" alt="Dining room" loading="lazy" width="1200" height="800">
-          <img data-img="interior2" src="assets/images/interior2.svg" alt="Bar" loading="lazy" width="1200" height="800">
-          <img data-img="interior3" src="assets/images/interior3.svg" alt="Patio" loading="lazy" width="1200" height="800">
+        <p class="lead">A relaxed country setting for dinner, wine, conversation, and the celebrations that bring everyone together.</p>
+        <div class="experience-grid" id="experience-grid"></div>
+      </div>
+    </section>
+
+    <section class="section alt fade-in">
+      <div class="container private-party-feature">
+        <img src="assets/images/mockingbird-bridal-shower-buffet.webp" alt="Garden themed bridal shower buffet at The Mockingbird" loading="lazy" width="1600" height="1200">
+        <div>
+          <p class="kicker">Private gatherings</p>
+          <h2>A welcoming place to celebrate</h2>
+          <p>From showers and birthdays to family gatherings, bring your people together with homemade food, drinks, and a space that feels personal.</p>
+          <a class="btn btn-primary" data-nav="private-parties">Plan a Private Party</a>
         </div>
+      </div>
+    </section>
+
+    <!--
+      Owner-ready testimonials: add only approved review text to data/site.json > testimonials.
+      No placeholder quote is published when that array is empty.
+    -->
+    <section class="section testimonials-section fade-in" id="guest-testimonials" aria-labelledby="testimonials-heading">
+      <div class="container">
+        <p class="kicker">From Our Guests</p>
+        <h2 id="testimonials-heading">A Place Worth Coming Back To</h2>
+        <p class="lead">Good food matters, but so does how a place makes you feel. Here are a few words from guests who have joined us for dinner, drinks, music, and celebrations.</p>
+        <div class="testimonial-grid" id="testimonial-grid"></div>
+        <div class="inline-links testimonial-links" id="testimonial-links"></div>
       </div>
     </section>
 
