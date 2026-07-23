@@ -108,11 +108,11 @@
   "image_url": "assets/events/August_Book_Club.png",
   "image_alt": "Mockingbird Book Club event image for The Invisible Hour by Alice Hoffman, Thursday, August 20th at 6:30 PM"
 },
- {
+{
   "date": "2026-08-23T18:00:00",
   "title": "A Taste of Canada: Wine Tasting Dinner",
   "slug": "a-taste-of-canada-wine-tasting-dinner",
-  "description": "<p>Join us on <strong>Sunday, August 23rd from 6:00–9:00 PM</strong> for a special evening of wine, food, and conversation at The Mockingbird.</p><p>Rachel Nasatir of <strong>Cutting Edge Selections</strong> will lead a guided wine tasting dinner featuring a <strong>five-course Canadian-inspired menu</strong>, with each course thoughtfully paired with a wine selected and presented by Rachel.</p><p>Throughout the evening, Rachel will introduce each wine, share the story behind the selection, and guide guests through each pairing as the courses are served.</p><p><strong>A portion of every ticket sold will benefit Canadian wildfire relief efforts.</strong></p><p><em>The full menu will be announced soon.</em></p><hr><h3>🍷 Reserve Your Seat</h3><p><a class=\"button button-primary\" href=\"https://link.clover.com/urlshortener/Sfpc7K\" target=\"_blank\" rel=\"noopener\">Individual Ticket – $75</a></p><p><a class=\"button button-primary\" href=\"https://link.clover.com/urlshortener/TY9jWv\" target=\"_blank\" rel=\"noopener\">Couples Ticket – $150</a></p>",
+  "description": "<p>Join us on <strong>Sunday, August 23rd from 6:00–9:00 PM</strong> for a special evening of wine, food, and conversation at The Mockingbird.</p><p>Rachel Nasatir of <strong>Cutting Edge Selections</strong> will lead a guided wine tasting dinner featuring a <strong>five-course Canadian-inspired menu</strong>, with each course thoughtfully paired with a wine selected and presented by Rachel.</p><p>Throughout the evening, Rachel will introduce each wine, share the story behind the selection, and guide guests through each pairing as the courses are served.</p><p><strong>A portion of every ticket sold will benefit Canadian wildfire relief efforts.</strong></p><p><em>The full menu will be announced soon.</em></p><hr><h3>🍷 Reserve Your Seat</h3><div class=\"event-ticket-buttons\"><a class=\"event-ticket-button\" href=\"https://link.clover.com/urlshortener/Sfpc7K\" target=\"_blank\" rel=\"noopener\">🍷 Individual Ticket <span>$75</span></a><a class=\"event-ticket-button\" href=\"https://link.clover.com/urlshortener/TY9jWv\" target=\"_blank\" rel=\"noopener\">🥂 Couples Ticket <span>$150</span></a></div>",
   "price": "$75 per person • $150 per couple",
   "event_type": "ticketed",
   "type": "Wine Tasting Dinner",
@@ -134,7 +134,7 @@
   "payment_note": "Reservations are required and seating is limited. Ticket price includes the five-course dinner, guided wine pairings, 7% sales tax, and 18% gratuity.",
   "image_url": "assets/events/Canada_Wine_Tasting_Dinner.png",
   "image_alt": "A Taste of Canada wine tasting dinner at The Mockingbird on Sunday, August 23 from 6–9 PM, featuring a five-course Canadian-inspired menu, expertly paired wines, and support for Canadian wildfire relief."
-}            
+}           
   ]
 
 }

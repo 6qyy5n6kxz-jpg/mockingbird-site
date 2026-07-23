@@ -1812,3 +1812,53 @@ textarea {
 .is-hidden {
   display: none !important;
 }
+
+.event-ticket-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 1rem;
+}
+
+.event-ticket-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  min-width: 260px;
+  padding: 14px 22px;
+  border-radius: 10px;
+  background: var(--color-primary, #8b5a2b);
+  color: #fff !important;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.event-ticket-button:hover {
+  background: #6d451f;
+  color: #fff;
+  text-decoration: none;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+}
+
+.event-ticket-button span {
+  background: rgba(255, 255, 255, 0.18);
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+@media (max-width: 640px) {
+  .event-ticket-buttons {
+    flex-direction: column;
+  }
+
+  .event-ticket-button {
+    width: 100%;
+  }
+}
