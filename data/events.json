@@ -107,7 +107,34 @@
   "payment_link_url": "",
   "image_url": "assets/events/August_Book_Club.png",
   "image_alt": "Mockingbird Book Club event image for The Invisible Hour by Alice Hoffman, Thursday, August 20th at 6:30 PM"
-}             
+},
+ {
+  "date": "2026-08-23T18:00:00",
+  "title": "A Taste of Canada: Wine Tasting Dinner",
+  "slug": "a-taste-of-canada-wine-tasting-dinner",
+  "description": "Join us on Sunday, August 23rd from 6:00–9:00 PM for a special evening of wine, food, and conversation at The Mockingbird. Rachel Nasatir of Cutting Edge Selections will lead a guided wine tasting dinner featuring a five-course Canadian-inspired menu, with each course thoughtfully paired with a wine selected and presented by Rachel. Throughout the evening, Rachel will introduce each wine, share the story behind the selection, and guide guests through the pairing as each course is served. A portion of every ticket sold will benefit Canadian wildfire relief efforts. The full menu will be announced soon.",
+  "price": "$75 per person • $150 per couple",
+  "event_type": "ticketed",
+  "type": "Wine Tasting Dinner",
+  "payment_provider": "Clover",
+  "payment_label": "Purchase Individual Ticket",
+  "payment_link_url": "https://link.clover.com/urlshortener/Sfpc7K",
+  "ticket_options": [
+    {
+      "label": "Individual Ticket",
+      "price": "$75",
+      "url": "https://link.clover.com/urlshortener/Sfpc7K"
+    },
+    {
+      "label": "Couples Ticket",
+      "price": "$150",
+      "url": "https://link.clover.com/urlshortener/TY9jWv"
+    }
+  ],
+  "payment_note": "Reservations are required and seating is limited. Ticket price includes the five-course dinner, guided wine pairings, 7% sales tax, and 18% gratuity.",
+  "image_url": "assets/events/Canada_Wine_Tasting_Dinner.jpg",
+  "image_alt": "A Taste of Canada wine tasting dinner at The Mockingbird on Sunday, August 23 from 6–9 PM, featuring a five-course Canadian-inspired menu, paired wines, and support for Canadian wildfire relief"
+}            
   ]
 
 }
