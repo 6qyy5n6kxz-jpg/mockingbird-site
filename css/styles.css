@@ -2230,11 +2230,7 @@ textarea {
   cursor: pointer;
 }
 
-.planner-enhancement-list select,
-.planner-enhancement-list input {
-  width: 100%;
-  margin-top: 6px;
-}
+/* SELECT and TEXT INPUTS within enhancement-list get full width (defined below in new narrowly-scoped rules) */
 
 .planner-estimate {
   margin-top: 24px;
@@ -2297,6 +2293,178 @@ textarea {
 
 .planner-estimate-list dd.is-total {
   font-weight: 700;
+}
+
+/* ===========================
+   Event Option Card Styling
+   Narrowly-scoped namespace for calculator option controls
+   ===========================  */
+
+.event-option-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.event-option-grid--3col {
+  grid-template-columns: 1fr;
+}
+
+.event-option-card {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: start;
+  gap: 12px;
+  width: 100%;
+  min-width: 0;
+  height: auto;
+  margin: 0;
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  font-weight: 400;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.event-option-card:hover {
+  border-color: var(--accent);
+  background: rgba(176, 109, 60, 0.02);
+}
+
+/* Input stays in first column, never expands */
+.event-option-card > input {
+  margin-top: 3px;
+  flex: 0 0 auto;
+  width: auto;
+  cursor: pointer;
+}
+
+/* Body wrapper for text content - takes remaining space */
+.event-option-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+/* Title */
+.event-option-card__title {
+  display: block;
+  margin: 0;
+  font-weight: 600;
+  color: var(--text);
+}
+
+/* Description */
+.event-option-card__description {
+  display: block;
+  margin: 0;
+  font-weight: 400;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+/* Enhancement section wrappers */
+.enhancement-section {
+  margin: 12px 0;
+  padding: 12px 0;
+}
+
+.enhancement-section label[for] {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.enhancement-section label[for] strong {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.enhancement-section label[for] small {
+  display: block;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.enhancement-section select {
+  width: 100%;
+  margin-top: 6px;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface);
+  font-size: 14px;
+  cursor: pointer;
+}
+
+/* Override: Only apply 100% width to text inputs and textareas in form grids, NOT to checkboxes/radios */
+.planner-enhancement-list select,
+.planner-enhancement-list input[type="text"],
+.planner-enhancement-list input[type="number"],
+.planner-enhancement-list textarea {
+  width: 100%;
+  margin-top: 6px;
+}
+
+.planner-form-grid {
+  display: grid;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.planner-form-grid label {
+  display: block;
+  margin-bottom: 4px;
+}
+
+.planner-form-grid input[type="text"],
+.planner-form-grid input[type="number"],
+.planner-form-grid textarea,
+.planner-form-grid select {
+  width: 100%;
+  margin-top: 4px;
+}
+
+/* Responsive: 3-column grid at desktop, 2 at tablet, 1 at mobile */
+@media (min-width: 1024px) {
+  .event-option-grid--3col {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .event-option-grid--3col {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 901px) {
+  .event-option-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 900px) {
+  .event-option-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .event-option-card {
+    min-height: 40px;
+  }
+
+  .event-option-grid {
+    gap: 10px;
+  }
 }
 
 .planner-estimate-list ul {

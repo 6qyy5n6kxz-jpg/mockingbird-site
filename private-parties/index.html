@@ -107,11 +107,31 @@
               <p>Private events at The Mockingbird can be as flexible as your group. Guests may purchase their own drinks, or the host may provide selected beverages for the group. Choose a starting direction below and we’ll help finalize the details.</p>
               <fieldset class="planner-fieldset">
                 <legend>How would you like beverages handled?</legend>
-                <div class="planner-choice-list">
-                  <label><input type="radio" name="beverage-method" value="guest" checked aria-controls="hosted-beverage-options" aria-expanded="false"> Guests purchase drinks individually</label>
-                  <label><input type="radio" name="beverage-method" value="hosted" aria-controls="hosted-beverage-options" aria-expanded="false"> Host provides selected beverages</label>
-                  <label><input type="radio" name="beverage-method" value="combination" aria-controls="hosted-beverage-options" aria-expanded="false"> Combination of hosted and guest-purchased drinks</label>
-                  <label><input type="radio" name="beverage-method" value="unsure" aria-controls="hosted-beverage-options" aria-expanded="false"> Not sure yet — help me plan</label>
+                <div class="event-option-grid">
+                  <label class="event-option-card">
+                    <input type="radio" name="beverage-method" value="guest" checked aria-controls="hosted-beverage-options" aria-expanded="false">
+                    <span class="event-option-card__body">
+                      <span class="event-option-card__title">Guests purchase drinks individually</span>
+                    </span>
+                  </label>
+                  <label class="event-option-card">
+                    <input type="radio" name="beverage-method" value="hosted" aria-controls="hosted-beverage-options" aria-expanded="false">
+                    <span class="event-option-card__body">
+                      <span class="event-option-card__title">Host provides selected beverages</span>
+                    </span>
+                  </label>
+                  <label class="event-option-card">
+                    <input type="radio" name="beverage-method" value="combination" aria-controls="hosted-beverage-options" aria-expanded="false">
+                    <span class="event-option-card__body">
+                      <span class="event-option-card__title">Combination of hosted and guest-purchased drinks</span>
+                    </span>
+                  </label>
+                  <label class="event-option-card">
+                    <input type="radio" name="beverage-method" value="unsure" aria-controls="hosted-beverage-options" aria-expanded="false">
+                    <span class="event-option-card__body">
+                      <span class="event-option-card__title">Not sure yet — help me plan</span>
+                    </span>
+                  </label>
                 </div>
               </fieldset>
               <p class="planner-method-note" data-beverage-method-note>Guests order and pay for their own beverages during the event. Estimated hosted beverage cost: $0.</p>
@@ -139,20 +159,88 @@
             <section class="planner-section" aria-labelledby="planner-enhancements-heading">
               <h3 id="planner-enhancements-heading">3. Event Enhancements</h3>
               <p>Select any additions you would like included in your preliminary plan.</p>
-              <div class="planner-enhancement-list">
-                <label><input type="checkbox" data-planner-enhancement="photoBooth"> <span><strong>Digital Photo Booth — $200</strong><small>Custom event template, setup and removal, digital sharing, and an event gallery.</small></span></label>
-                <label><input type="checkbox" data-planner-enhancement="uplighting"> <span><strong>Uplighting — $100</strong><small>Up to six uplights, coordinated static color, setup, and removal.</small></span></label>
-                <label><input type="checkbox" data-planner-enhancement="partyAudio"> <span><strong>Indoor &amp; Outdoor Party Audio — $75</strong><small>Line-array speaker, coordinated playlist playback, setup, sound check, and removal. This is not an actively staffed DJ service.</small></span></label>
-                <div class="planner-dependent" data-dependent-enhancement="partyAudio" hidden><label>Optional playlist notes <input type="text" data-playlist-notes></label></div>
-                <label for="planner-live-hours"><span><strong>Live Music by A Change of Plans</strong><small>Add acoustic guitar, piano, and vocals from The Mockingbird’s house band.</small></span></label>
-                <select id="planner-live-hours" data-live-hours><option value="0">Not selected</option><option value="1">1 hour — $100</option><option value="2">2 hours — $200</option><option value="3">3 hours — $300</option></select>
-                <label><input type="checkbox" data-planner-enhancement="outsideMusician"> <span><strong>I have another musician in mind</strong><small>Subject to venue approval, scheduling, sound-level expectations, and production requirements.</small></span></label>
-                <div class="planner-dependent planner-form-grid" data-dependent-enhancement="outsideMusician" hidden><label>Musician or group name <input type="text" data-musician-name></label><label>Contact information, if known <input type="text" data-musician-contact></label><label>Performance length <input type="text" data-musician-length></label><label>Equipment or production notes <textarea rows="2" data-musician-notes></textarea></label></div>
-                <label for="planner-canvas-experience"><span><strong>Wine &amp; Canvas</strong><small>Pricing is based on participating painters, not total guests. Eight paid painters minimum.</small></span></label>
-                <select id="planner-canvas-experience" data-canvas-experience><option value="none">Not selected</option><option value="mini">Mini Painting Experience — $20 per painter</option><option value="standard">Standard Painting Experience — $30 per painter</option><option value="full">Full Painting Experience — $40 per painter</option><option value="help">Not sure which experience?</option></select>
-                <div class="planner-dependent" data-canvas-painters-wrap hidden><label for="planner-canvas-painters">Participating painters <input id="planner-canvas-painters" type="number" min="8" step="1" value="8" data-canvas-painters aria-describedby="planner-canvas-error"></label><p class="field-error" id="planner-canvas-error" aria-live="polite"></p></div>
-                <label><input type="checkbox" data-planner-enhancement="custom"> <span><strong>Custom event enhancement request</strong><small>Pricing will be confirmed after review.</small></span></label>
-                <div class="planner-dependent" data-dependent-enhancement="custom" hidden><label>Tell us what you have in mind. <textarea rows="3" data-custom-enhancement-notes></textarea></label></div>
+              <!-- Fixed price enhancements: Photo Booth, Uplighting, Party Audio -->
+              <div class="event-option-grid event-option-grid--3col">
+                <label class="event-option-card">
+                  <input type="checkbox" data-planner-enhancement="photoBooth">
+                  <span class="event-option-card__body">
+                    <span class="event-option-card__title">Digital Photo Booth — $200</span>
+                    <span class="event-option-card__description">Custom event template, setup and removal, digital sharing, and an event gallery.</span>
+                  </span>
+                </label>
+                <label class="event-option-card">
+                  <input type="checkbox" data-planner-enhancement="uplighting">
+                  <span class="event-option-card__body">
+                    <span class="event-option-card__title">Uplighting — $100</span>
+                    <span class="event-option-card__description">Up to six uplights, coordinated static color, setup, and removal.</span>
+                  </span>
+                </label>
+                <label class="event-option-card">
+                  <input type="checkbox" data-planner-enhancement="partyAudio">
+                  <span class="event-option-card__body">
+                    <span class="event-option-card__title">Indoor &amp; Outdoor Party Audio — $75</span>
+                    <span class="event-option-card__description">Line-array speaker, coordinated playlist playback, setup, sound check, and removal. This is not an actively staffed DJ service.</span>
+                  </span>
+                </label>
+              </div>
+              <div class="planner-dependent" data-dependent-enhancement="partyAudio" hidden>
+                <label>Optional playlist notes <input type="text" data-playlist-notes></label>
+              </div>
+
+              <!-- Live Music section: Select + musician checkbox -->
+              <div class="enhancement-section enhancement-section--live-music">
+                <label for="planner-live-hours"><strong>Live Music by A Change of Plans</strong><small>Add acoustic guitar, piano, and vocals from The Mockingbird's house band.</small></label>
+                <select id="planner-live-hours" data-live-hours>
+                  <option value="0">Not selected</option>
+                  <option value="1">1 hour — $100</option>
+                  <option value="2">2 hours — $200</option>
+                  <option value="3">3 hours — $300</option>
+                </select>
+
+                <label class="event-option-card" style="margin-top: 12px;">
+                  <input type="checkbox" data-planner-enhancement="outsideMusician">
+                  <span class="event-option-card__body">
+                    <span class="event-option-card__title">I have another musician in mind</span>
+                    <span class="event-option-card__description">Subject to venue approval, scheduling, sound-level expectations, and production requirements.</span>
+                  </span>
+                </label>
+
+                <div class="planner-dependent" data-dependent-enhancement="outsideMusician" hidden>
+                  <div class="planner-form-grid">
+                    <label>Musician or group name <input type="text" data-musician-name></label>
+                    <label>Contact information, if known <input type="text" data-musician-contact></label>
+                    <label>Performance length <input type="text" data-musician-length></label>
+                    <label>Equipment or production notes <textarea rows="2" data-musician-notes></textarea></label>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Wine &amp; Canvas section: Select + painter count -->
+              <div class="enhancement-section enhancement-section--wine-canvas">
+                <label for="planner-canvas-experience"><strong>Wine &amp; Canvas</strong><small>Pricing is based on participating painters, not total guests. Eight paid painters minimum.</small></label>
+                <select id="planner-canvas-experience" data-canvas-experience>
+                  <option value="none">Not selected</option>
+                  <option value="mini">Mini Painting Experience — $20 per painter</option>
+                  <option value="standard">Standard Painting Experience — $30 per painter</option>
+                  <option value="full">Full Painting Experience — $40 per painter</option>
+                  <option value="help">Not sure which experience?</option>
+                </select>
+                <div class="planner-dependent" data-canvas-painters-wrap hidden>
+                  <label for="planner-canvas-painters">Participating painters <input id="planner-canvas-painters" type="number" min="8" step="1" value="8" data-canvas-painters aria-describedby="planner-canvas-error"></label>
+                  <p class="field-error" id="planner-canvas-error" aria-live="polite"></p>
+                </div>
+              </div>
+
+              <!-- Custom enhancement -->
+              <label class="event-option-card">
+                <input type="checkbox" data-planner-enhancement="custom">
+                <span class="event-option-card__body">
+                  <span class="event-option-card__title">Custom event enhancement request</span>
+                  <span class="event-option-card__description">Pricing will be confirmed after review.</span>
+                </span>
+              </label>
+              <div class="planner-dependent" data-dependent-enhancement="custom" hidden>
+                <label>Tell us what you have in mind. <textarea rows="3" data-custom-enhancement-notes></textarea></label>
               </div>
             </section>
 
