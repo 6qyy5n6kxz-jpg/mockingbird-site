@@ -174,7 +174,9 @@
     estimateRegion.appendChild(venue);
     const fb = document.createElement('section');
     fb.innerHTML = '<h4>Food & Beverages</h4>';
-    appendRows(fb, [['Food subtotal', money(estimate.foodSubtotal)], ['Hosted beverage subtotal', money(estimate.hostedBeverageSubtotal)], ['Food and beverage subtotal', money(estimate.foodAndBeverageSubtotal)], [`Tax (${config.taxRate * 100}%)`, money(estimate.taxAmount)], [`Food-and-beverage service charge (${config.serviceChargeRate * 100}%)`, money(estimate.serviceChargeAmount)]]);
+    const taxPct = Math.round(config.taxRate * 100);
+    const svcPct = Math.round(config.serviceChargeRate * 100);
+    appendRows(fb, [['Food subtotal', money(estimate.foodSubtotal)], ['Hosted beverage subtotal', money(estimate.hostedBeverageSubtotal)], ['Food and beverage subtotal', money(estimate.foodAndBeverageSubtotal)], [`Tax (${taxPct}%)`, money(estimate.taxAmount)], [`Food-and-beverage service charge (${svcPct}%)`, money(estimate.serviceChargeAmount)]]);
     estimateRegion.appendChild(fb);
     if (enhancements.length) {
       const section = document.createElement('section');
@@ -236,8 +238,8 @@
       `Food subtotal: ${money(e.foodSubtotal)}`,
       `Hosted beverage subtotal: ${money(e.hostedBeverageSubtotal)}`,
       `Food and beverage subtotal: ${money(e.foodAndBeverageSubtotal)}`,
-      `Tax (${config.taxRate * 100}%): ${money(e.taxAmount)}`,
-      `Food-and-beverage service charge (${config.serviceChargeRate * 100}%): ${money(e.serviceChargeAmount)}`,
+      `Tax (${Math.round(config.taxRate * 100)}%): ${money(e.taxAmount)}`,
+      `Food-and-beverage service charge (${Math.round(config.serviceChargeRate * 100)}%): ${money(e.serviceChargeAmount)}`,
       `Event enhancements: ${money(e.enhancementsSubtotal)}`,
       `Current estimated event total: ${money(e.estimatedTotal)}`,
       `Reservation deposit required: ${money(e.reservationDeposit)} (credited toward venue rental; not an additional charge)`,

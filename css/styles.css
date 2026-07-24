@@ -1961,23 +1961,35 @@ textarea {
 }
 
 .planner-choice-list {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  margin-bottom: 16px;
 }
 
 .planner-choice-list label {
   display: flex;
   align-items: flex-start;
-  gap: 8px;
+  gap: 12px;
   margin: 0;
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
   font-weight: 400;
   cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.planner-choice-list label:hover {
+  border-color: var(--accent);
+  background: rgba(176, 109, 60, 0.02);
 }
 
 .planner-choice-list input {
   margin-top: 3px;
   flex: 0 0 auto;
+  cursor: pointer;
 }
 
 .planner-method-note {
@@ -2132,23 +2144,34 @@ textarea {
 }
 
 .planner-enhancement-list {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr;
   gap: 14px;
 }
 
 .planner-enhancement-list > label {
   display: flex;
   align-items: flex-start;
-  gap: 10px;
+  gap: 12px;
   margin: 0;
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
   font-weight: 400;
   cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.planner-enhancement-list > label:hover {
+  border-color: var(--accent);
+  background: rgba(176, 109, 60, 0.02);
 }
 
 .planner-enhancement-list input {
-  margin-top: 2px;
+  margin-top: 3px;
   flex: 0 0 auto;
+  cursor: pointer;
 }
 
 .planner-enhancement-list span {
@@ -2165,6 +2188,46 @@ textarea {
   margin-top: 2px;
   color: var(--muted);
   font-size: 13px;
+}
+
+.planner-enhancement-list > label[for] {
+  display: block;
+  margin: 0;
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  font-weight: 400;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.planner-enhancement-list > label[for]:hover {
+  border-color: var(--accent);
+  background: rgba(176, 109, 60, 0.02);
+}
+
+.planner-enhancement-list > label[for] strong {
+  display: block;
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+
+.planner-enhancement-list > label[for] small {
+  display: block;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.planner-enhancement-list > select {
+  grid-column: 1 / -1;
+  margin-top: 0;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface);
+  font-size: 14px;
+  cursor: pointer;
 }
 
 .planner-enhancement-list select,
@@ -2189,6 +2252,7 @@ textarea {
   gap: 8px;
   margin-bottom: 16px;
   padding: 0;
+  max-width: 600px;
 }
 
 .planner-estimate-list section {
@@ -2208,8 +2272,8 @@ textarea {
 
 .planner-estimate-list dl {
   display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 8px 16px;
+  grid-template-columns: minmax(200px, 1fr) auto;
+  gap: 8px 24px;
   margin: 0;
   padding: 0;
 }
@@ -2257,6 +2321,16 @@ textarea {
 }
 
 /* Responsive adjustments */
+@media (min-width: 901px) {
+  .planner-choice-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .planner-enhancement-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 @media (max-width: 900px) {
   .pp-builder-grid {
     grid-template-columns: 1fr;
@@ -2277,6 +2351,14 @@ textarea {
   .pp-form-columns {
     grid-template-columns: 1fr;
   }
+
+  .planner-choice-list {
+    grid-template-columns: 1fr;
+  }
+
+  .planner-enhancement-list {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 640px) {
@@ -2291,6 +2373,11 @@ textarea {
 
   .menu-builder-buttons {
     gap: 8px;
+  }
+
+  .planner-choice-list label,
+  .planner-enhancement-list > label {
+    padding: 14px;
   }
 
   .planner-quantity-row {
@@ -2318,9 +2405,13 @@ textarea {
     min-height: 40px;
   }
 
+  .planner-estimate-list {
+    max-width: 100%;
+  }
+
   .planner-estimate-list dl {
-    grid-template-columns: 1fr;
-    gap: 4px 8px;
+    grid-template-columns: 1fr auto;
+    gap: 6px 12px;
   }
 
   .planner-estimate-list dt {
@@ -2328,6 +2419,6 @@ textarea {
   }
 
   .planner-estimate-list dd {
-    text-align: left;
+    text-align: right;
   }
 }
