@@ -134,7 +134,14 @@
   "payment_note": "Reservations are required and seating is limited. Ticket price includes the five-course dinner, guided wine pairings, 7% sales tax, and 18% gratuity.",
   "image_url": "assets/events/Canada_Wine_Tasting_Dinner.png",
   "image_alt": "A Taste of Canada wine tasting dinner at The Mockingbird on Sunday, August 23 from 6–9 PM, featuring a five-course Canadian-inspired menu, expertly paired wines, and support for Canadian wildfire relief."
-}           
+},
+{
+      "date": "2026-08-29T18:00:00",
+      "title": "Live Music: Jon B. Roth",
+      "description": "Live music by Jon B. Roth, 6:00–9:00 PM.",
+      "price": "No cover",
+      "payment_link_url": ""
+    }           
   ]
 
 }
