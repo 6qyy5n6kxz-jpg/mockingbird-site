@@ -141,7 +141,14 @@
       "description": "Live music by Jon B. Roth, 6:00–9:00 PM.",
       "price": "No cover",
       "payment_link_url": ""
-    }           
+    },
+    {
+      "date": "2026-09-05T18:00:00",
+      "title": "Live Music: Mike Bryce",
+      "description": "Live music by Mike Bryce, 6:00–9:00 PM.",
+      "price": "No cover",
+      "payment_link_url": ""
+    }            
   ]
 
 }
