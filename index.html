@@ -74,13 +74,20 @@
     </section>
 
     <section class="section alt fade-in">
-      <div class="container">
-        <p class="kicker">Favorites</p>
-        <h2>Featured from the kitchen</h2>
-        <p class="lead">Updated from our menu. Ask about weekly specials and wine pairings.</p>
-        <div id="featured-items" class="list-flex"></div>
+  <div class="container">
+    <div class="home-section-heading">
+      <div>
+        <p class="kicker">This week from the kitchen</p>
+        <h2>A few reasons to come hungry.</h2>
+        <p class="lead">Seasonal dishes made for this week at The Mockingbird.</p>
       </div>
-    </section>
+
+      <a class="home-section-link" data-nav="specials">See all specials →</a>
+    </div>
+
+    <div id="specials-preview" class="list-flex"></div>
+  </div>
+</section>
 
     <section class="section fade-in" id="experience">
       <div class="container">
@@ -244,17 +251,17 @@
 
   <script src="js/main.js"></script>
     <script>
-    (async function() {
-      const [site, menu, events] = await Promise.all([
-        Mockingbird.sitePromise,
-        Mockingbird.fetchJSON('menu.json', { categories: [] }),
-        Mockingbird.fetchJSON('events.json', { events: [] })
-      ]);
+  (async function() {
+    const [site, specials, events] = await Promise.all([
+      Mockingbird.sitePromise,
+      Mockingbird.fetchJSON('specials.json', { items: [] }),
+      Mockingbird.fetchJSON('events.json', { events: [] })
+    ]);
 
-      Mockingbird.renderFeaturedItems(site, menu);
-      Mockingbird.renderEventsPreview(events);
-      Mockingbird.renderHoursTable(site, 'hours-table-home');
-    })();
-  </script>
+    Mockingbird.renderSpecialsPreview(specials);
+    Mockingbird.renderEventsPreview(events);
+    Mockingbird.renderHoursTable(site, 'hours-table-home');
+  })();
+</script>
 </body>
 </html>

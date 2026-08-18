@@ -2695,21 +2695,60 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
   }
 
   function renderSpecialsPreview(data) {
-    const container = document.getElementById('specials-preview');
-    if (!container) return;
-    if (!data?.items?.length) {
-      container.innerHTML = '<p class="note">Specials will be posted soon.</p>';
-      return;
-    }
-    container.innerHTML = '';
-    data.items.slice(0, 2).forEach((item) => {
-      const card = document.createElement('div');
-      card.className = 'card fade-in';
-      card.innerHTML = `<h4>${item.name}</h4><p>${item.description}</p>${item.pairing ? `<span class="badge">${item.pairing}</span>` : ''}`;
-      container.appendChild(card);
-    });
-    enableFadeIn();
+  const container = document.getElementById('specials-preview');
+  if (!container) return;
+
+  if (!data?.items?.length) {
+    container.innerHTML = `
+      <div class="card">
+        <p class="note">This week's specials will be posted soon.</p>
+      </div>
+    `;
+    return;
   }
+
+  container.innerHTML = '';
+
+  data.items.slice(0, 5).forEach((item) => {
+    const card = document.createElement('article');
+    card.className = 'card fade-in';
+
+    const label = item.label
+      ? `<span class="badge">${item.label}</span>`
+      : '';
+
+    const notes = Array.isArray(item.notes) && item.notes.length
+      ? `<p class="note">${item.notes.join(' · ')}</p>`
+      : '';
+
+    const pairing = item.pairing
+      ? `<span class="badge badge-soft">Pairing: ${item.pairing}</span>`
+      : '';
+
+    const price = item.price
+      ? `<strong>${item.price}</strong>`
+      : '';
+
+    card.innerHTML = `
+      <div class="inline-links">
+        ${label}
+        ${pairing}
+      </div>
+
+      <h3>${item.name}</h3>
+
+      ${item.description ? `<p>${item.description}</p>` : ''}
+
+      ${notes}
+
+      ${price}
+    `;
+
+    container.appendChild(card);
+  });
+
+  enableFadeIn();
+}
 
     function renderEventsPreview(data) {
     const container = document.getElementById('events-preview');
