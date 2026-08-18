@@ -21,11 +21,9 @@
     "ogImage": { "src": "assets/images/og.jpg", "fallback": "assets/images/hero.jpg", "alt": "Seasonal dishes and drinks at The Mockingbird" },
     "experience": [
   {
-    "src": "assets/images/hero.jpg",
-    "alt": "The Mockingbird farmhouse exterior and patio in Graytown, Ohio",
-    "width": 2048,
-    "height": 1365,
-    "caption": "Tucked away in Graytown"
+    "src": "assets/images/mockingbird-patio-gardens.jpg",
+    "alt": "The Mockingbird patio, gardens, pond, and covered porch in Graytown, Ohio",
+    "caption": "Room to slow down"
   },
   {
     "src": "assets/images/interior3.jpg",
@@ -40,9 +38,9 @@
     "caption": "Live music on select nights"
   },
   {
-    "src": "assets/images/interior1.jpg",
-    "alt": "The Mockingbird dining room with tables and fireplace",
-    "caption": "A cozy place to settle in"
+    "src": "assets/images/mockingbird-dining-room-fireplace.jpg",
+    "alt": "The Mockingbird dining room with vintage seating, wood floors, and fireplace",
+    "caption": "Come as you are"
   }
 ],
     "gallery": [
