@@ -20,12 +20,31 @@
     "bar1": { "src": "assets/images/bar1.jpg", "alt": "Wine poured at the bar" },
     "ogImage": { "src": "assets/images/og.jpg", "fallback": "assets/images/hero.jpg", "alt": "Seasonal dishes and drinks at The Mockingbird" },
     "experience": [
-      { "src": "assets/images/mockingbird-private-event-buffet-room.webp", "alt": "The Mockingbird dining room set for a private buffet", "width": 1800, "height": 1350, "caption": "Gather around the table" },
-      { "src": "assets/images/hero.jpg", "alt": "The Mockingbird farmhouse exterior and patio", "width": 2048, "height": 1365, "caption": "A country setting in Graytown" },
-      { "src": "assets/images/mockingbird-party-wraps-and-sandwiches.webp", "alt": "Party platters with wraps, sandwiches, vegetables, and fruit", "width": 1600, "height": 1102 },
-      { "src": "assets/images/interior3.jpg", "alt": "Wine and two glasses at sunset on The Mockingbird patio", "width": 960, "height": 768 },
-      { "src": "assets/images/mockingbird-black-tie-dessert-table.webp", "alt": "Black tie themed cake, cupcakes, and decorated cookies", "width": 1200, "height": 1672 }
-    ],
+  {
+    "src": "assets/images/hero.jpg",
+    "alt": "The Mockingbird farmhouse exterior and patio in Graytown, Ohio",
+    "width": 2048,
+    "height": 1365,
+    "caption": "Tucked away in Graytown"
+  },
+  {
+    "src": "assets/images/interior3.jpg",
+    "alt": "Wine and two glasses at sunset on The Mockingbird patio",
+    "width": 960,
+    "height": 768,
+    "caption": "Stay for another glass"
+  },
+  {
+    "src": "assets/images/a-change-of-plans-live-music.webp",
+    "alt": "Live musicians performing inside The Mockingbird",
+    "caption": "Live music on select nights"
+  },
+  {
+    "src": "assets/images/interior1.jpg",
+    "alt": "The Mockingbird dining room with tables and fireplace",
+    "caption": "A cozy place to settle in"
+  }
+],
     "gallery": [
       { "src": "assets/images/mockingbird-party-wraps-and-sandwiches.webp", "alt": "Party platters with wraps, sandwiches, vegetables, and fruit", "width": 1600, "height": 1102, "category": "Food & Drinks" },
       { "src": "assets/images/mockingbird-party-flatbreads-and-salads.webp", "alt": "Flatbreads, fruit, and pasta salads arranged for a party", "width": 1200, "height": 1600, "category": "Food & Drinks" },
