@@ -923,7 +923,7 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
       return;
     }
     container.innerHTML = '';
-    testimonials.forEach((entry) => {
+    testimonials.slice(0, 3).forEach((entry) => {
       if (!entry?.quote || !entry?.name) return;
       const article = document.createElement('article');
       article.className = 'testimonial-card';
