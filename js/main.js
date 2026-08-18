@@ -2711,22 +2711,72 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
     enableFadeIn();
   }
 
-  function renderEventsPreview(data) {
+    function renderEventsPreview(data) {
     const container = document.getElementById('events-preview');
     if (!container) return;
+
     const now = new Date();
-    const events = (data?.events || []).filter((ev) => new Date(ev.date) >= now).sort((a, b) => new Date(a.date) - new Date(b.date));
+
+    const events = (data?.events || [])
+      .filter((ev) => new Date(ev.date) >= now)
+      .sort((a, b) => new Date(a.date) - new Date(b.date));
+
     if (!events.length) {
-      container.innerHTML = '<p class="note">Events will be posted soon.</p>';
+      container.innerHTML = `
+        <div class="home-events-empty">
+          <p>More events are coming soon.</p>
+          <a data-nav="events">Visit the events page →</a>
+        </div>
+      `;
       return;
     }
+
     container.innerHTML = '';
+
     events.slice(0, 3).forEach((ev) => {
-      const card = document.createElement('div');
-      card.className = 'card fade-in';
-      card.innerHTML = `<div class="badge">${formatDate(ev.date)}</div><h4>${ev.title}</h4><p>${ev.description}</p>`;
+      const date = new Date(ev.date);
+
+      const month = date.toLocaleDateString(undefined, {
+        month: 'short'
+      });
+
+      const day = date.toLocaleDateString(undefined, {
+        day: 'numeric'
+      });
+
+      const weekday = date.toLocaleDateString(undefined, {
+        weekday: 'short'
+      });
+
+      const time = date.toLocaleTimeString(undefined, {
+        hour: 'numeric',
+        minute: '2-digit'
+      });
+
+      const card = document.createElement('article');
+      card.className = 'home-event-card fade-in';
+
+      card.innerHTML = `
+        <div class="home-event-date" aria-label="${formatDate(ev.date)}">
+          <span class="home-event-month">${month}</span>
+          <strong>${day}</strong>
+          <span>${weekday}</span>
+        </div>
+
+        <div class="home-event-details">
+          ${ev.type ? `<p class="home-event-type">${ev.type}</p>` : ''}
+          <h3>${ev.title}</h3>
+
+          <div class="home-event-meta">
+            <span>${time}</span>
+            ${ev.price ? `<span>${ev.price}</span>` : ''}
+          </div>
+        </div>
+      `;
+
       container.appendChild(card);
     });
+
     enableFadeIn();
   }
 

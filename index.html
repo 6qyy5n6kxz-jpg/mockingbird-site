@@ -33,33 +33,43 @@
   <div class="announcement" role="status"></div>
 
   <main id="main">
-    <section class="hero">
-      <img data-img="hero" src="assets/images/mockingbird-private-event-buffet-room.webp" alt="Warm dining room at The Mockingbird set with a buffet of homemade food" width="1800" height="1350" fetchpriority="high">
+        <section class="hero home-hero">
+      <img
+        data-img="hero"
+        src="assets/images/hero.jpg"
+        alt="The Mockingbird farmhouse exterior and patio in Graytown, Ohio"
+        width="2048"
+        height="1365"
+        fetchpriority="high"
+      >
       <div class="hero-content">
         <div class="hero-inner">
-          <p class="kicker" data-fill="tagline">Mockingbird</p>
-          <h1 data-fill="hero-headline">Seasonal cooking with wine, beer, and sangria in the neighborhood</h1>
-          <p data-fill="hero-subhead">Walk-ins encouraged. Reservations optional. Come hungry, thirsty, and curious.</p>
+          <p class="kicker">Food, wine + good nights in Graytown</p>
+          <h1 data-fill="hero-headline">Come hungry. Stay awhile.</h1>
+          <p data-fill="hero-subhead">From-scratch food, wine, sangria, beer, and a country setting worth slowing down for.</p>
+
           <div class="hero-cta">
-            <a class="btn btn-primary" data-nav="menu">View Menu</a>
-            <a class="btn btn-secondary" data-nav="specials">Tonight's Specials</a>
+            <a class="btn btn-primary" data-nav="events">See What's Happening</a>
+            <a class="btn btn-secondary" data-nav="menu">Food + Drink</a>
           </div>
-          <p class="note"><a class="hero-events-link" data-nav="events">View upcoming events →</a></p>
-          <p class="note hero-location-note">Located in Graytown, OH, The Mockingbird on Mill Road welcomes guests from across Northwest Ohio — including Toledo, Oregon, Port Clinton, and surrounding communities — for food, drinks, and events.</p>
+
+          <p class="note hero-welcome-note">Walk-ins welcome • Kitchen open nightly</p>
         </div>
       </div>
     </section>
 
-    <section class="section fade-in" data-section="why">
+    <section class="section home-events-section fade-in">
       <div class="container">
-        <p class="kicker">Why Mockingbird</p>
-        <h2 data-fill="trust-heading">Why Mockingbird</h2>
-        <div class="features" id="trust-bullets">
-          <div class="card"><p data-trust="0">Dinner-forward seasonal specials — updated weekly</p></div>
-          <div class="card"><p data-trust="1">Curated bottles, glass pours, sangria, beer, and NA options</p></div>
-          <div class="card"><p data-trust="2">Warm, local hospitality — walk in or call ahead</p></div>
+        <div class="home-section-heading">
+          <div>
+            <p class="kicker">This week at Mockingbird</p>
+            <h2>There’s always something happening.</h2>
+          </div>
+
+          <a class="home-section-link" data-nav="events">View all events →</a>
         </div>
-        <div class="inline-links" id="trust-review"></div>
+
+        <div id="events-preview" class="home-events-grid"></div>
       </div>
     </section>
 
@@ -119,23 +129,24 @@
       </div>
     </section>
 
-    <section class="section fade-in">
-      <div class="container" id="jam-home-band"></div>
-    </section>
+        <section class="section alt fade-in">
+      <div class="container">
+        <div class="home-jam-feature">
+          <div class="home-jam-copy">
+            <p class="kicker">Mockingbird Jam 2026</p>
+            <h2>Music, community + a day supporting ALS families.</h2>
+            <p>
+              Join us Sunday, September 13 for yoga, live music, food,
+              a silent auction, and a full day of fundraising at The Mockingbird.
+            </p>
+          </div>
 
-    <section class="section alt fade-in">
-      <div class="container grid-2">
-        <div id="jam-home-countdown"></div>
-        <div id="event-updates-signup"></div>
+          <div class="home-jam-actions">
+            <a class="btn btn-primary" data-nav="events">Explore Mockingbird Jam</a>
+            <a class="btn btn-secondary" data-nav="sponsor">Become a Sponsor</a>
+          </div>
+        </div>
       </div>
-    </section>
-
-    <section class="section fade-in">
-      <div class="container" id="featured-auction-items"></div>
-    </section>
-
-    <section class="section alt fade-in">
-      <div class="container" id="home-sponsors"></div>
     </section>
 
     <section class="section fade-in">
@@ -232,30 +243,17 @@
   <button class="back-to-top" aria-label="Back to top">↑</button>
 
   <script src="js/main.js"></script>
-  <script>
+    <script>
     (async function() {
-      const [site, menu, auction, sponsors] = await Promise.all([
+      const [site, menu, events] = await Promise.all([
         Mockingbird.sitePromise,
         Mockingbird.fetchJSON('menu.json', { categories: [] }),
-        Mockingbird.fetchJSON('auction.json', { items: [], event: {} }),
-        Mockingbird.fetchJSON('sponsors.json', { sponsors: [] })
+        Mockingbird.fetchJSON('events.json', { events: [] })
       ]);
-      Mockingbird.state.auction = auction;
-      Mockingbird.state.sponsors = sponsors;
+
       Mockingbird.renderFeaturedItems(site, menu);
+      Mockingbird.renderEventsPreview(events);
       Mockingbird.renderHoursTable(site, 'hours-table-home');
-      Mockingbird.renderJamPromo('jam-home-band', auction);
-      Mockingbird.renderEventCountdown('jam-home-countdown', auction);
-      Mockingbird.renderEmailSignup('event-updates-signup', {
-        ...(auction.event?.signup || {}),
-        action: auction.event?.signup_form_action,
-        source: 'homepage_event_updates'
-      });
-      Mockingbird.renderFeaturedAuctionItems('featured-auction-items', auction);
-      Mockingbird.renderSponsors(sponsors, 'home-sponsors', {
-        title: 'Sponsor Mockingbird Jam 2026',
-        intro: 'Sponsor visibility runs across the event page, auction page, and fundraiser promotion throughout the site.'
-      });
     })();
   </script>
 </body>
