@@ -2971,10 +2971,8 @@ textarea {
 
 #experience .experience-grid {
   display: grid !important;
-  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-  grid-auto-flow: row !important;
-  grid-auto-rows: auto !important;
-  gap: 22px !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 18px !important;
   margin-top: 30px;
 }
 
@@ -2982,55 +2980,84 @@ textarea {
 #experience .experience-grid figure:nth-child(1),
 #experience .experience-grid figure:nth-child(2),
 #experience .experience-grid figure:nth-child(3),
-#experience .experience-grid figure:nth-child(4),
-#experience .experience-grid figure:nth-child(5),
-#experience .experience-grid figure:nth-child(6) {
+#experience .experience-grid figure:nth-child(4) {
   position: relative !important;
   display: block !important;
   grid-column: auto !important;
   grid-row: auto !important;
-  width: auto !important;
+  width: 100% !important;
   height: auto !important;
   min-width: 0 !important;
   margin: 0 !important;
   padding: 0 !important;
-  overflow: visible !important;
-  border-radius: 0 !important;
-}
-
-#experience .experience-grid img,
-#experience .experience-grid figure:nth-child(1) img,
-#experience .experience-grid figure:nth-child(2) img,
-#experience .experience-grid figure:nth-child(3) img,
-#experience .experience-grid figure:nth-child(4) img {
-  position: static !important;
-  display: block !important;
-  width: 100% !important;
-  height: auto !important;
-  max-width: 100% !important;
-  aspect-ratio: auto !important;
-  object-fit: contain !important;
-  object-position: center !important;
+  overflow: hidden !important;
   border-radius: 16px !important;
 }
 
-#experience .experience-grid figcaption {
-  position: static !important;
+/* Main establishing patio image */
+#experience .experience-grid figure:first-child {
+  grid-column: 1 / -1 !important;
+}
+
+#experience .experience-grid figure:first-child img {
   display: block !important;
+  width: 100% !important;
+  height: auto !important;
+  aspect-ratio: auto !important;
+  object-fit: contain !important;
+  border-radius: 16px !important;
+}
+
+/* Three supporting experience images */
+#experience .experience-grid figure:not(:first-child) img {
+  display: block !important;
+  width: 100% !important;
+  height: 260px !important;
+  object-fit: cover !important;
+  border-radius: 16px !important;
+}
+
+/* Adjust focal points individually */
+#experience .experience-grid figure:nth-child(2) img {
+  object-position: center 60% !important;
+}
+
+#experience .experience-grid figure:nth-child(3) img {
+  object-position: center center !important;
+}
+
+#experience .experience-grid figure:nth-child(4) img {
+  object-position: center 60% !important;
+}
+
+#experience .experience-grid figcaption {
+  position: absolute !important;
+  left: 12px !important;
+  bottom: 12px !important;
   width: auto !important;
-  margin: 9px 0 0 !important;
-  padding: 0 !important;
-  background: transparent !important;
-  color: var(--text) !important;
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 1.4;
-  border-radius: 0 !important;
+  margin: 0 !important;
+  padding: 7px 10px !important;
+  background: rgba(20, 18, 16, 0.78) !important;
+  color: #fff !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  line-height: 1.3 !important;
+  border-radius: 7px !important;
 }
 
 @media (max-width: 760px) {
   #experience .experience-grid {
     grid-template-columns: 1fr !important;
-    gap: 26px !important;
+    gap: 16px !important;
+  }
+
+  #experience .experience-grid figure:first-child {
+    grid-column: auto !important;
+  }
+
+  #experience .experience-grid figure:not(:first-child) img {
+    height: auto !important;
+    max-height: none !important;
+    object-fit: contain !important;
   }
 }
