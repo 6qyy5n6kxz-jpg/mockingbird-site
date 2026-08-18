@@ -3876,7 +3876,6 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
     setupNav();
     // Footer links are pruned before nav hrefs are set so any injected/removed links
     // get base-path normalization (GitHub Pages friendly) and stay deterministic.
-    pruneFooterLinks();
     setNavLinks();
     setupBackToTop();
     enableFadeIn();
