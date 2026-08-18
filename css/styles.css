@@ -2995,6 +2995,12 @@ textarea {
 }
 
 /* Main establishing patio image */
+#experience .experience-grid figure:first-child img {
+  height: auto !important;
+  object-fit: contain !important;
+  object-position: center !important;
+}
+
 #experience .experience-grid figure:first-child {
   grid-column: 1 / -1 !important;
 }
@@ -3002,9 +3008,9 @@ textarea {
 #experience .experience-grid figure:first-child img {
   display: block !important;
   width: 100% !important;
-  height: auto !important;
-  aspect-ratio: auto !important;
-  object-fit: contain !important;
+  height: 420px !important;
+  object-fit: cover !important;
+  object-position: center 68% !important;
   border-radius: 16px !important;
 }
 
