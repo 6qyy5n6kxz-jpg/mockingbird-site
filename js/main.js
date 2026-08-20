@@ -1712,7 +1712,7 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
         header.className = 'inline-links';
         const titleSpan = document.createElement('span');
         titleSpan.className = 'kicker';
-        const titleText = section.id === 'on-tap' ? 'On Tap · Flight Eligible' : (section.title || '');
+        const titleText = section.id === 'on-tap' ? 'On Tap' : (section.title || '');
         titleSpan.textContent = titleText;
         header.appendChild(titleSpan);
         if (section.description) {

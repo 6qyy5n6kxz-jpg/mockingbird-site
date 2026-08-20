@@ -3068,6 +3068,12 @@ textarea {
   white-space: nowrap;
 }
 
+@media (min-width: 761px) {
+  .drinks-flight-feature h2 {
+    white-space: nowrap;
+  }
+}
+
 .drinks-flight-pricing {
   display: flex;
   flex-wrap: wrap;
