@@ -1,47 +1,49 @@
 {
   "_comment": "Update weekly specials. weekOf should be the Monday of the current week.",
-  "weekOf": "2026-07-23",
-  "dateRange": "July 23–July 25",
+  "weekOf": "2026-08-17",
+  "dateRange": "August 20–23",
   "items": [
     {
-      "name": "Creamy Garden Rice Soup",
+      "name": "Summer Bean Soup",
       "label": "Soup of the Day",
-      "description": "A comforting blend of rice, white beans, squash, carrots, celery, onions, and garlic simmered with butter and cream.",
+      "description": "White beans, tomatoes, carrots, red onion, garlic, spinach, and herbs simmered together and finished with a bright touch of lemon.",
       "notes": [
         "Available as cup or bowl",
-        "Available as a combo add-on",
-        "Vegetarian"
+        "Available as a combo add-on"
       ]
     },
     {
-      "name": "Mediterranean Farro Salad",
+      "name": "Summer Garden Salad",
       "label": "Seasonal Salad",
-      "description": "Pearled farro tossed with cucumber, roasted red peppers, Kalamata olives, feta crumbles, and a bright lemon vinaigrette.",
+      "description": "Crisp romaine topped with fresh tomatoes, cucumber, red onion, and feta, served with a house vinaigrette.",
       "notes": [
-        "Vegetarian"
+        "Vegetarian",
+        "Gluten-Free"
       ]
     },
     {
-      "name": "Ham & Cheddar Pressed",
+      "name": "Chicken Pesto Pressed",
       "label": "Featured Pressed Sandwich",
-      "description": "Smoked ham, melted sharp cheddar, Dijon mustard, and dill pickle chips on our house bread, pressed golden and crisp.",
+      "description": "Herb-roasted chicken, crisp bacon, melted provolone, and house-made garden basil pesto on our house bread, pressed golden and crisp.",
       "notes": [
         "Served with pickle and Featured Side"
       ]
     },
     {
-      "name": "Italian Pasta Salad",
+      "name": "Garlic Parmesan Roasted Potatoes",
       "label": "Featured Side",
-      "description": "Tri-color rotini tossed with pepperoni, mozzarella, grape tomatoes, green bell pepper, red onion, pepperoncini, Kalamata olives, Parmesan, and Italian dressing.",
+      "description": "Baby potatoes roasted with garlic, Parmesan, and Italian herbs until golden and tender.",
       "notes": [
+        "Vegetarian",
+        "Gluten-Free",
         "Served with all pressed sandwiches",
         "Included in combos"
       ]
     },
     {
-      "name": "Chocolate Cheesecake Cookie Sandwich",
+      "name": "Peach & Raspberry Cake",
       "label": "Sweet Bite of the Day",
-      "description": "Creamy chocolate cheesecake filling sandwiched between two soft oatmeal chocolate chip cookies."
+      "description": "Tender sour cream cake baked with fresh peaches and raspberries and finished with a light lemon glaze."
     }
   ]
 }
