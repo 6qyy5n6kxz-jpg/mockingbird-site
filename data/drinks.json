@@ -1,12 +1,12 @@
 {
   "notes": {
-    "cashDiscount": "Prices in the menu reflect a 4% discount for cash paying customers."
+    "cashDiscount": "Prices shown reflect our 4% cash discount."
   },
   "sections": [
     {
       "id": "wine-flights",
-      "title": "Wine Flights (On Pour)",
-      "description": "Build-Your-Own-Flight (any 4) $15. Mix and match any wines or draft pours. Listed from sweeter to drier. Pour Sizes: Full 6 oz ($9) • Flight 2 oz",
+      "title": "Wine Flights",
+"description": "Mix and match from anywhere on this list. Wines are listed from sweeter to drier.",
       "subsections": [
         {
           "title": "Whites/Rosé",
@@ -244,7 +244,7 @@
     },
     {
       "id": "beer-cans",
-      "title": "Beer & Cans",
+      "title": "Beer + More",
       "subsections": [
         {
           "title": "IPAs",
@@ -505,7 +505,7 @@
     },
     {
       "id": "bottled-wine",
-      "title": "Bottled Wine (Cooler List)",
+      "title": "Bottled Shop",
       "subsections": [
         {
           "title": "Red",

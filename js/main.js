@@ -1687,23 +1687,8 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
         });
       });
       anchors.innerHTML = anchorLinks
-        .map((a) => `<a class="btn btn-ghost btn-small" href="#${a.id}">${a.title}</a>`)
-        .join('');
-    }
-
-    const helperCopy = [
-      'Flights: Flight Board (any 4) $15 · Half Pour $5 · Taste $4',
-      'Notes: Flights are available only from Wine Flights (On Pour). Bottles/cans aren’t eligible. Prices reflect a 4% cash discount.'
-    ];
-    if (anchors && container) {
-      let helper = document.getElementById('drinks-helper');
-      if (!helper) {
-        helper = document.createElement('div');
-        helper.id = 'drinks-helper';
-        helper.className = 'drinks-helper';
-        anchors.insertAdjacentElement('afterend', helper);
-      }
-      helper.innerHTML = helperCopy.map((line) => `<p class="note">${line}</p>`).join('');
+  .map((a) => `<a class="drink-anchor-link" href="#${a.id}">${a.title}</a>`)
+  .join('');
     }
 
     if (!drinks?.sections?.length) {
@@ -1713,7 +1698,7 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
     }
     drinks.sections.forEach((section) => {
       const secEl = document.createElement('section');
-      secEl.className = 'menu-category fade-in';
+      secEl.className = `drink-section drink-section-${section.id || 'general'} fade-in`;
       secEl.id = section.id || '';
       try {
         if (__debug && container.childElementCount > 0 && section.id === 'bottled-wine') {
@@ -1739,16 +1724,6 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
           header.appendChild(descSpan);
         }
         secEl.appendChild(header);
-        if (section.id === 'wine-flights') {
-          const note = document.createElement('div');
-          note.className = 'note';
-          note.innerHTML = [
-            'Pour Sizes: Full 6 oz ($9) • Flight 2 oz',
-            'Build-Your-Own-Flight (any 4) $15 — Mix and match from anywhere on this list.',
-            'Listed from sweeter to drier.'
-          ].map((line) => `<div>${line}</div>`).join('');
-          secEl.appendChild(note);
-        }
 
         const subsections = Array.isArray(section.subsections)
           ? section.subsections
@@ -1776,7 +1751,7 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
         let appendedRows = 0;
         subsections.forEach((sub) => {
           const subEl = document.createElement('div');
-          subEl.className = 'card';
+          subEl.className = 'drink-subsection';
           if (sub.title) {
             subEl.id = sub.id || sub.title.toLowerCase().replace(/[^a-z0-9]+/g, '-');
             const h3 = document.createElement('h3');

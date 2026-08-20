@@ -3019,3 +3019,222 @@ textarea {
     font-size: 12px;
   }
 }
+
+/* -------------------------------------------------------
+   Drinks page refresh
+------------------------------------------------------- */
+
+.drinks-page {
+  padding-top: 72px;
+}
+
+.drinks-intro {
+  max-width: 940px;
+  margin-bottom: 34px;
+}
+
+.drinks-intro h1 {
+  margin: 0 0 14px;
+  font-size: clamp(38px, 6vw, 58px);
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+}
+
+.drinks-intro .lead {
+  max-width: 760px;
+  font-size: 18px;
+}
+
+.drinks-flight-feature {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 18px 40px;
+  align-items: center;
+  margin: 32px 0 24px;
+  padding: 28px 30px;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background: var(--surface);
+  box-shadow: 0 10px 28px rgba(33, 31, 27, 0.05);
+}
+
+.drinks-flight-feature h2 {
+  margin: 4px 0 0;
+  font-size: clamp(24px, 4vw, 34px);
+}
+
+.drinks-flight-feature h2 span {
+  color: var(--accent-strong);
+  white-space: nowrap;
+}
+
+.drinks-flight-pricing {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 10px 20px;
+  color: var(--muted);
+}
+
+.drinks-flight-pricing span {
+  white-space: nowrap;
+}
+
+.drinks-flight-pricing strong {
+  color: var(--text);
+}
+
+.drinks-flight-feature > .note {
+  grid-column: 1 / -1;
+  margin: 0;
+}
+
+.drink-anchor-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.drink-anchor-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 9px 14px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.drink-anchor-link:hover,
+.drink-anchor-link:focus-visible {
+  border-color: var(--accent);
+  color: var(--accent-strong);
+  background: rgba(176, 109, 60, 0.06);
+}
+
+.drinks-list {
+  display: grid;
+  gap: 54px;
+  margin-top: 42px;
+}
+
+.drink-section {
+  scroll-margin-top: 100px;
+}
+
+.drink-section > .inline-links {
+  margin-bottom: 18px;
+  align-items: baseline;
+}
+
+.drink-section > .inline-links .kicker {
+  font-size: 13px;
+}
+
+.drink-section > .inline-links .note {
+  max-width: 760px;
+}
+
+.drink-subsection {
+  padding: 0;
+  background: transparent;
+}
+
+.drink-subsection + .drink-subsection {
+  margin-top: 28px;
+}
+
+.drink-subsection h3 {
+  margin: 0 0 10px;
+  font-size: 20px;
+}
+
+.drinks-page .menu-price-header {
+  padding: 8px 0;
+}
+
+.drinks-page .menu-item {
+  padding: 12px 0;
+}
+
+.drinks-page .menu-item h4 {
+  font-size: 15px;
+}
+
+.drinks-page .menu-item p {
+  margin-top: 2px;
+  font-size: 14px;
+}
+
+.drinks-page .badge {
+  padding: 2px 8px;
+  font-size: 11px;
+}
+
+/* Everyday drink sections get comfortable spacing */
+.drink-section-wine-flights,
+.drink-section-on-tap,
+.drink-section-beer-cans {
+  padding-bottom: 8px;
+}
+
+/* Bottle shop becomes denser and easier to scan */
+.drink-section-bottled-wine {
+  padding-top: 6px;
+}
+
+.drink-section-bottled-wine .drink-subsection {
+  padding: 20px 22px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--surface);
+}
+
+.drink-section-bottled-wine .menu-item {
+  padding: 8px 0;
+}
+
+.drink-section-bottled-wine .menu-item h4 {
+  margin: 0;
+  font-size: 14px;
+}
+
+.drink-section-bottled-wine .menu-item p {
+  display: none;
+}
+
+.drink-section-bottled-wine .menu-price-header {
+  padding-top: 4px;
+}
+
+.drinks-cash-note {
+  margin-top: 36px;
+  padding-top: 18px;
+  border-top: 1px solid var(--border);
+}
+
+@media (max-width: 760px) {
+  .drinks-page {
+    padding-top: 48px;
+  }
+
+  .drinks-flight-feature {
+    grid-template-columns: 1fr;
+    padding: 22px;
+  }
+
+  .drinks-flight-pricing {
+    justify-content: flex-start;
+  }
+
+  .drinks-list {
+    gap: 42px;
+  }
+
+  .drink-section-bottled-wine .drink-subsection {
+    padding: 16px;
+  }
+}
