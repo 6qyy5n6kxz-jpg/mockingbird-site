@@ -3174,16 +3174,31 @@ textarea {
   font-size: 11px;
 }
 
-/* Everyday drink sections get comfortable spacing */
-.drink-section-wine-flights,
-.drink-section-on-tap,
-.drink-section-beer-cans {
-  padding-bottom: 8px;
+/* Three-section visual hierarchy for drinks page */
+
+.drink-section-wine-flights {
+  padding-bottom: 0;
 }
 
-/* Bottle shop becomes denser and easier to scan */
+.drink-section-flight-continuation {
+  margin-top: -24px;
+  padding-top: 32px;
+  padding-bottom: 52px;
+  border-bottom: 1px solid var(--border);
+}
+
+.drink-section-flight-continuation > .inline-links .kicker {
+  color: var(--accent-strong);
+}
+
+.drink-section-beer-cans {
+  padding-top: 8px;
+  padding-bottom: 54px;
+  border-bottom: 1px solid var(--border);
+}
+
 .drink-section-bottled-wine {
-  padding-top: 6px;
+  padding-top: 8px;
 }
 
 .drink-section-bottled-wine .drink-subsection {
@@ -3232,6 +3247,16 @@ textarea {
 
   .drinks-list {
     gap: 42px;
+  }
+
+  .drink-section-flight-continuation {
+    margin-top: -16px;
+    padding-top: 24px;
+    padding-bottom: 40px;
+  }
+
+  .drink-section-beer-cans {
+    padding-bottom: 40px;
   }
 
   .drink-section-bottled-wine .drink-subsection {

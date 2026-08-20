@@ -1675,17 +1675,11 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
     }
 
     if (anchors) {
-      const anchorLinks = [];
-      const allowedSections = new Set(['wine-flights', 'on-tap', 'beer-cans', 'bottled-wine']);
-      drinks.sections.forEach((sec) => {
-        if (sec.id && sec.title && allowedSections.has(sec.id)) anchorLinks.push({ id: sec.id, title: sec.title });
-        (sec.subsections || []).forEach((sub) => {
-          if (sub.title && sub.title.toLowerCase().startsWith('non-alcoholic')) {
-            const slug = sub.id || sub.title.toLowerCase().replace(/[^a-z0-9]+/g, '-');
-            anchorLinks.push({ id: slug, title: sub.title });
-          }
-        });
-      });
+      const anchorLinks = [
+        { id: 'wine-flights', title: 'Flights + Pours' },
+        { id: 'beer-cans', title: 'Beer + More' },
+        { id: 'bottled-wine', title: 'Bottle Shop' }
+      ];
       anchors.innerHTML = anchorLinks
   .map((a) => `<a class="drink-anchor-link" href="#${a.id}">${a.title}</a>`)
   .join('');
@@ -1699,6 +1693,9 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
     drinks.sections.forEach((section) => {
       const secEl = document.createElement('section');
       secEl.className = `drink-section drink-section-${section.id || 'general'} fade-in`;
+      if (section.id === 'on-tap') {
+        secEl.classList.add('drink-section-flight-continuation');
+      }
       secEl.id = section.id || '';
       try {
         if (__debug && container.childElementCount > 0 && section.id === 'bottled-wine') {
@@ -1715,7 +1712,8 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
         header.className = 'inline-links';
         const titleSpan = document.createElement('span');
         titleSpan.className = 'kicker';
-        titleSpan.textContent = section.title || '';
+        const titleText = section.id === 'on-tap' ? 'On Tap · Flight Eligible' : (section.title || '');
+        titleSpan.textContent = titleText;
         header.appendChild(titleSpan);
         if (section.description) {
           const descSpan = document.createElement('span');
