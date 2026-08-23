@@ -1958,8 +1958,12 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
           ? '<span class="badge badge-soft">RSVP</span>'
           : '';
       const isTicketed = ev.event_type === 'ticketed';
-      const paymentOverride = !!(ev.payment_url && ev.payment_label);
-      const paymentProvider = ev.payment_provider || (paymentOverride ? 'vendor' : 'clover');
+      const paymentOverride = !!(
+  (ev.payment_url || ev.payment_link_url) &&
+  (ev.payment_label || ev.event_type === 'ticketed')
+);
+
+const paymentProvider = ev.payment_provider || 'clover';
       const isVendorPayment = paymentProvider === 'vendor' || paymentProvider === 'venmo';
       if (DEBUG && ev.payment_provider && !['vendor', 'clover', 'venmo'].includes(ev.payment_provider)) {
         dbg('event payment provider unknown', { title: ev.title, provider: ev.payment_provider });
@@ -1975,9 +1979,17 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
       dbg('vendor payment ux', { title: ev.title, sold_out_override: !!ev.sold_out_override });
 
       let button = '';
-      const providerKey = ev.payment_provider || (paymentOverride ? 'vendor' : 'clover');
-      const paymentUrl = paymentOverride ? ev.payment_url : ticketing?.clover_payment_url;
-      const paymentLabel = paymentOverride ? ev.payment_label : 'Pay on Clover';
+      const providerKey = ev.payment_provider || 'clover';
+
+const paymentUrl =
+  ev.payment_url ||
+  ev.payment_link_url ||
+  ticketing?.clover_payment_url ||
+  '';
+
+const paymentLabel =
+  ev.payment_label ||
+  (providerKey === 'clover' ? 'Buy tickets' : 'Buy tickets');
       const paymentOptions = Array.isArray(ev.payment_options) ? ev.payment_options.filter((option) => option && option.url && option.label) : [];
       const helperProvider = providerKey === 'vendor' && /venmo/i.test(`${paymentLabel} ${paymentUrl || ''}`) ? 'venmo' : providerKey;
       const paymentHelperOverride = typeof ev.payment_helper === 'string' ? ev.payment_helper.trim() : '';
@@ -1988,14 +2000,25 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
           ? 'You’ll complete payment via Venmo.'
           : 'You’ll complete payment on the vendor’s ticketing page.';
       const paymentHelper = paymentHelperOverride || paymentHelperDefault;
-      const linkValid = ticketing && isValidPaymentLink(paymentUrl, ticketing.isPlaceholder);
-      const optionLinksValid = ticketing && paymentOptions.some((option) => isValidPaymentLink(option.url, ticketing.isPlaceholder));
-      const soldOutOverride = ev.sold_out_override === true;
-      const paymentEnabled = ticketing && !soldOut && !soldOutOverride && (paymentOptions.length ? optionLinksValid : linkValid);
+      const placeholderFlag = ticketing?.isPlaceholder === true;
+
+const linkValid = isValidPaymentLink(paymentUrl, placeholderFlag);
+
+const optionLinksValid = paymentOptions.some((option) =>
+  isValidPaymentLink(option.url, placeholderFlag)
+);
+
+const soldOutOverride = ev.sold_out_override === true;
+
+const paymentEnabled =
+  isTicketed &&
+  !soldOut &&
+  !soldOutOverride &&
+  (paymentOptions.length ? optionLinksValid : linkValid);
       if (paymentEnabled) {
         if (paymentOptions.length) {
           button = paymentOptions.map((option) => {
-            if (!isValidPaymentLink(option.url, ticketing?.isPlaceholder)) return '';
+            if (!isValidPaymentLink(option.url, placeholderFlag)) return '';
             const buttonClass = option.style === 'secondary' ? 'btn btn-secondary btn-small' : 'btn btn-primary btn-small';
             const badge = option.badge ? ` <span class="ticket-option-badge">${option.badge}</span>` : '';
             return `<a class="${buttonClass}" href="${option.url}" target="_blank" rel="noopener noreferrer">${option.label}${badge}</a>`;
@@ -2048,25 +2071,26 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
       const soldOutNote = soldOut
         ? `<p class="note">${ev.sold_out_note || 'This event is sold out — thank you!'}</p>`
         : '';
-      const paymentBlock = ticketing
-        ? (soldOut
-          ? `<div class="event-payment">
-            <h4 class="event-section-title">Tickets</h4>
-            <p class="note event-help">This event is sold out.</p>
-          </div>`
-          : `
-          <div class="event-payment">
-            <h4 class="event-section-title">Pay for tickets</h4>
-            ${paymentCtaHelperLine}
-            <div class="form-actions event-payment-actions">
-              ${button || ''}
-            </div>
-            ${paymentHelperLine}
-            ${vendorPaymentDetails}
-            ${soldOutOverrideNotice}
-            ${ticketCopy}
-          </div>`)
-        : '';
+      const paymentBlock = isTicketed
+  ? (soldOut
+    ? `<div class="event-payment">
+      <h4 class="event-section-title">Tickets</h4>
+      <p class="note event-help">This event is sold out.</p>
+    </div>`
+    : `
+    <div class="event-payment">
+      <h4 class="event-section-title">Tickets</h4>
+      ${ev.payment_note ? `<p class="note event-help">${ev.payment_note}</p>` : ''}
+      ${paymentCtaHelperLine}
+      <div class="form-actions event-payment-actions">
+        ${button || ''}
+      </div>
+      ${paymentHelperLine}
+      ${vendorPaymentDetails}
+      ${soldOutOverrideNotice}
+      ${ticketCopy}
+    </div>`)
+  : '';
       const seatingClosedBlock = (soldOut && isTicketed)
         ? `<div class="event-seating">
           <h4 class="event-section-title">Seating details</h4>
