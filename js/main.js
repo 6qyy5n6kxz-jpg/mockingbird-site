@@ -2016,22 +2016,24 @@ const paymentEnabled =
   !soldOutOverride &&
   (paymentOptions.length ? optionLinksValid : linkValid);
       if (paymentEnabled) {
-        if (paymentOptions.length) {
-          button = paymentOptions.map((option) => {
-            if (!isValidPaymentLink(option.url, placeholderFlag)) return '';
-            const buttonClass = option.style === 'secondary' ? 'btn btn-secondary btn-small' : 'btn btn-primary btn-small';
-            const badge = option.badge ? ` <span class="ticket-option-badge">${option.badge}</span>` : '';
-            return `<a class="${buttonClass}" href="${option.url}" target="_blank" rel="noopener noreferrer">${option.label}${badge}</a>`;
-          }).join('');
-        } else if (paymentOverride) {
-          const paymentAttrs = providerKey === 'vendor' || providerKey === 'venmo'
-            ? ' target="_blank" rel="noopener noreferrer"'
-            : '';
-          button = `<a class="btn btn-primary btn-small" href="${paymentUrl}"${paymentAttrs}>${paymentLabel}</a>`;
-        } else {
-          button = `<a class="btn btn-primary btn-small" href="${paymentUrl}" target="_blank" rel="noopener noreferrer">${paymentLabel}</a>`;
-        }
-      }
+  if (paymentOptions.length) {
+    button = paymentOptions.map((option) => {
+      if (!isValidPaymentLink(option.url, placeholderFlag)) return '';
+
+      const buttonClass = option.style === 'secondary'
+        ? 'btn btn-secondary btn-small'
+        : 'btn btn-primary btn-small';
+
+      const badge = option.badge
+        ? ` <span class="ticket-option-badge">${option.badge}</span>`
+        : '';
+
+      return `<a class="${buttonClass}" href="${option.url}" target="_blank" rel="noopener noreferrer">${option.label}${badge}</a>`;
+    }).join('');
+  } else {
+    button = `<a class="btn btn-primary btn-small" href="${paymentUrl}" target="_blank" rel="noopener noreferrer">${paymentLabel}</a>`;
+  }
+}
       let vendorPaymentDetails = '';
       if (isVendorPayment && paymentEnabled) {
         const vendorLines = [];
