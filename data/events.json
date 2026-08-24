@@ -47,6 +47,15 @@
       "type": "Fundraiser",
       "image_url": "assets/events/Mockingbird_Jam_September_13.jpg",
       "image_alt": "Mockingbird Jam to Defeat ALS fundraiser graphic announcing Sunday, September 13 at The Mockingbird on Mill Road"
-    }
+    },
+    {
+  "date": "2026-09-17T18:30:00",
+  "title": "Mockingbird Book Club — September",
+  "description": "Join us for Mockingbird Book Club on Thursday, September 17th at 6:30 PM as we discuss The Woman in Suite 11 by Ruth Ware — the suspenseful follow-up to The Woman in Cabin 10. Travel journalist Lo Blacklock is invited to the opening of a luxurious hotel on Lake Geneva, where a late-night encounter with a mysterious woman pulls her into a dangerous situation involving secrets, deception, and a high-stakes pursuit across Europe. Enjoy an open, welcoming conversation with food and drinks available.",
+  "price": "No cover",
+  "payment_link_url": "",
+  "image_url": "assets/events/September_Book_Club.png",
+  "image_alt": "Mockingbird Book Club event image for The Woman in Suite 11 by Ruth Ware, Thursday, September 17th at 6:30 PM"
+}
   ]
 }
