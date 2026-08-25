@@ -2415,11 +2415,12 @@ const paymentEnabled =
         const targetAttrs = /^https?:\/\//i.test(href) ? ' target="_blank" rel="noopener noreferrer"' : '';
         const logoClass = `jam-sponsor-logo jam-sponsor-logo-${tierClass}`;
         const itemClass = `jam-sponsor-item jam-sponsor-item-${tierClass}`;
+        const bgStyle = sponsor.logoBackground ? ` style="background-color: ${sponsor.logoBackground};"` : '';
         
         if (!logoSrc) {
           html += `
             <div class="${itemClass}">
-              <div class="${logoClass}">
+              <div class="${logoClass}"${bgStyle}>
                 <span class="sponsor-name">${sponsor.name}</span>
               </div>
             </div>
@@ -2427,7 +2428,7 @@ const paymentEnabled =
         } else if (href) {
           html += `
             <div class="${itemClass}">
-              <a class="${logoClass}" href="${href}"${targetAttrs}>
+              <a class="${logoClass}" href="${href}"${targetAttrs}${bgStyle}>
                 <img src="${logoSrc}" alt="${sponsor.name}" loading="lazy">
               </a>
             </div>
@@ -2435,7 +2436,7 @@ const paymentEnabled =
         } else {
           html += `
             <div class="${itemClass}">
-              <div class="${logoClass}">
+              <div class="${logoClass}"${bgStyle}>
                 <img src="${logoSrc}" alt="${sponsor.name}" loading="lazy">
               </div>
             </div>

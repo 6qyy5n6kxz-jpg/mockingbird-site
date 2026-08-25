@@ -3285,16 +3285,18 @@ textarea {
 }
 
 .jam-hero-artwork > * {
-  max-width: 1200px;
+  max-width: 85%;
   margin: 0 auto;
 }
 
 .jam-hero-img {
   width: 100%;
   height: auto;
+  max-height: 680px;
   display: block;
   border-radius: var(--radius);
   box-shadow: var(--shadow);
+  object-fit: contain;
 }
 
 .jam-intro {
@@ -3537,6 +3539,107 @@ textarea {
   font-weight: 500;
 }
 
+/* Music Lineup Section */
+.jam-musicians-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+  margin-top: 32px;
+}
+
+.musician-name {
+  padding: 14px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.musician-name.featured {
+  background: linear-gradient(135deg, #faf6f0 0%, #f5ede2 100%);
+  border-color: var(--accent);
+  font-weight: 600;
+}
+
+.musician-name.featured .featured-label {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--accent);
+  letter-spacing: 0.05em;
+  margin-top: 4px;
+  text-transform: uppercase;
+}
+
+/* Food & Activities Section */
+.jam-activities-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  margin-top: 32px;
+}
+
+.activity-card {
+  padding: 24px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.activity-card-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100px;
+  max-width: 100%;
+}
+
+.activity-card-logo img {
+  max-width: 100%;
+  max-height: 100px;
+  object-fit: contain;
+  width: auto;
+  height: auto;
+}
+
+.activity-card-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text);
+  margin: 0;
+}
+
+.activity-card-partner {
+  font-size: 13px;
+  color: var(--muted);
+  margin: 0;
+  font-weight: 500;
+}
+
+.activity-card-copy {
+  font-size: 14px;
+  color: var(--text);
+  line-height: 1.5;
+  margin: 0;
+  flex-grow: 1;
+}
+
+.activity-card .inline-links {
+  margin-top: auto;
+  padding-top: 12px;
+}
+
+.activity-card .btn {
+  font-size: 13px;
+  padding: 8px 12px;
+}
+
 .jam-final-cta-actions {
   display: flex;
   gap: 12px;
@@ -3577,7 +3680,9 @@ textarea {
 }
 
 .jam-sponsor-logo-presenting {
-  max-width: 300px;
+  min-height: 180px;
+  max-width: 360px;
+  margin: 0 auto;
 }
 
 .jam-sponsor-item-headline {
@@ -3585,47 +3690,52 @@ textarea {
 }
 
 .jam-sponsor-logo-headline {
-  max-width: 220px;
+  min-height: 160px;
+  max-width: 330px;
 }
 
 .jam-sponsor-logo-supporting {
-  max-width: 160px;
+  min-height: 120px;
+  max-width: 240px;
 }
 
 .jam-sponsor-logo-community {
-  max-width: 140px;
+  min-height: 100px;
+  max-width: 200px;
 }
 
 .jam-sponsor-logo-friend {
-  max-width: 120px;
+  min-height: 80px;
+  max-width: 160px;
 }
 
 .jam-sponsor-tier-logos-presenting {
   display: flex;
-  gap: 28px;
+  gap: 24px;
   flex-wrap: wrap;
   align-items: center;
+  justify-content: center;
 }
 
 .jam-sponsor-tier-logos-headline {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 20px;
   align-items: center;
 }
 
 .jam-sponsor-tier-logos-supporting {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
   align-items: center;
 }
 
 .jam-sponsor-tier-logos-community,
 .jam-sponsor-tier-logos-friend {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 14px;
   align-items: center;
 }
 
@@ -3692,6 +3802,10 @@ textarea {
     padding: 32px 20px 28px;
   }
 
+  .jam-hero-artwork > * {
+    max-width: 95%;
+  }
+
   .jam-schedule-wrapper {
     grid-template-columns: 1fr;
   }
@@ -3703,6 +3817,14 @@ textarea {
 
   .section-heading h2 {
     font-size: 28px;
+  }
+
+  .jam-musicians-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .jam-activities-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .jam-sponsor-item-headline {
@@ -3780,6 +3902,14 @@ textarea {
   .jam-sponsor-tier-logos-community,
   .jam-sponsor-tier-logos-friend {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .jam-musicians-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .jam-activities-grid {
+    grid-template-columns: 1fr;
   }
 }
 

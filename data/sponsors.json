@@ -17,11 +17,22 @@
       "blurb": "Headline sponsor helping power the sound, video, and production side of Mockingbird Jam."
     },
     {
+      "name": "The Mockingbird on Mill Road",
+      "url": "https://themockingbirdonmillroad.com/",
+      "tier": "headline"
+    },
+    {
       "name": "Wine & Canvas Toledo",
       "url": "https://wineandcanvas.com/toledo/",
       "tier": "supporting",
       "logo": "assets/sponsors/wine-and-canvas-toledo.png",
       "blurb": "Supporting sponsor bringing creativity, community energy, and local event partnership to the fundraiser."
+    },
+    {
+      "name": "Frank Creations LLC",
+      "url": "https://frankcreationsllc.com/",
+      "tier": "supporting",
+      "logo": "assets/sponsors/Frank Creations LLC.png"
     },
     {
       "name": "Elliston Zion United Methodist Church",
