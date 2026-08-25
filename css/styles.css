@@ -3542,13 +3542,46 @@ textarea {
 /* Music Lineup Section */
 .jam-musicians-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  gap: 12px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
   margin-top: 32px;
 }
 
+.musician-card {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  border-radius: var(--radius);
+  transition: all 180ms ease;
+}
+
+.musician-card:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .musician-card {
+    transition: none;
+  }
+}
+
+.musician-card:hover:not(.musician-card-static) {
+  transform: translateY(-2px);
+  border-color: var(--accent);
+}
+
+.musician-card:hover:not(.musician-card-static) .musician-name {
+  border-color: var(--accent);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+}
+
+.musician-card-static {
+  cursor: default;
+}
+
 .musician-name {
-  padding: 14px;
+  padding: 12px;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
@@ -3556,6 +3589,12 @@ textarea {
   font-size: 14px;
   font-weight: 500;
   color: var(--text);
+  transition: all 180ms ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60px;
 }
 
 .musician-name.featured {
@@ -3590,6 +3629,57 @@ textarea {
   display: flex;
   flex-direction: column;
   gap: 16px;
+  text-decoration: none;
+  color: inherit;
+  transition: all 180ms ease;
+  cursor: pointer;
+}
+
+.activity-card:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .activity-card {
+    transition: none;
+  }
+}
+
+.activity-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+}
+
+.activity-card-with-links {
+  cursor: default;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.activity-card-link {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  text-decoration: none;
+  color: inherit;
+  transition: all 180ms ease;
+  border-radius: var(--radius);
+  padding: -24px;
+  margin: -24px -24px 0 -24px;
+  padding: 24px;
+}
+
+.activity-card-link:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.activity-card-with-links:hover .activity-card-link {
+  background: rgba(176, 109, 60, 0.03);
+  border-radius: var(--radius);
 }
 
 .activity-card-logo {
@@ -3820,7 +3910,7 @@ textarea {
   }
 
   .jam-musicians-grid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .jam-activities-grid {
