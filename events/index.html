@@ -152,6 +152,7 @@
         console.log('events init', { events: events?.events?.length || 0, hasContainer: !!document.getElementById('events-list') });
       }
       Mockingbird.renderEvents(events, site.email);
+      Mockingbird.initializeTicketQuantitySelectors();
       Mockingbird.renderFundraisingCtas('jam-events-cta', auction, {
         title: 'ALS fundraising at Mockingbird Jam',
         body: 'Support the fundraiser by donating to ALS, sponsoring the event, donating an auction item, or signing up for updates.'

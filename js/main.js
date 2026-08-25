@@ -1916,6 +1916,58 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
     });
   }
 
+  function initializeTicketQuantitySelectors() {
+    const selectors = document.querySelectorAll('[data-quantity-id]');
+    selectors.forEach(selector => {
+      const quantityId = selector.getAttribute('data-quantity-id');
+      if (!quantityId) return;
+
+      const display = selector.querySelector(`.qty-display[data-qty-id="${quantityId}"]`);
+      const minusBtn = selector.querySelector(`[data-qty-action="decrease"][data-qty-id="${quantityId}"]`);
+      const plusBtn = selector.querySelector(`[data-qty-action="increase"][data-qty-id="${quantityId}"]`);
+      const totalAmount = selector.querySelector(`.ticket-total-amount[data-qty-id="${quantityId}"]`);
+      const button = selector.querySelector(`[data-qty-button="true"][data-qty-id="${quantityId}"]`);
+
+      if (!display || !minusBtn || !plusBtn || !totalAmount || !button) return;
+
+      const minQty = parseInt(display.getAttribute('data-min-qty'), 10) || 1;
+      const maxQty = parseInt(display.getAttribute('data-max-qty'), 10) || 5;
+      const optionsJson = button.getAttribute('data-qty-options');
+      const optionsByQty = optionsJson ? JSON.parse(optionsJson) : {};
+
+      const updateUI = (quantity) => {
+        display.textContent = quantity;
+        
+        const option = optionsByQty[quantity];
+        if (option) {
+          totalAmount.textContent = `$${option.total}`;
+          button.href = option.url;
+          const ticketWord = quantity === 1 ? 'Ticket' : 'Tickets';
+          button.textContent = `Buy ${quantity} ${ticketWord} — $${option.total}`;
+        }
+
+        minusBtn.disabled = quantity <= minQty;
+        plusBtn.disabled = quantity >= maxQty;
+      };
+
+      minusBtn.addEventListener('click', () => {
+        let current = parseInt(display.textContent, 10);
+        if (current > minQty) {
+          current--;
+          updateUI(current);
+        }
+      });
+
+      plusBtn.addEventListener('click', () => {
+        let current = parseInt(display.textContent, 10);
+        if (current < maxQty) {
+          current++;
+          updateUI(current);
+        }
+      });
+    });
+  }
+
   function renderEvents(data, emailFallback) {
     const container = document.getElementById('events-list');
     if (!container) return;
@@ -1991,6 +2043,7 @@ const paymentLabel =
   ev.payment_label ||
   (providerKey === 'clover' ? 'Buy tickets' : 'Buy tickets');
       const paymentOptions = Array.isArray(ev.payment_options) ? ev.payment_options.filter((option) => option && option.url && option.label) : [];
+      const ticketOptions = Array.isArray(ev.ticket_options) ? ev.ticket_options.filter((option) => option && option.url && typeof option.quantity === 'number' && typeof option.total === 'number') : [];
       const helperProvider = providerKey === 'vendor' && /venmo/i.test(`${paymentLabel} ${paymentUrl || ''}`) ? 'venmo' : providerKey;
       const paymentHelperOverride = typeof ev.payment_helper === 'string' ? ev.payment_helper.trim() : '';
       const paymentCtaHelper = typeof ev.payment_cta_helper === 'string' ? ev.payment_cta_helper.trim() : '';
@@ -2008,15 +2061,48 @@ const optionLinksValid = paymentOptions.some((option) =>
   isValidPaymentLink(option.url, placeholderFlag)
 );
 
+const ticketOptionsValid = ticketOptions.length > 0 && ticketOptions.some((option) =>
+  isValidPaymentLink(option.url, placeholderFlag)
+);
+
 const soldOutOverride = ev.sold_out_override === true;
 
 const paymentEnabled =
   isTicketed &&
   !soldOut &&
   !soldOutOverride &&
-  (paymentOptions.length ? optionLinksValid : linkValid);
+  (ticketOptionsValid ? true : (paymentOptions.length ? optionLinksValid : linkValid));
       if (paymentEnabled) {
-  if (paymentOptions.length) {
+  if (ticketOptionsValid) {
+    const quantitySelectionId = `qty-selector-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+    const sortedTicketOptions = [...ticketOptions].sort((a, b) => a.quantity - b.quantity);
+    const minQty = sortedTicketOptions[0]?.quantity || 1;
+    const maxQty = sortedTicketOptions[sortedTicketOptions.length - 1]?.quantity || 5;
+    const optionsByQty = {};
+    sortedTicketOptions.forEach(opt => {
+      optionsByQty[opt.quantity] = opt;
+    });
+    const defaultOption = optionsByQty[1] || sortedTicketOptions[0];
+    const defaultQty = defaultOption?.quantity || 1;
+    const defaultTotal = defaultOption?.total || (defaultOption?.quantity * 20);
+
+    button = `
+    <div class="ticket-quantity-selector" data-quantity-id="${quantitySelectionId}">
+      <div class="ticket-qty-controls">
+        <div class="ticket-qty-label">Quantity</div>
+        <div class="ticket-qty-input">
+          <button class="qty-btn qty-btn-minus" data-qty-action="decrease" data-qty-id="${quantitySelectionId}" aria-label="Decrease ticket quantity" ${defaultQty <= minQty ? 'disabled' : ''}>−</button>
+          <span class="qty-display" data-qty-id="${quantitySelectionId}" data-min-qty="${minQty}" data-max-qty="${maxQty}">${defaultQty}</span>
+          <button class="qty-btn qty-btn-plus" data-qty-action="increase" data-qty-id="${quantitySelectionId}" aria-label="Increase ticket quantity" ${defaultQty >= maxQty ? 'disabled' : ''}>+</button>
+        </div>
+      </div>
+      <div class="ticket-qty-total">
+        <div class="ticket-total-label">Total</div>
+        <div class="ticket-total-amount" data-qty-id="${quantitySelectionId}">$${defaultTotal}</div>
+      </div>
+      <a class="btn btn-primary" href="${defaultOption.url}" target="_blank" rel="noopener noreferrer" data-qty-id="${quantitySelectionId}" data-qty-button="true" data-qty-options='${JSON.stringify(optionsByQty)}'>Buy ${defaultQty} ${defaultQty === 1 ? 'Ticket' : 'Tickets'} — $${defaultTotal}</a>
+    </div>`;
+  } else if (paymentOptions.length) {
     button = paymentOptions.map((option) => {
       if (!isValidPaymentLink(option.url, placeholderFlag)) return '';
 
@@ -4001,6 +4087,7 @@ const paymentEnabled =
     renderReserveDateDeposit,
     renderWineClub,
     renderGallery,
-    renderDrinks
+    renderDrinks,
+    initializeTicketQuantitySelectors
   };
 })();

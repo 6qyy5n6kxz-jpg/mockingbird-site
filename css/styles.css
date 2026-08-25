@@ -206,6 +206,94 @@ nav a:focus {
   vertical-align: middle;
 }
 
+.ticket-quantity-selector {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.ticket-qty-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.ticket-qty-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text);
+  min-width: 70px;
+}
+
+.ticket-qty-input {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.qty-btn {
+  background: transparent;
+  border: none;
+  padding: 4px 8px;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text);
+  cursor: pointer;
+  border-radius: 4px;
+  transition: color 150ms ease, background-color 150ms ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  min-height: 32px;
+}
+
+.qty-btn:hover:not(:disabled) {
+  background-color: rgba(176, 109, 60, 0.1);
+  color: var(--accent-strong);
+}
+
+.qty-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  color: var(--muted);
+}
+
+.qty-display {
+  min-width: 40px;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.ticket-qty-total {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.ticket-total-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text);
+  min-width: 70px;
+}
+
+.ticket-total-amount {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.ticket-quantity-selector .btn {
+  align-self: flex-start;
+}
+
 .hero {
   position: relative;
   overflow: hidden;
