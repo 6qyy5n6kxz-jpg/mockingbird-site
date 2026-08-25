@@ -1722,6 +1722,12 @@ textarea {
   grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
 }
 
+.footer .footer-links > div {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
 .footer .footer-links .kicker {
   color: #e9ddcf;
 }
@@ -1729,6 +1735,7 @@ textarea {
 .footer .footer-links a {
   display: inline-flex;
   padding: 4px 0;
+  font-size: 14px;
 }
 
 .event-thumb {
@@ -3271,20 +3278,69 @@ textarea {
 }
 /* Jam Page Specific Styles */
 
-.jam-hero {
-  min-height: 520px;
+.jam-hero-artwork {
+  width: 100%;
+  padding: 40px 20px 32px;
+  background: var(--bg);
 }
 
-.jam-hero .hero-inner p.lead {
-  font-size: 18px;
+.jam-hero-artwork > * {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.jam-hero-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.jam-intro {
+  padding: 40px 0;
+}
+
+.jam-intro-content {
+  max-width: 700px;
+}
+
+.jam-intro-content .kicker {
+  display: block;
+  font-size: 12px;
   font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
   margin-bottom: 12px;
 }
 
-.jam-hero .hero-inner > p {
-  font-size: 18px;
-  max-width: 600px;
+.jam-intro-content h1 {
+  font-size: 36px;
+  font-weight: 600;
+  margin: 0 0 12px;
+  line-height: 1.2;
+  color: var(--text);
+}
+
+.jam-intro-content .meta {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--muted);
+  margin-bottom: 16px;
+}
+
+.jam-intro-content > p {
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text);
   margin-bottom: 24px;
+}
+
+.jam-intro-cta {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
 }
 
 .section-heading {
@@ -3577,8 +3633,7 @@ textarea {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 100px;
-  padding: 12px;
+  padding: 16px;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
@@ -3595,7 +3650,7 @@ textarea {
 
 .jam-sponsor-logo img {
   max-width: 100%;
-  max-height: 80px;
+  max-height: 100%;
   object-fit: contain;
   width: auto;
   height: auto;
@@ -3605,7 +3660,38 @@ textarea {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
+/* Tier-specific logo container sizes */
+.jam-sponsor-logo-presenting {
+  min-height: 200px;
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+.jam-sponsor-logo-headline {
+  min-height: 180px;
+  max-width: 360px;
+}
+
+.jam-sponsor-logo-supporting {
+  min-height: 140px;
+  max-width: 260px;
+}
+
+.jam-sponsor-logo-community {
+  min-height: 120px;
+  max-width: 220px;
+}
+
+.jam-sponsor-logo-friend {
+  min-height: 90px;
+  max-width: 180px;
+}
+
 @media (max-width: 900px) {
+  .jam-hero-artwork {
+    padding: 32px 20px 28px;
+  }
+
   .jam-schedule-wrapper {
     grid-template-columns: 1fr;
   }
@@ -3633,12 +3719,32 @@ textarea {
 }
 
 @media (max-width: 640px) {
-  .jam-hero .hero-inner p.lead {
-    font-size: 16px;
+  .jam-hero-artwork {
+    padding: 24px 16px 20px;
   }
 
-  .jam-hero .hero-inner > p {
-    font-size: 16px;
+  .jam-intro {
+    padding: 32px 0;
+  }
+
+  .jam-intro-content h1 {
+    font-size: 26px;
+  }
+
+  .jam-intro-content .meta {
+    font-size: 14px;
+  }
+
+  .jam-intro-content > p {
+    font-size: 15px;
+  }
+
+  .jam-intro-cta {
+    flex-direction: column;
+  }
+
+  .jam-intro-cta .btn {
+    width: 100%;
   }
 
   .jam-features-grid {
