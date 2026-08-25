@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Donate an Auction Item | Mockingbird Jam</title>
-  <meta name="description" content="Auction item donation form for Mockingbird Jam 2026. Donate an item or experience to support ALS fundraising.">
-  <meta property="og:title" content="Donate an Auction Item | Mockingbird Jam">
-  <meta property="og:description" content="Contribute an item, package, or experience to the Mockingbird Jam silent auction.">
+  <title>Donate a Raffle Item | Mockingbird Jam</title>
+  <meta name="description" content="Raffle item donation form for Mockingbird Jam 2026. Donate an item or experience to support ALS fundraising.">
+  <meta property="og:title" content="Donate a Raffle Item | Mockingbird Jam">
+  <meta property="og:description" content="Contribute an item, package, or experience to the Mockingbird Jam basket raffles.">
   <meta property="og:image" content="../assets/images/og.jpg">
   <script src="../js/base.js"></script>
   <link rel="icon" type="image/svg+xml" data-favicon="svg">
@@ -34,17 +34,16 @@
     <div class="container grid-2">
       <div class="info-block">
         <p class="kicker">Mockingbird Jam</p>
-        <h1>Donate an Auction Item</h1>
-        <p>We’re gathering donated packages, local experiences, gift cards, and community gifts now so the Mockingbird Jam silent auction can launch strong.</p>
-        <p class="note">Online bidding opens soon, but auction donors can get involved right away.</p>
+        <h1>Donate a Raffle Item</h1>
+        <p>We're gathering donated baskets, packages, local experiences, gift cards, and community gifts for the Mockingbird Jam basket raffles.</p>
+        <p class="note">Raffle donations are drawn in-person on event day. All proceeds support ALS-TDI and local families affected by ALS.</p>
         <ul class="table-list">
           <li>Gift cards, baskets, experiences, services, and local goods are all welcome</li>
           <li>Donations help fund ALS research and support ALS families</li>
           <li>We’ll follow up to confirm delivery, restrictions, and display details</li>
         </ul>
         <div class="inline-links" style="margin-top:12px;">
-          <a class="btn btn-secondary btn-small" data-nav="auction">Back to Jam</a>
-          <a class="btn btn-ghost btn-small" data-nav="events">View events</a>
+          <a class="btn btn-secondary btn-small" href="../jam/">Back to Jam</a>
         </div>
       </div>
       <div id="item-donation-form-wrap"></div>
@@ -70,9 +69,9 @@
       const action = auction.event?.item_donation_form_action || 'https://formspree.io/f/xbddjoek';
       const container = document.getElementById('item-donation-form-wrap');
       container.innerHTML = `
-        <form action="${action}" method="POST" data-formspree data-success-message="Thanks. We received your auction donation form and will follow up soon." data-error-message="Something went wrong. Please try again.">
-          <p class="kicker">Auction Donation</p>
-          <h2>Tell us about the item or experience</h2>
+        <form action="${action}" method="POST" data-formspree data-success-message="Thanks. We received your raffle donation form and will follow up soon." data-error-message="Something went wrong. Please try again.">
+          <p class="kicker">Raffle Donation</p>
+          <h2>Tell us about the raffle item</h2>
           <label for="donor-name">Donor or business name</label>
           <input id="donor-name" name="donor_business_name" required>
           <label for="donor-contact-name">Contact name</label>
@@ -95,7 +94,7 @@
           <textarea id="donation-notes" name="notes" placeholder="Optional"></textarea>
           <input type="hidden" name="source" value="mockingbird_jam_item_donation">
           <div class="form-actions">
-            <button type="submit" class="btn btn-primary">Submit auction donation</button>
+            <button type="submit" class="btn btn-primary">Submit raffle donation</button>
           </div>
           <p class="form-status" role="status" aria-live="polite" aria-atomic="true" style="display:none;"></p>
         </form>

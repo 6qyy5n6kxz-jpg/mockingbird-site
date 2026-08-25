@@ -3269,3 +3269,411 @@ textarea {
     padding: 16px;
   }
 }
+/* Jam Page Specific Styles */
+
+.jam-hero {
+  min-height: 520px;
+}
+
+.jam-hero .hero-inner p.lead {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.jam-hero .hero-inner > p {
+  font-size: 18px;
+  max-width: 600px;
+  margin-bottom: 24px;
+}
+
+.section-heading {
+  margin-bottom: 36px;
+}
+
+.section-heading .kicker {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+
+.section-heading h2 {
+  font-size: 36px;
+  margin: 0 0 12px;
+  line-height: 1.2;
+}
+
+.section-heading .lead {
+  font-size: 16px;
+  color: var(--muted);
+  margin: 12px 0 0;
+}
+
+.jam-features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  margin-top: 32px;
+}
+
+.feature-card {
+  padding: 24px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  transition: all 0.2s ease;
+}
+
+.feature-card:hover {
+  box-shadow: var(--shadow);
+  border-color: var(--accent);
+}
+
+.feature-card h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 8px;
+  color: var(--text);
+}
+
+.feature-card p {
+  font-size: 15px;
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.jam-schedule-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: 40px;
+  margin-top: 32px;
+}
+
+.jam-schedule-timed {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.schedule-item {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 20px;
+  padding: 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.schedule-time {
+  font-weight: 600;
+  color: var(--accent);
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.schedule-content h4 {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 0 4px;
+  color: var(--text);
+}
+
+.schedule-content p {
+  font-size: 14px;
+  color: var(--muted);
+  margin: 0;
+}
+
+.jam-schedule-allday {
+  padding: 24px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  height: fit-content;
+  position: sticky;
+  top: 80px;
+}
+
+.jam-schedule-allday h4 {
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  margin: 0 0 12px;
+}
+
+.jam-allday-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.jam-allday-list li {
+  font-size: 14px;
+  color: var(--text);
+  padding-left: 20px;
+  position: relative;
+}
+
+.jam-allday-list li:before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-weight: bold;
+}
+
+.jam-raffle-content {
+  max-width: 700px;
+  margin-top: 32px;
+}
+
+.jam-raffle-note {
+  background: #faf6f0;
+  padding: 12px 16px;
+  border-left: 4px solid var(--accent);
+  border-radius: 4px;
+  margin: 20px 0;
+  font-size: 14px;
+}
+
+.jam-mission-block {
+  margin-top: 32px;
+  padding: 28px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.jam-mission-block p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.jam-mission-block strong {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.jam-sponsor-cta {
+  margin-top: 40px;
+  padding: 28px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  text-align: center;
+}
+
+.jam-sponsor-cta p {
+  margin: 0 0 8px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.jam-final-cta-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+#jam-sponsors {
+  margin-top: 32px;
+}
+
+.jam-sponsor-wall {
+  display: grid;
+  gap: 36px;
+}
+
+.jam-sponsor-tier {
+  display: grid;
+  gap: 16px;
+}
+
+.jam-sponsor-tier-heading {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 12px;
+}
+
+.jam-sponsor-tier-logos {
+  display: grid;
+  gap: 16px;
+}
+
+.jam-sponsor-item-presenting {
+  grid-column: 1 / -1;
+}
+
+.jam-sponsor-logo-presenting {
+  max-width: 300px;
+}
+
+.jam-sponsor-item-headline {
+  grid-column: span 2;
+}
+
+.jam-sponsor-logo-headline {
+  max-width: 220px;
+}
+
+.jam-sponsor-logo-supporting {
+  max-width: 160px;
+}
+
+.jam-sponsor-logo-community {
+  max-width: 140px;
+}
+
+.jam-sponsor-logo-friend {
+  max-width: 120px;
+}
+
+.jam-sponsor-tier-logos-presenting {
+  display: flex;
+  gap: 28px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.jam-sponsor-tier-logos-headline {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 24px;
+  align-items: center;
+}
+
+.jam-sponsor-tier-logos-supporting {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 20px;
+  align-items: center;
+}
+
+.jam-sponsor-tier-logos-community,
+.jam-sponsor-tier-logos-friend {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 16px;
+  align-items: center;
+}
+
+.jam-sponsor-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100px;
+  padding: 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  transition: all 0.2s ease;
+}
+
+.jam-sponsor-logo a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.jam-sponsor-logo img {
+  max-width: 100%;
+  max-height: 80px;
+  object-fit: contain;
+  width: auto;
+  height: auto;
+}
+
+.jam-sponsor-logo:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 900px) {
+  .jam-schedule-wrapper {
+    grid-template-columns: 1fr;
+  }
+
+  .jam-schedule-allday {
+    position: relative;
+    top: 0;
+  }
+
+  .section-heading h2 {
+    font-size: 28px;
+  }
+
+  .jam-sponsor-item-headline {
+    grid-column: span 1;
+  }
+
+  .jam-sponsor-tier-logos-headline {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .jam-sponsor-tier-logos-supporting {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .jam-hero .hero-inner p.lead {
+    font-size: 16px;
+  }
+
+  .jam-hero .hero-inner > p {
+    font-size: 16px;
+  }
+
+  .jam-features-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .section-heading h2 {
+    font-size: 24px;
+  }
+
+  .schedule-item {
+    grid-template-columns: 80px 1fr;
+    gap: 12px;
+    padding: 16px;
+  }
+
+  .jam-final-cta-actions {
+    flex-direction: column;
+  }
+
+  .jam-final-cta-actions .btn {
+    width: 100%;
+  }
+
+  .jam-sponsor-tier-logos-presenting {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .jam-sponsor-tier-logos-headline,
+  .jam-sponsor-tier-logos-supporting,
+  .jam-sponsor-tier-logos-community,
+  .jam-sponsor-tier-logos-friend {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+

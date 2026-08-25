@@ -1067,7 +1067,7 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
             <li><a data-nav="drinks">Drinks</a></li>
             <li><a data-nav="specials">Specials</a></li>
             <li><a data-nav="events">Events</a></li>
-            <li><a data-nav="auction">Jam</a></li>
+            <li><a data-nav="jam">Jam</a></li>
             <li><a data-nav="private-parties">Private Parties</a></li>
           </ul>
           <div class="nav-divider" aria-hidden="true"></div>
@@ -2371,6 +2371,86 @@ const paymentEnabled =
         `).join('')}
       </div>
     `;
+    enableFadeIn();
+  }
+
+  function renderJamSponsors(containerId, data) {
+    const container = document.getElementById(containerId);
+    const sponsors = Array.isArray(data?.sponsors) ? data.sponsors : [];
+    const tiers = Array.isArray(data?.tiers) ? data.tiers : [];
+    
+    if (!container) return;
+    if (!sponsors.length) {
+      container.innerHTML = '';
+      return;
+    }
+
+    // Group sponsors by tier
+    const grouped = tiers.map((tier) => {
+      const items = sponsors.filter((sponsor) => sponsor.tier === tier.id);
+      return { ...tier, items };
+    }).filter((tier) => tier.items.length);
+
+    if (!grouped.length) {
+      container.innerHTML = '';
+      return;
+    }
+
+    // Render sponsor wall with tier-based layout
+    let html = '<div class="jam-sponsor-wall fade-in">';
+    
+    grouped.forEach((tier) => {
+      const tierClass = tier.id.toLowerCase();
+      const logoGridClass = `jam-sponsor-tier-logos-${tierClass}`;
+      
+      html += `
+        <div class="jam-sponsor-tier">
+          <h3 class="jam-sponsor-tier-heading">${tier.label}</h3>
+          <div class="jam-sponsor-tier-logos ${logoGridClass}">
+      `;
+      
+      tier.items.forEach((sponsor) => {
+        const href = resolveLink(sponsor.url);
+        const logoSrc = sponsor.logo ? withBase(sponsor.logo) : '';
+        const targetAttrs = /^https?:\/\//i.test(href) ? ' target="_blank" rel="noopener noreferrer"' : '';
+        const logoClass = `jam-sponsor-logo jam-sponsor-logo-${tierClass}`;
+        const itemClass = `jam-sponsor-item jam-sponsor-item-${tierClass}`;
+        
+        if (!logoSrc) {
+          html += `
+            <div class="${itemClass}">
+              <div class="${logoClass}">
+                <span class="sponsor-name">${sponsor.name}</span>
+              </div>
+            </div>
+          `;
+        } else if (href) {
+          html += `
+            <div class="${itemClass}">
+              <a class="${logoClass}" href="${href}"${targetAttrs}>
+                <img src="${logoSrc}" alt="${sponsor.name}" loading="lazy">
+              </a>
+            </div>
+          `;
+        } else {
+          html += `
+            <div class="${itemClass}">
+              <div class="${logoClass}">
+                <img src="${logoSrc}" alt="${sponsor.name}" loading="lazy">
+              </div>
+            </div>
+          `;
+        }
+      });
+      
+      html += `
+          </div>
+        </div>
+      `;
+    });
+    
+    html += '</div>';
+    container.innerHTML = html;
     enableFadeIn();
   }
 
@@ -3902,6 +3982,7 @@ const paymentEnabled =
     renderEvents,
     renderAuction,
     renderSponsors,
+    renderJamSponsors,
     renderEmailSignup,
     renderEventCountdown,
     renderAuctionIntro,
