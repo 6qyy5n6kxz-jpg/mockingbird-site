@@ -1,0 +1,409 @@
+<!doctype html>
+<html lang="en" data-base="../..">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plan Your Private Event | The Mockingbird</title>
+  <meta name="description" content="Build a preliminary event estimate for your private party at The Mockingbird in Graytown, Ohio. Select your menu, beverages, enhancements, and check availability." data-page-seo>
+  <link rel="canonical" href="https://themockingbirdonmillroad.com/private-parties/estimate/">
+  <meta name="robots" content="index,follow">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://themockingbirdonmillroad.com/private-parties/estimate/">
+  <meta property="og:title" content="Build Your Private Event Estimate at The Mockingbird">
+  <meta property="og:description" content="Create a preliminary event plan with our interactive estimator tool.">
+  <meta property="og:image" content="https://themockingbirdonmillroad.com/assets/images/private-party1.jpg" data-page-seo>
+  <script src="../../js/base.js?v=1"></script>
+  <link rel="icon" type="image/svg+xml" data-favicon="svg">
+  <link rel="alternate icon" data-favicon="ico">
+  <link rel="apple-touch-icon" data-favicon="apple">
+  <script>
+    (function() {
+      if (!window.withBase) return;
+      const svg = document.querySelector('link[data-favicon="svg"]');
+      const ico = document.querySelector('link[data-favicon="ico"]');
+      const apple = document.querySelector('link[data-favicon="apple"]');
+      if (svg) svg.href = withBase('/assets/images/favicon.svg');
+      if (ico) ico.href = withBase('/assets/images/favicon.png');
+      if (apple) apple.href = withBase('/assets/images/favicon.png');
+    })();
+  </script>
+  <link rel="stylesheet" href="../../css/styles.css?v=3">
+</head>
+<body>
+  <a class="sr-only" href="#main">Skip to main content</a>
+  <header id="site-header"></header>
+  <div class="announcement" role="status"></div>
+
+  <main id="main">
+    <section class="pp-estimate-hero section">
+      <div class="container">
+        <p class="kicker">Private Event Planning</p>
+        <h1>Build Your Event</h1>
+        <p class="lead">Create a preliminary event plan by selecting your menu, beverage preferences, and optional enhancements. Your estimate will update as you make selections, and we'll confirm availability and final details after you submit your request.</p>
+        <div style="margin-top: 16px;">
+          <a href="../" class="text-button" style="display: inline-flex; align-items: center; gap: 4px;">← Back to Private Parties</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="pp-builder-grid" id="event-estimate">
+      <div class="pp-builder-left">
+        <div id="private-menu-builder" class="card menu-builder">
+          <section class="planner-section" aria-labelledby="planner-food-heading">
+            <h2 id="planner-food-heading">1. Build Your Menu</h2>
+            <div class="menu-builder-group">
+              <p class="note">Menu type</p>
+              <p class="note">Starts with our recommended menu — customize anything.</p>
+              <div class="inline-links menu-builder-buttons" data-private-menu="types" role="group" aria-label="Menu type"></div>
+            </div>
+            <div class="menu-builder-sections" data-private-menu="sections"></div>
+            <div class="menu-builder-estimate">
+              <label for="private-guest-count">Guest count</label>
+              <input id="private-guest-count" type="number" min="10" step="1" value="40">
+              <p class="menu-estimate" data-private-menu="estimate" aria-live="polite">Food subtotal: —</p>
+              <p class="note" data-private-menu="estimate-fixed"></p>
+              <p class="note" data-private-menu="estimate-perguest"></p>
+            </div>
+          </section>
+
+          <section class="planner-section" aria-labelledby="beverage-service-heading">
+            <h2 id="beverage-service-heading">2. Beverage Service</h2>
+            <p>Private events at The Mockingbird can be as flexible as your group. Guests may purchase their own drinks, or the host may provide selected beverages for the group. Choose a starting direction below and we'll help finalize the details.</p>
+            <fieldset class="planner-fieldset">
+              <legend>How would you like beverages handled?</legend>
+              <div class="event-option-grid">
+                <label class="event-option-card">
+                  <input type="radio" name="beverage-method" value="guest" checked aria-controls="hosted-beverage-options" aria-expanded="false">
+                  <span class="event-option-card__body">
+                    <span class="event-option-card__title">Guests purchase drinks individually</span>
+                  </span>
+                </label>
+                <label class="event-option-card">
+                  <input type="radio" name="beverage-method" value="hosted" aria-controls="hosted-beverage-options" aria-expanded="false">
+                  <span class="event-option-card__body">
+                    <span class="event-option-card__title">Host provides selected beverages</span>
+                  </span>
+                </label>
+                <label class="event-option-card">
+                  <input type="radio" name="beverage-method" value="combination" aria-controls="hosted-beverage-options" aria-expanded="false">
+                  <span class="event-option-card__body">
+                    <span class="event-option-card__title">Combination of hosted and guest-purchased drinks</span>
+                  </span>
+                </label>
+                <label class="event-option-card">
+                  <input type="radio" name="beverage-method" value="unsure" aria-controls="hosted-beverage-options" aria-expanded="false">
+                  <span class="event-option-card__body">
+                    <span class="event-option-card__title">Not sure yet — help me plan</span>
+                  </span>
+                </label>
+              </div>
+            </fieldset>
+            <p class="planner-method-note" data-beverage-method-note>Guests order and pay for their own beverages during the event. Estimated hosted beverage cost: $0.</p>
+            <div id="hosted-beverage-options" class="planner-reveal" hidden>
+              <h3>Opening hosted beverage estimate</h3>
+              <div class="planner-quantity-list" data-known-beverages></div>
+              <p class="note">These quantities create an opening beverage estimate. Additional beverages requested during the event will be added to the final bill.</p>
+              <fieldset class="planner-fieldset planner-custom-options">
+                <legend>Selections requiring final pricing</legend>
+                <label><input type="checkbox" data-custom-beverage="wine"> Wine bottles</label>
+                <div class="planner-dependent" data-dependent="wine" hidden><label>Wine direction <select data-wine-preference><option>House selections</option><option>Specific wines</option><option>Need recommendations</option></select></label><label>Wine preferences <input type="text" data-wine-notes placeholder="Styles, labels, or budget preferences"></label></div>
+                <label><input type="checkbox" data-custom-beverage="beer"> Beer cans or bottles</label>
+                <div class="planner-dependent" data-dependent="beer" hidden><label>Beer direction <select data-beer-preference><option>Individual cans or bottles</option><option>Specific beer request</option><option>Need recommendations</option></select></label><label>Beer preferences <input type="text" data-beer-notes placeholder="Brands, styles, or brewery preferences"></label></div>
+                <label><input type="checkbox" data-custom-beverage="keg"> Sixth-barrel beer keg</label>
+                <div class="planner-dependent" data-dependent="keg" hidden><label>Keg direction <select data-keg-preference><option>Specific beer requested</option><option>Need recommendations</option></select></label><label>Beer preference <input type="text" data-keg-notes placeholder="Beer or brewery, if known"></label></div>
+                <label><input type="checkbox" data-custom-beverage="nonalcoholic"> Soft drinks or nonalcoholic options</label>
+                <div class="planner-dependent" data-dependent="nonalcoholic" hidden><label>Preferences <input type="text" data-nonalcoholic-notes placeholder="Soft drinks, mocktails, or other options"></label></div>
+                <label><input type="checkbox" data-custom-beverage="other"> Other beverage request</label>
+                <div class="planner-dependent" data-dependent="other" hidden><label>Other beverage request <input type="text" data-other-beverage-notes></label></div>
+                <p class="note">Pricing depends on the selected wine, beer, brewery, package, and availability. We'll confirm your options and pricing after reviewing the request.</p>
+              </fieldset>
+            </div>
+          </section>
+
+          <section class="planner-section" aria-labelledby="planner-enhancements-heading">
+            <h2 id="planner-enhancements-heading">3. Event Enhancements</h2>
+            <p>Select any additions you would like included in your preliminary plan.</p>
+            <!-- Fixed price enhancements: Photo Booth, Uplighting, Party Audio -->
+            <div class="event-option-grid event-option-grid--3col">
+              <label class="event-option-card">
+                <input type="checkbox" data-planner-enhancement="photoBooth">
+                <span class="event-option-card__body">
+                  <span class="event-option-card__title">Digital Photo Booth — $200</span>
+                  <span class="event-option-card__description">Custom event template, setup and removal, digital sharing, and an event gallery.</span>
+                </span>
+              </label>
+              <label class="event-option-card">
+                <input type="checkbox" data-planner-enhancement="uplighting">
+                <span class="event-option-card__body">
+                  <span class="event-option-card__title">Uplighting — $100</span>
+                  <span class="event-option-card__description">Up to six uplights, coordinated static color, setup, and removal.</span>
+                </span>
+              </label>
+              <label class="event-option-card">
+                <input type="checkbox" data-planner-enhancement="partyAudio">
+                <span class="event-option-card__body">
+                  <span class="event-option-card__title">Indoor &amp; Outdoor Party Audio — $75</span>
+                  <span class="event-option-card__description">Line-array speaker, coordinated playlist playback, setup, sound check, and removal. This is not an actively staffed DJ service.</span>
+                </span>
+              </label>
+            </div>
+            <div class="planner-dependent" data-dependent-enhancement="partyAudio" hidden>
+              <label>Optional playlist notes <input type="text" data-playlist-notes></label>
+            </div>
+
+            <!-- Live Music section: Select + musician checkbox -->
+            <div class="enhancement-section enhancement-section--live-music">
+              <label for="planner-live-hours"><strong>Live Music by A Change of Plans</strong><small>Add acoustic guitar, piano, and vocals from The Mockingbird's house band.</small></label>
+              <select id="planner-live-hours" data-live-hours>
+                <option value="0">Not selected</option>
+                <option value="1">1 hour — $100</option>
+                <option value="2">2 hours — $200</option>
+                <option value="3">3 hours — $300</option>
+              </select>
+
+              <label class="event-option-card" style="margin-top: 12px;">
+                <input type="checkbox" data-planner-enhancement="outsideMusician">
+                <span class="event-option-card__body">
+                  <span class="event-option-card__title">I have another musician in mind</span>
+                  <span class="event-option-card__description">Subject to venue approval, scheduling, sound-level expectations, and production requirements.</span>
+                </span>
+              </label>
+
+              <div class="planner-dependent" data-dependent-enhancement="outsideMusician" hidden>
+                <div class="planner-form-grid">
+                  <label>Musician or group name <input type="text" data-musician-name></label>
+                  <label>Contact information, if known <input type="text" data-musician-contact></label>
+                  <label>Performance length <input type="text" data-musician-length></label>
+                  <label>Equipment or production notes <textarea rows="2" data-musician-notes></textarea></label>
+                </div>
+              </div>
+            </div>
+
+            <!-- Wine &amp; Canvas section: Select + painter count -->
+            <div class="enhancement-section enhancement-section--wine-canvas">
+              <label for="planner-canvas-experience"><strong>Wine &amp; Canvas</strong><small>Pricing is based on participating painters, not total guests. Eight paid painters minimum.</small></label>
+              <select id="planner-canvas-experience" data-canvas-experience>
+                <option value="none">Not selected</option>
+                <option value="mini">Mini Painting Experience — $20 per painter</option>
+                <option value="standard">Standard Painting Experience — $30 per painter</option>
+                <option value="full">Full Painting Experience — $40 per painter</option>
+                <option value="help">Not sure which experience?</option>
+              </select>
+              <div class="planner-dependent" data-canvas-painters-wrap hidden>
+                <label for="planner-canvas-painters">Participating painters <input id="planner-canvas-painters" type="number" min="8" step="1" value="8" data-canvas-painters aria-describedby="planner-canvas-error"></label>
+                <p class="field-error" id="planner-canvas-error" aria-live="polite"></p>
+              </div>
+            </div>
+
+            <!-- Custom enhancement -->
+            <label class="event-option-card">
+              <input type="checkbox" data-planner-enhancement="custom">
+              <span class="event-option-card__body">
+                <span class="event-option-card__title">Custom event enhancement request</span>
+                <span class="event-option-card__description">Pricing will be confirmed after review.</span>
+              </span>
+            </label>
+            <div class="planner-dependent" data-dependent-enhancement="custom" hidden>
+              <label>Tell us what you have in mind. <textarea rows="3" data-custom-enhancement-notes></textarea></label>
+            </div>
+          </section>
+
+          <section class="planner-section planner-estimate" aria-labelledby="planner-estimate-heading">
+            <h2 id="planner-estimate-heading">Preliminary Event Estimate</h2>
+            <div data-event-estimate></div>
+            <p class="planner-total" aria-live="polite" aria-atomic="true">Current Estimated Total: <strong data-current-estimated-total>$250</strong></p>
+            <p class="note">This preliminary estimate includes the selections with known pricing. Beverage consumption, custom products, staffing, special setup, availability, and final event details may change the confirmed total.</p>
+            <p class="note">The 18% service charge applies only to food and beverages. Venue rental and optional event enhancements are listed separately.</p>
+            <button type="button" class="btn btn-primary pp-estimate-handoff" data-calculator-to-form>Request This Event</button>
+          </section>
+          <p class="note">This tool creates a planning estimate, not a binding quote, guaranteed reservation, or final invoice. Our team will confirm availability, details, and pricing before your event.</p>
+        </div>
+      </div>
+      <div class="pp-builder-right">
+        <div class="card pp-inquiry-card">
+          <div class="pp-inquiry-body">
+            <form id="party-form" action="https://formspree.io/f/xbddjoek" method="POST" data-formspree data-success-message="Your event request has been sent." data-error-message="We couldn't send your request right now. Your information is still on this page. Please try again or call The Mockingbird at 419-504-4900." novalidate>
+              <p class="kicker">Start Planning</p>
+              <h2>Request availability</h2>
+              <section class="pp-event-summary" aria-labelledby="event-summary-title">
+                <h3 id="event-summary-title">Your Event So Far</h3>
+                <div data-event-summary aria-live="polite"><p class="note">You can submit an inquiry without using the estimator, or create an estimate first to give us a better starting point.</p></div>
+              </section>
+              <div class="availability-card" id="availability">
+                <div class="availability-header">
+                  <p class="kicker">Availability</p>
+                  <div class="availability-nav">
+                    <button type="button" class="btn btn-ghost btn-small" id="availability-prev" aria-label="Previous month">Prev</button>
+                    <button type="button" class="btn btn-ghost btn-small" id="availability-next" aria-label="Next month">Next</button>
+                  </div>
+                </div>
+                <div id="availability-month" class="availability-month" aria-live="polite"></div>
+                <div id="availability-grid" class="availability-grid" role="grid" aria-label="Availability calendar"></div>
+                <div class="availability-legend" aria-label="Availability legend">
+                  <span class="legend-item"><span class="legend-dot available"></span>Available</span>
+                  <span class="legend-item"><span class="legend-dot unavailable"></span>Unavailable</span>
+                </div>
+                <p class="note">Availability calendar updates as events are booked.</p>
+                <p class="note">Dates marked unavailable are already booked. Not seeing your date? Send your request—availability can change.</p>
+                <p class="note">Thursday–Saturday evenings are not available for private events. We're happy to consider morning or daytime requests—Mockingbird remains open during regular dinner service.</p>
+                <details class="availability-fallback" id="availability-fallback">
+                  <summary>Unavailable dates</summary>
+                  <ul></ul>
+                </details>
+              </div>
+              <input id="party-menu-summary" type="hidden" data-menu-summary>
+              <input id="party-calculator-submission" name="Calculator estimate" type="hidden">
+              <input id="party-inquiry-summary" name="Event inquiry summary" type="hidden">
+              <input id="party-enhancements-summary" name="Selected enhancements" type="hidden">
+              <input id="party-page-url" name="Page URL" type="hidden">
+              <input id="party-submitted-at" name="Submission timestamp" type="hidden">
+              <input id="party-subject" name="_subject" type="hidden" value="Private Event Inquiry">
+
+              <fieldset class="pp-form-section">
+                <legend>Contact Information</legend>
+                <label for="party-name">Name <span aria-hidden="true">*</span></label>
+                <input id="party-name" name="Customer name" autocomplete="name" required aria-describedby="party-name-error">
+                <p class="field-error" id="party-name-error"></p>
+                <div class="pp-form-columns">
+                  <div><label for="party-email">Email</label><input id="party-email" name="Email" type="email" autocomplete="email" aria-describedby="party-contact-help party-email-error"><p class="field-error" id="party-email-error"></p></div>
+                  <div><label for="party-phone">Phone</label><input id="party-phone" name="Phone" type="tel" autocomplete="tel" inputmode="tel" aria-describedby="party-contact-help party-phone-error"><p class="field-error" id="party-phone-error"></p></div>
+                </div>
+                <p class="field-help" id="party-contact-help">Please provide at least one reliable way for us to contact you.</p>
+              </fieldset>
+
+              <fieldset class="pp-form-section">
+                <legend>Event Details</legend>
+                <label for="party-event-type">Event type <span aria-hidden="true">*</span></label>
+                <select id="party-event-type" name="Event type" required aria-describedby="party-event-type-error"><option value="">Select an event type</option><option>Birthday</option><option>Graduation</option><option>Bridal shower</option><option>Baby shower</option><option>Rehearsal dinner</option><option>Anniversary</option><option>Retirement party</option><option>Family reunion</option><option>Corporate gathering</option><option>Holiday party</option><option>Celebration of Life</option><option>Community event</option><option>Other</option></select>
+                <p class="field-error" id="party-event-type-error"></p>
+                <div class="pp-form-columns">
+                  <div><label for="party-date">Preferred date <span aria-hidden="true">*</span></label><input id="party-date" name="Preferred date" type="date" required aria-describedby="party-date-help party-date-error availability-warning"><p class="field-help" id="party-date-help">If your date is flexible, include an alternate date.</p><p class="field-error" id="party-date-error"></p></div>
+                  <div><label for="party-alternate-date">Alternate date</label><input id="party-alternate-date" name="Alternate date" type="date"></div>
+                </div>
+                <label for="party-time-window">Preferred start time</label>
+                <select id="party-time-window" name="Preferred start time"><option>Morning</option><option>Afternoon</option><option selected>Evening</option></select>
+                <p class="note availability-warning" id="availability-warning" aria-live="polite"></p>
+                <p class="note availability-warning" id="availability-warning-time" aria-live="polite"></p>
+                <label for="party-size">Approximate guest count <span aria-hidden="true">*</span></label>
+                <input id="party-size" name="Guest count" type="number" min="1" step="1" required aria-describedby="party-size-help party-size-error"><p class="field-help" id="party-size-help">A preliminary estimate is fine. We can update this later.</p><p class="field-error" id="party-size-error"></p>
+                <label for="party-space">Space preference</label><select id="party-space" name="Indoor/outdoor preference"><option>Flexible / not sure yet</option><option>Indoor</option><option>Outdoor</option><option>Indoor and outdoor</option></select>
+              </fieldset>
+
+              <fieldset class="pp-form-section">
+                <legend>Food and Beverage</legend>
+                <label for="party-food">Food interests</label><textarea id="party-food" name="Food interests" rows="3" aria-describedby="party-food-help"></textarea><p class="field-help" id="party-food-help">Include anything you may be considering. You are not making a final selection yet.</p>
+                <label for="party-beverages">Beverage interests</label><input id="party-beverages" name="Beverage interests" placeholder="Beer, wine, sangria, cider, non-alcoholic options">
+                <label for="party-dietary">Dietary restrictions or accessibility needs</label><textarea id="party-dietary" name="Dietary or accessibility needs" rows="3"></textarea>
+              </fieldset>
+
+              <fieldset class="pp-form-section enhancement-fieldset">
+                <legend>Event Enhancements <span class="optional-label">Optional</span></legend>
+                <p class="field-help" id="party-enhancements-help">These options may affect final pricing.</p>
+                <div class="checkbox-grid" aria-describedby="party-enhancements-help">
+                  <label><input type="checkbox" data-enhancement-option value="Photo Booth"> Photo Booth</label>
+                  <label><input type="checkbox" data-enhancement-option value="Uplighting"> Uplighting</label>
+                  <label><input type="checkbox" data-enhancement-option value="Indoor and outdoor audio"> Indoor and outdoor audio</label>
+                  <label><input type="checkbox" data-enhancement-option value="Live music"> Live music</label>
+                  <label><input type="checkbox" data-enhancement-option value="Wine &amp; Canvas activity"> Wine &amp; Canvas activity</label>
+                  <label><input type="checkbox" data-enhancement-option value="Custom event enhancement"> Custom event enhancement</label>
+                  <label><input type="checkbox" data-enhancement-option value="Not sure yet"> Not sure yet</label>
+                </div>
+              </fieldset>
+
+              <fieldset class="pp-form-section">
+                <legend>Additional Details</legend>
+                <label for="party-occasion">What are you celebrating?</label><input id="party-occasion" name="Celebration details">
+                <label for="party-special">What would make this event feel special?</label><textarea id="party-special" name="Desired atmosphere or experience" rows="3"></textarea>
+                <label for="party-notes">Questions or notes</label><textarea id="party-notes" name="Questions or notes" rows="3" aria-describedby="party-notes-help"></textarea><p class="field-help" id="party-notes-help">Tell us anything that would help us understand the atmosphere, setup, or experience you are imagining.</p>
+              </fieldset>
+
+              <p class="pp-reservation-note">Submitting this form does not officially reserve your date. Your event is confirmed only after availability, pricing, and reservation requirements have been reviewed and completed.</p>
+              <p class="field-help">We'll use the information you provide only to respond to your event inquiry and help plan your event.</p>
+              <div class="inline-links pp-form-actions">
+                <button type="submit" class="btn btn-primary">Send Event Request</button>
+                <button type="button" class="btn btn-ghost btn-small" data-copy-form="party-form">Copy details</button>
+              </div>
+              <p class="field-help" data-error-phone hidden>If sending fails, your information will remain here. You can also call <a href="tel:+14195044900" data-phone-fallback>419-504-4900</a>.</p>
+            </form>
+            <section class="pp-success-panel" data-inquiry-success hidden tabindex="-1" aria-live="polite">
+              <p class="kicker">Request received</p><h2>Your Event Request Has Been Sent</h2>
+              <p>Thank you for considering The Mockingbird. We've received your event details and will review your preferred date, guest count, and selections before following up with the next steps.</p>
+              <div data-submitted-summary></div>
+              <p class="pp-reservation-note">Submitting this form does not officially reserve your date. Your event is confirmed only after availability, pricing, and reservation requirements have been reviewed and completed.</p>
+              <p>Questions in the meantime? Call <a href="tel:+14195044900" data-phone-fallback>419-504-4900</a>.</p>
+              <div class="inline-links"><button type="button" class="btn btn-primary" data-copy-inquiry>Copy Inquiry Summary</button><a class="btn btn-secondary" href="../../menu/" data-inquiry-menu>View Regular Menu</a><a class="btn btn-ghost btn-small" href="#main">Return to Top</a></div>
+              <p class="form-status" data-copy-status role="status" aria-live="polite"></p>
+            </section>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="meta">
+        <strong data-fill="name">Mockingbird</strong>
+        <div data-fill="address">4408 N. Elliston-Trowbridge Road</div>
+        <div data-fill="city">Graytown, Ohio 43432</div>
+        <div class="note" data-fill="hours">Hours</div>
+        <div><a data-fill="phone-link">419-504-4900</a></div>
+        <div class="social">
+          <a data-fill="facebook">Facebook</a>
+          <a data-fill="instagram">Instagram</a>
+        </div>
+        <div class="footer-links">
+          <div>
+            <p class="kicker">Visit</p>
+            <div class="inline-links">
+              <a data-nav="home">Home</a>
+              <a data-nav="menu">Menu</a>
+              <a data-nav="drinks">Drinks</a>
+              <a data-nav="specials">Specials</a>
+            </div>
+          </div>
+          <div>
+            <p class="kicker">Happenings</p>
+            <div class="inline-links">
+              <a data-nav="events">Events</a>
+              <a data-nav="private-parties">Private Parties</a>
+              <a data-nav="gallery">Gallery</a>
+            </div>
+          </div>
+          <div>
+            <p class="kicker">Explore</p>
+            <div class="inline-links">
+              <a data-nav="gift-cards">Gift Cards</a>
+              <a data-nav="contact">Contact</a>
+            </div>
+          </div>
+        </div>
+        <small>© Mockingbird</small>
+      </div>
+    </div>
+  </footer>
+
+  <div class="sticky-cta-bar" aria-label="Quick actions">
+    <a data-cta="call">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.1 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.81.37 1.6.72 2.34a2 2 0 0 1-.45 2.18L8.09 9.91a16 16 0 0 0 6 6l1.67-1.33a2 2 0 0 1 2.18-.45c.74.35 1.53.6 2.34.72A2 2 0 0 1 22 16.92z"/></svg>
+      Call
+    </a>
+    <a data-cta="menu">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      Menu
+    </a>
+    <a data-cta="directions">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2l7 7-7 13-7-13z"/><path d="M12 9v4"/></svg>
+      Directions
+    </a>
+  </div>
+
+  <button class="back-to-top" aria-label="Back to top">↑</button>
+
+  <script src="../../js/private-menu-pricing.js?v=1"></script>
+  <script src="../../js/main.js?v=1"></script>
+  <script src="../../js/private-availability.js?v=1"></script>
+  <script src="../../js/private-event-planner.js?v=2"></script>
+  <script src="../../js/private-parties.js?v=1"></script>
+</body>
+</html>
