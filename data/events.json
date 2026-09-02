@@ -2,13 +2,6 @@
   "_comment": "Upcoming events. Remove past dates as needed.",
 
   "events": [
-    {
-      "date": "2026-08-29T18:00:00",
-      "title": "Live Music: Jon B. Roth",
-      "description": "Live music by Jon B. Roth, 6:00–9:00 PM.",
-      "price": "No cover",
-      "payment_link_url": ""
-    },
 
     {
       "date": "2026-09-05T18:00:00",
@@ -67,7 +60,7 @@
       "title": "Mockingbird Jam 2026",
       "slug": "mockingbird-jam-2026",
       "campaign": "mockingbird_jam",
-      "description": "Mockingbird Jam is our 2026 community fundraiser for ALS research and families dealing with ALS. Join us for yoga at 9 AM, church service at 10 AM, live music from 11 AM to 8 PM, food trucks, a silent auction, and all-day fundraising throughout the property.",
+      "description": "Mockingbird Jam is our 2026 community fundraiser for ALS research and families dealing with ALS. Join us for yoga at 9 AM, church service at 10 AM, live music from 11 AM to 8 PM, food trucks, basket raffles, and all-day fundraising throughout the property.",
       "price": "$10 admission",
       "event_type": "rsvp",
       "payment_link_url": "",
@@ -83,6 +76,21 @@
   "payment_link_url": "",
   "image_url": "assets/events/September_Book_Club.png",
   "image_alt": "Mockingbird Book Club event image for The Woman in Suite 11 by Ruth Ware, Thursday, September 17th at 6:30 PM"
+},
+{
+  "date": "2026-09-28T18:00:00",
+  "title": "Blacklight Paint & Sip: Sugar Skull Glow",
+  "description": "Join Wine & Canvas Toledo at The Mockingbird on Mill Road for a special blacklight paint-and-sip featuring Sugar Skull Glow. Paint under blacklights while enjoying food and drinks available from The Mockingbird. Advance registration is required through Wine & Canvas Toledo.",
+  "price": "See Wine & Canvas for tickets",
+  "event_type": "ticketed",
+  "payment_link_url": "https://wineandcanvas.com/toledo/event/blacklight-paint-and-sip-in-graytown-sugar-skull-glow/",
+  "payment_provider": "Wine & Canvas Toledo",
+  "payment_label": "Reserve Your Seat",
+  "payment_url": "https://wineandcanvas.com/toledo/event/blacklight-paint-and-sip-in-graytown-sugar-skull-glow/",
+  "payment_note": "Advance registration is handled through Wine & Canvas Toledo.",
+  "type": "Paint & Sip",
+  "image_url": "assets/events/skull glow black light.png",
+  "image_alt": "Sugar Skull Glow blacklight paint and sip at The Mockingbird on Mill Road"
 }
   ]
 }
