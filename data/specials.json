@@ -1,38 +1,45 @@
 {
   "_comment": "Update weekly specials. weekOf should be the Monday of the current week.",
-  "weekOf": "2026-08-17",
-  "dateRange": "August 20–23",
+
+  "weekOf": "2026-08-31",
+
+  "dateRange": "September 3–5",
+
   "items": [
     {
-      "name": "Summer Bean Soup",
+      "name": "Potato Soup",
       "label": "Soup of the Day",
-      "description": "White beans, tomatoes, carrots, red onion, garlic, spinach, and herbs simmered together and finished with a bright touch of lemon.",
+      "description": "A warm and comforting creamy potato soup, hearty and satisfying.",
       "notes": [
+        "Vegetarian",
         "Available as cup or bowl",
         "Available as a combo add-on"
       ]
     },
+
     {
-      "name": "Summer Garden Salad",
+      "name": "Garden Tomato & Cucumber Salad",
       "label": "Seasonal Salad",
-      "description": "Crisp romaine topped with fresh tomatoes, cucumber, red onion, and feta, served with a house vinaigrette.",
+      "description": "Crisp romaine topped with fresh tomatoes and cucumbers from our garden, red onion, and Parmesan, served with house-made balsamic-Dijon vinaigrette.",
       "notes": [
         "Vegetarian",
         "Gluten-Free"
       ]
     },
+
     {
-      "name": "Chicken Pesto Pressed",
+      "name": "Chicken & Cheddar Pressed",
       "label": "Featured Pressed Sandwich",
-      "description": "Herb-roasted chicken, crisp bacon, melted provolone, and house-made garden basil pesto on our house bread, pressed golden and crisp.",
+      "description": "Deli chicken, sharp cheddar, thinly sliced Granny Smith apple, and house-made creamy honey-Dijon on our house bread, pressed golden and crisp.",
       "notes": [
         "Served with pickle and Featured Side"
       ]
     },
+
     {
-      "name": "Garlic Parmesan Roasted Potatoes",
+      "name": "Fresh Fruit Cup",
       "label": "Featured Side",
-      "description": "Baby potatoes roasted with garlic, Parmesan, and Italian herbs until golden and tender.",
+      "description": "A refreshing mix of fresh pineapple, black seedless grapes, strawberries, Granny Smith apples, and Cara Cara oranges.",
       "notes": [
         "Vegetarian",
         "Gluten-Free",
@@ -40,10 +47,14 @@
         "Included in combos"
       ]
     },
+
     {
-      "name": "Peach & Raspberry Cake",
+      "name": "Carrot Cake Cheesecake",
       "label": "Sweet Bite of the Day",
-      "description": "Tender sour cream cake baked with fresh peaches and raspberries and finished with a light lemon glaze."
+      "description": "Creamy cheesecake and classic spiced carrot cake come together for a rich twist on two favorite desserts.",
+      "notes": [
+        "Vegetarian"
+      ]
     }
   ]
 }
