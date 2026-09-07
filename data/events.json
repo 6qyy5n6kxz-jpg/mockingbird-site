@@ -119,6 +119,15 @@
       "description": "Live music by Jack & Lucky, 6:00–9:00 PM.",
       "price": "No cover",
       "payment_link_url": ""
-    }
+    },
+    {
+  "date": "2026-10-15T18:30:00",
+  "title": "Mockingbird Book Club — October",
+  "description": "Join us for Mockingbird Book Club on Thursday, October 15th at 6:30 PM as we discuss The Amalfi Curse by Sarah Penner — a dual-timeline novel set on Italy's Amalfi Coast. In the present day, nautical archaeologist Haven Ambrose arrives in Positano to investigate mysterious shipwrecks and search for a trove of gemstones connected to her late father's final dive. In 1821, Mari DeLuca and the women of her village practice stregheria, an ancient magic tied to the sea. Blending mystery, historical fiction, romance, sunken treasure, and witchcraft, the story offers plenty to discuss. Enjoy an open, welcoming conversation with food and drinks available.",
+  "price": "No cover",
+  "payment_link_url": "",
+  "image_url": "assets/events/October_Book_Club.png",
+  "image_alt": "Mockingbird Book Club event image for The Amalfi Curse by Sarah Penner, Thursday, October 15th at 6:30 PM"
+}
   ]
 }
