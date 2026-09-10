@@ -1985,11 +1985,22 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
     intro.textContent = 'Complete your registration to continue to payment.';
     form.appendChild(intro);
 
-    // Recording consent info
-    const consentInfo = document.createElement('p');
-    consentInfo.className = 'note event-help';
-    consentInfo.innerHTML = 'This event will be video recorded for documentation and promotional purposes. At times, audience members may appear in the recording to show audience engagement. Guests who choose not to be recorded will have designated seating available outside the filming area.';
-    form.appendChild(consentInfo);
+    // Your Information fieldset
+    const infoFieldset = document.createElement('fieldset');
+    infoFieldset.className = 'event-registration-info-fieldset';
+    infoFieldset.style.border = 'none';
+    infoFieldset.style.padding = '0';
+    infoFieldset.style.margin = '16px 0 0';
+
+    const infoLegend = document.createElement('legend');
+    infoLegend.className = 'event-registration-section-header';
+    infoLegend.textContent = 'Your Information';
+    infoLegend.style.padding = '0 0 8px';
+    infoLegend.style.marginBottom = '12px';
+    infoLegend.style.fontSize = '0.95em';
+    infoLegend.style.fontWeight = '600';
+    infoLegend.style.borderBottom = '1px solid var(--border)';
+    infoFieldset.appendChild(infoLegend);
 
     // Name field
     const nameWrap = document.createElement('div');
@@ -2004,7 +2015,7 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
     nameInput.required = true;
     nameWrap.appendChild(nameLabel);
     nameWrap.appendChild(nameInput);
-    form.appendChild(nameWrap);
+    infoFieldset.appendChild(nameWrap);
 
     // Phone field
     const phoneWrap = document.createElement('div');
@@ -2020,11 +2031,11 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
     phoneInput.required = true;
     phoneWrap.appendChild(phoneLabel);
     phoneWrap.appendChild(phoneInput);
-    form.appendChild(phoneWrap);
+    infoFieldset.appendChild(phoneWrap);
 
     // Email field
     const emailWrap = document.createElement('div');
-    emailWrap.style.marginBottom = '8px';
+    emailWrap.style.marginBottom = '0';
     const emailLabel = document.createElement('label');
     emailLabel.setAttribute('for', 'field-registration-email');
     emailLabel.innerHTML = 'Email <span class="required">*</span>';
@@ -2035,19 +2046,33 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
     emailInput.required = true;
     emailWrap.appendChild(emailLabel);
     emailWrap.appendChild(emailInput);
-    form.appendChild(emailWrap);
+    infoFieldset.appendChild(emailWrap);
 
-    // Recording consent fieldset
+    form.appendChild(infoFieldset);
+
+    // Video Recording Consent fieldset
     const consentFieldset = document.createElement('fieldset');
+    consentFieldset.className = 'event-registration-consent-fieldset';
     consentFieldset.style.border = 'none';
     consentFieldset.style.padding = '0';
-    consentFieldset.style.margin = '12px 0 8px';
+    consentFieldset.style.margin = '16px 0 0';
+
     const consentLegend = document.createElement('legend');
-    consentLegend.innerHTML = 'Recording Consent <span class="required">*</span>';
-    consentLegend.style.padding = '0';
-    consentLegend.style.marginBottom = '8px';
-    consentLegend.style.fontSize = '1em';
+    consentLegend.className = 'event-registration-section-header';
+    consentLegend.innerHTML = 'Video Recording Consent <span class="required">*</span>';
+    consentLegend.style.padding = '0 0 8px';
+    consentLegend.style.marginBottom = '12px';
+    consentLegend.style.fontSize = '0.95em';
+    consentLegend.style.fontWeight = '600';
+    consentLegend.style.borderBottom = '1px solid var(--border)';
     consentFieldset.appendChild(consentLegend);
+
+    // Recording consent info
+    const consentInfo = document.createElement('p');
+    consentInfo.className = 'note event-help event-registration-consent-info';
+    consentInfo.innerHTML = 'This event will be video recorded for documentation and promotional purposes. At times, audience members may appear in the recording to show audience engagement. Guests who choose not to be recorded will have designated seating available outside the filming area.';
+    consentInfo.style.marginBottom = '12px';
+    consentFieldset.appendChild(consentInfo);
 
     const consentOptions = [
       {
@@ -2061,18 +2086,22 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
     ];
 
     consentOptions.forEach((option) => {
-      const consentLabel = document.createElement('label');
-      consentLabel.className = 'check-row';
+      const optionWrapper = document.createElement('label');
+      optionWrapper.className = 'event-registration-consent-option';
+
       const consentRadio = document.createElement('input');
       consentRadio.type = 'radio';
       consentRadio.name = 'recording_consent';
       consentRadio.value = option.value;
       consentRadio.required = true;
+
       const consentText = document.createElement('span');
+      consentText.className = 'event-registration-consent-label';
       consentText.textContent = option.label;
-      consentLabel.appendChild(consentRadio);
-      consentLabel.appendChild(consentText);
-      consentFieldset.appendChild(consentLabel);
+
+      optionWrapper.appendChild(consentRadio);
+      optionWrapper.appendChild(consentText);
+      consentFieldset.appendChild(optionWrapper);
     });
 
     form.appendChild(consentFieldset);
@@ -2115,6 +2144,7 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
 
     const formActions = document.createElement('div');
     formActions.className = 'form-actions';
+    formActions.style.marginTop = '16px';
     formActions.appendChild(submitBtn);
     form.appendChild(formActions);
 
@@ -2432,7 +2462,6 @@ const paymentEnabled =
       ? `<div class="event-payment">
         <h4 class="event-section-title">Registration</h4>
         ${ev.payment_note ? `<p class="note event-help">${ev.payment_note}</p>` : ''}
-        <p class="note event-help">Registration required by ${ev.registration_deadline ? formatDate(ev.registration_deadline) : 'deadline'}.</p>
         <div class="form-actions event-payment-actions">
           ${registrationButton}
         </div>
@@ -2464,7 +2493,9 @@ const paymentEnabled =
         ${img}
         <div class="inline-links"><span class="badge">${formatDate(ev.date)}</span>${priceBadge}${availabilityBadge}${typeBadge}${eventTypeBadge}</div>
         <h3>${ev.title}</h3>
-        <p>${ev.description}</p>
+        ${Array.isArray(ev.description_paragraphs) && ev.description_paragraphs.length 
+          ? ev.description_paragraphs.map((para) => `<p>${para}</p>`).join('')
+          : `<p>${ev.description}</p>`}
         ${scheduleBlock}
         ${soldOutNote}
         ${ticketing?.policy ? `<p class="note">${ticketing.policy}</p>` : ''}
