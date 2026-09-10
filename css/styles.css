@@ -1414,9 +1414,72 @@ textarea {
 }
 
 .event-payment,
-.event-seating {
+.event-seating,
+.event-registration {
   margin-top: 12px;
 }
+
+.event-registration-form {
+  padding: 12px;
+  margin-top: 12px;
+  border: 1px solid rgba(0,0,0,0.05);
+  border-radius: 6px;
+  background: #fff;
+}
+
+.event-registration-container {
+  margin-top: 12px;
+}
+
+.event-registration-success {
+  padding: 12px;
+  margin-top: 12px;
+  border: 1px solid rgba(0,0,0,0.05);
+  border-radius: 6px;
+  background: #fff;
+}
+
+.event-registration-consent fieldset {
+  border: none;
+  padding: 0;
+  margin: 12px 0 8px;
+}
+
+.event-registration-consent legend {
+  padding: 0;
+  margin-bottom: 8px;
+  font-size: 1em;
+}
+
+.event-schedule {
+  margin-top: 12px;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: rgba(176, 109, 60, 0.05);
+}
+
+.event-schedule-row {
+  display: grid;
+  gap: 8px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.event-schedule-row:last-child {
+  border-bottom: none;
+}
+
+.event-schedule-row strong {
+  color: var(--accent-strong);
+  font-size: 14px;
+}
+
+.event-schedule-row div {
+  color: var(--text);
+  font-size: 14px;
+}
+
 
 .jam-event-block {
   margin-top: 14px;

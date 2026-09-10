@@ -128,6 +128,38 @@
   "payment_link_url": "",
   "image_url": "assets/events/October_Book_Club.png",
   "image_alt": "Mockingbird Book Club event image for The Amalfi Curse by Sarah Penner, Thursday, October 15th at 6:30 PM"
+},
+{
+  "date": "2026-10-18T16:30:00",
+  "title": "Changing Seasons: Finding Hope and Purpose in Each Chapter of Life",
+  "slug": "changing-seasons",
+  "description": "CHANGE. That word alone can evoke a lot of emotion. For some it's exciting, but for many it is a struggle and stirs up feelings that can be difficult to navigate.\n\nRegardless of your age or stage of life, seasons of change can be challenging. Even in the good seasons, we can learn new skills and tips for how to receive the most enjoyment from them.\n\nAre you in a season of change or anticipating one soon?\n\nJoin Bethany Widmer for Changing Seasons: Finding Hope and Purpose in Each Chapter of Life, a Biblically focused, workshop-style event. Throughout the program, Bethany will share a series of mini talks followed by opportunities for personal reflection and application.\n\nStep away from the hustle and bustle of life for an evening of learning, growing, fellowship, and rejuvenation. Bring a friend or two and join us.",
+  "price": "$25 per person — dinner included",
+  "event_type": "ticketed",
+  "registration_required": true,
+  "registration_deadline": "2026-10-11",
+  "payment_link_url": "https://link.clover.com/urlshortener/gV76BJ",
+  "payment_provider": "Clover",
+  "payment_label": "Register",
+  "payment_url": "https://link.clover.com/urlshortener/gV76BJ",
+  "payment_note": "Advance registration is required by October 11. The $25 registration fee covers dinner and one nonalcoholic beverage. A cash bar will be available. Optional free-will donations for the speaker will be accepted at the event.",
+  "type": "Workshop",
+  "image_url": "assets/events/Changing_Seasons.jpg",
+  "image_alt": "Changing Seasons: Finding Hope and Purpose in Each Chapter of Life with Bethany Widmer at The Mockingbird on Mill Road on Sunday, October 18, 2026",
+  "schedule": [
+    {
+      "time": "4:30 PM",
+      "title": "Doors open for fellowship + drinks"
+    },
+    {
+      "time": "5:00–6:00 PM",
+      "title": "Dinner"
+    },
+    {
+      "time": "6:00–7:30 PM",
+      "title": "Changing Seasons program"
+    }
+  ]
 }
   ]
 }

@@ -1968,6 +1968,235 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
     });
   }
 
+  function renderEventRegistrationForm(ev, emailFallback) {
+    if (!ev || ev.registration_required !== true || !ev.payment_url) return null;
+
+    const wrap = document.createElement('div');
+    wrap.className = 'event-registration';
+
+    const form = document.createElement('form');
+    form.className = 'form-card compact event-registration-form';
+    form.action = 'https://formspree.io/f/xbddjoek';
+    form.method = 'POST';
+
+    // Intro text
+    const intro = document.createElement('p');
+    intro.className = 'note';
+    intro.textContent = 'Complete your registration to continue to payment.';
+    form.appendChild(intro);
+
+    // Recording consent info
+    const consentInfo = document.createElement('p');
+    consentInfo.className = 'note event-help';
+    consentInfo.innerHTML = 'This event will be video recorded for documentation and promotional purposes. At times, audience members may appear in the recording to show audience engagement. Guests who choose not to be recorded will have designated seating available outside the filming area.';
+    form.appendChild(consentInfo);
+
+    // Name field
+    const nameWrap = document.createElement('div');
+    nameWrap.style.marginBottom = '8px';
+    const nameLabel = document.createElement('label');
+    nameLabel.setAttribute('for', 'field-registration-name');
+    nameLabel.innerHTML = 'Name <span class="required">*</span>';
+    const nameInput = document.createElement('input');
+    nameInput.type = 'text';
+    nameInput.id = 'field-registration-name';
+    nameInput.name = 'name';
+    nameInput.required = true;
+    nameWrap.appendChild(nameLabel);
+    nameWrap.appendChild(nameInput);
+    form.appendChild(nameWrap);
+
+    // Phone field
+    const phoneWrap = document.createElement('div');
+    phoneWrap.style.marginBottom = '8px';
+    const phoneLabel = document.createElement('label');
+    phoneLabel.setAttribute('for', 'field-registration-phone');
+    phoneLabel.innerHTML = 'Phone <span class="required">*</span>';
+    const phoneInput = document.createElement('input');
+    phoneInput.type = 'tel';
+    phoneInput.id = 'field-registration-phone';
+    phoneInput.name = 'phone';
+    phoneInput.placeholder = '(555) 555-5555';
+    phoneInput.required = true;
+    phoneWrap.appendChild(phoneLabel);
+    phoneWrap.appendChild(phoneInput);
+    form.appendChild(phoneWrap);
+
+    // Email field
+    const emailWrap = document.createElement('div');
+    emailWrap.style.marginBottom = '8px';
+    const emailLabel = document.createElement('label');
+    emailLabel.setAttribute('for', 'field-registration-email');
+    emailLabel.innerHTML = 'Email <span class="required">*</span>';
+    const emailInput = document.createElement('input');
+    emailInput.type = 'email';
+    emailInput.id = 'field-registration-email';
+    emailInput.name = 'email';
+    emailInput.required = true;
+    emailWrap.appendChild(emailLabel);
+    emailWrap.appendChild(emailInput);
+    form.appendChild(emailWrap);
+
+    // Recording consent fieldset
+    const consentFieldset = document.createElement('fieldset');
+    consentFieldset.style.border = 'none';
+    consentFieldset.style.padding = '0';
+    consentFieldset.style.margin = '12px 0 8px';
+    const consentLegend = document.createElement('legend');
+    consentLegend.innerHTML = 'Recording Consent <span class="required">*</span>';
+    consentLegend.style.padding = '0';
+    consentLegend.style.marginBottom = '8px';
+    consentLegend.style.fontSize = '1em';
+    consentFieldset.appendChild(consentLegend);
+
+    const consentOptions = [
+      {
+        value: 'CONSENT',
+        label: 'I consent to the recording and use of my image, voice, or likeness in connection with this event.'
+      },
+      {
+        value: 'OPT_OUT',
+        label: 'I opt out of being recorded. I understand that designated seating will be available for guests who do not wish to appear in the recording.'
+      }
+    ];
+
+    consentOptions.forEach((option) => {
+      const consentLabel = document.createElement('label');
+      consentLabel.className = 'check-row';
+      const consentRadio = document.createElement('input');
+      consentRadio.type = 'radio';
+      consentRadio.name = 'recording_consent';
+      consentRadio.value = option.value;
+      consentRadio.required = true;
+      const consentText = document.createElement('span');
+      consentText.textContent = option.label;
+      consentLabel.appendChild(consentRadio);
+      consentLabel.appendChild(consentText);
+      consentFieldset.appendChild(consentLabel);
+    });
+
+    form.appendChild(consentFieldset);
+
+    // Hidden fields for form tracking
+    const hiddenFields = {
+      event_title: ev.title || '',
+      event_date_display: formatDate(ev.date),
+      event_datetime_iso: ev.date || '',
+      registration_deadline: ev.registration_deadline || '',
+      registration_status: 'SUBMITTED',
+      payment_status: 'UNCONFIRMED',
+      payment_provider: 'Clover',
+      payment_url: ev.payment_url || '',
+      source: 'changing_seasons_registration'
+    };
+
+    Object.entries(hiddenFields).forEach(([key, value]) => {
+      const hidden = document.createElement('input');
+      hidden.type = 'hidden';
+      hidden.name = key;
+      hidden.value = value;
+      form.appendChild(hidden);
+    });
+
+    // Honeypot for spam prevention
+    const honeypot = document.createElement('input');
+    honeypot.type = 'text';
+    honeypot.name = '_gotcha';
+    honeypot.autocomplete = 'off';
+    honeypot.tabIndex = -1;
+    honeypot.className = 'sr-only';
+    form.appendChild(honeypot);
+
+    // Submit button (will be "Continue to Payment" after success)
+    const submitBtn = document.createElement('button');
+    submitBtn.type = 'submit';
+    submitBtn.className = 'btn btn-primary';
+    submitBtn.textContent = 'Continue to Payment';
+
+    const formActions = document.createElement('div');
+    formActions.className = 'form-actions';
+    formActions.appendChild(submitBtn);
+    form.appendChild(formActions);
+
+    // Status message element
+    const status = document.createElement('p');
+    status.className = 'form-status';
+    status.setAttribute('role', 'status');
+    status.setAttribute('aria-live', 'polite');
+    status.setAttribute('aria-atomic', 'true');
+    status.style.display = 'none';
+    form.appendChild(status);
+
+    wrap.appendChild(form);
+
+    // Initialize form submission handler
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (submitBtn.dataset.submitting === 'true') return;
+
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
+      submitBtn.dataset.submitting = 'true';
+      submitBtn.disabled = true;
+      const defaultLabel = submitBtn.textContent;
+      submitBtn.textContent = 'Sending...';
+      status.style.display = 'none';
+
+      const formData = new FormData(form);
+      fetch('https://formspree.io/f/xbddjoek', {
+        method: 'POST',
+        body: formData,
+        headers: { Accept: 'application/json' }
+      }).then((res) => {
+        if (!res.ok) throw new Error('Formspree error');
+        status.textContent = 'Registration information received. Your spot is not confirmed until payment is completed through Clover.';
+        status.classList.add('is-success');
+        status.style.display = 'block';
+        status.focus();
+        form.style.display = 'none';
+        showPaymentStep(wrap, ev);
+      }).catch(() => {
+        status.textContent = 'Something went wrong. Please try again.';
+        status.classList.add('is-error');
+        status.style.display = 'block';
+        status.focus();
+      }).finally(() => {
+        submitBtn.dataset.submitting = 'false';
+        submitBtn.disabled = false;
+        submitBtn.textContent = defaultLabel;
+      });
+    });
+
+    return wrap;
+
+    function showPaymentStep(container, event) {
+      const paymentDiv = document.createElement('div');
+      paymentDiv.className = 'event-registration-success';
+
+      const successMsg = document.createElement('p');
+      successMsg.className = 'note event-help';
+      successMsg.textContent = 'Your registration has been submitted successfully!';
+      paymentDiv.appendChild(successMsg);
+
+      const paymentCTA = document.createElement('a');
+      paymentCTA.className = 'btn btn-primary';
+      paymentCTA.href = event.payment_url;
+      paymentCTA.target = '_blank';
+      paymentCTA.rel = 'noopener noreferrer';
+      paymentCTA.textContent = `Continue to Clover — Pay ${event.price || '$25'}`;
+
+      const paymentActions = document.createElement('div');
+      paymentActions.className = 'form-actions';
+      paymentActions.appendChild(paymentCTA);
+      paymentDiv.appendChild(paymentActions);
+
+      container.appendChild(paymentDiv);
+    }
+  }
+
   function renderEvents(data, emailFallback) {
     const container = document.getElementById('events-list');
     if (!container) return;
@@ -2159,13 +2388,56 @@ const paymentEnabled =
       const soldOutNote = soldOut
         ? `<p class="note">${ev.sold_out_note || 'This event is sold out — thank you!'}</p>`
         : '';
+
+      // Check if registration-required event
+      const isRegistrationRequired = ev.registration_required === true && ev.registration_deadline;
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      const registrationDeadline = ev.registration_deadline ? new Date(ev.registration_deadline) : null;
+      const registrationClosed = registrationDeadline && today > registrationDeadline;
+
+      // For registration_required events, create a Register button instead of direct payment
+      let registrationButton = '';
+      if (isRegistrationRequired) {
+        if (registrationClosed) {
+          registrationButton = '<p class="note event-help">Online registration has closed. Please contact The Mockingbird with questions about availability.</p>';
+        } else {
+          registrationButton = `<button class="btn btn-primary btn-small event-register-btn" type="button" data-event-slug="${ev.slug || ev.title}">Register</button>`;
+        }
+      }
+
+      // Schedule block for events with schedule
+      let scheduleBlock = '';
+      if (Array.isArray(ev.schedule) && ev.schedule.length > 0) {
+        const scheduleRows = ev.schedule.map((item) => `
+          <div class="event-schedule-row">
+            <strong>${item.time}</strong>
+            <div>${item.title}</div>
+          </div>
+        `).join('');
+        scheduleBlock = `
+          <div class="event-schedule">
+            ${scheduleRows}
+          </div>
+        `;
+      }
+
       const paymentBlock = isTicketed
   ? (soldOut
     ? `<div class="event-payment">
       <h4 class="event-section-title">Tickets</h4>
       <p class="note event-help">This event is sold out.</p>
     </div>`
-    : `
+    : (isRegistrationRequired
+      ? `<div class="event-payment">
+        <h4 class="event-section-title">Registration</h4>
+        ${ev.payment_note ? `<p class="note event-help">${ev.payment_note}</p>` : ''}
+        <p class="note event-help">Registration required by ${ev.registration_deadline ? formatDate(ev.registration_deadline) : 'deadline'}.</p>
+        <div class="form-actions event-payment-actions">
+          ${registrationButton}
+        </div>
+      </div>`
+      : `
     <div class="event-payment">
       <h4 class="event-section-title">Tickets</h4>
       ${ev.payment_note ? `<p class="note event-help">${ev.payment_note}</p>` : ''}
@@ -2177,7 +2449,7 @@ const paymentEnabled =
       ${vendorPaymentDetails}
       ${soldOutOverrideNotice}
       ${ticketCopy}
-    </div>`)
+    </div>`))
   : '';
       const seatingClosedBlock = (soldOut && isTicketed)
         ? `<div class="event-seating">
@@ -2193,6 +2465,7 @@ const paymentEnabled =
         <div class="inline-links"><span class="badge">${formatDate(ev.date)}</span>${priceBadge}${availabilityBadge}${typeBadge}${eventTypeBadge}</div>
         <h3>${ev.title}</h3>
         <p>${ev.description}</p>
+        ${scheduleBlock}
         ${soldOutNote}
         ${ticketing?.policy ? `<p class="note">${ticketing.policy}</p>` : ''}
         ${jamBlock}
@@ -2265,6 +2538,31 @@ const paymentEnabled =
           `;
           seatingBlock.appendChild(form);
           card.appendChild(seatingBlock);
+        }
+      }
+
+      // Handle registration-required events
+      if (isRegistrationRequired && !registrationClosed) {
+        const registrationForm = renderEventRegistrationForm(ev, emailFallback);
+        if (registrationForm) {
+          // Create a container for the registration form (hidden by default)
+          const formContainer = document.createElement('div');
+          formContainer.className = 'event-registration-container';
+          formContainer.style.display = 'none';
+          formContainer.appendChild(registrationForm);
+          card.appendChild(formContainer);
+
+          // Add event listener to Register button
+          const registerBtn = card.querySelector('.event-register-btn');
+          if (registerBtn) {
+            registerBtn.addEventListener('click', (e) => {
+              e.preventDefault();
+              formContainer.style.display = 'block';
+              registerBtn.style.display = 'none';
+              const form = formContainer.querySelector('form');
+              if (form) form.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            });
+          }
         }
       }
 
