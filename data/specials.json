@@ -1,26 +1,25 @@
 {
   "_comment": "Update weekly specials. weekOf should be the Monday of the current week.",
 
-  "weekOf": "2026-08-31",
+  "weekOf": "2026-09-07",
 
-  "dateRange": "September 3–5",
+  "dateRange": "September 10–12",
 
   "items": [
     {
-      "name": "Potato Soup",
+      "name": "Italian Tomato & Zucchini Soup",
       "label": "Soup of the Day",
-      "description": "A warm and comforting creamy potato soup, hearty and satisfying.",
+      "description": "Italian sausage, tomatoes, zucchini, and savory herbs simmered together in a flavorful broth.",
       "notes": [
-        "Vegetarian",
         "Available as cup or bowl",
         "Available as a combo add-on"
       ]
     },
 
     {
-      "name": "Garden Tomato & Cucumber Salad",
+      "name": "Italian Garden Salad",
       "label": "Seasonal Salad",
-      "description": "Crisp romaine topped with fresh tomatoes and cucumbers from our garden, red onion, and Parmesan, served with house-made balsamic-Dijon vinaigrette.",
+      "description": "Crisp romaine topped with fresh garden tomatoes and cucumbers, red onion, pepperoncini, and Parmesan, served with Italian dressing.",
       "notes": [
         "Vegetarian",
         "Gluten-Free"
@@ -28,9 +27,9 @@
     },
 
     {
-      "name": "Chicken & Cheddar Pressed",
+      "name": "Turkey Bacon Ranch Pressed",
       "label": "Featured Pressed Sandwich",
-      "description": "Deli chicken, sharp cheddar, thinly sliced Granny Smith apple, and house-made creamy honey-Dijon on our house bread, pressed golden and crisp.",
+      "description": "Deli turkey, crisp bacon, sharp cheddar, fresh tomato, and ranch on our house bread, pressed golden and crisp.",
       "notes": [
         "Served with pickle and Featured Side"
       ]
@@ -39,7 +38,7 @@
     {
       "name": "Fresh Fruit Cup",
       "label": "Featured Side",
-      "description": "A refreshing mix of fresh pineapple, black seedless grapes, strawberries, Granny Smith apples, and Cara Cara oranges.",
+      "description": "A refreshing mix of fresh strawberries, blueberries, pineapple, watermelon, mandarin oranges, and green grapes.",
       "notes": [
         "Vegetarian",
         "Gluten-Free",
@@ -49,9 +48,9 @@
     },
 
     {
-      "name": "Carrot Cake Cheesecake",
+      "name": "Chocolate Blackberry Clafoutis",
       "label": "Sweet Bite of the Day",
-      "description": "Creamy cheesecake and classic spiced carrot cake come together for a rich twist on two favorite desserts.",
+      "description": "A rich chocolate custard-style dessert baked with juicy blackberries for a decadent twist on the classic French favorite.",
       "notes": [
         "Vegetarian"
       ]
