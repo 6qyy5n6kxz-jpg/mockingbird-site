@@ -16,6 +16,55 @@
   let formStarted = false;
   let submittedSummaryText = '';
 
+  function crmSubmissionId() {
+    const field = $('#party-crm-submission-id');
+    if (!field) return '';
+    if (!field.value) {
+      field.value = typeof crypto?.randomUUID === 'function'
+        ? crypto.randomUUID()
+        : `mockingbird-${Date.now()}-${Math.random().toString(36).slice(2)}`;
+    }
+    return field.value;
+  }
+
+  function formDataObject(formData) {
+    const result = {};
+    formData.forEach((value, key) => {
+      const normalized = typeof value === 'string' ? value : value?.name || '';
+      if (Object.prototype.hasOwnProperty.call(result, key)) {
+        result[key] = Array.isArray(result[key])
+          ? [...result[key], normalized]
+          : [result[key], normalized];
+      } else {
+        result[key] = normalized;
+      }
+    });
+    return result;
+  }
+
+  async function sendCrmIntake(formData) {
+    const endpoint = window.MOCKINGBIRD_CRM_INTAKE_URL || form.dataset.crmIntakeUrl;
+    if (!endpoint || !formData) return;
+    const submissionId = crmSubmissionId();
+    try {
+      const response = await fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          source: 'mockingbird_website',
+          source_submission_id: submissionId,
+          submitted_at: $('#party-submitted-at')?.value || new Date().toISOString(),
+          payload: formDataObject(formData)
+        })
+      });
+      if (!response.ok) throw new Error(`CRM intake failed with ${response.status}`);
+      track('crm_lead_intake_success');
+    } catch (error) {
+      console.warn('CRM lead intake failed; Formspree submission remains authoritative.', error);
+      track('crm_lead_intake_error');
+    }
+  }
+
   const track = (eventName, parameters) => {
     if (typeof window.gtag === 'function') window.gtag('event', eventName, parameters || {});
     else if (Array.isArray(window.dataLayer)) window.dataLayer.push({ event: eventName, ...(parameters || {}) });
@@ -101,6 +150,7 @@
     $('#party-calculator-submission').value = estimateText() || 'Not created';
     $('#party-page-url').value = pageUrl;
     $('#party-submitted-at').value = timestamp;
+    crmSubmissionId();
     $('#party-subject').value = `Private Event Inquiry — ${eventType} — ${date} — ${name}`;
   }
 
@@ -188,8 +238,9 @@
   form.addEventListener('change', renderSummary);
   form.addEventListener('submit', () => track('inquiry_submit_attempt'));
   form.addEventListener('formspree:validate', validateInquiry);
-  form.addEventListener('formspree:success', () => {
+  form.addEventListener('formspree:success', (event) => {
     track('inquiry_submit_success');
+    void sendCrmIntake(event.detail?.formData);
     const submitted = $('[data-submitted-summary]');
     if (submitted) {
       const pre = document.createElement('pre');
