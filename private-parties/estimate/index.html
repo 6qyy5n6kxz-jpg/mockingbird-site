@@ -222,7 +222,7 @@
       <div class="pp-builder-right">
         <div class="card pp-inquiry-card">
           <div class="pp-inquiry-body">
-            <form id="party-form" action="https://formspree.io/f/xbddjoek" method="POST" data-formspree data-success-message="Your event request has been sent." data-error-message="We couldn't send your request right now. Your information is still on this page. Please try again or call The Mockingbird at 419-504-4900." novalidate>
+            <form id="party-form" action="https://formspree.io/f/xbddjoek" method="POST" data-formspree data-crm-intake-url="https://krgvotkqeguvfiowammp.supabase.co/functions/v1/ingest-crm-lead" data-success-message="Your event request has been sent." data-error-message="We couldn't send your request right now. Your information is still on this page. Please try again or call The Mockingbird at 419-504-4900." novalidate>
               <p class="kicker">Start Planning</p>
               <h2>Request availability</h2>
               <section class="pp-event-summary" aria-labelledby="event-summary-title">
@@ -257,6 +257,7 @@
               <input id="party-enhancements-summary" name="Selected enhancements" type="hidden">
               <input id="party-page-url" name="Page URL" type="hidden">
               <input id="party-submitted-at" name="Submission timestamp" type="hidden">
+              <input id="party-crm-submission-id" name="CRM submission id" type="hidden">
               <input id="party-subject" name="_subject" type="hidden" value="Private Event Inquiry">
 
               <fieldset class="pp-form-section">
