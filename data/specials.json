@@ -1,15 +1,15 @@
 {
   "_comment": "Update weekly specials. weekOf should be the Monday of the current week.",
 
-  "weekOf": "2026-09-07",
+  "weekOf": "2026-09-28",
 
-  "dateRange": "September 10–12",
+  "dateRange": "October 1–3",
 
   "items": [
     {
-      "name": "Italian Tomato & Zucchini Soup",
+      "name": "Broccoli Cheddar Soup",
       "label": "Soup of the Day",
-      "description": "Italian sausage, tomatoes, zucchini, and savory herbs simmered together in a flavorful broth.",
+      "description": "A rich and creamy soup loaded with tender broccoli, carrots, and sharp cheddar cheese.",
       "notes": [
         "Available as cup or bowl",
         "Available as a combo add-on"
@@ -17,9 +17,9 @@
     },
 
     {
-      "name": "Italian Garden Salad",
+      "name": "Apple Pecan Harvest Salad",
       "label": "Seasonal Salad",
-      "description": "Crisp romaine topped with fresh garden tomatoes and cucumbers, red onion, pepperoncini, and Parmesan, served with Italian dressing.",
+      "description": "Crisp romaine topped with Granny Smith apple, dried cherries, pecans, and sharp cheddar, served with house-made apple-cider maple vinaigrette.",
       "notes": [
         "Vegetarian",
         "Gluten-Free"
@@ -27,9 +27,9 @@
     },
 
     {
-      "name": "Turkey Bacon Ranch Pressed",
+      "name": "French Onion Roast Beef Pressed",
       "label": "Featured Pressed Sandwich",
-      "description": "Deli turkey, crisp bacon, sharp cheddar, fresh tomato, and ranch on our house bread, pressed golden and crisp.",
+      "description": "Thin-sliced roast beef, melted provolone, and caramelized onions on our house bread, pressed golden and crisp and served with au jus for dipping.",
       "notes": [
         "Served with pickle and Featured Side"
       ]
@@ -38,7 +38,7 @@
     {
       "name": "Fresh Fruit Cup",
       "label": "Featured Side",
-      "description": "A refreshing mix of fresh strawberries, blueberries, pineapple, watermelon, mandarin oranges, and green grapes.",
+      "description": "A fresh mix of pineapple, red grapes, strawberries, and mandarin oranges.",
       "notes": [
         "Vegetarian",
         "Gluten-Free",
@@ -48,9 +48,9 @@
     },
 
     {
-      "name": "Chocolate Blackberry Clafoutis",
+      "name": "Warm Apple Crisp",
       "label": "Sweet Bite of the Day",
-      "description": "A rich chocolate custard-style dessert baked with juicy blackberries for a decadent twist on the classic French favorite.",
+      "description": "Warm cinnamon-spiced apples topped with a buttery oat crumble and served with vanilla ice cream.",
       "notes": [
         "Vegetarian"
       ]
