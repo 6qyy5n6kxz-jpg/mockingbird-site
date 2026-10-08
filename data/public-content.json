@@ -1,0 +1,5 @@
+{
+  "enabled": false,
+  "events_endpoint": "",
+  "_setup": "Deploy mockingbird-public-content in the Command Center Supabase project. Copy its feed URL from Mockingbird Public Events. Review/publish replacement events, then set enabled to true. Never put credentials here."
+}
