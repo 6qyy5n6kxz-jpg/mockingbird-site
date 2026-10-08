@@ -1,15 +1,16 @@
+
 {
   "_comment": "Update weekly specials. weekOf should be the Monday of the current week.",
 
-  "weekOf": "2026-09-28",
+  "weekOf": "2026-10-05",
 
-  "dateRange": "October 1–3",
+  "dateRange": "October 8–10",
 
   "items": [
     {
-      "name": "Broccoli Cheddar Soup",
+      "name": "Italian Lentil Soup",
       "label": "Soup of the Day",
-      "description": "A rich and creamy soup loaded with tender broccoli, carrots, and sharp cheddar cheese.",
+      "description": "A hearty Italian-inspired soup with tender lentils, tomatoes, carrots, celery, and kale, simmered with aromatic herbs in a savory broth.",
       "notes": [
         "Available as cup or bowl",
         "Available as a combo add-on"
@@ -17,9 +18,9 @@
     },
 
     {
-      "name": "Apple Pecan Harvest Salad",
+      "name": "Cranberry Walnut Harvest Salad",
       "label": "Seasonal Salad",
-      "description": "Crisp romaine topped with Granny Smith apple, dried cherries, pecans, and sharp cheddar, served with house-made apple-cider maple vinaigrette.",
+      "description": "Crisp romaine topped with dried cranberries, toasted walnuts, red onion, and crumbled feta, served with house-made balsamic vinaigrette.",
       "notes": [
         "Vegetarian",
         "Gluten-Free"
@@ -27,30 +28,29 @@
     },
 
     {
-      "name": "French Onion Roast Beef Pressed",
+      "name": "Chicken Bacon Cheddar Pressed",
       "label": "Featured Pressed Sandwich",
-      "description": "Thin-sliced roast beef, melted provolone, and caramelized onions on our house bread, pressed golden and crisp and served with au jus for dipping.",
+      "description": "Tender chicken thigh, crisp bacon, melted sharp cheddar, and maple-pepper mayo on our house bread, pressed golden and crisp.",
       "notes": [
         "Served with pickle and Featured Side"
       ]
     },
 
     {
-      "name": "Fresh Fruit Cup",
+      "name": "Parmesan Herb Pasta Salad",
       "label": "Featured Side",
-      "description": "A fresh mix of pineapple, red grapes, strawberries, and mandarin oranges.",
+      "description": "Tender rotini tossed with Parmesan, fresh parsley, Italian herbs, and a light, tangy vinaigrette.",
       "notes": [
         "Vegetarian",
-        "Gluten-Free",
         "Served with all pressed sandwiches",
         "Included in combos"
       ]
     },
 
     {
-      "name": "Warm Apple Crisp",
+      "name": "Glazed Apple Cake",
       "label": "Sweet Bite of the Day",
-      "description": "Warm cinnamon-spiced apples topped with a buttery oat crumble and served with vanilla ice cream.",
+      "description": "Moist, cinnamon-spiced apple cake with raisins and walnuts, finished with a rich, buttery brown sugar glaze.",
       "notes": [
         "Vegetarian"
       ]
