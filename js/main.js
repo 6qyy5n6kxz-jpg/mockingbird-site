@@ -676,6 +676,10 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
   }
 
   async function fetchJSON(filename, fallback) {
+    if (filename.split('?')[0] === 'events.json' && window.MockingbirdPublicEvents) {
+      const published = await window.MockingbirdPublicEvents.load(withBase);
+      if (published !== null) return published;
+    }
     const url = withBase(`/data/${filename}`);
     try {
       if (DEBUG && filename === 'menu.json') dbg('fetchJSON start', { filename, url });
@@ -2230,6 +2234,11 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
   function renderEvents(data, emailFallback) {
     const container = document.getElementById('events-list');
     if (!container) return;
+    if (data?.source === 'command-center') {
+      window.MockingbirdPublicEvents.render(data, container);
+      enableFadeIn();
+      return;
+    }
     validateEvents(data);
     const now = new Date();
     const events = (data?.events || []).filter((ev) => new Date(ev.date) >= now);
@@ -3248,6 +3257,11 @@ const paymentEnabled =
     function renderEventsPreview(data) {
     const container = document.getElementById('events-preview');
     if (!container) return;
+    if (data?.source === 'command-center') {
+      window.MockingbirdPublicEvents.render(data, container, true);
+      enableFadeIn();
+      return;
+    }
 
     const now = new Date();
 
@@ -4420,3 +4434,4 @@ const paymentEnabled =
     initializeTicketQuantitySelectors
   };
 })();
+

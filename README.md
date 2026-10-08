@@ -2,6 +2,10 @@
 
 A fast, mobile-first static site for the Mockingbird restaurant and bar. Built with plain HTML/CSS/JS and JSON data so updates can be made without touching markup.
 
+Events can now come from owner-approved Command Center content. See
+[public event publishing](docs/public-events-publishing.md) for the one-time
+feed setup, owner workflow and rollout checks. Other content remains JSON-based.
+
 ## Quick start
 1) Open the project in VS Code or your editor of choice.
 2) Use a local static server (e.g., the VS Code Live Server extension) and open `index.html`.
@@ -22,6 +26,10 @@ All live content is stored in `/data`. Update these files and refresh:
 4) Save and refresh the `/specials/` page.
 
 ### Updating events
+When `data/public-content.json` has `enabled:true`, create/review/publish events
+in Command Center; both website surfaces read that feed. The steps below apply
+only to legacy mode (`enabled:false`).
+
 1) Open `data/events.json`.
 2) Add or edit event objects. Set `payment_link_url` to a Stripe link for ticketed events; leave blank to show an email RSVP button.
 3) Remove past events to hide them. The page auto-sorts upcoming dates.
@@ -61,3 +69,4 @@ Place hero/gallery images in `/assets/images` and reference the filenames in `da
 - Provided filenames expected: `hero.jpg`, `interior1.jpg`, `interior2.jpg`, `interior3.jpg`, `food1.jpg`, `food2.jpg`, `food3.jpg`, `bar1.jpg`, `og.jpg`. Update `data/site.json` to match if you swap files.
 - Export settings: JPG/WebP, ~75–85% quality, resize hero to ~2000px wide, interior/food/bar to ~1400px wide, and keep each under ~400KB when possible.
 - Social sharing: `og.jpg` is used for OpenGraph/Twitter cards—replace it in `assets/images/` and `data/site.json` when you add a new image.
+
