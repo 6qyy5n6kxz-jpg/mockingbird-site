@@ -51,3 +51,11 @@ Run `node --test tests/public-events.test.cjs`, `node --check js/main.js`, and
 production dependencies. Tests cover enabled/disabled mode, errors, empty feeds,
 staleness, ongoing events, safe text/URLs, Eastern DST and both card variants.
 The Command Center PR provides transactional database lifecycle/security checks.
+
+## Registration forms
+
+Command Center events can use `registration_mode: formspree` with an allowlisted `https://formspree.io/f/<id>` submission URL, optional Eastern registration deadline and recording-consent choice. The public card shows a Register form before revealing the optional payment link; the homepage Register button takes guests to that event form on `/events/`. Name, phone and email are required. Consent is explicitly chosen (consent or opt-out), never preselected.
+
+Deploy the companion Command Center registration migration/frontend before configuring and republishing these events. Existing snapshots without these fields continue using external links. Submissions remain in Formspree and payment is unconfirmed until completed/reconciled separately. No attendee records or capacity controls are added by this bridge. Deadline enforcement is client-side; close Formspree separately for server-side enforcement.
+
+For Changing Seasons use https://formspree.io/f/xbddjoek, payment https://link.clover.com/urlshortener/gV76BJ, deadline October 11, 2026 and recording consent enabled.
