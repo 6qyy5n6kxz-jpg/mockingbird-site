@@ -676,6 +676,10 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
   }
 
   async function fetchJSON(filename, fallback) {
+    if (filename.split('?')[0] === 'specials.json' && window.MockingbirdPublicSpecials) {
+      const published = await window.MockingbirdPublicSpecials.load(withBase);
+      if (published !== null) return published;
+    }
     if (filename.split('?')[0] === 'events.json' && window.MockingbirdPublicEvents) {
       const published = await window.MockingbirdPublicEvents.load(withBase);
       if (published !== null) return published;
@@ -1415,10 +1419,17 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
       if (key) specials.set(key, item);
     });
     const featuredSide = specials.get('Featured Side');
+    if (specialsData?.source === 'command-center' && !featuredSide) {
+      const comboSection = Array.from(container.querySelectorAll('section.menu-category'))
+        .find((section) => section.querySelector('.kicker')?.textContent?.trim() === 'Combos');
+      comboSection?.querySelectorAll('.menu-combo-side, .note div').forEach((row) => {
+        if ((row.textContent || '').toLowerCase().includes('featured side')) row.textContent = 'Featured Side: please ask what is available.';
+      });
+    }
     if (featuredSide?.name) {
       const comboSection = Array.from(container.querySelectorAll('section.menu-category'))
         .find((section) => section.querySelector('.kicker')?.textContent?.trim() === 'Combos');
-      const note = comboSection?.querySelector('.note');
+      const note = comboSection?.querySelector('.menu-combo-side') || comboSection?.querySelector('.note');
       if (note) {
         const rawName = String(featuredSide.name || '').trim();
         const cleanedName = rawName.replace(/^featured side[:\s-]*/i, '').replace(/\.$/, '').trim();
@@ -1437,10 +1448,17 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
     rows.forEach((row) => {
       const label = row.getAttribute('data-special-label');
       const match = label ? specials.get(label) : null;
-      if (!match) return;
+      if (!match) {
+        if (specialsData?.source === 'command-center') row.style.display = 'none';
+        return;
+      }
       const nameEl = row.querySelector('[data-special-name]');
       const descEl = row.querySelector('[data-special-description]');
-      if (nameEl && match.name) nameEl.textContent = match.name;
+      if (nameEl && match.name) nameEl.textContent = match.name + (match.vegetarian ? ' · V' : '') + (match.glutenFree ? ' · GF' : '');
+      if (specialsData?.source === 'command-center') {
+        const priceEl = row.querySelector('.price.note');
+        if (priceEl && match.price) priceEl.textContent = match.price;
+      }
       if (descEl) {
         const section = row.closest('section.menu-category');
         const sectionName = section?.querySelector('.kicker')?.textContent?.trim() || '';
@@ -1461,13 +1479,23 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
           prefix = prefixEl ? prefixEl.outerHTML : (rawPrefix ? rawPrefix : '');
         }
         const parts = [];
+        const escape = (value) => String(value).replace(/[&<>"']/g, (character) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[character]));
+        if (label === 'Soup of the Day' && match.secondaryPrice) {
+          prefix = `<span class="menu-size-pricing">Cup ${escape(match.price)} · Bowl ${escape(match.secondaryPrice)}</span>`;
+        }
         if (prefix) parts.push(prefix);
-        if (match.description) parts.push(match.description);
+        if (match.description) parts.push(escape(match.description));
         const notes = Array.isArray(match.notes) ? match.notes.filter(Boolean) : [];
-        notes.forEach((note) => parts.push(String(note)));
+        notes.forEach((note) => parts.push(escape(note)));
         if (parts.length) descEl.innerHTML = parts.join('<br>');
       }
     });
+    if (specialsData?.source === 'command-center' && specials.size) {
+      const legend = document.createElement('p');
+      legend.className = 'note';
+      legend.textContent = 'V = vegetarian · GF = gluten-free';
+      container.prepend(legend);
+    }
   }
 
   function resolveMenuPdfUrl(site) {
@@ -1890,19 +1918,25 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
       return;
     }
     container.innerHTML = '';
+    const escape = (value) => String(value).replace(/[&<>"']/g, (character) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[character]));
+    if (data.source === 'command-center') {
+      const legend = document.createElement('p');
+      legend.className = 'note'; legend.textContent = 'V = vegetarian · GF = gluten-free';
+      container.appendChild(legend);
+    }
     data.items.forEach((item) => {
       const card = document.createElement('div');
       card.className = 'card fade-in';
-      const pillText = (item.label && String(item.label).trim()) ? item.label : 'Weekly special';
+      const pillText = (item.label && String(item.label).trim()) ? escape(item.label) : 'Weekly special';
       const notes = Array.isArray(item.notes) && item.notes.length
-        ? `<div class="note">${item.notes.join(' · ')}</div>`
+        ? `<div class="note">${item.notes.map(escape).join(' · ')}</div>`
         : '';
       card.innerHTML = `
-        <div class="inline-links"><span class="badge">${pillText}</span>${item.pairing ? `<span class="badge">Pairing: ${item.pairing}</span>` : ''}</div>
-        <h3>${item.name}</h3>
-        <p>${item.description}</p>
+        <div class="inline-links"><span class="badge">${pillText}</span>${item.vegetarian ? '<span class="badge">V</span>' : ''}${item.glutenFree ? '<span class="badge">GF</span>' : ''}${item.pairing ? `<span class="badge">Pairing: ${escape(item.pairing)}</span>` : ''}</div>
+        <h3>${escape(item.name)}</h3>
+        <p>${escape(item.description || '')}</p>
         ${notes}
-        ${item.price ? `<strong>${item.price}</strong>` : ''}
+        ${item.price ? `<strong>${escape(item.price)}${item.secondaryPrice ? ` cup · ${escape(item.secondaryPrice)} bowl` : ''}</strong>` : ''}
       `;
       container.appendChild(card);
     });
@@ -3212,36 +3246,44 @@ const paymentEnabled =
   }
 
   container.innerHTML = '';
+  const escape = (value) => String(value).replace(/[&<>"']/g, (character) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[character]));
+  if (data.source === 'command-center') {
+    const legend = document.createElement('p');
+    legend.className = 'note'; legend.textContent = 'V = vegetarian · GF = gluten-free';
+    container.appendChild(legend);
+  }
 
   data.items.slice(0, 5).forEach((item) => {
     const card = document.createElement('article');
     card.className = 'card fade-in';
 
     const label = item.label
-      ? `<span class="badge">${item.label}</span>`
+      ? `<span class="badge">${escape(item.label)}</span>`
       : '';
 
     const notes = Array.isArray(item.notes) && item.notes.length
-      ? `<p class="note">${item.notes.join(' · ')}</p>`
+      ? `<p class="note">${item.notes.map(escape).join(' · ')}</p>`
       : '';
 
     const pairing = item.pairing
-      ? `<span class="badge badge-soft">Pairing: ${item.pairing}</span>`
+      ? `<span class="badge badge-soft">Pairing: ${escape(item.pairing)}</span>`
       : '';
 
     const price = item.price
-      ? `<strong>${item.price}</strong>`
+      ? `<strong>${escape(item.price)}${item.secondaryPrice ? ` cup · ${escape(item.secondaryPrice)} bowl` : ''}</strong>`
       : '';
 
     card.innerHTML = `
       <div class="inline-links">
         ${label}
+        ${item.vegetarian ? '<span class="badge">V</span>' : ''}
+        ${item.glutenFree ? '<span class="badge">GF</span>' : ''}
         ${pairing}
       </div>
 
-      <h3>${item.name}</h3>
+      <h3>${escape(item.name)}</h3>
 
-      ${item.description ? `<p>${item.description}</p>` : ''}
+      ${item.description ? `<p>${escape(item.description)}</p>` : ''}
 
       ${notes}
 
