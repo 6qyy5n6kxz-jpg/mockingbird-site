@@ -9,5 +9,7 @@ jobs:
         with:
           node-version: 24
       - run: node --test tests/public-events.test.cjs
+      - run: node --test tests/public-specials.test.cjs
       - run: node --check js/main.js
       - run: node --check js/public-events.js
+      - run: node --check js/public-specials.js
