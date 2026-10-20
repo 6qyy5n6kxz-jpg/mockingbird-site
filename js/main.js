@@ -2929,7 +2929,7 @@ const paymentEnabled =
     const title = config.title || 'Join Event Updates';
     const description = config.description || 'Get event updates, auction reminders, sponsor announcements, and donation reminders.';
     container.innerHTML = `
-      <form class="fade-in signup-form" action="${action}" method="POST" data-formspree data-success-message="${config.success_message || 'Thanks. You’re signed up.'}" data-error-message="${config.error_message || 'Something went wrong. Please try again.'}">
+      <form class="fade-in signup-form" action="${action}" method="POST" data-formspree data-success-message="${config.success_message || 'Thanks! Check your email and tap the link to confirm event updates.'}" data-error-message="${config.error_message || 'Something went wrong. Please try again.'}">
         <p class="kicker">Join Event Updates</p>
         <h2>${title}</h2>
         <p class="note">${description}</p>
@@ -2952,8 +2952,51 @@ const paymentEnabled =
         <p class="form-status" role="status" aria-live="polite" aria-atomic="true" style="display:none;"></p>
       </form>
     `;
-    initFormspreeForm(container.querySelector('form'));
+    const signupForm = container.querySelector('form');
+    initFormspreeForm(signupForm);
+    addToMockingbirdNewsletter(signupForm);
     enableFadeIn();
+  }
+
+  // Also add the person to The Mockingbird email list in the Frank Creations Command Center
+  // (Formspree still delivers the interests). They get an email to confirm first.
+  function loadFrankNewsletter() {
+    if (document.querySelector('script[data-frank-newsletter]')) return;
+    const script = document.createElement('script');
+    script.src = 'https://frank-creations-booking-center.vercel.app/newsletter-signup.js';
+    script.defer = true;
+    script.dataset.frankNewsletter = '1';
+    document.head.appendChild(script);
+  }
+
+  // Site-wide signup at the top of every page footer (The Mockingbird list in the
+  // Frank Creations Command Center; new subscribers confirm by email).
+  function renderFooterNewsletter() {
+    const container = document.querySelector('footer.footer .container');
+    if (!container || container.querySelector('[data-newsletter-signup]')) return;
+    const block = document.createElement('div');
+    block.className = 'footer-newsletter';
+    block.setAttribute('data-newsletter-signup', 'the-mockingbird');
+    block.setAttribute('data-title', 'Get the weekly specials');
+    block.setAttribute('data-description', 'This week’s specials, live music and what’s happening on Mill Road.');
+    block.setAttribute('data-button', 'Sign me up');
+    block.setAttribute('data-theme', 'dark');
+    container.insertBefore(block, container.firstChild);
+    loadFrankNewsletter();
+  }
+
+  function addToMockingbirdNewsletter(form) {
+    if (!form) return;
+    loadFrankNewsletter();
+    form.addEventListener('submit', () => {
+      const email = form.querySelector('[name="email"]')?.value.trim();
+      if (!email || !window.FrankNewsletter || !form.checkValidity()) return;
+      window.FrankNewsletter.subscribe({
+        list: 'the-mockingbird',
+        email,
+        first_name: form.querySelector('[name="first_name"]')?.value.trim() || ''
+      }).catch(() => {});
+    });
   }
 
   function getAuctionFeaturedItems(data, limit = 3) {
@@ -4431,6 +4474,7 @@ const paymentEnabled =
     setupBackToTop();
     enableFadeIn();
     initContactForm();
+    renderFooterNewsletter();
     if (document.getElementById('private-menu-builder')) {
       const pricingModule = window.PrivateMenuPricing;
       if (pricingModule?.MENUS) {
