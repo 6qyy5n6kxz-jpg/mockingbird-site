@@ -4228,3 +4228,8 @@ textarea {
     grid-template-columns: 1fr;
   }
 }
+
+/* Footer newsletter signup (rendered by the Frank Creations Command Center widget) */
+.footer-newsletter { margin: 0 0 28px; padding-bottom: 24px; border-bottom: 1px solid rgba(255, 255, 255, .14); }
+.footer-newsletter .fcn-form { max-width: 560px; }
+.footer-newsletter .fcn-form h3 { color: #fff; }
