@@ -90,14 +90,14 @@
     script.id = 'localbusiness-schema';
     script.textContent = `{
   "@context": "https://schema.org",
-  "@type": ["CafeOrCoffeeShop", "WineBar"],
+  "@type": ["WineBar", "EventVenue"],
   "name": "The Mockingbird on Mill Road",
   "url": "https://themockingbirdonmillroad.com/",
   "image": {
     "@type": "ImageObject",
     "url": "https://themockingbirdonmillroad.com/assets/images/og.jpg"
   },
-  "description": "The Mockingbird on Mill Road is a cozy wine café and event space in Graytown, OH featuring live music, trivia nights, book club, private parties, and seasonal food and drinks.",
+  "description": "The Mockingbird is a wine and music house in the country, made for finding your next favorite.",
   "priceRange": "$$",
   "address": {
     "@type": "PostalAddress",
@@ -1071,8 +1071,8 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
         <button class="mobile-nav-toggle" aria-label="Toggle navigation" aria-controls="site-nav" aria-expanded="false">☰</button>
         <nav id="site-nav" class="nav-menu" aria-label="Primary">
           <ul class="nav-primary">
-            <li><a data-nav="menu">Menu</a></li>
             <li><a data-nav="drinks">Drinks</a></li>
+            <li><a data-nav="menu">Menu</a></li>
             <li><a data-nav="specials">Specials</a></li>
             <li><a data-nav="events">Events</a></li>
             <li><a data-nav="jam">Jam</a></li>
@@ -3560,7 +3560,7 @@ const paymentEnabled =
       if (phoneHref) actions.push(`<a class="btn btn-primary" href="${phoneHref}">${giftData.cta_label || 'Call to purchase'}</a>`);
       if (onlineUrl) actions.push(`<a class="btn btn-secondary" href="${onlineUrl}" target="_blank" rel="noopener noreferrer">Buy Gift Card Online</a>`);
       if (!onlineUrl && siteEmail) actions.push(`<a class="btn btn-ghost" href="${siteEmail}">Email us</a>`);
-      container.innerHTML = `<div class="card fade-in"><h3>${giftData.title || 'Gift Cards'}</h3><p>Pick up a physical card at the bar or call to load one for dinner, drinks, specials, or events.</p><p class="note">Redeem at Mockingbird when you visit. Custom amounts available when you call or email.</p>${actions.length ? `<div class="inline-links">${actions.join('')}</div>` : ''}</div>`;
+      container.innerHTML = `<div class="card fade-in"><h3>${giftData.title || 'Gift Cards'}</h3><p>Pick up a physical card at the bar or call to load one for wine, music nights, food or events.</p><p class="note">Redeem at Mockingbird when you visit. Custom amounts available when you call or email.</p>${actions.length ? `<div class="inline-links">${actions.join('')}</div>` : ''}</div>`;
       enableFadeIn();
       updateDebugSummaryDisplay();
       return;
@@ -4428,7 +4428,7 @@ const paymentEnabled =
     }
     const data = {
       '@context': 'https://schema.org',
-      '@type': document.getElementById('party-form') ? ['Restaurant', 'EventVenue'] : 'Restaurant',
+      '@type': ['WineBar', 'EventVenue'],
       name: site.name,
       description: site.description,
       telephone: site.phone,
