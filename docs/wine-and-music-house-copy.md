@@ -8,7 +8,14 @@ Meta description (148 characters): A wine and music house in the country. Explor
 
 ## 2. Homepage hero options
 
-Option 1 — implemented
+Implemented combination: Option 3’s headline with Option 1’s subheadline and buttons.
+
+- Headline: Good wine. A song worth staying for.
+- Subheadline: Twenty wines by the glass. Music to make a night of. A country farmhouse in Graytown where your next favorite is waiting.
+- Primary button: Find Your Night → /events/
+- Secondary button: Explore the Drinks → /drinks/
+
+Option 1
 
 - Headline: A little country. A lot to discover.
 - Subheadline: Twenty wines by the glass. Music to make a night of. A country farmhouse in Graytown where your next favorite is waiting.
@@ -31,13 +38,13 @@ Option 3
 
 ## 3. Homepage order and full copy
 
-Hero → what we are → wine, flights and bottle shop → music and events → food → farmhouse → private parties → wine club → visit and hours.
+Hero → what we are → wine, flights and bottle shop → music and events → food → gift cards → private parties → wine club → visit and hours.
 
 The events and specials previews remain connected to the existing publishing feed. Hours, address and phone remain managed in data/site.json. No event dates or service hours were invented for this rebrand.
 
 A wine and music house in the country
 
-# A little country. A lot to discover.
+# Good wine. A song worth staying for.
 
 Twenty wines by the glass. Music to make a night of. A country farmhouse in Graytown where your next favorite is waiting.
 
@@ -53,6 +60,8 @@ Pick a date. Gather your favorite people. Head for the farmhouse.
 
 The Mockingbird is a wine and music house in Graytown, Ohio. Come for a wine you haven’t met, a song you love, and time together that doesn’t need rushing. Bring your curiosity. We’ll help with the wine.
 
+A patio, a studio side and a tasting room give you a few ways to settle in.
+
 Wine, flights + the bottle shop
 
 ## Find your next favorite.
@@ -61,13 +70,11 @@ Our 20 wines by the glass are listed sweet to dry. Start where you’re comforta
 
 Build your own flight: any 4 wines or tap pours for $15. Mix familiar favorites with something new.
 
-Six taps include Peach Mango and Cucumber Lime sangria. Explore hazy IPAs, porters and a barrel-aged rye ale, with familiar beer favorites, too.
+Our taps include Peach Mango and Cucumber Lime sangria. Explore hazy IPAs, porters and a barrel-aged rye ale, with familiar beer favorites, too.
 
 ### A bottle for another evening.
 
 Our bottle shop has wines you won’t find at the grocery store. Tell us what you enjoy or what you’re bringing it to. We’ll help you choose.
-
-Explore the Drinks
 
 Music + events
 
@@ -77,7 +84,7 @@ Some nights invite a singalong. Some ask you to lean in and listen.
 
 ### Night Singer Sessions
 
-Our listening-room series gives the songs your full attention. Settle in for a night built around listening.
+Ticketed, candlelit and limited to 32 seats. Our listening-room series is built for leaning in: phones away, songs first.
 
 ### A Change of Plans
 
@@ -108,13 +115,13 @@ Make room on the table for cheese and charcuterie boards, homemade flatbreads, p
 See the Menu
 This Week’s Specials →
 
-The farmhouse
+Gift cards
 
-## Find your corner of the country.
+## Give a night in the country
 
-A patio, a studio side and a tasting room. Different corners of the same welcoming house.
+Give someone wine, music and a farmhouse evening to look forward to.
 
-Come as a couple, bring your friends, or meet here for a night you’ve been meaning to plan. There’s room to slow down and enjoy where you are.
+Give a Gift Card → /gift-cards/
 
 Private parties
 
@@ -132,9 +139,15 @@ Coming early 2027
 
 The Mockingbird Wine Club launches in early 2027.
 
-If finding a new favorite is your kind of fun, keep an eye on what’s next. We’ll share membership details as launch gets closer.
+Founding memberships will open soon. Leave your name and email to hear when they’re ready.
 
-Wine Club Updates
+Signup fields: Name and Email (both required).
+
+Sign up for emails about the Wine Club launch.
+
+Button: Get first access
+
+Success message: Thanks — you’re on the list. We’ll email you when founding memberships open.
 
 Plan your visit
 
@@ -163,6 +176,8 @@ The Mockingbird is a wine and music house in the country, made for finding your 
 ### Drinks
 
 Explore 20 wines by the glass, listed sweet to dry, or build a flight of any 4 wines or tap pours for $15. There’s sangria on tap, craft beer and a bottle shop to explore. Tell us what you like. We’ll help you find a place to start.
+
+Bottle carryout coming Monday–Wednesday evenings in 2027.
 
 ### Menu
 
@@ -204,7 +219,19 @@ Try Matthew Fritz Sauvignon Blanc for dry, zesty grapefruit and lime. Or stay wi
 
 Try La Posta Pizzella Malbec for a dry, round red with plum and cocoa notes. Prefer another dark beer? Try Zywiec Porter for chocolate, caramel and smooth roast.
 
+### If you like light beer like Bud Light…
+
+Try Juniper Low Rider Light Lager.
+
+### If you like seltzers like White Claw…
+
+Try Vikre Distillery wine cocktails.
+
 Ask us about today’s selections. Beer bottles and cans are separate from the build-your-own flight.
+
+### Standard Drinks menu offering
+
+Bucket of Beer · 6 for $15. Choose from Garage Beer Lime, Rhinegeist Cincy Light, Busch Light and Busch Light Apple.
 
 ## 7. What to stop saying
 
@@ -215,8 +242,8 @@ Ask us about today’s selections. Beer bottles and cans are separate from the b
 - “Beyond the usual” and other comparisons. Name our own wines, music and farmhouse experience directly.
 - “Not a bargain club,” “true wine enthusiast” or other language that sorts guests by expertise or budget. Invite curiosity.
 - “Join now,” draft club prices, guaranteed tasting benefits, exclusive savings or other unconfirmed launch terms. Say “Coming early 2027” until details are ready.
-- Free alcohol, drink discounts and happy-hour promises. Present the confirmed flight as a regular menu offering.
+- Free alcohol, drink discounts and happy-hour promises. Present the confirmed flight and Bucket of Beer prices as regular menu offerings.
 
 ## Editorial boundaries
 
-The new copy does not claim that every named music format runs every week. Calendar dates and ticket details remain on the event listings. Existing guest reviews, menu item prices, private-party booking terms and service hours are preserved. The old bucket promotion was removed from the drink-list footer. Existing individual beverage listings were not reclassified as part of the positioning rewrite.
+The new copy does not claim that every named music format runs every week. Calendar dates and ticket details remain on the event listings. Existing guest reviews, menu item prices, private-party booking terms and service hours are preserved. Bucket of Beer (6 for $15) is listed as a standard menu offering in the drink-list footer. Existing individual beverage listings were not reclassified as part of the positioning rewrite.

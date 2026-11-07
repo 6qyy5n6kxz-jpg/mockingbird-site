@@ -39,9 +39,21 @@
 <section class="section fade-in"><div class="container"><p class="kicker">Coming early 2027</p>
 <h1>The Mockingbird Wine Club</h1>
 <p class="lead">More wine discoveries are on the way.</p>
-<p>Our wine club launches in early 2027. We’ll share membership details as launch gets closer.</p>
+<p>Our wine club launches in early 2027. Founding memberships will open soon. Leave your name and email to hear when they’re ready.</p>
 <p>In the meantime, explore the bottle shop and tell us what you enjoy. We’ll help you choose a bottle for your next evening in.</p>
-<div class="inline-links"><a class="btn btn-primary" data-nav="drinks">Explore the Drinks</a><a class="btn btn-secondary" data-nav="contact">Ask About the Wine Club</a></div></div></section>
+<div class="inline-links"><a class="btn btn-primary" data-nav="drinks">Explore the Drinks</a></div>
+<form id="wineclub-form" class="signup-form" action="https://formspree.io/f/xbddjoek" method="POST" data-formspree data-success-message="Thanks — you’re on the list. We’ll email you when founding memberships open.">
+  <label for="wineclub-name">Name</label>
+  <input id="wineclub-name" name="name" autocomplete="name" required>
+  <label for="wineclub-email">Email</label>
+  <input id="wineclub-email" name="email" type="email" autocomplete="email" required>
+  <input type="hidden" name="subject" value="Wine Club — Founding Membership Interest">
+  <input type="hidden" name="page" value="Wine Club">
+  <p class="note">Sign up for emails about the Wine Club launch.</p>
+  <div class="form-actions"><button type="submit" class="btn btn-secondary">Get first access</button></div>
+  <p class="form-status" role="status" aria-live="polite" aria-atomic="true" style="display:none;"></p>
+</form>
+</div></section>
 
   </main>
 
