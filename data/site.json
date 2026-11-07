@@ -2,12 +2,12 @@
   "_comment": "Update contact info, hours, social links, and image filenames here. All pages read from this file.",
   "name": "The Mockingbird on Mill Road",
   "shortName": "Mockingbird",
-  "tagline": "The Mockingbird Wine Café",
-    "heroHeadline": "Come hungry. Stay awhile.",
-  "heroSubhead": "From-scratch food, wine, sangria, beer, and a country setting worth slowing down for.",
-  "heroLede": "Weekly specials, wine, sangria, beer, events, and warm hospitality in Graytown.",
-  "description": "A cozy wine café serving Graytown with seasonal cooking, weekly specials, curated wine, craft beverages, and no-proof options.",
-  "seoDescription": "The Mockingbird on Mill Road is a wine café in Graytown, OH serving seasonal cooking, curated wines, craft beverages, and weekly specials.",
+  "tagline": "The Mockingbird is a wine and music house in the country, made for finding your next favorite.",
+    "heroHeadline": "Good wine. A song worth staying for.",
+  "heroSubhead": "Twenty wines by the glass. Music to make a night of. A country farmhouse in Graytown where your next favorite is waiting.",
+  "heroLede": "Twenty wines by the glass. Music to make a night of. A country farmhouse in Graytown where your next favorite is waiting.",
+  "description": "The Mockingbird is a wine and music house in the country, made for finding your next favorite.",
+  "seoDescription": "A wine and music house in the country. Explore 20 wines by the glass, flights, live music, a bottle shop and farmhouse gatherings in Graytown, Ohio.",
   "locationShort": "Graytown, OH",
   "images": {
         "hero": { "src": "assets/images/hero.jpg", "fallback": "assets/images/hero.jpg", "alt": "The Mockingbird farmhouse exterior and patio in Graytown, Ohio" },
@@ -30,7 +30,7 @@
     "alt": "Wine and two glasses at sunset on The Mockingbird patio",
     "width": 960,
     "height": 768,
-    "caption": "Stay for another glass"
+    "caption": "Wine, sunset + good company"
   },
   {
     "src": "assets/images/a-change-of-plans-live-music.webp",
@@ -94,9 +94,9 @@
   "trust": {
     "heading": "Why Mockingbird",
     "bullets": [
-      "Dinner-forward seasonal specials — updated weekly",
-      "Curated bottles, glass pours, sangria, beer, and NA options",
-      "Warm, local hospitality — walk in or call ahead"
+      "20 wines by the glass, listed sweet to dry",
+      "Live music, listening nights and a country farmhouse setting",
+      "A bottle shop with a little help finding your next favorite"
     ],
     "reviewLink": "https://www.facebook.com/TheMockingbirdOnMillRoad/reviews",
     "quotes": []
@@ -133,8 +133,8 @@
     "hours_summary": "Mon–Wed 5–8 PM • Thu–Sat 4–10 PM • Closed Sunday"
   },
   "defaultSEO": {
-    "title": "The Mockingbird on Mill Road",
-    "description": "Seasonal cooking and welcoming hospitality in Graytown, OH.",
+    "title": "The Mockingbird | Wine & Music House in Graytown, OH",
+    "description": "A wine and music house in the country. Explore 20 wines by the glass, flights, live music, a bottle shop and farmhouse gatherings in Graytown, Ohio.",
     "ogImage": "assets/images/hero.svg"
   },
   "whyBullets": [],

@@ -1,6 +1,6 @@
 # Mockingbird Static Site
 
-A fast, mobile-first static site for the Mockingbird restaurant and bar. Built with plain HTML/CSS/JS and JSON data so updates can be made without touching markup.
+A fast, mobile-first static site for The Mockingbird wine and music house. Built with plain HTML/CSS/JS and JSON data so updates can be made without touching markup.
 
 Events can now come from owner-approved Command Center content. See
 [public event publishing](docs/public-events-publishing.md) for the one-time
@@ -40,7 +40,7 @@ only to legacy mode (`enabled:false`).
 - `/specials/` – Weekly specials from `data/specials.json`.
 - `/events/` – Upcoming events with ticket/RSVP actions.
 - `/private-parties/` – Inquiry form with copy-to-clipboard email helper and Stripe deposit options.
-- `/wine-club/` – Pickup-only tiers with Stripe links and policies.
+- `/wine-club/` – Early 2027 launch announcement and contact link.
 - `/gift-cards/` – Gift card purchase buttons tied to Stripe Payment Links.
 - `/contact/` – Hours, address, map link, phone/email/social, and a contact form.
 - `404.html` – GitHub Pages 404 fallback.
