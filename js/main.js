@@ -97,7 +97,7 @@
     "@type": "ImageObject",
     "url": "https://themockingbirdonmillroad.com/assets/images/og.jpg"
   },
-  "description": "The Mockingbird is a wine and music house in the country, made for finding your next favorite.",
+  "description": "The Mockingbird is a country wine café and music venue on Mill Road, made for finding your next favorite.",
   "priceRange": "$$",
   "address": {
     "@type": "PostalAddress",
