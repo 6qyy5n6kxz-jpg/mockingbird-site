@@ -1,6 +1,6 @@
 # Mockingbird Static Site
 
-A fast, mobile-first static site for The Mockingbird wine and music house. Built with plain HTML/CSS/JS and JSON data so updates can be made without touching markup.
+A fast, mobile-first static site for The Mockingbird, a country wine café and music venue on Mill Road. Built with plain HTML/CSS/JS and JSON data so updates can be made without touching markup.
 
 Events can now come from owner-approved Command Center content. See
 [public event publishing](docs/public-events-publishing.md) for the one-time
