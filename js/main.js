@@ -326,8 +326,7 @@
     function normalizeRequired(list, ctx) {
       const requiredMap = {
         event_ticketed: ['name', 'email', 'quantity'],
-        deposit: ['name', 'email', 'phone', 'date'],
-        wineclub: ['plan', 'name', 'email']
+        deposit: ['name', 'email', 'phone', 'date']
       };
       const required = requiredMap[ctx] || [];
       return list.map((f) => {
@@ -4210,62 +4209,6 @@ const paymentEnabled =
     updateEstimate();
   }
 
-  function renderWineClub(wineclubData, site) {
-    const container = document.getElementById('wineclub-options');
-    if (!container) return;
-    const plans = wineclubData?.plans || [];
-    if (!plans.length) {
-      container.innerHTML = '<p class="note">Wine club enrollment is temporarily unavailable.</p>';
-      return;
-    }
-    container.innerHTML = '';
-    plans.forEach((plan) => {
-      const actionable = plan.clover_payment_url && !isPlaceholderUrl(plan.clover_payment_url, plan.isPlaceholder);
-      const action = actionable
-        ? `<a class="btn btn-primary" href="${plan.clover_payment_url}" target="_blank" rel="noopener noreferrer">Pay with Clover</a>`
-        : `<button class="btn btn-secondary" type="button" disabled>Link coming soon</button>`;
-      const note = plan.notes ? `<p class="note">${plan.notes}</p>` : '';
-      const card = document.createElement('div');
-      card.className = 'card fade-in';
-      card.innerHTML = `<h3>${plan.name}</h3><p>${plan.price_display || plan.priceDisplay || ''}</p>${note}${action}`;
-      container.appendChild(card);
-    });
-
-    const formConfig = wineclubData.preferences_form;
-    if (formConfig && formConfig.fields?.length) {
-      const holder = document.createElement('div');
-      holder.className = 'card';
-      const fields = formConfig.fields.map((f) => {
-        const field = { ...f };
-        if (f.optionsFromPlans) {
-          field.options = plans.map((p) => ({
-            value: p.id || p.name,
-            label: p.price_display ? `${p.name} — ${p.price_display}` : p.name
-          }));
-        }
-        return field;
-      });
-      const tokens = {
-        site_contact_email: site?.email || ''
-      };
-      const form = createForm(
-        fields,
-        formConfig.submission,
-        tokens,
-        'Send Details',
-        formConfig.note,
-        formConfig.submission?.subject || 'Wine Club Preferences – {{plan}} – {{name}}',
-        formConfig.submission?.body_template,
-        'wineclub',
-        { compact: true }
-      );
-      holder.innerHTML = '<h3>Preferences</h3>';
-      if (form) holder.appendChild(form);
-      container.parentElement.appendChild(holder);
-    }
-    enableFadeIn();
-  }
-
   function attachCopyButtons(defaultEmail) {
     document.querySelectorAll('[data-copy-form]').forEach((btn) => {
       btn.addEventListener('click', async (e) => {
@@ -4514,7 +4457,6 @@ const paymentEnabled =
     renderGiftCards,
     renderDeposits,
     renderReserveDateDeposit,
-    renderWineClub,
     renderGallery,
     renderDrinks,
     initializeTicketQuantitySelectors

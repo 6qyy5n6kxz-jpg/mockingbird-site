@@ -26,9 +26,6 @@
       "description": "Buy gift cards at the bar or by phone.",
       "cta_label": "Call to purchase",
       "cta_url": "tel:+1-419-504-4900"
-    },
-    "wine_club": {
-      "data_file": "wineclub.json"
     }
   }
 }
