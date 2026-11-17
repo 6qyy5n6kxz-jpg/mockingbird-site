@@ -679,6 +679,11 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
       const published = await window.MockingbirdPublicSpecials.load(withBase);
       if (published !== null) return published;
     }
+    if (filename.split('?')[0] === 'drinks.json' && window.MockingbirdPublicDrinks) {
+      const readFile = () => fetch(withBase('/data/drinks.json')).then((res) => (res.ok ? res.json() : null));
+      const live = await window.MockingbirdPublicDrinks.load(withBase, readFile);
+      if (live !== null) return live;
+    }
     if (filename.split('?')[0] === 'events.json' && window.MockingbirdPublicEvents) {
       const published = await window.MockingbirdPublicEvents.load(withBase);
       if (published !== null) return published;
@@ -1798,9 +1803,12 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
           } else if (section.id === 'wine-flights') {
             // Handled by section-level note.
           }
-          const headerInfo = section.id === 'wine-flights'
-            ? { labels: ['Bottle'], keys: ['bottle'] }
-            : getDrinkHeaderForSubsection(sub.items || []);
+          // Drinks from the POS feed carry their own price header and formatted prices.
+          const headerInfo = Array.isArray(sub.priceHeader)
+            ? { labels: sub.priceHeader, keys: [] }
+            : section.id === 'wine-flights'
+              ? { labels: ['Bottle'], keys: ['bottle'] }
+              : getDrinkHeaderForSubsection(sub.items || []);
           if (headerInfo.labels && headerInfo.labels.length) {
             const header = document.createElement('div');
             header.className = 'menu-price-header';
@@ -1818,8 +1826,10 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
           }
           const list = document.createElement('div');
           (sub.items || []).forEach((item) => {
-            const priceText = formatDrinkPrices(item?.prices, headerInfo.keys)
-              || (item?.price != null ? String(item.price) : '');
+            const priceText = typeof item?.priceText === 'string'
+              ? item.priceText
+              : formatDrinkPrices(item?.prices, headerInfo.keys)
+                || (item?.price != null ? String(item.price) : '');
             if (!item || (!item.name && !priceText)) {
               console.warn('Skipping drinks item with no name/price', item);
               return;

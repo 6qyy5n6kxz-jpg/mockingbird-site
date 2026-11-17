@@ -3,5 +3,8 @@
   "events_endpoint": "https://krgvotkqeguvfiowammp.supabase.co/functions/v1/mockingbird-public-content",
   "specials_enabled": true,
   "specials_endpoint": "https://krgvotkqeguvfiowammp.supabase.co/functions/v1/mockingbird-public-specials",
+  "drinks_enabled": true,
+  "drinks_endpoint": "https://krgvotkqeguvfiowammp.supabase.co/functions/v1/mockingbird-public-drinks",
+  "drinks_bottle_shop_source": "file",
   "_setup": "Deploy mockingbird-public-content in the Command Center Supabase project. Copy its feed URL from Mockingbird Public Events. Review/publish replacement events, then set enabled to true. Never put credentials here."
 }
