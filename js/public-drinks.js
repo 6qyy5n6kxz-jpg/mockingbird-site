@@ -83,5 +83,26 @@
    }catch{return null;}
   };
  }
- root.MockingbirdPublicDrinks={load:createLoader((...args)=>root.fetch(...args)),createLoader,normalizeFeed,withFileBottleShop};
+ // The "If you like… try…" guide only suggests drinks on tonight's list. Names match loosely
+ // (case, accents and apostrophes ignored: d’Asti = d'Asti, Żywiec = Zywiec), but a misspelling won't match.
+ const drinkKey=name=>String(name||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase()
+  .replace(/[’‘'`]/g,'').replace(/&/g,' and ').replace(/[^a-z0-9]+/g,' ').trim();
+ function menuNames(drinks){
+  const names=new Set();
+  for(const section of drinks?.sections||[])for(const sub of section.subsections||[{items:section.items}])
+   for(const item of sub?.items||[])if(item?.name)names.add(drinkKey(item.name));
+  return names;
+ }
+ function trimFlavorGuide(doc,drinks){
+  const names=menuNames(drinks);
+  const guide=doc.querySelector('[data-flavor-guide-section]');
+  if(!guide||!names.size)return;
+  const any=(el,selector)=>[...el.querySelectorAll(selector)].some(x=>!x.hidden);
+  for(const suggestion of guide.querySelectorAll('[data-suggest]'))
+   suggestion.hidden=![...suggestion.querySelectorAll('[data-drink]')].every(d=>names.has(drinkKey(d.textContent)));
+  for(const card of guide.querySelectorAll('[data-flavor-guide]'))card.hidden=!any(card,'[data-suggest]');
+  for(const group of guide.querySelectorAll('[data-flavor-group]'))group.hidden=!any(group,'[data-flavor-guide]');
+  guide.hidden=!any(guide,'[data-flavor-guide]');
+ }
+ root.MockingbirdPublicDrinks={load:createLoader((...args)=>root.fetch(...args)),createLoader,normalizeFeed,withFileBottleShop,drinkKey,trimFlavorGuide};
 })(typeof window==='undefined'?globalThis:window);

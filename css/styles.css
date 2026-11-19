@@ -4235,3 +4235,6 @@ textarea {
 .footer-newsletter .fcn-form h3 { color: #fff; }
 
 .flavor-group { margin: 28px 0 12px; font-size: 1.15rem; }
+
+/* The flavor guide hides suggestions for drinks that aren't on tonight's list. */
+[data-flavor-guide-section][hidden], [data-flavor-guide-section] [hidden] { display: none !important; }
