@@ -118,3 +118,29 @@ test('free registration and no recording consent omit payment and recording fiel
  assert.equal(descendants(wrap).filter(x=>x.name==='recording_consent').length,0);
  await wrap.children[0].listeners.submit({preventDefault(){}});assert.equal(wrap.children.length,2);assert.match(wrap.children[1].textContent,/received/);
 });
+test('pinned events come first on both surfaces; free sign-ups show spots left and a Sign up button',()=>{
+ const api=moduleApi(),now=Date.now();
+ const data=api.normalizeFeed(feed([
+  event({id:'soon',title:'Trivia',starts_at:new Date(now+3600000).toISOString(),ends_at:new Date(now+7200000).toISOString()}),
+  event({id:'euchre',title:'Euchre Night',pinned:true,reservation_required:true,reservation_url:'https://app.example.com/mockingbird/register/euchre',
+   starts_at:new Date(now+9*86400000).toISOString(),ends_at:new Date(now+9*86400000+7200000).toISOString(),signup:{free:true,open:true,spots_left:6}})]));
+ assert.equal(data.events[1].pinned,true);assert.equal(data.events[0].pinned,false);
+ for(const preview of [false,true]){
+  const container=new (class{constructor(){this.children=[];}replaceChildren(){this.children=[];}appendChild(c){this.children.push(c);return c;}})();
+  api.render(data,container,preview);
+  assert.equal(container.children[0].className.includes('event-pinned'),true);
+  const text=JSON.stringify(plain(container.children[0]));
+  assert.match(text,/Euchre Night/);
+  if(!preview){assert.match(text,/Free · 6 spots left/);assert.match(text,/Sign up free/);assert.match(text,/Sign up in advance/);}
+ }
+});
+test('a full free night says so; a malformed sign-up count is ignored; paid events keep their wording',()=>{
+ const api=moduleApi(),now=Date.now(),container={children:[],replaceChildren(){this.children=[];},appendChild(c){this.children.push(c);return c;}};
+ const base={reservation_required:true,reservation_url:'https://app.example.com/mockingbird/register/x',starts_at:new Date(now+3600000).toISOString(),ends_at:new Date(now+7200000).toISOString()};
+ const data=api.normalizeFeed(feed([event({...base,id:'full',signup:{free:true,open:true,spots_left:0}}),event({...base,id:'odd',signup:{free:true,open:true,spots_left:'lots'}}),event({...base,id:'paid',signup:{free:false,open:true,spots_left:3}})]));
+ api.render(data,container,false);
+ const [full,odd,paid]=container.children.map(c=>JSON.stringify(plain(c)));
+ assert.match(full,/This night is full/);assert.match(full,/See details/);
+ assert.doesNotMatch(odd,/spots left/);assert.match(odd,/Sign up free/);
+ assert.match(paid,/Reserve \/ tickets/);assert.doesNotMatch(paid,/spots left|Sign up/);
+});

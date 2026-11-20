@@ -315,3 +315,23 @@ nav a[aria-current="page"] { color: var(--green); font-weight: 600; }
 @media (max-width: 860px) {
   .pp-hero .page-intro-photo img { max-height: 280px; }
 }
+
+/* Pinned events (e.g. the monthly Euchre night) sit across the top of the Events list. */
+#events-list .event-pinned {
+  grid-column: 1 / -1;
+  border: 2px solid var(--green);
+  background: var(--green-soft);
+}
+.event-pinned-label,
+.event-spots {
+  font-weight: 700;
+  color: var(--green);
+  margin: 6px 0;
+}
+.event-pinned-label {
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--wood);
+}
+.home-event-card.event-pinned { border-color: var(--green); }
