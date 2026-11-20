@@ -306,3 +306,12 @@ nav a[aria-current="page"] { color: var(--green); font-weight: 600; }
 @media (prefers-reduced-motion: reduce) {
   * { scroll-behavior: auto !important; }
 }
+
+/* Private Parties: taller photos sit beside the text without towering over it. */
+.pp-hero .page-intro { align-items: start; }
+.pp-hero .page-intro-photo img { max-height: 480px; }
+.pp-split { margin-bottom: 24px; }
+.pp-split .section-heading { margin-bottom: 0; }
+@media (max-width: 860px) {
+  .pp-hero .page-intro-photo img { max-height: 280px; }
+}
