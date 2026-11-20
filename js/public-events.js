@@ -26,7 +26,9 @@
     performer:text(event.performer),description:text(event.description),admission:text(event.admission),venue_area:text(event.venue_area),
     image_url:safeUrl(event.image_url),image_alt:text(event.image_alt),reservation_required:event.reservation_required===true,
     reservation_url:safeUrl(event.reservation_url),registration_mode:mode,formspree_url:safeFormspree(event.formspree_url),
-    registration_deadline:deadline,recording_consent_required:event.recording_consent_required===true};
+    registration_deadline:deadline,recording_consent_required:event.recording_consent_required===true,pinned:event.pinned===true,
+    signup:event.signup&&typeof event.signup==='object'?{free:event.signup.free===true,open:event.signup.open===true,
+     spots_left:Number.isSafeInteger(event.signup.spots_left)&&event.signup.spots_left>=0?event.signup.spots_left:null}:null};
   }).filter(event=>Date.parse(event.ends_at)>=now).sort((a,b)=>Date.parse(a.starts_at)-Date.parse(b.starts_at)||a.id.localeCompare(b.id));
   return {source:'command-center',events,generated_at:data.generated_at};
  }
@@ -111,8 +113,9 @@
    const message=node('p',data.unavailable?'Events are temporarily unavailable. Please check back soon.':'New events coming soon.','note');
    message.setAttribute('role','status');container.appendChild(message);return;
   }
-  (preview?data.events.slice(0,3):data.events).forEach(event=>{
-   const card=node('article',null,preview?'home-event-card fade-in':'card fade-in');
+  const ordered=data.events.filter(event=>event.pinned).concat(data.events.filter(event=>!event.pinned));
+  (preview?ordered.slice(0,3):ordered).forEach(event=>{
+   const card=node('article',null,(preview?'home-event-card fade-in':'card fade-in')+(event.pinned?' event-pinned':''));
    if(preview){
     const date=new Date(event.starts_at),badge=node('div',null,'home-event-date');
     badge.setAttribute('aria-label',new Intl.DateTimeFormat('en-US',{timeZone:zone,dateStyle:'full'}).format(date));
@@ -123,6 +126,7 @@
    }
    const body=node('div',null,preview?'home-event-details':'event-content');
    body.appendChild(node('p',labels[event.event_type]||'Event','badge badge-soft'));
+   if(event.pinned&&!preview)body.appendChild(node('p',event.signup?.free?'Sign up in advance':'Featured','event-pinned-label'));
    body.appendChild(node('h3',event.title));body.appendChild(node('p',when(event),'note'));
    if(event.performer)body.appendChild(node('p',event.performer));
    if(!preview&&event.image_url){
@@ -139,7 +143,10 @@
     if(preview){const link=node('a','Register','btn btn-primary');link.href=(root.Mockingbird?.withBase('/events/')||'/events/')+'#event-'+encodeURIComponent(event.id);body.appendChild(link);}
     else{card.id='event-'+event.id;const details=node('details',null,'event-registration-container');details.appendChild(node('summary','Register','btn btn-primary'));details.appendChild(registrationForm(event));body.appendChild(details);}
    }else if(event.reservation_url){
-    const link=node('a',event.reservation_required?'Reserve / tickets':'Event details','btn btn-primary');
+    const free=event.signup?.free===true,full=free&&event.signup.open&&event.signup.spots_left===0;
+    if(free&&event.signup.open&&event.signup.spots_left>0)body.appendChild(node('p',`Free · ${event.signup.spots_left} ${event.signup.spots_left===1?'spot':'spots'} left`,'event-spots'));
+    if(full)body.appendChild(node('p','This night is full. Check back in case a spot opens up.','note event-help'));
+    const link=node('a',free?(full?'See details':'Sign up free'):event.reservation_required?'Reserve / tickets':'Event details','btn btn-primary');
     link.href=event.reservation_url;link.target='_blank';link.rel='noopener noreferrer';body.appendChild(link);
    }
    if(preview){const link=node('a','View events →','btn btn-secondary');link.href=root.Mockingbird?.withBase('/events/')||'/events/';body.appendChild(link);}
