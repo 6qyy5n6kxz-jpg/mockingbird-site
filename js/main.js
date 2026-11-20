@@ -81,50 +81,6 @@
     if (DEBUG) console.log('[dbg]', ...args);
   }
 
-  function injectLocalBusinessSchema() {
-    if (typeof document === 'undefined') return;
-    const head = document.head || document.querySelector('head');
-    if (!head || document.getElementById('localbusiness-schema')) return;
-    const script = document.createElement('script');
-    script.type = 'application/ld+json';
-    script.id = 'localbusiness-schema';
-    script.textContent = `{
-  "@context": "https://schema.org",
-  "@type": ["WineBar", "EventVenue"],
-  "name": "The Mockingbird on Mill Road",
-  "url": "https://themockingbirdonmillroad.com/",
-  "image": {
-    "@type": "ImageObject",
-    "url": "https://themockingbirdonmillroad.com/assets/images/og.jpg"
-  },
-  "description": "The Mockingbird is a country wine café and music venue on Mill Road, made for finding your next favorite.",
-  "priceRange": "$$",
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "4408 N Elliston-Trowbridge Rd",
-    "addressLocality": "Graytown",
-    "addressRegion": "OH",
-    "postalCode": "43432",
-    "addressCountry": "US"
-  },
-  "areaServed": [
-    { "@type": "City", "name": "Graytown" },
-    { "@type": "City", "name": "Toledo" },
-    { "@type": "City", "name": "Oregon" },
-    { "@type": "City", "name": "Port Clinton" },
-    { "@type": "City", "name": "Genoa" }
-  ],
-  "sameAs": [
-    "https://www.facebook.com/themockingbirdonmillroad/",
-    "https://www.instagram.com/mockingbirdonmillroad/"
-  ],
-  "hasMenu": "https://themockingbirdonmillroad.com/menu/",
-  "acceptsReservations": true
-}`;
-    head.appendChild(script);
-  }
-
-  injectLocalBusinessSchema();
 
   function ticketsRemaining(ticketing) {
     if (!ticketing) return 0;
@@ -775,6 +731,26 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
       applyText('[data-fill="seasonal-hours"]', site.seasonalHoursNote);
     }
 
+    // The logo badge leads the footer; the email sits under the phone number.
+    document.querySelectorAll('footer .footer-simple-brand, footer .meta').forEach((brand) => {
+      if (brand.querySelector('.footer-badge')) return;
+      const badge = document.createElement('img');
+      badge.className = 'footer-badge';
+      badge.src = withBase('/assets/brand/logo-badge.webp');
+      badge.alt = '';
+      badge.width = 96;
+      badge.height = 96;
+      badge.loading = 'lazy';
+      brand.prepend(badge);
+      const phone = brand.querySelector('[data-fill="phone-link"]');
+      if (email && phone && !brand.querySelector('.footer-email')) {
+        const mail = document.createElement('a');
+        mail.className = 'footer-email';
+        mail.href = `mailto:${email}`;
+        mail.textContent = email;
+        (phone.parentElement === brand ? phone : phone.parentElement).after(mail);
+      }
+    });
     setHref('[data-fill="phone-link"]', site.phone ? `tel:${site.phone}` : null);
     setHref('[data-fill="map"]', site.mapsUrl || site.mapLink);
     setHref('[data-fill="email-link"]', email ? `mailto:${email}` : null);
@@ -1071,21 +1047,24 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
     if (!header) return;
     header.innerHTML = `
       <div class="container navbar">
-        <a class="logo" data-fill="name" data-nav="home">The Mockingbird on Mill Road</a>
-        <button class="mobile-nav-toggle" aria-label="Toggle navigation" aria-controls="site-nav" aria-expanded="false">☰</button>
+        <a class="logo" data-nav="home" aria-label="The Mockingbird on Mill Road, home">
+          <img src="${withBase('/assets/brand/logo.webp')}" alt="The Mockingbird on Mill Road" width="640" height="561">
+        </a>
+        <button class="mobile-nav-toggle" aria-label="Open menu" aria-controls="site-nav" aria-expanded="false">Menu</button>
         <nav id="site-nav" class="nav-menu" aria-label="Primary">
           <ul class="nav-primary">
             <li><a data-nav="drinks">Drinks</a></li>
             <li><a data-nav="menu">Menu</a></li>
             <li><a data-nav="specials">Specials</a></li>
             <li><a data-nav="events">Events</a></li>
-            <li><a data-nav="jam">Jam</a></li>
             <li><a data-nav="private-parties">Private Parties</a></li>
           </ul>
           <div class="nav-divider" aria-hidden="true"></div>
           <ul class="nav-secondary" aria-label="Explore">
             <li><a data-nav="gift-cards">Gift Cards</a></li>
             <li><a data-nav="gallery">Gallery</a></li>
+            <li><a data-nav="about">About</a></li>
+            <li><a data-nav="jam">Mockingbird Jam</a></li>
             <li><a data-nav="contact">Contact</a></li>
           </ul>
           <div class="nav-call-mobile">
@@ -4365,8 +4344,11 @@ const paymentEnabled =
 
   function injectSchema(site) {
     if (!site?.name) return;
+    // One business listing per page, built from data/site.json.
+    if (document.getElementById('localbusiness-schema')) return;
     const script = document.createElement('script');
     script.type = 'application/ld+json';
+    script.id = 'localbusiness-schema';
     if (site.seoDescription && !document.querySelector('meta[name="description"][data-page-seo]')) {
       const meta = document.querySelector('meta[name="description"]');
       if (meta) meta.setAttribute('content', site.seoDescription);
@@ -4395,12 +4377,36 @@ const paymentEnabled =
         addressCountry: site.address?.country
       },
       url: window.location.href.split('#')[0],
-      image: document.querySelector('meta[property="og:image"]')?.content || (site.images && site.images.ogImage) || (site.defaultSEO && site.defaultSEO.ogImage) || site.openGraphImage || site.heroImage,
+      image: 'https://themockingbirdonmillroad.com/assets/brand/og.jpg',
       servesCuisine: 'Seasonal',
-      openingHours: site.hours?.map((h) => `${h.label} ${h.value}`)
+      priceRange: '$$',
+      hasMenu: 'https://themockingbirdonmillroad.com/menu/',
+      acceptsReservations: true,
+      areaServed: ['Graytown', 'Toledo', 'Oregon', 'Port Clinton', 'Genoa'].map((name) => ({ '@type': 'City', name })),
+      logo: new URL(withBase('/assets/brand/logo.png'), window.location.href).href,
+      email: site.email || undefined,
+      sameAs: [site.socials?.facebook, site.socials?.instagram].filter(Boolean),
+      openingHoursSpecification: openingHoursSpec(site.hours)
     };
     script.textContent = JSON.stringify(data);
     document.head.appendChild(script);
+  }
+
+  // "Mon" + "5–8 PM" -> {dayOfWeek: Monday, opens: 17:00, closes: 20:00}. Closed days are left out.
+  function openingHoursSpec(hours) {
+    const days = { Sun: 'Sunday', Mon: 'Monday', Tue: 'Tuesday', Wed: 'Wednesday', Thu: 'Thursday', Fri: 'Friday', Sat: 'Saturday' };
+    const to24 = (h, m, ap) => {
+      let hour = Number(h) % 12;
+      if ((ap || '').toUpperCase() === 'PM') hour += 12;
+      return `${String(hour).padStart(2, '0')}:${String(m || '00').padStart(2, '0')}`;
+    };
+    return (hours || []).flatMap((row) => {
+      const day = days[String(row.label || '').slice(0, 3)];
+      const match = String(row.value || '').match(/(\d{1,2})(?::(\d{2}))?\s*(AM|PM)?\s*[–-]\s*(\d{1,2})(?::(\d{2}))?\s*(AM|PM)/i);
+      if (!day || !match) return [];
+      const [, h1, m1, ap1, h2, m2, ap2] = match;
+      return [{ '@type': 'OpeningHoursSpecification', dayOfWeek: `https://schema.org/${day}`, opens: to24(h1, m1, ap1 || ap2), closes: to24(h2, m2, ap2) }];
+    });
   }
 
   sitePromise.then((site) => {

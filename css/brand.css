@@ -1,0 +1,317 @@
+/*
+  The Mockingbird on Mill Road: brand layer.
+  Loaded after styles.css. Colors come from the place itself: the barn-green roofs and porch,
+  pine floors and rails, the brick fireplace, white siding, and the logo's near-black ink.
+  Rustic warmth (serif headings, wood and brick accents) with a modern, clean white page.
+*/
+:root {
+  --ink: #1d1d1b;
+  --green: #1f4a3a;        /* barn roof, darkened for text */
+  --green-mid: #2d6a50;    /* porch floor */
+  --green-soft: #e6eee8;
+  --wood: #8a5426;         /* pine rail, darkened for text */
+  --wood-light: #c9955e;
+  --brick: #9c3f2c;
+  --paper: #f2f4ef;        /* soft sage-white for alternating sections, not cream */
+  --cream: #f6efe2;        /* used only on the green, like a lamp-lit wall */
+
+  --bg: #ffffff;
+  --surface: #ffffff;
+  --text: var(--ink);
+  --muted: #55584f;
+  --accent: var(--green);
+  --accent-strong: #163829;
+  --border: #dfe3dc;
+  --shadow: 0 1px 2px rgba(29, 29, 27, 0.06), 0 8px 24px rgba(29, 29, 27, 0.06);
+  --radius: 14px;
+
+  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3,
+.section h2,
+.hero h1 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-variation-settings: "SOFT" 50, "WONK" 0;
+  letter-spacing: -0.01em;
+  color: inherit;
+}
+
+a:hover { color: var(--green-mid); }
+
+/* Small labels above headings: wood, letter-spaced, with a short rule like a picture-rail. */
+.kicker {
+  color: var(--wood);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-size: 13px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.kicker::before {
+  content: "";
+  width: 22px;
+  height: 2px;
+  background: var(--wood-light);
+  border-radius: 2px;
+}
+
+/* Sections no longer start invisible and fade in late (pages looked blank while scrolling). */
+.fade-in,
+.fade-in.visible {
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+
+/* ---------- Header ---------- */
+header {
+  background: rgba(255, 255, 255, 0.97);
+  border-bottom: 1px solid var(--border);
+}
+.navbar { padding: 8px 0; }
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  letter-spacing: 0;
+}
+.logo img {
+  height: 76px;
+  width: auto;
+  border-radius: 0;
+}
+nav a { color: #3c3f37; font-weight: 500; }
+nav a:hover,
+nav a:focus { color: var(--green); background: var(--green-soft); }
+nav a[aria-current="page"] { color: var(--green); font-weight: 600; }
+.mobile-nav-toggle {
+  border-color: var(--border);
+  color: var(--green);
+  font-size: 0;
+  width: 44px;
+  height: 44px;
+  align-items: center;
+  justify-content: center;
+}
+.mobile-nav-toggle::before {
+  content: "";
+  width: 20px;
+  height: 14px;
+  background:
+    linear-gradient(currentColor, currentColor) top / 100% 2px no-repeat,
+    linear-gradient(currentColor, currentColor) center / 100% 2px no-repeat,
+    linear-gradient(currentColor, currentColor) bottom / 100% 2px no-repeat;
+}
+.mobile-nav-toggle[aria-expanded="true"]::before {
+  height: 20px;
+  background:
+    linear-gradient(45deg, transparent 45%, currentColor 45%, currentColor 55%, transparent 55%),
+    linear-gradient(-45deg, transparent 45%, currentColor 45%, currentColor 55%, transparent 55%);
+}
+@media (max-width: 959px) {
+  .logo img { height: 58px; }
+  #site-header .navbar { padding-left: 16px; padding-right: 16px; }
+  #site-header .nav-menu { top: calc(100% + 6px); left: 12px; right: 12px; }
+}
+@media (min-width: 960px) and (max-width: 1120px) {
+  .nav-menu ul { gap: 4px; }
+  nav a { padding: 8px 8px; }
+}
+.nav-menu ul a { white-space: nowrap; }
+
+/* ---------- Buttons ---------- */
+.btn { border-radius: 10px; font-weight: 600; }
+.btn-primary { background: var(--green); color: #fff; box-shadow: none; }
+.btn-primary:hover { background: var(--green-mid); color: #fff; }
+.btn-secondary { background: #fff; color: var(--green); border-color: var(--green); }
+.btn-secondary:hover { background: var(--green-soft); color: var(--green); }
+.btn-ghost { border-color: var(--border); color: var(--ink); }
+.btn-ghost:hover { border-color: var(--green); color: var(--green); }
+.btn:focus-visible { outline: 3px solid var(--wood-light); outline-offset: 2px; }
+
+/* ---------- Home hero: the grounds across the top, a green panel underneath ---------- */
+.home-hero {
+  display: grid;
+  grid-template-columns: 1fr;
+  background: var(--green);
+  border-radius: 0;
+  overflow: visible;
+}
+.home-hero::after { display: none; }
+.home-hero img[data-img="hero"] {
+  grid-row: 1;
+  width: 100%;
+  height: clamp(220px, 34vw, 440px);
+  object-fit: cover;
+  object-position: 50% 48%;
+  border-radius: 0;
+}
+.home-hero .hero-content {
+  position: relative;
+  grid-row: 2;
+  inset: auto;
+  display: block;
+  text-align: left;
+  padding: 0 0 56px;
+  color: var(--cream);
+}
+.home-hero .hero-inner {
+  width: min(100%, var(--max-width));
+  margin: 0 auto;
+  padding: 0 20px;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) minmax(0, 0.9fr);
+  gap: 18px 40px;
+  align-items: end;
+}
+.home-hero img.hero-badge {
+  grid-row: 1 / span 2;
+  width: 168px;
+  height: 168px;
+  margin-top: -84px;
+  align-self: start;
+  border-radius: 50%;
+  object-fit: contain;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.28);
+}
+.home-hero .kicker { grid-column: 2 / span 2; margin: 22px 0 0; color: var(--wood-light); }
+.home-hero .kicker::before { background: var(--wood-light); }
+.home-hero h1 {
+  grid-column: 2;
+  margin: 0;
+  color: #fff;
+  font-size: clamp(38px, 4.4vw, 60px);
+  line-height: 1.04;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+.home-hero h1 + p {
+  grid-column: 3;
+  margin: 0;
+  color: rgba(246, 239, 226, 0.92);
+  max-width: none;
+  font-size: 18px;
+}
+.home-hero .hero-cta { grid-column: 2 / span 2; justify-content: flex-start; margin-top: 8px; }
+.home-hero .btn-primary { background: var(--cream); color: var(--green); }
+.home-hero .btn-primary:hover { background: #fff; color: var(--green); }
+.home-hero .btn-secondary { background: transparent; color: var(--cream); border-color: rgba(246, 239, 226, 0.6); }
+.home-hero .btn-secondary:hover { background: rgba(255, 255, 255, 0.08); color: #fff; }
+@media (max-width: 860px) {
+  .home-hero .hero-content { padding-bottom: 40px; }
+  .home-hero .hero-inner { grid-template-columns: 1fr; gap: 14px; }
+  .home-hero img.hero-badge { grid-row: auto; width: 116px; height: 116px; margin-top: -58px; }
+  .home-hero .kicker,
+  .home-hero h1,
+  .home-hero h1 + p,
+  .home-hero .hero-cta { grid-column: 1; }
+  .home-hero .kicker { margin-top: 0; }
+  .home-hero .hero-cta .btn { flex: 1 1 100%; }
+}
+
+/* ---------- Photos beside page intros ---------- */
+.page-intro {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.85fr);
+  gap: 40px;
+  align-items: center;
+  margin-bottom: 28px;
+}
+.page-intro-photo,
+.split-photo-img { margin: 0; }
+.page-intro-photo img,
+.split-photo-img img {
+  width: 100%;
+  height: auto;
+  max-height: 420px;
+  object-fit: cover;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+.split-photo {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+  gap: 48px;
+  align-items: center;
+}
+@media (max-width: 860px) {
+  .page-intro,
+  .split-photo { grid-template-columns: 1fr; gap: 20px; }
+  .page-intro-photo { order: -1; }
+  .page-intro-photo img,
+  .split-photo-img img { max-height: 260px; }
+}
+
+.about-photo { margin: 8px 0 32px; }
+.about-photo img { width: 100%; height: clamp(200px, 30vw, 380px); object-fit: cover; object-position: 30% 60%; border-radius: var(--radius); }
+
+/* ---------- Sections and cards ---------- */
+.section.alt {
+  background: var(--paper);
+  border-color: var(--border);
+}
+.card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  background: var(--surface);
+}
+.badge,
+.pill {
+  background: var(--green-soft);
+  color: var(--green);
+}
+
+/* Event dates read like a tear-off calendar. */
+.home-event-date { background: var(--green-soft); border-right-color: var(--border); }
+.home-event-date strong { font-family: var(--font-display); color: var(--green); }
+.home-event-month { color: var(--wood); }
+
+/* ---------- Footer: deep green with the logo badge ---------- */
+.footer {
+  background: var(--green);
+  color: var(--cream);
+}
+.footer a { color: var(--cream); }
+.footer a:hover { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
+.footer .note,
+.footer small,
+.footer-simple-address { color: rgba(246, 239, 226, 0.78); }
+.footer .footer-badge {
+  width: 96px;
+  height: 96px;
+  margin: 0 0 16px;
+  border-radius: 50%;
+}
+.footer strong { font-family: var(--font-display); font-weight: 600; }
+.footer-simple-bottom { border-top-color: rgba(246, 239, 226, 0.18); }
+.footer-email { display: block; width: fit-content; margin-top: 6px; }
+.footer-simple-phone { display: block; width: fit-content; }
+
+/* ---------- Sticky phone bar ---------- */
+.sticky-cta-bar a { color: var(--green); }
+
+@media (prefers-reduced-motion: reduce) {
+  * { scroll-behavior: auto !important; }
+}
+
+/* Private Parties: taller photos sit beside the text without towering over it. */
+.pp-hero .page-intro { align-items: start; }
+.pp-hero .page-intro-photo img { max-height: 480px; }
+.pp-split { margin-bottom: 24px; }
+.pp-split .section-heading { margin-bottom: 0; }
+@media (max-width: 860px) {
+  .pp-hero .page-intro-photo img { max-height: 280px; }
+}

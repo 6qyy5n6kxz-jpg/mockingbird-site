@@ -7,7 +7,9 @@
   <meta name="description" content="A country wine café and music venue on Mill Road. Explore 20 wines by the glass, flights, live music, a bottle shop and gatherings in Graytown, Ohio.">
   <meta property="og:title" content="The Mockingbird | Wine Café &amp; Live Music in Graytown, OH">
   <meta property="og:description" content="A country wine café and music venue on Mill Road. Explore 20 wines by the glass, flights, live music, a bottle shop and gatherings in Graytown, Ohio.">
-  <meta property="og:image" content="assets/images/og.jpg">
+  <meta property="og:image" content="https://themockingbirdonmillroad.com/assets/brand/og.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
   <script src="js/base.js"></script>
@@ -25,7 +27,11 @@
       if (apple) apple.href = withBase('/assets/images/favicon.png');
     })();
   </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,500..700,50&family=Inter:wght@400;500;600;700&display=swap">
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/brand.css">
 </head>
 <body>
   <a class="sr-only" href="#main">Skip to main content</a>
@@ -36,14 +42,17 @@
         <section class="hero home-hero">
       <img
         data-img="hero"
-        src="assets/images/hero.jpg"
-        alt="The Mockingbird on Mill Road in Graytown, Ohio: the white building with the green roof and cupola, the windmill and the patio"
-        width="2048"
-        height="1365"
+        src="assets/brand/hero-patio.jpg"
+        srcset="assets/brand/hero-patio-760.webp 760w, assets/brand/hero-patio-1120.webp 1121w"
+        sizes="100vw"
+        alt="The Mockingbird's covered porch and stone patio at sunset, with wicker chairs on the lawn"
+        width="1121"
+        height="705"
         fetchpriority="high"
       >
       <div class="hero-content">
         <div class="hero-inner">
+          <img class="hero-badge" src="assets/brand/logo-badge.webp" alt="" width="440" height="440">
           <p class="kicker">In the middle of nowhere, there’s a where.</p>
           <h1 data-fill="hero-headline">Good wine. A song worth staying for.</h1>
           <p data-fill="hero-subhead">Twenty wines by the glass. Music to make a night of. A country wine café on Mill Road in Graytown where your next favorite is waiting.</p>
@@ -64,14 +73,14 @@
 <p>A patio, a studio side and a tasting room give you a few ways to settle in.</p>
 </div></section>
 
-<section class="section alt fade-in"><div class="container"><p class="kicker">Wine, flights + the bottle shop</p>
+<section class="section alt fade-in"><div class="container split-photo"><div><p class="kicker">Wine, flights + the bottle shop</p>
 <h2>Find your next favorite.</h2>
 <p class="lead">Our 20 wines by the glass are listed sweet to dry. Start where you’re comfortable, then see what catches your eye.</p>
 <p><strong>Build your own flight: any 4 wines or tap pours for $15.</strong> Mix familiar favorites with something new.</p>
 <p>Our taps include Peach Mango and Cucumber Lime sangria. Explore hazy IPAs, porters and a barrel-aged rye ale, with familiar beer favorites, too.</p>
 <h3>A bottle for another evening.</h3>
 <p>Our bottle shop has wines you won’t find at the grocery store. Tell us what you enjoy or what you’re bringing it to. We’ll help you choose.</p>
-</div></section>
+</div><figure class="split-photo-img"><img src="assets/brand/drinks-rose-720.webp" alt="Bottles of rosé and sparkling rosé tucked among pink roses" width="720" height="720" loading="lazy" decoding="async"></figure></div></section>
 
 <section class="section fade-in" id="music"><div class="container"><p class="kicker">Music + events</p>
 <h2>Find a night that sings to you.</h2>
@@ -178,7 +187,7 @@
         <a data-fill="instagram">Instagram</a>
       </div>
 
-      <small>© Mockingbird</small>
+      <small>© The Mockingbird on Mill Road</small>
     </div>
   </div>
 </footer>

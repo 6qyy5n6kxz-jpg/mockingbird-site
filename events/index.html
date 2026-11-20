@@ -7,7 +7,9 @@
   <meta name="description" content="Upcoming events in Graytown, OH at The Mockingbird on Mill Road—live music, trivia, ticketed dinners, and more." data-page-seo>
   <meta property="og:title" content="Events | Mockingbird">
   <meta property="og:description" content="Dinners, tastings, and live music at Mockingbird." data-page-seo>
-  <meta property="og:image" content="../assets/images/og.jpg">
+  <meta property="og:image" content="https://themockingbirdonmillroad.com/assets/brand/og.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
   <script src="../js/base.js"></script>
   <link rel="icon" type="image/svg+xml" data-favicon="svg">
   <link rel="alternate icon" data-favicon="ico">
@@ -23,7 +25,11 @@
       if (apple) apple.href = withBase('/assets/images/favicon.png');
     })();
   </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,500..700,50&family=Inter:wght@400;500;600;700&display=swap">
   <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/brand.css">
 </head>
 <body>
   <a class="sr-only" href="#main">Skip to main content</a>
@@ -32,10 +38,12 @@
 
   <main id="main" class="section">
     <div class="container">
+      <div class="page-intro"><div>
       <p class="kicker">Events</p>
       <h1>Choose a night. Make it yours.</h1>
       <p class="lead">Sing along at a themed A Change of Plans show, or join us for Thursday trivia and book club and our quarterly wine dinners. Find your next night out below.</p>
       <p class="note">Check each event for dates, times, tickets and reservation details.</p>
+      </div><figure class="page-intro-photo"><img src="../assets/brand/event-dinner-1200.webp" srcset="../assets/brand/event-dinner-700.webp 700w, ../assets/brand/event-dinner-1200.webp 1200w" sizes="(max-width: 860px) 100vw, 45vw" alt="Plated wine dinner: roasted chicken over wild rice with vegetables, olives and a balsamic drizzle" width="1200" height="900" loading="eager" decoding="async"></figure></div>
       <div id="events-list" class="table-grid" style="margin-top:20px;"></div>
     </div>
   </main>
@@ -115,7 +123,7 @@
             </div>
           </div>
         </div>
-        <small>© Mockingbird</small>
+        <small>© The Mockingbird on Mill Road</small>
       </div>
     </div>
   </footer>
