@@ -1,63 +1,179 @@
 {
   "_comment": "Update contact info, hours, social links, and image filenames here. All pages read from this file.",
   "name": "The Mockingbird on Mill Road",
-  "shortName": "Mockingbird",
+  "shortName": "The Mockingbird",
   "tagline": "The Mockingbird is a country wine café and music venue on Mill Road, made for finding your next favorite.",
-    "heroHeadline": "Good wine. A song worth staying for.",
+  "heroHeadline": "Good wine. A song worth staying for.",
   "heroSubhead": "Twenty wines by the glass. Music to make a night of. A country wine café on Mill Road in Graytown where your next favorite is waiting.",
   "heroLede": "Twenty wines by the glass. Music to make a night of. A country wine café on Mill Road in Graytown where your next favorite is waiting.",
   "description": "The Mockingbird is a country wine café and music venue on Mill Road, made for finding your next favorite.",
   "seoDescription": "A country wine café and music venue on Mill Road. Explore 20 wines by the glass, flights, live music, a bottle shop and gatherings in Graytown, Ohio.",
   "locationShort": "Graytown, OH",
   "images": {
-        "hero": { "src": "assets/images/hero.jpg", "fallback": "assets/images/hero.jpg", "alt": "The Mockingbird on Mill Road in Graytown, Ohio: the white building with the green roof and cupola, the windmill and the patio" },
-    "interior1": { "src": "assets/images/interior1.jpg", "fallback": "assets/images/interior1.svg", "alt": "Cozy dining room seating" },
-    "interior2": { "src": "assets/images/interior2.jpg", "fallback": "assets/images/interior2.svg", "alt": "Bar with seasonal wine and sangria pours" },
-    "interior3": { "src": "assets/images/interior3.jpg", "fallback": "assets/images/interior3.svg", "alt": "Patio and exterior seating" },
-    "food1": { "src": "assets/images/food1.jpg", "alt": "Seasonal plated dish" },
-    "food2": { "src": "assets/images/food2.jpg", "alt": "Shared plates on a table" },
-    "food3": { "src": "assets/images/food3.jpg", "alt": "Fresh salad with herbs" },
-    "bar1": { "src": "assets/images/bar1.jpg", "alt": "Wine poured at the bar" },
-    "ogImage": { "src": "assets/images/og.jpg", "fallback": "assets/images/hero.jpg", "alt": "Seasonal dishes and drinks at The Mockingbird" },
+    "hero": {
+      "src": "assets/brand/hero-grounds.jpg",
+      "fallback": "assets/brand/hero-grounds.jpg",
+      "alt": "The Mockingbird on Mill Road in Graytown, Ohio: the white building with the green roof and cupola, the windmill and the patio"
+    },
+    "interior1": {
+      "src": "assets/images/interior1.jpg",
+      "fallback": "assets/images/interior1.svg",
+      "alt": "Cozy dining room seating"
+    },
+    "interior2": {
+      "src": "assets/images/interior2.jpg",
+      "fallback": "assets/images/interior2.svg",
+      "alt": "Bar with seasonal wine and sangria pours"
+    },
+    "interior3": {
+      "src": "assets/images/interior3.jpg",
+      "fallback": "assets/images/interior3.svg",
+      "alt": "Patio and exterior seating"
+    },
+    "food1": {
+      "src": "assets/images/food1.jpg",
+      "alt": "Seasonal plated dish"
+    },
+    "food2": {
+      "src": "assets/images/food2.jpg",
+      "alt": "Shared plates on a table"
+    },
+    "food3": {
+      "src": "assets/images/food3.jpg",
+      "alt": "Fresh salad with herbs"
+    },
+    "bar1": {
+      "src": "assets/images/bar1.jpg",
+      "alt": "Wine poured at the bar"
+    },
+    "ogImage": {
+      "src": "assets/brand/og.jpg",
+      "fallback": "assets/brand/og.jpg",
+      "alt": "The Mockingbird on Mill Road logo beside the white building with the green roof and cupola"
+    },
     "experience": [
-  {
-    "src": "assets/images/mockingbird-patio-gardens.jpg",
-    "alt": "The Mockingbird patio, gardens, pond, and covered porch in Graytown, Ohio",
-    "caption": "Patio, gardens + room to linger"
-  },
-  {
-    "src": "assets/images/interior3.jpg",
-    "alt": "Wine and two glasses at sunset on The Mockingbird patio",
-    "width": 960,
-    "height": 768,
-    "caption": "Wine, sunset + good company"
-  },
-  {
-    "src": "assets/images/a-change-of-plans-live-music.webp",
-    "alt": "Live musicians performing inside The Mockingbird",
-    "caption": "Live music on select nights"
-  },
-  {
-    "src": "assets/images/mockingbird-dining-room-fireplace.jpg",
-    "alt": "The Mockingbird dining room with vintage seating, wood floors, and fireplace",
-    "caption": "Cozy, eclectic + unhurried"
-  }
-],
+      {
+        "src": "assets/images/mockingbird-patio-gardens.jpg",
+        "alt": "The Mockingbird patio, gardens, pond, and covered porch in Graytown, Ohio",
+        "caption": "Patio, gardens + room to linger"
+      },
+      {
+        "src": "assets/images/interior3.jpg",
+        "alt": "Wine and two glasses at sunset on The Mockingbird patio",
+        "width": 960,
+        "height": 768,
+        "caption": "Wine, sunset + good company"
+      },
+      {
+        "src": "assets/images/a-change-of-plans-live-music.webp",
+        "alt": "Live musicians performing inside The Mockingbird",
+        "caption": "Live music on select nights"
+      },
+      {
+        "src": "assets/images/mockingbird-dining-room-fireplace.jpg",
+        "alt": "The Mockingbird dining room with vintage seating, wood floors, and fireplace",
+        "caption": "Cozy, eclectic + unhurried"
+      }
+    ],
     "gallery": [
-      { "src": "assets/images/mockingbird-party-wraps-and-sandwiches.webp", "alt": "Party platters with wraps, sandwiches, vegetables, and fruit", "width": 1600, "height": 1102, "category": "Food & Drinks" },
-      { "src": "assets/images/mockingbird-party-flatbreads-and-salads.webp", "alt": "Flatbreads, fruit, and pasta salads arranged for a party", "width": 1200, "height": 1600, "category": "Food & Drinks" },
-      { "src": "assets/images/mockingbird-baked-potato-bar.webp", "alt": "Baked potato bar with flavored butters, cheese, bacon, and fresh toppings", "width": 1600, "height": 1200, "category": "Food & Drinks" },
-      { "src": "assets/images/food1.jpg", "alt": "Dessert served with red wine at The Mockingbird", "width": 1536, "height": 2048, "category": "Food & Drinks" },
-      { "src": "assets/images/food3.jpg", "alt": "Colorful fruit and snack display prepared for a gathering", "width": 1440, "height": 1080, "category": "Food & Drinks" },
-      { "src": "assets/images/mockingbird-private-event-buffet-room.webp", "alt": "The Mockingbird dining room set with a buffet of homemade food", "width": 1800, "height": 1350, "category": "Inside Mockingbird" },
-      { "src": "assets/images/interior1.jpg", "alt": "Cozy dining room with fireplace at The Mockingbird", "width": 2048, "height": 1536, "category": "Inside Mockingbird" },
-      { "src": "assets/images/interior2.jpg", "alt": "The Mockingbird team behind the bar", "width": 960, "height": 640, "category": "Inside Mockingbird" },
-      { "src": "assets/images/hero.jpg", "alt": "The Mockingbird on Mill Road in Graytown, Ohio: the white building with the green roof and cupola, the windmill and the patio", "width": 2048, "height": 1365, "category": "Patio & Grounds" },
-      { "src": "assets/images/interior3.jpg", "alt": "Wine and two glasses at sunset on The Mockingbird patio", "width": 960, "height": 768, "category": "Patio & Grounds" },
-      { "src": "assets/images/mockingbird-bridal-shower-buffet.webp", "alt": "Garden themed bridal shower buffet with salads and fresh vegetables", "width": 1600, "height": 1200, "category": "Private Celebrations" },
-      { "src": "assets/images/mockingbird-black-tie-dessert-table.webp", "alt": "Black tie themed cake, cupcakes, and decorated cookies", "width": 1200, "height": 1672, "category": "Private Celebrations" },
-      { "src": "assets/images/mockingbird-cookies-and-cupcakes.webp", "alt": "Cookies and frosted cupcakes on a lace-covered celebration table", "width": 1600, "height": 1200, "category": "Private Celebrations" },
-      { "src": "assets/images/mockingbird-adopt-a-teddy-party-table.webp", "alt": "Adopt a Teddy activity table arranged for a children's celebration", "width": 1200, "height": 1600, "category": "Private Celebrations" }
+      {
+        "src": "assets/images/mockingbird-party-wraps-and-sandwiches.webp",
+        "alt": "Party platters with wraps, sandwiches, vegetables, and fruit",
+        "width": 1600,
+        "height": 1102,
+        "category": "Food & Drinks"
+      },
+      {
+        "src": "assets/images/mockingbird-party-flatbreads-and-salads.webp",
+        "alt": "Flatbreads, fruit, and pasta salads arranged for a party",
+        "width": 1200,
+        "height": 1600,
+        "category": "Food & Drinks"
+      },
+      {
+        "src": "assets/images/mockingbird-baked-potato-bar.webp",
+        "alt": "Baked potato bar with flavored butters, cheese, bacon, and fresh toppings",
+        "width": 1600,
+        "height": 1200,
+        "category": "Food & Drinks"
+      },
+      {
+        "src": "assets/images/food1.jpg",
+        "alt": "Dessert served with red wine at The Mockingbird",
+        "width": 1536,
+        "height": 2048,
+        "category": "Food & Drinks"
+      },
+      {
+        "src": "assets/images/food3.jpg",
+        "alt": "Colorful fruit and snack display prepared for a gathering",
+        "width": 1440,
+        "height": 1080,
+        "category": "Food & Drinks"
+      },
+      {
+        "src": "assets/images/mockingbird-private-event-buffet-room.webp",
+        "alt": "The Mockingbird dining room set with a buffet of homemade food",
+        "width": 1800,
+        "height": 1350,
+        "category": "Inside Mockingbird"
+      },
+      {
+        "src": "assets/images/interior1.jpg",
+        "alt": "Cozy dining room with fireplace at The Mockingbird",
+        "width": 2048,
+        "height": 1536,
+        "category": "Inside Mockingbird"
+      },
+      {
+        "src": "assets/images/interior2.jpg",
+        "alt": "The Mockingbird team behind the bar",
+        "width": 960,
+        "height": 640,
+        "category": "Inside Mockingbird"
+      },
+      {
+        "src": "assets/images/hero.jpg",
+        "alt": "The Mockingbird on Mill Road in Graytown, Ohio: the white building with the green roof and cupola, the windmill and the patio",
+        "width": 2048,
+        "height": 1365,
+        "category": "Patio & Grounds"
+      },
+      {
+        "src": "assets/images/interior3.jpg",
+        "alt": "Wine and two glasses at sunset on The Mockingbird patio",
+        "width": 960,
+        "height": 768,
+        "category": "Patio & Grounds"
+      },
+      {
+        "src": "assets/images/mockingbird-bridal-shower-buffet.webp",
+        "alt": "Garden themed bridal shower buffet with salads and fresh vegetables",
+        "width": 1600,
+        "height": 1200,
+        "category": "Private Celebrations"
+      },
+      {
+        "src": "assets/images/mockingbird-black-tie-dessert-table.webp",
+        "alt": "Black tie themed cake, cupcakes, and decorated cookies",
+        "width": 1200,
+        "height": 1672,
+        "category": "Private Celebrations"
+      },
+      {
+        "src": "assets/images/mockingbird-cookies-and-cupcakes.webp",
+        "alt": "Cookies and frosted cupcakes on a lace-covered celebration table",
+        "width": 1600,
+        "height": 1200,
+        "category": "Private Celebrations"
+      },
+      {
+        "src": "assets/images/mockingbird-adopt-a-teddy-party-table.webp",
+        "alt": "Adopt a Teddy activity table arranged for a children's celebration",
+        "width": 1200,
+        "height": 1600,
+        "category": "Private Celebrations"
+      }
     ]
   },
   "address": {
@@ -69,21 +185,42 @@
     "full": "4408 N. Elliston-Trowbridge Rd., Graytown, OH 43432"
   },
   "phone": "419-504-4900",
-  "email": "",
+  "email": "Mockingbirddevin@gmail.com",
   "mapsUrl": "https://www.google.com/maps/search/?api=1&query=4408+N.+Elliston-Trowbridge+Rd.,+Graytown,+OH+43432",
   "hours": [
-    { "label": "Sun", "value": "Closed" },
-    { "label": "Mon", "value": "5–8 PM" },
-    { "label": "Tue", "value": "5–8 PM" },
-    { "label": "Wed", "value": "5–8 PM" },
-    { "label": "Thu", "value": "4–10 PM" },
-    { "label": "Fri", "value": "4–10 PM" },
-    { "label": "Sat", "value": "4–10 PM" }
+    {
+      "label": "Sun",
+      "value": "Closed"
+    },
+    {
+      "label": "Mon",
+      "value": "5–8 PM"
+    },
+    {
+      "label": "Tue",
+      "value": "5–8 PM"
+    },
+    {
+      "label": "Wed",
+      "value": "5–8 PM"
+    },
+    {
+      "label": "Thu",
+      "value": "4–10 PM"
+    },
+    {
+      "label": "Fri",
+      "value": "4–10 PM"
+    },
+    {
+      "label": "Sat",
+      "value": "4–10 PM"
+    }
   ],
   "seasonalHoursNote": "Beverage service & carryout: Mon–Wed 5–8 PM · Thu–Sat 4–10 PM",
   "kitchenNote": "Kitchen service: Thursday–Saturday until 9 PM.",
   "socials": {
-    "facebook": "https://www.facebook.com/themockingbirdonmillroad/",
+    "facebook": "https://www.facebook.com/themockingbirdonmillroad",
     "instagram": "https://www.instagram.com/mockingbirdonmillroad/"
   },
   "announcementBar": {

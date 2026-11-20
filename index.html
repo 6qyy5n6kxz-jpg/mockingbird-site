@@ -7,7 +7,9 @@
   <meta name="description" content="A country wine café and music venue on Mill Road. Explore 20 wines by the glass, flights, live music, a bottle shop and gatherings in Graytown, Ohio.">
   <meta property="og:title" content="The Mockingbird | Wine Café &amp; Live Music in Graytown, OH">
   <meta property="og:description" content="A country wine café and music venue on Mill Road. Explore 20 wines by the glass, flights, live music, a bottle shop and gatherings in Graytown, Ohio.">
-  <meta property="og:image" content="assets/images/og.jpg">
+  <meta property="og:image" content="https://themockingbirdonmillroad.com/assets/brand/og.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
   <script src="js/base.js"></script>
@@ -25,7 +27,11 @@
       if (apple) apple.href = withBase('/assets/images/favicon.png');
     })();
   </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,500..700,50&family=Inter:wght@400;500;600;700&display=swap">
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/brand.css">
 </head>
 <body>
   <a class="sr-only" href="#main">Skip to main content</a>
@@ -36,14 +42,17 @@
         <section class="hero home-hero">
       <img
         data-img="hero"
-        src="assets/images/hero.jpg"
+        src="assets/brand/hero-grounds.jpg"
+        srcset="assets/brand/hero-grounds-800.webp 800w, assets/brand/hero-grounds-1600.webp 1600w"
+        sizes="(max-width: 860px) 100vw, 60vw"
         alt="The Mockingbird on Mill Road in Graytown, Ohio: the white building with the green roof and cupola, the windmill and the patio"
-        width="2048"
-        height="1365"
+        width="1600"
+        height="547"
         fetchpriority="high"
       >
       <div class="hero-content">
         <div class="hero-inner">
+          <img class="hero-badge" src="assets/brand/logo-badge.webp" alt="" width="440" height="440">
           <p class="kicker">In the middle of nowhere, there’s a where.</p>
           <h1 data-fill="hero-headline">Good wine. A song worth staying for.</h1>
           <p data-fill="hero-subhead">Twenty wines by the glass. Music to make a night of. A country wine café on Mill Road in Graytown where your next favorite is waiting.</p>
@@ -178,7 +187,7 @@
         <a data-fill="instagram">Instagram</a>
       </div>
 
-      <small>© Mockingbird</small>
+      <small>© The Mockingbird on Mill Road</small>
     </div>
   </div>
 </footer>
