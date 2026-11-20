@@ -6,195 +6,137 @@
     {
       "id": "wine-flights",
       "title": "Flights + Pours",
-"description": "Mix and match any wine or eligible tap pour shown below. Wines are listed from sweeter to drier.",
+      "description": "Mix and match any wine or eligible tap pour shown below. Wines are listed from sweeter to drier.",
       "subsections": [
         {
           "title": "Whites/Rosé",
+          "priceHeader": [
+            "Glass",
+            "Bottle"
+          ],
           "items": [
             {
-              "name": "D’Altieri Moscato d'Asti",
-              "meta": "(ITA)",
+              "name": "D’Altieri Moscato",
+              "meta": "ITA",
               "description": "Sweet, lightly fizzy, peach + floral",
-              "prices": {
-                "fullPour": "$9",
-                "bottle": "$20.99"
-              }
+              "priceText": "$9.00 | $21.00"
             },
             {
               "name": "Innocent Bystander Pink Moscato",
-              "meta": "(AUS)",
+              "meta": "AUS",
               "description": "Sweet + spritzy, strawberry + rose",
-              "prices": {
-                "fullPour": "$9",
-                "bottle": "$20.99"
-              }
+              "priceText": "$9.00 | $21.00"
             },
             {
               "name": "Frisk Prickly Riesling",
-              "meta": "(AUS)",
+              "meta": "AUS",
               "description": "Off-dry + spritzy, lime + green apple",
-              "prices": {
-                "fullPour": "$9",
-                "bottle": "$17.49"
-              }
+              "priceText": "$9.00 | $17.50"
             },
             {
-              "name": "Madonna Kabinett",
-              "meta": "(DEU)",
-              "description": "Off-dry + floral, apricot + peach",
-              "prices": {
-                "fullPour": "$9",
-                "bottle": "$15.49"
-              }
+              "name": "Gateway Vinho Verde",
+              "meta": "",
+              "description": "",
+              "priceText": "$9.00 | $15.50"
+            },
+            {
+              "name": "House of Brown Chardonnay",
+              "meta": "USA",
+              "description": "Dry + fresh, apple + citrus",
+              "priceText": "$9.00 | $26.50"
             },
             {
               "name": "Seméli Mountain Sun Rosé",
-              "meta": "(GRC)",
+              "meta": "GRC",
               "description": "Dry + fresh, strawberry + melon",
-              "prices": {
-                "fullPour": "$9",
-                "bottle": "$22.99"
-              }
+              "priceText": "$9.00 | $23.00"
             },
             {
               "name": "Cantina Colli Euganei Pinot Grigio",
-              "meta": "(ITA)",
+              "meta": "ITA",
               "description": "Dry + crisp, pear + citrus",
-              "prices": {
-                "fullPour": "$9",
-                "bottle": "$19.99"
-              }
-            },
-            {
-              "name": "House Of Brown Chardonnay",
-              "meta": "(USA)",
-              "description": "Dry + fresh, apple + citrus",
-              "prices": {
-                "fullPour": "$9",
-                "bottle": "$26.49"
-              }
+              "priceText": "$9.00 | $20.00"
             },
             {
               "name": "Matthew Fritz Sauvignon Blanc",
-              "meta": "(USA)",
+              "meta": "USA",
               "description": "Dry + zesty, grapefruit + lime",
-              "prices": {
-                "fullPour": "$9",
-                "bottle": "$18.49"
-              }
+              "priceText": "$9.00 | $18.50"
             }
           ]
         },
         {
           "title": "Reds",
+          "priceHeader": [
+            "Glass",
+            "Bottle"
+          ],
           "items": [
             {
-              "name": "Voulet Malvasia d'Asti",
-              "meta": "(ITA)",
+              "name": "Voulet Malvasia d’Asti",
+              "meta": "ITA",
               "description": "Sweet + lightly fizzy, strawberry + cherry",
-              "prices": {
-                "fullPour": "$9",
-                "bottle": "$19.99"
-              }
+              "priceText": "$9.00 | $20.00"
             },
             {
-              "name": "Old Patch Red Blend",
-              "meta": "(USA)",
+              "name": "OPR Old Patch Red",
+              "meta": "USA",
               "description": "Off-dry + jammy, dark cherry + raspberry",
-              "prices": {
-                "fullPour": "$9",
-                "bottle": "$21.99"
-              }
+              "priceText": "$9.00 | $22.00"
             },
             {
-              "name": "Ghostrunner Red Blend",
-              "meta": "(USA)",
+              "name": "Ghostrunner Ungrafted Red",
+              "meta": "USA",
               "description": "Dry + full, dark berry + cocoa",
-              "prices": {
-                "fullPour": "$9",
-                "bottle": "$22.99"
-              }
+              "priceText": "$9.00 | $23.00"
             },
             {
-              "name": "Monte Moton Garnacha",
-              "meta": "(ESP)",
-              "description": "Dry + juicy, cherry + spice",
-              "prices": {
-                "fullPour": "$9",
-                "bottle": "$17.49"
-              }
+              "name": "Honoro Vera Garnacha",
+              "meta": "",
+              "description": "",
+              "priceText": "$9.00 | $16.50"
             },
             {
               "name": "Raphael Merlot",
-              "meta": "(FRA)",
+              "meta": "FRA",
               "description": "Dry + soft, plum + red berry",
-              "prices": {
-                "fullPour": "$9",
-                "bottle": "$19.99"
-              }
+              "priceText": "$9.00 | $20.00"
             },
             {
-              "name": "Dry Canyon Red Blend",
-              "meta": "(USA)",
-              "description": "Dry + smooth, blackberry + vanilla",
-              "prices": {
-                "fullPour": "$9",
-                "bottle": "$18.49"
-              }
+              "name": "Stump Jump Shiraz",
+              "meta": "",
+              "description": "",
+              "priceText": "$9.00 | $21.00"
             },
             {
               "name": "La Posta Pizzella Malbec",
-              "meta": "(ARG)",
+              "meta": "ARG",
               "description": "Dry + round, plum + cocoa",
-              "prices": {
-                "fullPour": "$9",
-                "bottle": "$29.99"
-              }
+              "priceText": "$9.00 | $30.00"
             },
             {
-              "name": "Tasmorcan Barbera d’Asti",
-              "meta": "(ITA)",
-              "description": "Dry + bright, cherry + spice",
-              "prices": {
-                "fullPour": "$9",
-                "bottle": "$24.49"
-              }
-            },
-            {
-              "name": "Idlewild Flora & Fauna Red",
-              "meta": "(USA)",
-              "description": "Dry + light, red berry + herbs",
-              "prices": {
-                "fullPour": "$9",
-                "bottle": "$24.49"
-              }
-            },
-            {
-              "name": "Honoro Vera Monastrell",
-              "meta": "(ESP)",
-              "description": "Dry + bold, blackberry + spice",
-              "prices": {
-                "fullPour": "$9",
-                "bottle": "$16.49"
-              }
-            },
-            {
-              "name": "Domaine de Servans Côtes du Rhône",
-              "meta": "(FRA)",
-              "description": "Dry + savory, blackberry + pepper",
-              "prices": {
-                "fullPour": "$9",
-                "bottle": "$24.49"
-              }
+              "name": "Graziano Cabernet Sauvignon",
+              "meta": "",
+              "description": "",
+              "priceText": "$9.00 | $17.50"
             },
             {
               "name": "Heron Cabernet Sauvignon",
-              "meta": "(USA)",
+              "meta": "USA",
               "description": "Dry + firm, black cherry + cocoa",
-              "prices": {
-                "fullPour": "$9",
-                "bottle": "$22.99"
-              }
+              "priceText": "$9.00 | $23.00"
+            },
+            {
+              "name": "Domaine de Servans Côtes du Rhône",
+              "meta": "FRA",
+              "description": "Dry + savory, blackberry + pepper",
+              "priceText": "$9.00 | $24.50"
+            },
+            {
+              "name": "Krš Crni Blatina",
+              "meta": "",
+              "description": "",
+              "priceText": "$9.00 | $25.50"
             }
           ]
         }
@@ -203,40 +145,46 @@
     {
       "id": "on-tap",
       "title": "On Tap",
-      "description": "All tap selections available by the pitcher",
       "subsections": [
         {
-          "title": "Pour",
+          "title": "",
+          "priceHeader": [],
           "items": [
             {
-              "name": "Juniper Low Rider Light Lager",
-              "prices": {
-                "pour": "$4.00"
-              }
-            },
-            {
-              "name": "Garage Beer Light Lager",
-              "prices": {
-                "pour": "$5.00"
-              }
-            },
-            {
-              "name": "Outerbelt 270 IPA",
-              "prices": {
-                "pour": "$6.00"
-              }
-            },
-            {
-              "name": "Peach Mango Sangria",
-              "prices": {
-                "pour": "$6.00"
-              }
+              "name": "Ace Pineapple Cider",
+              "meta": "",
+              "description": "",
+              "priceText": "Pint $7.00 · Howler $14.00 · Pitcher $25.00 · Growler $27.00"
             },
             {
               "name": "Cucumber Lime Sangria",
-              "prices": {
-                "pour": "$6.00"
-              }
+              "meta": "",
+              "description": "",
+              "priceText": "Snifter $6.00 · Howler $14.00 · Growler $26.00 · Pitcher $27.00"
+            },
+            {
+              "name": "Garage Beer",
+              "meta": "",
+              "description": "",
+              "priceText": "Pint $4.50 · Howler $10.00 · Pitcher $16.00 · Growler $19.00"
+            },
+            {
+              "name": "Heart State Gourdeous Vanilla Pumpkin Porter",
+              "meta": "",
+              "description": "",
+              "priceText": "Pint $6.00 · Howler $12.00 · Pitcher $21.00 · Growler $23.00"
+            },
+            {
+              "name": "Juniper Low Rider Light Lager",
+              "meta": "",
+              "description": "",
+              "priceText": "Pint $4.00 · Howler $8.00 · Pitcher $14.00 · Growler $15.00"
+            },
+            {
+              "name": "Peach Mango Sangria",
+              "meta": "",
+              "description": "",
+              "priceText": "Snifter $6.00 · Howler $14.00 · Growler $26.00 · Pitcher $27.00"
             }
           ]
         }
@@ -247,257 +195,314 @@
       "title": "Beer, Cans + More",
       "subsections": [
         {
-          "title": "IPAs",
+          "title": "Beer",
+          "priceHeader": [],
           "items": [
             {
-              "name": "Masthead Brewing Hazy Headlines Hazy IPA",
-              "prices": {
-                "can": "$6"
-              },
-              "description": "Hazy + juicy, tropical fruit + citrus"
+              "name": "Alaskan Amber",
+              "meta": "",
+              "description": "Ale with flavors of caramel, toasted bread, and light nuttiness",
+              "priceText": "Can $4.50 · To Go 4 Pack $15.00 · To Go 6 pack $20.00"
             },
             {
-              "name": "Flying Monkey Juicy Ass IPA",
-              "prices": {
-                "can": "$6"
-              },
-              "description": "Juicy + bold, mango + pineapple"
+              "name": "Allagash White",
+              "meta": "",
+              "description": "",
+              "priceText": "Can $3.50 · To Go 4 Pack $12.00 · To Go 6 pack $15.00"
             },
             {
-              "name": "Masthead Brewing Freelance IPA",
-              "prices": {
-                "can": "$6"
-              },
-              "description": "Crisp + hoppy, grapefruit + pine"
+              "name": "Busch Light",
+              "meta": "",
+              "description": "Light-bodied American lager",
+              "priceText": "Can $3.50 · To Go 4 Pack $12.00 · To Go 6 pack $15.00"
+            },
+            {
+              "name": "Busch Light Apple",
+              "meta": "",
+              "description": "Light-bodied American lager",
+              "priceText": "Can $3.50 · To Go 4 Pack $12.00 · To Go 6 pack $15.00"
+            },
+            {
+              "name": "Cincy Light",
+              "meta": "",
+              "description": "Ultra-light lager – clean, crisp finish",
+              "priceText": "Can $3.50 · To Go 4 Pack $12.00 · To Go 6 pack $15.00"
+            },
+            {
+              "name": "DuClaw Sweet Baby Jesus",
+              "meta": "",
+              "description": "Porter – chocolate + peanut butter",
+              "priceText": "Can $5.00 · To Go 4 Pack $17.00 · To Go 6 pack $23.00"
+            },
+            {
+              "name": "Findlay El Guapo",
+              "meta": "",
+              "description": "Smooth + easy, caramel + toasted malt",
+              "priceText": "Can $5.00 · To Go 4 Pack $17.00 · To Go 6 pack $23.00"
+            },
+            {
+              "name": "Founders All Day Peach",
+              "meta": "",
+              "description": "",
+              "priceText": "Can $3.50 · To Go 4 Pack $12.00 · To Go 6 pack $15.00"
+            },
+            {
+              "name": "Garage Beer Lime",
+              "meta": "",
+              "description": "Crisp, no-nonsense American light lager",
+              "priceText": "Can $3.50 · To Go 4 Pack $12.00 · To Go 6 pack $15.00"
+            },
+            {
+              "name": "Ghost Tree Canoe Brew",
+              "meta": "",
+              "description": "Crisp + refreshing, floral hops + clean malt",
+              "priceText": "Can $4.50 · To Go 4 Pack $15.00 · To Go 6 pack $20.00"
+            },
+            {
+              "name": "Great Lakes Barrel-Aged Rye",
+              "meta": "",
+              "description": "Oak, caramel + spice • 12.5% ABV",
+              "priceText": "$7.50"
+            },
+            {
+              "name": "Juniper Ziggy Zoomba",
+              "meta": "",
+              "description": "Well-rounded, bright, subtle, soft malty sweetness",
+              "priceText": "Can $6.00 · To Go 4 Pack $20.00 · To Go 6 pack $27.00"
+            },
+            {
+              "name": "North High Sliced",
+              "meta": "",
+              "description": "Crisp + citrusy, lemon + bread crust",
+              "priceText": "Can $4.50 · To Go 4 Pack $15.00 · To Go 6 pack $20.00"
+            },
+            {
+              "name": "Northern Row Designer",
+              "meta": "",
+              "description": "Soft + fruity, banana + clove",
+              "priceText": "Can $4.50 · To Go 4 Pack $15.00 · To Go 6 pack $20.00"
+            },
+            {
+              "name": "Sonder Raspberry Divot",
+              "meta": "",
+              "description": "Tart + refreshing, raspberry + lemon tea",
+              "priceText": "Can $2.00 · To Go 6 pack $12.00"
+            },
+            {
+              "name": "Żywiec Lager",
+              "meta": "",
+              "description": "Polish pale lager – clean malt + firm hop bitterness",
+              "priceText": "Can $4.50 · To Go 4 Pack $15.00 · To Go 6 pack $20.00"
+            },
+            {
+              "name": "Żywiec Porter",
+              "meta": "",
+              "description": "Baltic porter – chocolate, caramel + smooth roast",
+              "priceText": "Can $6.00 · To Go 4 Pack $20.00 · To Go 6 pack $27.00"
             }
           ]
         },
         {
-          "title": "Beer",
+          "title": "IPAs",
+          "priceHeader": [
+            "Can",
+            "To Go 4 Pack",
+            "To Go 6 pack"
+          ],
           "items": [
             {
-              "name": "Garage Beer Lime",
-              "prices": {
-                "can": "$3.50"
-              },
-              "description": "Crisp, no-nonsense American light lager",
-              "bucketEligible": true
+              "name": "Bell's Two Hearted",
+              "meta": "",
+              "description": "",
+              "priceText": "$6.00 | $20.00 | $27.00"
             },
             {
-              "name": "Rhinegeist Cincy Light",
-              "prices": {
-                "can": "$3.50"
-              },
-              "description": "Ultra-light lager – clean, crisp finish",
-              "bucketEligible": true
+              "name": "Flying Monkey Juicy Ass",
+              "meta": "",
+              "description": "Juicy + bold, mango + pineapple",
+              "priceText": "$6.00 | $20.00 | $27.00"
             },
             {
-              "name": "Busch Light & Busch Light Apple",
-              "prices": {
-                "can": "$3.50"
-              },
-              "description": "Light-bodied American lager",
-              "bucketEligible": true
-            },
-            {
-              "name": "North High Sliced Lagered Ale",
-              "prices": {
-                "can": "$4.50"
-              },
-              "description": "Crisp + citrusy, lemon + bread crust"
-            },
-            {
-              "name": "Ghost Tree Brewing Canoe Brew",
-              "prices": {
-                "can": "$4.50"
-              },
-              "description": "Crisp + refreshing, floral hops + clean malt"
-            },
-            {
-              "name": "Findlay Brewing El Guapo",
-              "prices": {
-                "can": "$5"
-              },
-              "description": "Smooth + easy, caramel + toasted malt"
-            },
-            {
-              "name": "Northern Row Designer",
-              "prices": {
-                "can": "$4.50"
-              },
-              "description": "Soft + fruity, banana + clove"
-            },
-            {
-              "name": "Shiner Raspberry Blonde",
-              "prices": {
-                "can": "$4"
-              },
-              "description": "Light, easy-drinking blonde ale with prominent raspberry flavor"
-            },
-            {
-              "name": "Juniper Brewing Ale Ziggy Zoomba",
-              "prices": {
-                "can": "$6"
-              },
-              "description": "Well-rounded, bright, subtle, soft malty sweetness"
-            },
-            {
-              "name": "Alaskan Amber Ale",
-              "prices": {
-                "can": "$4.50"
-              },
-              "description": "Ale with flavors of caramel, toasted bread, and light nuttiness"
-            },
-            {
-              "name": "Zywiec Pale Lager",
-              "prices": {
-                "can": "$4.50"
-              },
-              "description": "Polish pale lager – clean malt + firm hop bitterness"
-            },
-            {
-              "name": "Sonder Brewing Raspberry Divot",
-              "prices": {
-                "can": "$4.50"
-              },
-              "description": "Tart + refreshing, raspberry + lemon tea"
-            },
-            {
-              "name": "DuClaw Sweet Baby Jesus",
-              "prices": {
-                "can": "$5"
-              },
-              "description": "Porter – chocolate + peanut butter"
-            },
-            {
-              "name": "Zywiec Porter",
-              "prices": {
-                "can": "$6"
-              },
-              "description": "Baltic porter – chocolate, caramel + smooth roast"
-            },
-            {
-              "name": "Great Lakes Barrel Aged Rye Ale",
-              "prices": {
-                "can": "$7.50"
-              },
-              "description": "Oak, caramel + spice • 12.5% ABV"
+              "name": "Masthead Hazy Headlines",
+              "meta": "",
+              "description": "Hazy + juicy, tropical fruit + citrus",
+              "priceText": "$6.00 | $20.00 | $27.00"
             }
-          ],
-          "footer": "Bucket of Beer · 6 for $15. Choose from Garage Beer Lime, Rhinegeist Cincy Light, Busch Light and Busch Light Apple."
+          ]
         },
         {
           "title": "On The Rocks & Cold Cans",
+          "priceHeader": [
+            "Can",
+            "To Go 4 Pack",
+            "To Go 6 pack"
+          ],
           "items": [
             {
+              "name": "Downeast Original Cider",
+              "meta": "",
+              "description": "",
+              "priceText": "$4.50 | $15.00 | $20.00"
+            },
+            {
+              "name": "Dragon Heart",
+              "meta": "",
+              "description": "Lightly sweet, cherry + raspberry",
+              "priceText": "$4.50 | $15.00 | $20.00"
+            },
+            {
               "name": "Dulce Vida Margarita",
-              "prices": {
-                "can": "$6"
-              },
-              "description": "Tequila margarita"
+              "meta": "",
+              "description": "Tequila margarita",
+              "priceText": "$6.00 | $20.00 | $27.00"
+            },
+            {
+              "name": "Happy Dad Peach Hard Iced Tea",
+              "meta": "",
+              "description": "",
+              "priceText": "$3.50 | $12.00 | $15.00"
             },
             {
               "name": "Heart of Glass Vodka Lemonade",
-              "prices": {
-                "can": "$7"
-              },
-              "description": "Strawberry vodka lemonade"
-            },
-            {
-              "name": "Vikre Distillery Wine Cocktails",
-              "prices": {
-                "can": "$7"
-              },
-              "description": "Wine-based cocktails. Flavors: Frenchie, Briar, Velo"
-            },
-            {
-              "name": "Juniper Scarlet Begonias",
-              "prices": {
-                "can": "$4"
-              },
-              "description": "Berry-infused cider"
-            },
-            {
-              "name": "Dragon Heart Mead",
-              "prices": {
-                "can": "$4.50"
-              },
-              "description": "Lightly sweet, cherry + raspberry"
-            },
-            {
-              "name": "Warhammer Mead",
-              "prices": {
-                "can": "$4.50"
-              },
-              "description": "Lightly sweet, blueberry + vanilla oak"
-            },
-            {
-              "name": "White Claw/High Noon",
-              "prices": {
-                "can": "$4"
-              },
-              "description": "Flavors: Black Cherry, Mango, Pineapple"
-            },
-            {
-              "name": "Lucky One Vodka Lemonade",
-              "prices": {
-                "can": "$4"
-              },
-              "description": "Non-carbonated vodka drink. Flavors: Blueberry, Peach"
-            },
-            {
-              "name": "Sun Cruiser",
-              "prices": {
-                "can": "$4"
-              },
-              "description": "Easy sipper. Flavor: Half & Half"
+              "meta": "",
+              "description": "Strawberry vodka lemonade",
+              "priceText": "$7.00 | $24.00 | $32.00"
             },
             {
               "name": "Lone River Ranch Water",
-              "prices": {
-                "can": "$4"
-              },
-              "description": "Tequila seltzer – lime, agave + crisp finish"
+              "meta": "",
+              "description": "Tequila seltzer – lime, agave + crisp finish",
+              "priceText": "$4.00 | $14.00 | $18.00"
+            },
+            {
+              "name": "Spikeade Electric Orange",
+              "meta": "",
+              "description": "",
+              "priceText": "$5.00 | $17.00 | $23.00"
+            },
+            {
+              "name": "Spikeade Electric Blue",
+              "meta": "",
+              "description": "",
+              "priceText": "$5.00 | $17.00 | $23.00"
+            },
+            {
+              "name": "Spikeade Electric Green",
+              "meta": "",
+              "description": "",
+              "priceText": "$5.00 | $17.00 | $23.00"
+            },
+            {
+              "name": "Spikeade Electric Red",
+              "meta": "",
+              "description": "",
+              "priceText": "$5.00 | $17.00 | $23.00"
+            },
+            {
+              "name": "Warhammer",
+              "meta": "",
+              "description": "Lightly sweet, blueberry + vanilla oak",
+              "priceText": "$4.50 | $15.00 | $20.00"
+            },
+            {
+              "name": "White Claw Black Cherry",
+              "meta": "",
+              "description": "",
+              "priceText": "$4.00 | $14.00 | $18.00"
+            }
+          ]
+        },
+        {
+          "title": "",
+          "priceHeader": [
+            "Can",
+            "To Go 4 Pack",
+            "To Go 6 pack"
+          ],
+          "items": [
+            {
+              "name": "Shiner Holiday Cheer",
+              "meta": "",
+              "description": "",
+              "priceText": "$4.50 | $7.00 | $10.00"
             }
           ]
         },
         {
           "title": "Non-Alcoholic",
+          "priceHeader": [],
           "items": [
             {
-              "name": "Rhinegeist NA Beers",
-              "prices": {
-                "can": "$4.50"
-              },
-              "description": "Haze (juicy NA ale) or Pils (crisp NA lager)"
+              "name": "Bubbl’r Fruit Punch’r",
+              "meta": "",
+              "description": "",
+              "priceText": "Can $2.50 · To Go 4 Pack $9.00 · To Go 6 pack $12.00"
             },
             {
-              "name": "White Claw 0%",
-              "prices": {
-                "can": "$4"
-              },
-              "description": "Variety"
+              "name": "Bubbl’r Lemon Lime Twist’r",
+              "meta": "",
+              "description": "",
+              "priceText": "Can $2.50 · To Go 4 Pack $9.00 · To Go 6 pack $12.00"
             },
             {
-              "name": "Bubbl’r",
-              "prices": {
-                "can": "$2.50"
-              },
-              "description": "Variety"
+              "name": "Bubbl’r Tropical Dream’r",
+              "meta": "",
+              "description": "",
+              "priceText": "Can $2.50 · To Go 4 Pack $9.00 · To Go 6 pack $12.00"
             },
             {
-              "name": "Canned Pop",
-              "prices": {
-                "can": "$2.50"
-              },
-              "description": "Variety"
+              "name": "Bubbl’r Twisted Elix’r",
+              "meta": "",
+              "description": "",
+              "priceText": "Can $2.50 · To Go 4 Pack $9.00 · To Go 6 pack $12.00"
             },
             {
-              "name": "Sparkling Water",
-              "prices": {
-                "can": "$2.50"
-              },
-              "description": "Variety"
+              "name": "Coca-Cola",
+              "meta": "",
+              "description": "",
+              "priceText": "$2.50"
+            },
+            {
+              "name": "Corona Non-Alcoholic",
+              "meta": "",
+              "description": "",
+              "priceText": "Can $4.50 · To Go 4 Pack $15.00 · To Go 6 pack $20.00"
+            },
+            {
+              "name": "Leitz Sparkling Riesling Eins Zwei Zero Alcohol Free",
+              "meta": "",
+              "description": "",
+              "priceText": "Can $6.00 · To Go 4 Pack $20.00 · To Go 6 pack $27.00"
+            },
+            {
+              "name": "Samuel Adams Non-Alcoholic Hazy IPA",
+              "meta": "",
+              "description": "",
+              "priceText": "Can $4.50 · To Go 4 Pack $15.00 · To Go 6 pack $20.00"
+            },
+            {
+              "name": "White Claw Zero Proof Black Cherry",
+              "meta": "",
+              "description": "",
+              "priceText": "Can $4.00 · To Go 4 Pack $14.00 · To Go 6 pack $18.00"
+            },
+            {
+              "name": "White Claw Zero Proof Lime Yuzu",
+              "meta": "",
+              "description": "",
+              "priceText": "Can $4.00 · To Go 4 Pack $14.00 · To Go 6 pack $18.00"
+            },
+            {
+              "name": "White Claw Zero Proof Mango Passion Fruit",
+              "meta": "",
+              "description": "",
+              "priceText": "Can $4.00 · To Go 4 Pack $14.00 · To Go 6 pack $18.00"
+            },
+            {
+              "name": "White Claw Zero Proof Peach Orange Blossom",
+              "meta": "",
+              "description": "",
+              "priceText": "Can $4.00 · To Go 4 Pack $14.00 · To Go 6 pack $18.00"
             }
           ]
         }

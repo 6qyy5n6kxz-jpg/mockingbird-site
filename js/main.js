@@ -1892,6 +1892,7 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
       note.textContent = '';
       note.style.display = 'none';
     }
+    window.MockingbirdPublicDrinks?.trimFlavorGuide?.(document, drinks);
     enableFadeIn();
     if (container.id === 'drinks-container') {
       const drinkSections = container.querySelectorAll('.menu-category.fade-in');
