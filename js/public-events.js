@@ -1,6 +1,6 @@
 (function(root){
  'use strict';
- const labels={live_music:'Live music',trivia:'Trivia',book_club:'Book club',holiday:'Holiday',dinner:'Special dinner',community:'Community',seasonal:'Seasonal',other:'Event'};
+ const labels={live_music:'Live music',trivia:'Trivia',book_club:'Book club',game_night:'Game night',holiday:'Holiday',dinner:'Special dinner',community:'Community',seasonal:'Seasonal',other:'Event'};
  const zone='America/New_York';
  const text=value=>typeof value==='string'?value:'';
  function safeUrl(value){
