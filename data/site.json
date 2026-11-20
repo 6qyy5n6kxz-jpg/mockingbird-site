@@ -11,9 +11,9 @@
   "locationShort": "Graytown, OH",
   "images": {
     "hero": {
-      "src": "assets/brand/hero-grounds.jpg",
-      "fallback": "assets/brand/hero-grounds.jpg",
-      "alt": "The Mockingbird on Mill Road in Graytown, Ohio: the white building with the green roof and cupola, the windmill and the patio"
+      "src": "assets/brand/hero-patio.jpg",
+      "fallback": "assets/brand/hero-patio.jpg",
+      "alt": "The Mockingbird's covered porch and stone patio at sunset, with wicker chairs on the lawn"
     },
     "interior1": {
       "src": "assets/images/interior1.jpg",

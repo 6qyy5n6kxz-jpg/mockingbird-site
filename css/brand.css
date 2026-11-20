@@ -155,7 +155,7 @@ nav a[aria-current="page"] { color: var(--green); font-weight: 600; }
   width: 100%;
   height: clamp(220px, 34vw, 440px);
   object-fit: cover;
-  object-position: 30% 62%;
+  object-position: 50% 48%;
   border-radius: 0;
 }
 .home-hero .hero-content {
@@ -220,6 +220,42 @@ nav a[aria-current="page"] { color: var(--green); font-weight: 600; }
   .home-hero .kicker { margin-top: 0; }
   .home-hero .hero-cta .btn { flex: 1 1 100%; }
 }
+
+/* ---------- Photos beside page intros ---------- */
+.page-intro {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.85fr);
+  gap: 40px;
+  align-items: center;
+  margin-bottom: 28px;
+}
+.page-intro-photo,
+.split-photo-img { margin: 0; }
+.page-intro-photo img,
+.split-photo-img img {
+  width: 100%;
+  height: auto;
+  max-height: 420px;
+  object-fit: cover;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+.split-photo {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+  gap: 48px;
+  align-items: center;
+}
+@media (max-width: 860px) {
+  .page-intro,
+  .split-photo { grid-template-columns: 1fr; gap: 20px; }
+  .page-intro-photo { order: -1; }
+  .page-intro-photo img,
+  .split-photo-img img { max-height: 260px; }
+}
+
+.about-photo { margin: 8px 0 32px; }
+.about-photo img { width: 100%; height: clamp(200px, 30vw, 380px); object-fit: cover; object-position: 30% 60%; border-radius: var(--radius); }
 
 /* ---------- Sections and cards ---------- */
 .section.alt {
