@@ -337,6 +337,46 @@ nav a[aria-current="page"] { color: var(--green); font-weight: 600; }
 .home-event-card.event-pinned { border-color: var(--green); }
 
 /* ---------- Wine club ---------- */
-.wine-club-tiers { margin: 24px 0; }
-.wine-club-price { font-family: var(--font-display, inherit); font-size: 28px; font-weight: 700; color: var(--green, #1f4a3a); margin: 4px 0 8px; }
-.wine-club-price span { font-family: var(--font-body, inherit); font-size: 14px; font-weight: 500; color: var(--muted); }
+.wc-hero h1 { margin-bottom: 8px; }
+.wc-facts { list-style: none; display: flex; flex-wrap: wrap; gap: 12px; padding: 0; margin: 22px 0 26px; }
+.wc-facts li { background: var(--green-soft); border-radius: 12px; padding: 10px 16px; display: flex; flex-direction: column; min-width: 110px; }
+.wc-facts strong { font-family: var(--font-display); font-size: 22px; color: var(--green); line-height: 1.1; }
+.wc-facts span { font-size: 13px; color: var(--muted); }
+.wc-sub { color: var(--muted); max-width: 640px; margin-bottom: 28px; }
+.wc-plans { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; max-width: 900px; }
+.wc-plan { position: relative; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); padding: 30px 28px; display: flex; flex-direction: column; }
+.wc-plan h3 { font-family: var(--font-display); font-size: 28px; margin: 0 0 12px; }
+.wc-plan p { margin: 0 0 6px; }
+.wc-plan .btn { margin-top: auto; align-self: flex-start; }
+.wc-plan-featured { border: 2px solid var(--green); }
+.wc-badge { position: absolute; top: -13px; right: 22px; background: var(--green); color: #fff; font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; padding: 5px 12px; border-radius: 999px; }
+.wc-price { font-family: var(--font-display); font-size: 46px; font-weight: 700; color: var(--green); line-height: 1; margin: 14px 0 12px !important; }
+.wc-price span { display: block; font-family: var(--font-body); font-size: 14px; font-weight: 500; color: var(--muted); margin-top: 6px; }
+.wc-per { color: var(--wood); font-weight: 600; font-size: 14px; margin-bottom: 22px !important; }
+.wc-bottles { display: flex; gap: 6px; }
+.wc-bottles i { width: 10px; height: 30px; border-radius: 5px 5px 3px 3px; background: var(--green-mid); position: relative; }
+.wc-bottles i::before { content: ""; position: absolute; left: 3px; top: -7px; width: 4px; height: 8px; border-radius: 2px; background: var(--green-mid); }
+.wc-perks { display: grid; grid-template-columns: 1fr; gap: 16px; margin-top: 24px; }
+@media (min-width: 600px) { .wc-perks { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (min-width: 1100px) { .wc-perks { grid-template-columns: repeat(5, minmax(0, 1fr)); } }
+.wc-perk { border: 1px solid var(--border); border-radius: var(--radius); padding: 22px; background: var(--surface); }
+.wc-perk h3 { font-size: 17px; margin: 14px 0 6px; }
+.wc-perk p { margin: 0; color: var(--muted); font-size: 15px; }
+.wc-icon { display: inline-flex; width: 44px; height: 44px; border-radius: 50%; background: var(--green-soft); color: var(--green); align-items: center; justify-content: center; }
+.wc-icon svg { width: 24px; height: 24px; }
+.wc-steps { list-style: none; counter-reset: wc; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 18px; padding: 0; margin: 24px 0 0; }
+.wc-steps li { counter-increment: wc; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px; }
+.wc-steps li::before { content: counter(wc); display: inline-flex; width: 34px; height: 34px; border-radius: 50%; background: var(--green); color: #fff; font-family: var(--font-display); font-weight: 700; align-items: center; justify-content: center; }
+.wc-steps h3 { font-size: 17px; margin: 12px 0 6px; }
+.wc-steps p { margin: 0; color: var(--muted); font-size: 15px; }
+.wc-fine { margin-top: 22px; font-size: 14px; color: var(--muted); }
+.wc-cta .container { background: var(--green); color: var(--cream); text-align: center; border-radius: var(--radius); padding: 44px 24px; box-shadow: var(--shadow); }
+.wc-cta h2 { color: #fff; margin-top: 0; }
+.wc-cta p { color: var(--cream); }
+.wc-cta a:not(.btn) { color: #fff; text-decoration: underline; }
+.wc-cta-btn { background: #fff; color: var(--green); border-color: #fff; margin-top: 8px; }
+.wc-cta-btn:hover { background: var(--cream); color: var(--green); }
+@media (max-width: 720px) {
+  .wc-plans { grid-template-columns: 1fr; }
+  .wc-price { font-size: 40px; }
+}
