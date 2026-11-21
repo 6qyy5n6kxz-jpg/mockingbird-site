@@ -335,3 +335,8 @@ nav a[aria-current="page"] { color: var(--green); font-weight: 600; }
   color: var(--wood);
 }
 .home-event-card.event-pinned { border-color: var(--green); }
+
+/* ---------- Wine club ---------- */
+.wine-club-tiers { margin: 24px 0; }
+.wine-club-price { font-family: var(--font-display, inherit); font-size: 28px; font-weight: 700; color: var(--green, #1f4a3a); margin: 4px 0 8px; }
+.wine-club-price span { font-family: var(--font-body, inherit); font-size: 14px; font-weight: 500; color: var(--muted); }
