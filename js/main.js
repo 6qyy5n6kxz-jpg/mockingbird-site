@@ -1059,10 +1059,10 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
             <li><a data-nav="events">Events</a></li>
             <li><a data-nav="wine-club">Wine Club</a></li>
             <li><a data-nav="private-parties">Private Parties</a></li>
+            <li><a data-nav="gift-cards">Gift Cards</a></li>
           </ul>
           <div class="nav-divider" aria-hidden="true"></div>
           <ul class="nav-secondary" aria-label="Explore">
-            <li><a data-nav="gift-cards">Gift Cards</a></li>
             <li><a data-nav="gallery">Gallery</a></li>
             <li><a data-nav="about">About</a></li>
             <li><a data-nav="jam">Mockingbird Jam</a></li>
@@ -3734,7 +3734,8 @@ const paymentEnabled =
     const menuById = new Map(normalizedMenus.map((menu) => [menu.id, menu]));
     const selectionsByMenu = new Map();
     const addonSelections = new Map();
-    let currentMenuId = normalizedMenus[0].id;
+    // No menu type is chosen at first, so the page doesn't open with a price nobody asked for.
+    let currentMenuId = null;
     let resetButton;
 
     const MENU_PRESETS = {
@@ -3762,6 +3763,7 @@ const paymentEnabled =
     }
 
     function getSelectionMap() {
+      if (!currentMenuId) return new Map();
       if (!selectionsByMenu.has(currentMenuId)) selectionsByMenu.set(currentMenuId, new Map());
       return selectionsByMenu.get(currentMenuId);
     }
@@ -3857,10 +3859,11 @@ const paymentEnabled =
       }).filter(Boolean);
     }
 
+    // Empty until the guest enters a count (then at least the minimum).
     function normalizeGuestCount() {
       const min = Number(guestInput.min) || 10;
       const parsed = parseInt(guestInput.value, 10);
-      if (!Number.isFinite(parsed)) return min;
+      if (!Number.isFinite(parsed) || parsed <= 0) return 0;
       return Math.max(min, parsed);
     }
 
@@ -3913,7 +3916,7 @@ const paymentEnabled =
 
     function updateEstimate() {
       const menu = menuById.get(currentMenuId);
-      const menuLabel = menu?.label || currentMenuId;
+      const menuLabel = menu?.label || currentMenuId || '';
       const guestCount = normalizeGuestCount();
       const selectionMap = getSelectionMap();
       const selectedItems = getOrderedSelections(menu, selectionMap);
@@ -3965,14 +3968,18 @@ const paymentEnabled =
         estimateTotal = combinedFixedTotal + (guestCount * combinedPerPerson);
         foodSubtotal = estimateTotal;
       }
-      estimateEl.textContent = `Food subtotal: ${formatCurrency(foodSubtotal)}`;
+      estimateEl.textContent = !currentMenuId
+        ? 'Choose a menu type to see the food estimate.'
+        : !guestCount
+          ? 'Add your guest count to see the food estimate.'
+          : `Food subtotal: ${formatCurrency(foodSubtotal)}`;
       if (estimateFixed) {
         const parts = [];
         if (combinedFixedTotal > 0) parts.push(`Boards/stations: ${formatCurrency(combinedFixedTotal)}`);
         estimateFixed.textContent = parts.join(' · ');
       }
       if (estimatePerGuest) {
-        estimatePerGuest.textContent = combinedPerPerson > 0
+        estimatePerGuest.textContent = combinedPerPerson > 0 && guestCount > 0
           ? `Selections: ~${formatCurrency(combinedPerPerson)} per guest × ${guestCount} = ${formatCurrency(combinedPerPerson * guestCount)}`
           : '';
       }
@@ -4043,10 +4050,29 @@ const paymentEnabled =
       updateResetButton();
     }
 
+    function itemPriceLabel(item) {
+      if (Number.isFinite(item.fixedPrice)) return `${formatCurrency(item.fixedPrice)}${item.servingsPerBatch ? ` · serves ~${item.servingsPerBatch}` : ''}`;
+      if (Number.isFinite(item.perPerson)) return `${formatCurrency(item.perPerson)}/guest`;
+      return '';
+    }
+
+    function priceTag(item) {
+      const tag = document.createElement('span');
+      tag.className = 'menu-item-price';
+      tag.textContent = itemPriceLabel(item);
+      return tag;
+    }
+
     function renderMenuSections() {
       menuSections.innerHTML = '';
       const menu = menuById.get(currentMenuId);
-      if (!menu?.sections?.length) return;
+      if (!menu?.sections?.length) {
+        const prompt = document.createElement('p');
+        prompt.className = 'note menu-builder-prompt';
+        prompt.textContent = 'Choose a menu type above to see our recommended menu and prices.';
+        menuSections.appendChild(prompt);
+        return;
+      }
       const selectionMap = getSelectionMap();
       menu.sections.forEach((section) => {
         const sectionEl = document.createElement('div');
@@ -4068,12 +4094,7 @@ const paymentEnabled =
             label.type = 'button';
             label.className = 'btn btn-ghost btn-small';
             label.textContent = name;
-            if (!Number.isFinite(item.fixedPrice) && Number.isFinite(item.perPerson)) {
-              const badge = document.createElement('span');
-              badge.className = 'badge per-guest-badge is-hidden';
-              badge.textContent = 'per guest';
-              label.appendChild(badge);
-            }
+            label.appendChild(priceTag(item));
             const minus = document.createElement('button');
             minus.type = 'button';
             minus.className = 'btn btn-secondary btn-small';
@@ -4091,8 +4112,6 @@ const paymentEnabled =
               if (bounded === 0) selectionMap.delete(name);
               else selectionMap.set(name, bounded);
               count.textContent = String(bounded);
-              const badge = label.querySelector('.per-guest-badge');
-              if (badge) badge.classList.toggle('is-hidden', bounded === 0);
               dbg('qty change', { item: name, qty: bounded });
               updateEstimate();
             };
@@ -4121,21 +4140,13 @@ const paymentEnabled =
             btn.setAttribute('aria-pressed', isSelected ? 'true' : 'false');
             btn.dataset.itemName = name;
             btn.textContent = name;
-            if (!Number.isFinite(item.fixedPrice) && Number.isFinite(item.perPerson)) {
-              const badge = document.createElement('span');
-              badge.className = 'badge per-guest-badge';
-              badge.textContent = 'per guest';
-              badge.classList.toggle('is-hidden', !isSelected);
-              btn.appendChild(badge);
-            }
+            btn.appendChild(priceTag(item));
             btn.addEventListener('click', () => {
               const next = (selectionMap.get(name) || 0) > 0 ? 0 : 1;
               if (next === 0) selectionMap.delete(name);
               else selectionMap.set(name, next);
               btn.classList.toggle('is-selected', next > 0);
               btn.setAttribute('aria-pressed', next > 0 ? 'true' : 'false');
-              const badge = btn.querySelector('.per-guest-badge');
-              if (badge) badge.classList.toggle('is-hidden', next === 0);
               updateEstimate();
             });
             itemsWrap.appendChild(btn);
@@ -4192,7 +4203,7 @@ const paymentEnabled =
       updateEstimate();
     });
 
-    applyPreset(currentMenuId);
+    if (currentMenuId) applyPreset(currentMenuId);
     renderMenuTypes();
     renderMenuSections();
     renderAddons();

@@ -71,10 +71,26 @@
     });
   }
 
+  const startOfToday = () => { const t = new Date(); return new Date(t.getFullYear(), t.getMonth(), t.getDate()); };
+  // Thursday–Saturday evenings are regular dinner service; those days are open for daytime events only.
+  const isDaytimeOnly = (date) => [4, 5, 6].includes(date.getDay());
+
+  function selectDate(key) {
+    if (!dateInput) return;
+    dateInput.value = key;
+    dateInput.dispatchEvent(new Event('input', { bubbles: true }));
+    dateInput.dispatchEvent(new Event('change', { bubbles: true }));
+    renderCalendar();
+  }
+
   function renderCalendar() {
     const year = viewDate.getFullYear();
     const month = viewDate.getMonth();
+    const today = startOfToday();
+    const todayKey = toKey(today);
+    const selectedKey = dateInput?.value || '';
     monthLabel.textContent = viewDate.toLocaleDateString(undefined, { month: 'long', year: 'numeric' });
+    if (prevBtn) prevBtn.disabled = year < today.getFullYear() || (year === today.getFullYear() && month <= today.getMonth());
     grid.innerHTML = '';
     weekdayLabels.forEach((label) => {
       const el = document.createElement('div');
@@ -83,31 +99,42 @@
       el.setAttribute('aria-hidden', 'true');
       grid.appendChild(el);
     });
-    const firstDay = new Date(year, month, 1);
-    const startOffset = firstDay.getDay();
+    const startOffset = new Date(year, month, 1).getDay();
     for (let i = 0; i < startOffset; i += 1) {
       const pad = document.createElement('div');
       pad.className = 'availability-pad';
       grid.appendChild(pad);
     }
     const daysInMonth = new Date(year, month + 1, 0).getDate();
-    const today = new Date();
-    const todayKey = toKey(today);
     for (let day = 1; day <= daysInMonth; day += 1) {
       const date = new Date(year, month, day);
       const key = toKey(date);
-      const cell = document.createElement('div');
-      cell.className = 'calendar-day cal-day';
-      if (key === todayKey) cell.classList.add('today', 'is-today');
-      if (blockedSet.has(key)) cell.classList.add('unavailable', 'is-unavailable');
-      cell.textContent = String(day);
-      const status = blockedSet.has(key) ? 'Unavailable' : 'Available';
-      cell.setAttribute('aria-label', `${date.toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' })} — ${status}`);
-      cell.setAttribute('role', 'gridcell');
-      if (blockedSet.has(key)) {
+      const past = date < today;
+      const booked = blockedSet.has(key);
+      const daytime = !past && !booked && isDaytimeOnly(date);
+      const label = date.toLocaleDateString(undefined, { weekday: 'long', month: 'long', day: 'numeric' });
+      let cell;
+      if (past || booked) {
+        cell = document.createElement('div');
         cell.setAttribute('aria-disabled', 'true');
-        cell.title = 'Unavailable (already booked)';
+        cell.classList.add(past ? 'is-past' : 'unavailable');
+        if (booked && !past) cell.classList.add('is-unavailable');
+        cell.setAttribute('aria-label', `${label} — ${past ? 'past' : 'booked'}`);
+        if (booked && !past) cell.title = 'Booked';
+      } else {
+        cell = document.createElement('button');
+        cell.type = 'button';
+        if (daytime) cell.classList.add('is-daytime');
+        cell.setAttribute('aria-label', `${label} — ${daytime ? 'open for daytime events' : 'open'}`);
+        cell.setAttribute('aria-pressed', key === selectedKey ? 'true' : 'false');
+        cell.title = daytime ? 'Open for daytime events' : 'Open';
+        cell.addEventListener('click', () => selectDate(key));
       }
+      cell.classList.add('calendar-day', 'cal-day');
+      if (key === todayKey) cell.classList.add('today', 'is-today');
+      if (key === selectedKey) cell.classList.add('is-selected');
+      cell.setAttribute('role', 'gridcell');
+      cell.textContent = String(day);
       grid.appendChild(cell);
     }
   }
@@ -115,30 +142,23 @@
   function updateWarning() {
     if (!warning || !dateInput) return;
     const value = dateInput.value;
-    if (!value) {
-      warning.textContent = '';
-      if (timeWarning) timeWarning.textContent = '';
-      return;
+    if (timeWarning) timeWarning.textContent = '';
+    if (!value) { warning.textContent = ''; return; }
+    const date = parseDate(value);
+    if (date && date < startOfToday()) warning.textContent = 'That date has already passed. Please choose a future date.';
+    else if (blockedSet.has(value)) warning.textContent = 'That date is already booked. You can still send your request if you are flexible, and we’ll suggest options.';
+    else if (date && isDaytimeOnly(date)) warning.textContent = 'Thursday–Saturday are open for morning and afternoon events only.';
+    else warning.textContent = '';
+    if (timeWarning && timeSelect && date && timeSelect.value === 'Evening' && isDaytimeOnly(date)) {
+      timeWarning.textContent = 'Thursday–Saturday evenings aren’t available. Choose morning or afternoon, or another date.';
     }
-    if (blockedSet.has(value)) {
-      warning.textContent = 'That date appears unavailable—still submit if flexible, and we’ll confirm options.';
-    } else {
-      warning.textContent = '';
-    }
-    if (timeWarning && timeSelect) {
-      const selected = timeSelect.value || '';
-      const date = parseDate(value);
-      if (date && selected === 'Evening') {
-        const day = date.getDay();
-        if (day === 4 || day === 5 || day === 6) {
-          timeWarning.textContent = 'Thursday–Saturday evenings aren’t available—submit if flexible and we’ll follow up with alternatives.';
-        } else {
-          timeWarning.textContent = '';
-        }
-      } else {
-        timeWarning.textContent = '';
-      }
-    }
+  }
+
+  // Typing a date moves the calendar to it.
+  function showDateMonth() {
+    const date = parseDate(dateInput?.value);
+    if (date) viewDate = new Date(date.getFullYear(), date.getMonth(), 1);
+    renderCalendar();
   }
 
   function attachNav() {
@@ -155,7 +175,8 @@
       });
     }
     if (dateInput) {
-      dateInput.addEventListener('change', updateWarning);
+      dateInput.min = toKey(startOfToday());
+      dateInput.addEventListener('change', () => { updateWarning(); showDateMonth(); });
       dateInput.addEventListener('input', updateWarning);
     }
     if (timeSelect) {
