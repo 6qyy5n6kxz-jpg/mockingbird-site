@@ -1058,10 +1058,10 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
             <li><a data-nav="specials">Specials</a></li>
             <li><a data-nav="events">Events</a></li>
             <li><a data-nav="private-parties">Private Parties</a></li>
+            <li><a data-nav="gift-cards">Gift Cards</a></li>
           </ul>
           <div class="nav-divider" aria-hidden="true"></div>
           <ul class="nav-secondary" aria-label="Explore">
-            <li><a data-nav="gift-cards">Gift Cards</a></li>
             <li><a data-nav="gallery">Gallery</a></li>
             <li><a data-nav="about">About</a></li>
             <li><a data-nav="jam">Mockingbird Jam</a></li>
