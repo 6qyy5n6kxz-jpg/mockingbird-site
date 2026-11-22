@@ -3716,7 +3716,8 @@ const paymentEnabled =
         pricingType,
         sectionTitle: sectionTitle || '',
         allowQuantity,
-        maxQty
+        maxQty,
+        serving: typeof raw.serving === 'string' ? raw.serving : ''
       };
       return normalized;
     }
@@ -3885,7 +3886,7 @@ const paymentEnabled =
               priceParts.push(`${formatCurrency(item.fixedPrice)} each`);
             } else {
               const perPersonInfo = getPerPersonPrice(item);
-              if (perPersonInfo.value) priceParts.push(`${formatCurrency(perPersonInfo.value)}/guest`);
+              if (perPersonInfo.value) priceParts.push(`${formatCurrency(perPersonInfo.value)}/guest${item.serving ? `, ${item.serving}` : ''}`);
             }
             const priceLabel = priceParts.length ? ` (${priceParts.join(', ')})` : '';
             const qtyTag = item.qty > 1 ? ` x${item.qty}` : '';
@@ -4052,7 +4053,7 @@ const paymentEnabled =
 
     function itemPriceLabel(item) {
       if (Number.isFinite(item.fixedPrice)) return `${formatCurrency(item.fixedPrice)}${item.servingsPerBatch ? ` · serves ~${item.servingsPerBatch}` : ''}`;
-      if (Number.isFinite(item.perPerson)) return `${formatCurrency(item.perPerson)}/guest`;
+      if (Number.isFinite(item.perPerson)) return `${formatCurrency(item.perPerson)}/guest${item.serving ? ` · ${item.serving}` : ''}`;
       return '';
     }
 
