@@ -17,7 +17,7 @@
   //   it's probably the repo name.
   // - If path has 1 segment and it matches a known route, base should be '' (user site).
   const knownRoutes = new Set([
-    'menu', 'specials', 'events', 'private-parties', 'reserve-date', 'gift-cards', 'contact', 'drinks'
+    'menu', 'specials', 'events', 'private-parties', 'reserve-date', 'gift-cards', 'wine-club', 'contact', 'drinks'
   ]);
 
   const parts = pathname.split('/').filter(Boolean);
@@ -1057,6 +1057,7 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
             <li><a data-nav="menu">Menu</a></li>
             <li><a data-nav="specials">Specials</a></li>
             <li><a data-nav="events">Events</a></li>
+            <li><a data-nav="wine-club">Wine Club</a></li>
             <li><a data-nav="private-parties">Private Parties</a></li>
           </ul>
           <div class="nav-divider" aria-hidden="true"></div>
