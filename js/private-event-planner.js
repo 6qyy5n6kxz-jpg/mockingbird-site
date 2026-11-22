@@ -15,17 +15,23 @@
   const hostedOptions = $('#hosted-beverage-options', builder);
   const methodNote = $('[data-beverage-method-note]', builder);
   const knownBeverageWrap = $('[data-known-beverages]', builder);
+  // Hosted drinks: the fixed list plus wine bottles, sangria growlers and cans priced from the live
+  // drinks menu (the same list as the Drinks page). Added once the menu loads.
+  const beverageOptions = { ...config.beverages };
   const state = {
-    food: { menuLabel: '', guestCount: 40, foodSubtotal: 0, foodSummary: '' },
+    food: { menuLabel: '', guestCount: 0, foodSubtotal: 0, foodSummary: '', selectedItems: [] },
     beverageQuantities: Object.fromEntries(Object.keys(config.beverages).map((key) => [key, 0])),
     estimate: null,
     sections: []
   };
   let syncing = false;
 
-  const money = (value) => new Intl.NumberFormat('en-US', {
-    style: 'currency', currency: 'USD', minimumFractionDigits: 0, maximumFractionDigits: 2
-  }).format(Number(value) || 0);
+  // $250, $15.50 (never $15.5).
+  const money = (value) => {
+    const n = Number(value) || 0;
+    const cents = Math.round(n * 100) % 100 !== 0;
+    return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: cents ? 2 : 0, maximumFractionDigits: 2 }).format(n);
+  };
 
   const track = (eventName, parameters = {}) => {
     if (typeof window.gtag === 'function') window.gtag('event', eventName, parameters);
@@ -42,7 +48,8 @@
 
   function renderKnownBeverages() {
     knownBeverageWrap.replaceChildren();
-    Object.entries(config.beverages).forEach(([key, item]) => {
+    Object.entries(beverageOptions).forEach(([key, item]) => {
+      if (!(key in state.beverageQuantities)) state.beverageQuantities[key] = 0;
       const row = document.createElement('div');
       row.className = 'planner-quantity-row';
       const copy = document.createElement('div');
@@ -64,7 +71,7 @@
       const count = document.createElement('span');
       count.className = 'qty-value';
       count.dataset.beverageCount = key;
-      count.textContent = '0';
+      count.textContent = String(state.beverageQuantities[key] || 0);
       count.setAttribute('aria-live', 'polite');
       const plus = document.createElement('button');
       plus.type = 'button';
@@ -111,7 +118,7 @@
     if (method === 'unsure') items.push('Beverage planning assistance — To be determined');
     if (method === 'hosted' || method === 'combination') {
       const labels = {
-        wine: 'Wine bottles', beer: 'Beer cans or bottles', keg: 'Sixth-barrel keg',
+        wine: 'Specific wines or a pairing', beer: 'Specific beers', keg: 'Sixth-barrel keg',
         nonalcoholic: 'Soft drinks or nonalcoholic options', other: 'Other beverage request'
       };
       $$('[data-custom-beverage]:checked', builder).forEach((input) => items.push(`${labels[input.dataset.customBeverage]} — To be determined`));
@@ -124,9 +131,54 @@
 
   function knownBeverageSelections(method) {
     if (method !== 'hosted' && method !== 'combination') return [];
-    return Object.entries(state.beverageQuantities).filter(([, quantity]) => quantity > 0).map(([key, quantity]) => ({
-      key, quantity, ...config.beverages[key], amount: quantity * config.beverages[key].price
+    return Object.entries(state.beverageQuantities).filter(([key, quantity]) => quantity > 0 && beverageOptions[key]).map(([key, quantity]) => ({
+      key, quantity, ...beverageOptions[key], amount: quantity * beverageOptions[key].price
     }));
+  }
+
+  // "$9.00 | $21.00" with header ["Glass","Bottle"], or "Can $3.50 · To Go 4 Pack $12.00".
+  const priceFor = (item, header, label) => {
+    const text = String(item?.priceText || '');
+    const want = label.toLowerCase();
+    if (Array.isArray(header) && header.length) {
+      const i = header.findIndex((h) => String(h).toLowerCase() === want);
+      const parts = text.split('|').map((p) => p.trim());
+      if (i >= 0 && parts.length === header.length) {
+        const n = Number(parts[i].replace(/[^0-9.]/g, ''));
+        return Number.isFinite(n) && n > 0 ? n : null;
+      }
+    }
+    const match = text.match(new RegExp(`${label}\\s*\\$([0-9]+(?:\\.[0-9]{1,2})?)`, 'i'));
+    return match ? Number(match[1]) : null;
+  };
+  const median = (values) => {
+    const sorted = values.filter((v) => Number.isFinite(v) && v > 0).sort((a, b) => a - b);
+    if (!sorted.length) return null;
+    const mid = Math.floor(sorted.length / 2);
+    return sorted.length % 2 ? sorted[mid] : (sorted[mid - 1] + sorted[mid]) / 2;
+  };
+
+  function applyDrinkPrices(drinks) {
+    const sections = drinks?.sections || [];
+    const items = (id) => sections.filter((sec) => sec.id === id).flatMap((sec) => (sec.subsections || []).map((sub) => ({ sub, list: sub.items || [] })));
+    const bottles = items('wine-flights').flatMap(({ sub, list }) => list.map((it) => priceFor(it, sub.priceHeader, 'Bottle')));
+    const sangria = items('on-tap').flatMap(({ sub, list }) => list.filter((it) => /sangria/i.test(it.name || '')).map((it) => priceFor(it, sub.priceHeader, 'Growler')));
+    const cans = items('beer-cans').filter(({ sub }) => !/non-?alcoholic/i.test(sub.title || '')).flatMap(({ sub, list }) => list.map((it) => priceFor(it, sub.priceHeader, 'Can')));
+    const wine = median(bottles), growler = median(sangria), can = median(cans);
+    const range = (values) => { const v = values.filter((x) => x > 0); return v.length ? `${money(Math.min(...v))}–${money(Math.max(...v))}` : ''; };
+    const added = {};
+    if (wine) added.wineBottle = { label: 'Wine bottles, your choice from our list', price: Math.round(wine), guide: `About 5 glasses per bottle. Estimated at a typical bottle; our bottles run ${range(bottles)}.` };
+    if (growler) added.sangria = { ...config.beverages.sangria, price: Math.round(growler) };
+    if (can) added.cans = { label: 'Beer & seltzer cans', price: Math.round(can * 2) / 2, guide: `Estimated at a typical can; cans run ${range(cans)}.` };
+    if (!Object.keys(added).length) return;
+    const ordered = {};
+    if (added.wineBottle) ordered.wineBottle = added.wineBottle;
+    Object.entries(beverageOptions).forEach(([key, item]) => { ordered[key] = added[key] || item; });
+    if (added.cans) ordered.cans = added.cans;
+    Object.keys(beverageOptions).forEach((key) => delete beverageOptions[key]);
+    Object.assign(beverageOptions, ordered);
+    renderKnownBeverages();
+    updatePlan();
   }
 
   function enhancementSelections() {
@@ -165,12 +217,24 @@
     container.appendChild(list);
   }
 
+  const hasGuests = () => Number(state.food.guestCount) > 0;
+
   function renderEstimate(beverages, enhancements, customItems) {
     const estimate = state.estimate;
     estimateRegion.replaceChildren();
+    if (!hasGuests()) {
+      const prompt = document.createElement('p');
+      prompt.className = 'note planner-estimate-prompt';
+      prompt.textContent = 'Add your guest count and choose a menu to see your estimate.';
+      estimateRegion.appendChild(prompt);
+    }
     const venue = document.createElement('section');
     venue.innerHTML = '<h4>Venue</h4>';
-    appendRows(venue, [['Venue rental', money(estimate.venueRental)], ['Reservation deposit required', money(estimate.reservationDeposit)], ['Remaining venue-rental balance after deposit', money(estimate.venueRental - estimate.reservationDeposit)]]);
+    appendRows(venue, [['Venue rental', money(estimate.venueRental)]]);
+    const depositNote = document.createElement('p');
+    depositNote.className = 'note';
+    depositNote.textContent = `A ${money(estimate.reservationDeposit)} deposit holds your date. It counts toward the venue rental, so it isn't an extra charge.`;
+    venue.appendChild(depositNote);
     estimateRegion.appendChild(venue);
     const fb = document.createElement('section');
     fb.innerHTML = '<h4>Food & Beverages</h4>';
@@ -194,9 +258,11 @@
     }
     const totals = document.createElement('section');
     totals.innerHTML = '<h4>Planning Total</h4>';
-    appendRows(totals, [['Current estimated event total', money(estimate.estimatedTotal), true], ['Reservation deposit required to secure date', `−${money(estimate.reservationDeposit)}`], ['Estimated remaining balance after deposit', money(estimate.remainingAfterDeposit), true]]);
+    appendRows(totals, [['Estimated event total', money(estimate.estimatedTotal), true], ['Due now to hold your date (deposit)', money(estimate.reservationDeposit)], ['Due before the event', money(estimate.remainingAfterDeposit), true]]);
     estimateRegion.appendChild(totals);
-    totalOutput.textContent = money(estimate.estimatedTotal);
+    const shown = hasGuests() ? money(estimate.estimatedTotal) : '—';
+    totalOutput.textContent = shown;
+    $$('[data-mobile-total]').forEach((el) => { el.textContent = shown; });
   }
 
   function detailLines() {
@@ -242,8 +308,8 @@
       `Food-and-beverage service charge (${Math.round(config.serviceChargeRate * 100)}%): ${money(e.serviceChargeAmount)}`,
       `Event enhancements: ${money(e.enhancementsSubtotal)}`,
       `Current estimated event total: ${money(e.estimatedTotal)}`,
-      `Reservation deposit required: ${money(e.reservationDeposit)} (credited toward venue rental; not an additional charge)`,
-      `Estimated remaining balance after deposit: ${money(e.remainingAfterDeposit)}`
+      `Deposit to hold the date: ${money(e.reservationDeposit)} (counts toward the venue rental; not an extra charge)`,
+      `Due before the event: ${money(e.remainingAfterDeposit)}`
     ];
     return [
       { title: 'Food Selections', lines: foodLines },
@@ -285,6 +351,12 @@
     state.sections = buildSections(beverages, enhancements, customItems);
     renderEstimate(beverages, enhancements, customItems);
     if (summaryField) summaryField.value = state.sections.map((section) => `${section.title.toUpperCase()}\n${section.lines.join('\n')}`).join('\n\n');
+    const foodField = $('#party-food', form);
+    if (foodField) foodField.value = state.food.menuLabel
+      ? `${state.food.menuLabel}: ${(state.food.selectedItems || []).map((item) => `${item.name}${item.qty > 1 ? ` x${item.qty}` : ''}`).join(', ') || 'no items chosen yet'}`
+      : 'No menu chosen yet';
+    const beverageField = $('#party-beverages', form);
+    if (beverageField) beverageField.value = [methodLabels[method], ...beverages.map((item) => `${item.label} x${item.quantity}`)].join('; ');
     syncInquiryEnhancements();
     document.dispatchEvent(new CustomEvent('private-event-plan:updated', { detail: { estimate: state.estimate } }));
   }
@@ -311,6 +383,7 @@
   });
 
   renderKnownBeverages();
+  window.Mockingbird?.fetchJSON?.('drinks.json', {}).then(applyDrinkPrices).catch(() => {});
   $$('[name="beverage-method"]', builder).forEach((radio) => radio.addEventListener('change', () => {
     track('beverage_method_selected', { beverage_method: radio.value });
     updatePlan();
@@ -327,6 +400,13 @@
   window.PrivateEventPlanner = {
     update: updatePlan,
     getEstimate: () => ({ ...(state.estimate || {}) }),
+    getHeadline: () => ({
+      guestCount: Number(state.food.guestCount) || 0,
+      menuLabel: state.food.menuLabel || '',
+      itemCount: (state.food.selectedItems || []).length,
+      beverageMethod: methodLabels[selectedMethod()],
+      total: hasGuests() ? state.estimate?.estimatedTotal : null
+    }),
     getSubmissionSections: () => state.sections.map((section) => ({ title: section.title, lines: [...section.lines] }))
   };
 

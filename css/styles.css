@@ -4238,3 +4238,59 @@ textarea {
 
 /* The flavor guide hides suggestions for drinks that aren't on tonight's list. */
 [data-flavor-guide-section][hidden], [data-flavor-guide-section] [hidden] { display: none !important; }
+
+/* ---------- Private event estimate: two steps (plan & estimate, then date & details) ---------- */
+.pp-steps { display: flex; gap: 8px; margin: 0 0 18px; scroll-margin-top: 90px; }
+.pp-step { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 8px 16px; border-radius: 999px;
+  border: 1px solid var(--border); background: #fff; color: var(--muted); font: 600 15px/1.2 var(--font-body); cursor: pointer; }
+.pp-step__num { display: inline-grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; background: var(--paper); color: var(--ink); font-size: 13px; }
+.pp-step[aria-current="step"] { border-color: var(--green); background: var(--green); color: #fff; }
+.pp-step[aria-current="step"] .pp-step__num { background: #fff; color: var(--green); }
+.pp-builder-grid { width: min(1180px, calc(100% - 32px)); margin: 0 auto 56px; grid-template-columns: minmax(0, 1fr) !important; }
+.pp-builder-grid[data-step="plan"] .pp-builder-right,
+.pp-builder-grid[data-step="request"] .pp-builder-left { display: none; }
+.pp-builder-grid[data-step="request"] .pp-builder-right { max-width: 820px; width: 100%; margin: 0 auto; }
+/* The request form is one normal page now, not a box with its own scroll bar. */
+.pp-inquiry-card { position: static !important; margin-top: 0 !important; }
+.pp-inquiry-body { max-height: none !important; overflow: visible !important; }
+.pp-skip { margin: 0 0 12px; font-size: 14px; color: var(--muted); }
+.pp-event-summary__head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+.menu-builder-guests { margin: 4px 0 18px; }
+.menu-builder-guests label { display: block; font-weight: 600; margin-bottom: 4px; }
+.menu-builder-guests input { max-width: 180px; min-height: 48px; font-size: 18px; }
+.menu-builder-prompt { padding: 14px; border: 1px dashed var(--border); border-radius: var(--radius); background: var(--paper); }
+.menu-item-price { margin-left: 6px; font-weight: 500; font-size: 12px; opacity: .8; white-space: nowrap; }
+.planner-estimate-prompt { padding: 10px 12px; border-radius: 10px; background: var(--green-soft); color: var(--accent-strong); }
+@media (min-width: 1024px) {
+  /* Plan step: choices on the left, the running estimate stays in view on the right. */
+  #private-menu-builder { display: grid; grid-template-columns: minmax(0, 1fr) 360px; column-gap: 32px; align-items: start; }
+  #private-menu-builder > * { grid-column: 1; }
+  #private-menu-builder > .planner-estimate { grid-column: 2; grid-row: 1 / span 4; position: sticky; top: 96px;
+    max-height: calc(100vh - 120px); overflow: auto; }
+}
+/* Phones: a bar with the running estimate and the next step. */
+.pp-mobile-bar { display: none; }
+@media (max-width: 959px) {
+  body.pp-on-plan .sticky-cta-bar { display: none !important; }
+  body.pp-on-plan .pp-mobile-bar { display: flex; position: fixed; left: 0; right: 0; bottom: 0; z-index: 60; align-items: center; justify-content: space-between;
+    gap: 12px; padding: 10px 16px calc(10px + env(safe-area-inset-bottom)); background: #fff; border-top: 1px solid var(--border); box-shadow: 0 -6px 18px rgba(29, 29, 27, .08); }
+  body.pp-on-plan .pp-mobile-bar strong { font-size: 18px; }
+  body.pp-on-plan { padding-bottom: 76px; }
+  body.pp-on-plan .back-to-top { bottom: 88px; }
+  .pp-steps .pp-step { flex: 1; justify-content: center; padding: 8px 10px; font-size: 14px; }
+}
+/* Calendar: past days, daytime-only days (Thu–Sat) and the chosen day. */
+button.calendar-day { font: inherit; cursor: pointer; width: 100%; padding: 0; }
+.calendar-day.is-past { opacity: .35; background: transparent; border-color: transparent; }
+.calendar-day.is-daytime, .legend-dot.daytime { background: linear-gradient(180deg, var(--paper) 55%, rgba(201, 149, 94, .45) 55%); }
+.calendar-day.is-selected { background: var(--green); color: #fff; border-color: var(--green); }
+.calendar-day.is-selected.is-daytime { background: var(--green); }
+.availability-nav .btn:disabled { opacity: .35; cursor: default; }
+.pp-builder-grid[data-step="request"] .calendar-day { aspect-ratio: auto; min-height: 44px; }
+.availability-grid .calendar-day { width: 100%; min-width: 0; box-sizing: border-box; }
+@media (max-width: 520px) {
+  .pp-builder-grid[data-step="request"] .availability-grid { gap: 4px; }
+  .pp-builder-grid[data-step="request"] .calendar-day { aspect-ratio: auto; min-height: 40px; font-size: 14px; }
+  .pp-builder-grid[data-step="request"] .availability-card { padding: 12px 10px; }
+}
+.availability-header { flex-wrap: wrap; }
