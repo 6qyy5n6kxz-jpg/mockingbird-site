@@ -12,6 +12,7 @@ jobs:
       - run: node --test tests/public-specials.test.cjs
       - run: node --test tests/public-drinks.test.cjs
       - run: node --test tests/flavor-guide.test.cjs
+      - run: node --test tests/site-seo.test.cjs
       - run: node --check js/main.js
       - run: node --check js/public-events.js
       - run: node --check js/public-specials.js

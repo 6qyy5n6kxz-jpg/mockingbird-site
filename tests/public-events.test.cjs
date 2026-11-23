@@ -144,3 +144,31 @@ test('a full free night says so; a malformed sign-up count is ignored; paid even
  assert.doesNotMatch(odd,/spots left/);assert.match(odd,/Sign up free/);
  assert.match(paid,/Reserve \/ tickets/);assert.doesNotMatch(paid,/spots left|Sign up/);
 });
+test('Command Center flyers load as resized copies; other image hosts are left alone',()=>{
+ const api=moduleApi();
+ const sized=api.flyerSources('https://abc.supabase.co/storage/v1/object/public/mockingbird-event-images/x/flyer.png');
+ assert.equal(sized.src,'https://abc.supabase.co/storage/v1/render/image/public/mockingbird-event-images/x/flyer.png?width=480&resize=contain&quality=75');
+ assert.match(sized.srcset,/width=320&resize=contain&quality=75 320w, .*width=720&resize=contain&quality=75 720w$/);
+ assert.equal(api.flyerSources('https://cdn.example.com/flyer.png'),null);
+ assert.equal(api.flyerSources('https://abc.supabase.co/functions/v1/x'),null);
+});
+test('long lists get month headings and jump links; events become Google event listings',()=>{
+ const api=moduleApi(),now=Date.parse('2026-12-01T17:00:00Z');
+ const day=86400000,events=[];
+ for(let i=0;i<7;i++)events.push(event({id:'e'+i,title:'Night '+i,starts_at:new Date(now+i*12*day).toISOString(),ends_at:new Date(now+i*12*day+7200000).toISOString(),
+  reservation_url:i===0?'https://app.example.com/r/0':'',signup:i===0?{free:true,open:true,spots_left:0}:null}));
+ const data=api.normalizeFeed({...feed(events),generated_at:new Date(now).toISOString()},now);
+ const container={children:[],replaceChildren(){this.children=[];},appendChild(c){this.children.push(c);return c;}};
+ api.render(data,container,false);
+ const kinds=container.children.map(c=>c.tagName);
+ assert.equal(kinds[0],'nav');
+ const headings=container.children.filter(c=>c.tagName==='h2').map(c=>c.textContent);
+ assert.deepEqual(headings,['December 2026','January 2027','February 2027']);
+ assert.deepEqual(container.children[0].children.slice(1).map(a=>a.href),['#events-2026-12','#events-2027-01','#events-2027-02']);
+ const schema=api.eventSchema(data.events,'https://site.test/events/');
+ assert.equal(schema.length,7);assert.equal(schema[0]['@type'],'Event');assert.equal(schema[0].location.address.postalCode,'43432');
+ assert.equal(schema[0].offers.availability,'https://schema.org/SoldOut');assert.equal(schema[1].url,'https://site.test/events/#event-e1');
+ const short={children:[],replaceChildren(){this.children=[];},appendChild(c){this.children.push(c);return c;}};
+ api.render({events:data.events.slice(0,3)},short,false);
+ assert.equal(short.children.every(c=>c.tagName==='article'),true);
+});

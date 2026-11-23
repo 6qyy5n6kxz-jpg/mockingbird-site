@@ -81,98 +81,112 @@
         "alt": "Party platters with wraps, sandwiches, vegetables, and fruit",
         "width": 1600,
         "height": 1102,
-        "category": "Food & Drinks"
+        "category": "Food & Drinks",
+        "thumb": "assets/images/w640/mockingbird-party-wraps-and-sandwiches.webp"
       },
       {
         "src": "assets/images/mockingbird-party-flatbreads-and-salads.webp",
         "alt": "Flatbreads, fruit, and pasta salads arranged for a party",
         "width": 1200,
         "height": 1600,
-        "category": "Food & Drinks"
+        "category": "Food & Drinks",
+        "thumb": "assets/images/w640/mockingbird-party-flatbreads-and-salads.webp"
       },
       {
         "src": "assets/images/mockingbird-baked-potato-bar.webp",
         "alt": "Baked potato bar with flavored butters, cheese, bacon, and fresh toppings",
         "width": 1600,
         "height": 1200,
-        "category": "Food & Drinks"
+        "category": "Food & Drinks",
+        "thumb": "assets/images/w640/mockingbird-baked-potato-bar.webp"
       },
       {
         "src": "assets/images/food1.jpg",
         "alt": "Dessert served with red wine at The Mockingbird",
         "width": 1536,
         "height": 2048,
-        "category": "Food & Drinks"
+        "category": "Food & Drinks",
+        "thumb": "assets/images/w640/food1.webp"
       },
       {
         "src": "assets/images/food3.jpg",
         "alt": "Colorful fruit and snack display prepared for a gathering",
         "width": 1440,
         "height": 1080,
-        "category": "Food & Drinks"
+        "category": "Food & Drinks",
+        "thumb": "assets/images/w640/food3.webp"
       },
       {
         "src": "assets/images/mockingbird-private-event-buffet-room.webp",
         "alt": "The Mockingbird dining room set with a buffet of homemade food",
         "width": 1800,
         "height": 1350,
-        "category": "Inside Mockingbird"
+        "category": "Inside Mockingbird",
+        "thumb": "assets/images/w640/mockingbird-private-event-buffet-room.webp"
       },
       {
         "src": "assets/images/interior1.jpg",
         "alt": "Cozy dining room with fireplace at The Mockingbird",
         "width": 2048,
         "height": 1536,
-        "category": "Inside Mockingbird"
+        "category": "Inside Mockingbird",
+        "thumb": "assets/images/w640/interior1.webp"
       },
       {
         "src": "assets/images/interior2.jpg",
         "alt": "The Mockingbird team behind the bar",
         "width": 960,
         "height": 640,
-        "category": "Inside Mockingbird"
+        "category": "Inside Mockingbird",
+        "thumb": "assets/images/w640/interior2.webp"
       },
       {
         "src": "assets/images/hero.jpg",
         "alt": "The Mockingbird on Mill Road in Graytown, Ohio: the white building with the green roof and cupola, the windmill and the patio",
         "width": 2048,
         "height": 1365,
-        "category": "Patio & Grounds"
+        "category": "Patio & Grounds",
+        "thumb": "assets/images/w640/hero.webp"
       },
       {
         "src": "assets/images/interior3.jpg",
         "alt": "Wine and two glasses at sunset on The Mockingbird patio",
         "width": 960,
         "height": 768,
-        "category": "Patio & Grounds"
+        "category": "Patio & Grounds",
+        "thumb": "assets/images/w640/interior3.webp"
       },
       {
         "src": "assets/images/mockingbird-bridal-shower-buffet.webp",
         "alt": "Garden themed bridal shower buffet with salads and fresh vegetables",
         "width": 1600,
         "height": 1200,
-        "category": "Private Celebrations"
+        "category": "Private Celebrations",
+        "thumb": "assets/images/w640/mockingbird-bridal-shower-buffet.webp"
       },
       {
         "src": "assets/images/mockingbird-black-tie-dessert-table.webp",
         "alt": "Black tie themed cake, cupcakes, and decorated cookies",
         "width": 1200,
         "height": 1672,
-        "category": "Private Celebrations"
+        "category": "Private Celebrations",
+        "thumb": "assets/images/w640/mockingbird-black-tie-dessert-table.webp"
       },
       {
         "src": "assets/images/mockingbird-cookies-and-cupcakes.webp",
         "alt": "Cookies and frosted cupcakes on a lace-covered celebration table",
         "width": 1600,
         "height": 1200,
-        "category": "Private Celebrations"
+        "category": "Private Celebrations",
+        "thumb": "assets/images/w640/mockingbird-cookies-and-cupcakes.webp"
       },
       {
         "src": "assets/images/mockingbird-adopt-a-teddy-party-table.webp",
         "alt": "Adopt a Teddy activity table arranged for a children's celebration",
         "width": 1200,
         "height": 1600,
-        "category": "Private Celebrations"
+        "category": "Private Celebrations",
+        "thumb": "assets/images/w640/mockingbird-adopt-a-teddy-party-table.webp"
       }
     ]
   },
