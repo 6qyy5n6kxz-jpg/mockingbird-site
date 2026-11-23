@@ -184,29 +184,46 @@
     }
   }
 
-  function loadData() {
-    fetch(withBase('/data/private-availability.json'))
-      .then((res) => res.json())
-      .then((data) => {
-        (data?.blocked_dates || []).forEach((entry) => {
-          const date = parseDate(entry);
-          if (date) addBlockedDate(date);
-        });
-        (data?.blocked_ranges || []).forEach((range) => {
-          const start = parseDate(range?.start);
-          const end = parseDate(range?.end);
-          if (start && end) expandRange(start, end);
-        });
-        blockedDates.sort();
-        renderCalendar();
-        renderFallbackList();
-        updateWarning();
-        attachNav();
+  // Booked dates come from two places: the Command Center (private bookings and closed / private /
+  // special days, dates only) and the hand-kept data/private-availability.json. If the Command Center
+  // feed is down, the file alone is used.
+  const DATE = /^\d{4}-\d{1,2}-\d{1,2}$/;
+  function readFile() {
+    return fetch(withBase('/data/private-availability.json')).then((res) => (res.ok ? res.json() : {})).catch(() => ({}));
+  }
+  function readLive() {
+    return fetch(withBase('/data/public-content.json'), { cache: 'no-store' })
+      .then((res) => (res.ok ? res.json() : null))
+      .then((config) => {
+        if (!config?.private_availability_endpoint) return [];
+        const url = new URL(config.private_availability_endpoint);
+        if (url.protocol !== 'https:' || url.username || url.password || url.search || url.hash
+          || !url.pathname.endsWith('/functions/v1/mockingbird-private-availability')) return [];
+        return fetch(url.href, { credentials: 'omit', signal: AbortSignal.timeout(8000) })
+          .then((res) => (res.ok ? res.json() : null))
+          .then((data) => (data?.schema_version === 1 && Array.isArray(data.booked_dates)
+            ? data.booked_dates.filter((d) => typeof d === 'string' && DATE.test(d)) : []));
       })
-      .catch(() => {
-        renderCalendar();
-        attachNav();
+      .catch(() => []);
+  }
+
+  function loadData() {
+    Promise.all([readFile(), readLive()]).then(([file, live]) => {
+      [...(file?.blocked_dates || []), ...live].forEach((entry) => {
+        const date = parseDate(entry);
+        if (date) addBlockedDate(date);
       });
+      (file?.blocked_ranges || []).forEach((range) => {
+        const start = parseDate(range?.start);
+        const end = parseDate(range?.end);
+        if (start && end) expandRange(start, end);
+      });
+      blockedDates.sort();
+      renderCalendar();
+      renderFallbackList();
+      updateWarning();
+      attachNav();
+    });
   }
 
   loadData();
