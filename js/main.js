@@ -1065,7 +1065,6 @@ if (field.id === 'quantity' && (!optsList || !optsList.length)) {
           <ul class="nav-secondary" aria-label="Explore">
             <li><a data-nav="gallery">Gallery</a></li>
             <li><a data-nav="about">About</a></li>
-            <li><a data-nav="jam">Mockingbird Jam</a></li>
             <li><a data-nav="contact">Contact</a></li>
           </ul>
           <div class="nav-call-mobile">
@@ -3437,7 +3436,9 @@ const paymentEnabled =
         button.type = 'button';
         button.setAttribute('aria-label', `View larger image: ${item.alt}`);
         const image = document.createElement('img');
-        image.src = item.src;
+        // Grid shows a 640px copy; the full photo loads only in the lightbox.
+        image.src = item.thumb ? withBase(item.thumb) : item.src;
+        image.decoding = 'async';
         image.alt = item.alt;
         image.loading = 'lazy';
         image.width = item.width || 1200;
@@ -4362,12 +4363,6 @@ const paymentEnabled =
     const script = document.createElement('script');
     script.type = 'application/ld+json';
     script.id = 'localbusiness-schema';
-    if (site.seoDescription && !document.querySelector('meta[name="description"][data-page-seo]')) {
-      const meta = document.querySelector('meta[name="description"]');
-      if (meta) meta.setAttribute('content', site.seoDescription);
-      const og = document.querySelector('meta[property="og:description"]');
-      if (og) og.setAttribute('content', site.seoDescription);
-    }
     const ogImg = resolveImage(site.images?.ogImage || site.defaultSEO?.ogImage || site.openGraphImage || site.heroImage);
     if (ogImg && !document.querySelector('meta[property="og:image"][data-page-seo]')) {
       const ogMeta = document.querySelector('meta[property="og:image"]');

@@ -4308,3 +4308,27 @@ button.calendar-day { font: inherit; cursor: pointer; width: 100%; padding: 0; }
 .menu-builder-sections .menu-toggle { display: inline-flex; flex-direction: column; align-items: flex-start; justify-content: center; text-align: left;
   white-space: normal; height: auto; min-height: 48px; line-height: 1.25; padding: 8px 14px; }
 .menu-builder-sections .menu-toggle .menu-item-price { margin: 2px 0 0; white-space: normal; }
+
+/* Tap targets: social icons and footer links are at least 44px tall to tap on a phone. */
+.footer-social-icons { gap: 4px; margin-left: -10px; }
+.footer-social-icons .footer-icon, .social .social-icon { width: 44px; height: 44px; padding: 10px; box-sizing: border-box; align-items: center; justify-content: center; }
+.social { gap: 4px; margin-left: -10px; }
+.footer .footer-links > div { gap: 0; }
+.footer .footer-links .inline-links { row-gap: 0; column-gap: 16px; }
+.footer .footer-links a { min-height: 44px; align-items: center; padding: 0; }
+.footer a[data-fill="phone-link"], .footer a[data-fill="email-link"] { display: inline-flex; align-items: center; min-height: 44px; }
+
+/* Events: month headings and jump links when the list is long. */
+.events-jump { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; grid-column: 1 / -1; margin: 0 0 4px; }
+.events-jump-label { font-weight: 600; color: var(--muted); margin-right: 2px; }
+.events-jump-link { display: inline-flex; align-items: center; min-height: 40px; padding: 0 14px; border: 1px solid var(--border); border-radius: 999px;
+  text-decoration: none; color: inherit; background: var(--paper, #fff); font-weight: 600; font-size: 15px; }
+.events-jump-link:hover, .events-jump-link:focus-visible { border-color: var(--green, currentColor); }
+.events-month-heading { grid-column: 1 / -1; margin: 18px 0 2px; font-size: 1.35rem; scroll-margin-top: 90px; }
+.events-month-heading:focus { outline: none; }
+
+/* Images with width/height attributes keep their shape when scaled down (zero specificity, so layout rules still win). */
+:where(img[width][height]) { height: auto; }
+.event-description.is-clamped { display: -webkit-box; -webkit-line-clamp: 4; line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
+.event-more { display: flex; align-items: center; width: fit-content; min-height: 44px; padding: 0; margin: -4px 0 10px; font-weight: 600; }
+.footer-icon[aria-label="Facebook"] svg, .social-icon[aria-label="Facebook"] svg { transform: scale(1.7); }

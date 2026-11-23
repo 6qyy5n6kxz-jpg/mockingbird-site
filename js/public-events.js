@@ -52,6 +52,42 @@
  function node(tag,value,className){
   const element=root.document.createElement(tag);if(value)element.textContent=value;if(className)element.className=className;return element;
  }
+ // Flyers uploaded in the Command Center are full size (often 2+ MB). Supabase can resize them on the fly.
+ function flyerSources(url){
+  try{
+   const parsed=new URL(url);
+   if(!/[.]supabase[.]co$/.test(parsed.hostname)||!parsed.pathname.startsWith('/storage/v1/object/public/'))return null;
+   const base=parsed.origin+parsed.pathname.replace('/storage/v1/object/public/','/storage/v1/render/image/public/');
+   const at=width=>`${base}?width=${width}&resize=contain&quality=75`;
+   return {src:at(480),srcset:[320,480,720].map(width=>`${at(width)} ${width}w`).join(', ')};
+  }catch{return null;}
+ }
+ const monthKey=event=>new Intl.DateTimeFormat('en-CA',{timeZone:zone,year:'numeric',month:'2-digit'}).format(new Date(event.starts_at));
+ const monthLabel=event=>new Intl.DateTimeFormat('en-US',{timeZone:zone,month:'long',year:'numeric'}).format(new Date(event.starts_at));
+ function eventSchema(events,pageUrl){
+  const place={'@type':'Place',name:'The Mockingbird on Mill Road',address:{'@type':'PostalAddress',streetAddress:'4408 N. Elliston-Trowbridge Rd.',
+   addressLocality:'Graytown',addressRegion:'OH',postalCode:'43432',addressCountry:'US'}};
+  return events.slice(0,50).map(event=>{
+   const item={'@context':'https://schema.org','@type':'Event',name:event.title,startDate:event.starts_at,endDate:event.ends_at,
+    eventStatus:'https://schema.org/EventScheduled',eventAttendanceMode:'https://schema.org/OfflineEventAttendanceMode',location:place,
+    organizer:{'@type':'Organization',name:'The Mockingbird on Mill Road',url:'https://themockingbirdonmillroad.com/'},
+    url:event.reservation_url||`${pageUrl}#event-${encodeURIComponent(event.id)}`};
+   if(event.description)item.description=event.description.slice(0,500);
+   if(event.image_url)item.image=[event.image_url];
+   if(event.performer)item.performer={'@type':'PerformingGroup',name:event.performer};
+   if(event.signup?.free)item.offers={'@type':'Offer',price:'0',priceCurrency:'USD',availability:event.signup.spots_left===0?'https://schema.org/SoldOut':'https://schema.org/InStock',url:item.url};
+   return item;
+  });
+ }
+ function injectEventSchema(events){
+  const doc=root.document;
+  if(!doc?.head||typeof doc.getElementById!=='function')return;
+  doc.getElementById('events-schema')?.remove();
+  if(!events.length)return;
+  const script=doc.createElement('script');script.type='application/ld+json';script.id='events-schema';
+  script.textContent=JSON.stringify(eventSchema(events,'https://themockingbirdonmillroad.com/events/'));
+  doc.head.appendChild(script);
+ }
  function when(event){
   const start=new Date(event.starts_at),end=new Date(event.ends_at);
   const date=new Intl.DateTimeFormat('en-US',{timeZone:zone,weekday:'short',month:'short',day:'numeric'});
@@ -114,7 +150,27 @@
    message.setAttribute('role','status');container.appendChild(message);return;
   }
   const ordered=data.events.filter(event=>event.pinned).concat(data.events.filter(event=>!event.pinned));
+  const grouped=!preview&&ordered.length>=6;
+  const seenMonths=new Set();
+  if(!preview)injectEventSchema(data.events);
+  if(grouped){
+   const months=[];
+   data.events.filter(event=>!event.pinned).forEach(event=>{const key=monthKey(event);if(!months.some(m=>m.key===key))months.push({key,label:monthLabel(event)});});
+   if(months.length>1){
+    const nav=node('nav',null,'events-jump');nav.setAttribute('aria-label','Jump to month');
+    nav.appendChild(node('span','Jump to:','events-jump-label'));
+    months.forEach(month=>{const link=node('a',month.label.replace(/ \d{4}$/,''),'events-jump-link');link.href=`#events-${month.key}`;nav.appendChild(link);});
+    container.appendChild(nav);
+   }
+  }
   (preview?ordered.slice(0,3):ordered).forEach(event=>{
+   if(grouped&&!event.pinned){
+    const key=monthKey(event);
+    if(!seenMonths.has(key)){
+     seenMonths.add(key);
+     const heading=node('h2',monthLabel(event),'events-month-heading');heading.id=`events-${key}`;heading.tabIndex=-1;container.appendChild(heading);
+    }
+   }
    const card=node('article',null,(preview?'home-event-card fade-in':'card fade-in')+(event.pinned?' event-pinned':''));
    if(preview){
     const date=new Date(event.starts_at),badge=node('div',null,'home-event-date');
@@ -130,10 +186,29 @@
    body.appendChild(node('h3',event.title));body.appendChild(node('p',when(event),'note'));
    if(event.performer)body.appendChild(node('p',event.performer));
    if(!preview&&event.image_url){
-    const wrap=node('div',null,'event-thumb'),image=node('img');image.src=event.image_url;image.alt=event.image_alt;image.loading='lazy';
-    image.addEventListener('error',()=>wrap.remove());wrap.appendChild(image);card.appendChild(wrap);
+    const wrap=node('div',null,'event-thumb'),image=node('img'),sized=flyerSources(event.image_url);
+    image.alt=event.image_alt;image.loading='lazy';image.decoding='async';
+    if(sized){image.srcset=sized.srcset;image.sizes='220px';image.src=sized.src;}else image.src=event.image_url;
+    image.addEventListener('error',()=>{
+     if(sized&&image.dataset.fallback!=='1'){image.dataset.fallback='1';image.removeAttribute('srcset');image.src=event.image_url;}else wrap.remove();
+    });
+    wrap.appendChild(image);card.appendChild(wrap);
    }
-   if(!preview&&event.description){const description=node('p',event.description);description.style.whiteSpace='pre-wrap';body.appendChild(description);}
+   if(!preview&&event.description){
+    const description=node('p',event.description,'event-description');description.style.whiteSpace='pre-wrap';body.appendChild(description);
+    // Long descriptions start folded to a few lines so the list stays easy to scroll on a phone.
+    if(event.description.length>240){
+     description.className='event-description is-clamped';description.id=`event-description-${event.id}`;
+     const more=node('button','Read more','text-button event-more');more.type='button';
+     more.setAttribute('aria-expanded','false');more.setAttribute('aria-controls',description.id);
+     more.addEventListener('click',()=>{
+      const open=description.className.includes('is-clamped');
+      description.className=open?'event-description':'event-description is-clamped';
+      more.textContent=open?'Show less':'Read more';more.setAttribute('aria-expanded',String(open));
+     });
+     body.appendChild(more);
+    }
+   }
    if(event.admission)body.appendChild(node('p',event.admission,'badge'));
    if(!preview&&event.venue_area)body.appendChild(node('p',event.venue_area,'note'));
    if(registrationClosed(event)){
@@ -153,5 +228,5 @@
    card.appendChild(body);container.appendChild(card);
   });
  }
- root.MockingbirdPublicEvents={load:createLoader((...args)=>root.fetch(...args)),createLoader,normalizeFeed,safeUrl,safeFormspree,registrationClosed,registrationForm,when,render};
+ root.MockingbirdPublicEvents={load:createLoader((...args)=>root.fetch(...args)),createLoader,normalizeFeed,safeUrl,safeFormspree,registrationClosed,registrationForm,when,render,flyerSources,eventSchema};
 })(typeof window==='undefined'?globalThis:window);

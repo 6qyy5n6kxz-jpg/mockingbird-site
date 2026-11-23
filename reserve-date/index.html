@@ -3,10 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Reserve Your Date | Mockingbird</title>
-  <meta name="description" content="Reserve your date for a private event after confirmation from Mockingbird.">
-  <meta property="og:title" content="Reserve Your Date | Mockingbird">
-  <meta property="og:description" content="Use this page after availability is confirmed to submit your deposit.">
+  <title>Reserve Your Date | The Mockingbird on Mill Road</title>
+  <meta name="description" content="How to reserve a private event date at The Mockingbird on Mill Road: plan your event, we confirm the details, then sign and pay your deposit online.">
+  <link rel="canonical" href="https://themockingbirdonmillroad.com/reserve-date/">
+  <meta property="og:url" content="https://themockingbirdonmillroad.com/reserve-date/">
+  <meta name="robots" content="noindex">
+  <meta property="og:title" content="Reserve Your Date | The Mockingbird on Mill Road">
+  <meta property="og:description" content="Plan your event, we confirm the details, then you sign and pay your deposit online.">
   <meta property="og:image" content="https://themockingbirdonmillroad.com/assets/brand/og.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -28,7 +31,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,500..700,50&family=Inter:wght@400;500;600;700&display=swap">
-  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/styles.css?v=6">
   <link rel="stylesheet" href="../css/brand.css">
 </head>
 <body>
@@ -38,46 +41,21 @@
 
   <main id="main" class="section">
     <div class="container">
-      <p class="kicker">Reserve Date</p>
-      <h1>Reserve your date</h1>
-      <p class="lead">Use this page only after we’ve confirmed availability for your event date.</p>
+      <p class="kicker">Private events</p>
+      <h1>Reserving your date has moved</h1>
+      <p class="lead">You no longer pay a deposit on this page. Here’s how booking a private event works now.</p>
 
-      <div class="info-block" id="reserve-deposit-card">
-        <p class="kicker">Reservation deposit</p>
-        <h2>Reserve your date</h2>
-        <p><strong data-reserve-deposit="amount">$100 deposit</strong></p>
-        <p class="note">Remaining balance: <span data-reserve-deposit="balance">$150</span> due the day of your event.</p>
-        <p class="note">Deposit reserves your date after we confirm availability. Refundable if we cannot accommodate the confirmed date/time.</p>
-        <div class="inline-links" style="margin-top:12px;">
-          <a class="btn btn-primary" data-reserve-deposit="cta" href="https://link.clover.com/urlshortener/yhvkYs" target="_blank" rel="noopener noreferrer">Pay $100 deposit</a>
-          <a class="btn btn-secondary btn-small" data-nav="private-parties">Back to Private Parties</a>
-        </div>
+      <ol class="info-block" style="padding-left:1.4em;line-height:1.6;">
+        <li><strong>Plan and request your date.</strong> Use our planner to choose food, drinks and extras, see a preliminary estimate, and pick a date that’s open on the calendar.</li>
+        <li><strong>We confirm the details.</strong> We’ll reply to check availability, pricing and anything else your event needs.</li>
+        <li><strong>Sign and pay online.</strong> Once your date is confirmed, we’ll email you a private link to your event portal. That’s where you review and sign your agreement and pay your deposit to hold the date.</li>
+      </ol>
+
+      <div class="inline-links" style="margin-top:16px;">
+        <a class="btn btn-primary" href="../private-parties/estimate/">Plan your event</a>
+        <a class="btn btn-secondary" data-nav="private-parties">Private parties</a>
       </div>
-
-      <form id="reserve-date-form" data-subject="Reserve Date Confirmation" style="margin-top:20px;">
-        <p class="note">Pay on Clover first. Then send your details below. This email does not process payment.</p>
-        <label for="reserve-name">Name</label>
-        <input id="reserve-name" name="Name" placeholder="Full name" required>
-
-        <label for="reserve-email">Email</label>
-        <input id="reserve-email" name="Email" type="email" placeholder="you@example.com" required>
-
-        <label for="reserve-phone">Phone</label>
-        <input id="reserve-phone" name="Phone" type="tel" placeholder="419-504-4900">
-
-        <label for="reserve-date">Confirmed event date</label>
-        <input id="reserve-date" name="Confirmed event date" type="date" required>
-
-        <label for="reserve-guests">Estimated guest count</label>
-        <input id="reserve-guests" name="Estimated guest count" type="number" min="1" placeholder="40">
-
-        <label for="reserve-notes">Notes</label>
-        <textarea id="reserve-notes" name="Notes" placeholder="Timing, service style, or other details"></textarea>
-
-        <div class="inline-links" style="margin-top:12px;">
-          <button type="button" class="btn btn-primary" data-copy-form="reserve-date-form" data-send-email="true" data-mailto="mockingbirdevin@gmail.com">Send details</button>
-        </div>
-      </form>
+      <p class="note" style="margin-top:16px;">Already have a confirmed date? Use the portal link in your email from us, or call <a data-fill="phone-link">419-504-4900</a> and we’ll resend it.</p>
     </div>
   </main>
 
@@ -158,15 +136,6 @@
 
   <button class="back-to-top" aria-label="Back to top">↑</button>
 
-  <script src="../js/main.js"></script>
-  <script>
-    (async function() {
-      const [payments, site] = await Promise.all([
-        Mockingbird.fetchJSON('payments.json', {}),
-        Mockingbird.sitePromise
-      ]);
-      Mockingbird.renderReserveDateDeposit(payments, site);
-    })();
-  </script>
+  <script src="../js/main.js?v=4"></script>
 </body>
 </html>
