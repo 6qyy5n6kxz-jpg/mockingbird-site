@@ -14,9 +14,9 @@ How the per-guest prices on the private event estimate page (`js/private-menu-pr
 
 | Item | Type | Serving | Ingredient cost | New price | Old price | Food cost |
 |---|---|---|---|---|---|---|
-| Cheesy Potatoes | Side | ½ cup | $0.85 | $3.25 | $3.00 | 26.1% |
-| Sausage, Biscuits & Gravy | Brunch | 1 biscuit + ½ cup gravy | $0.88 | $3.25 | $3.50 | 27.0% |
-| French Toast Casserole | Brunch | 1 square (1/12 pan) + syrup | $1.62 | $6.00 | $1.25 | 27.0% |
+| Cheesy Potatoes | Side | ½ cup | $0.81 | $3.00 | $3.00 | 26.9% |
+| Sausage, Biscuits & Gravy | Brunch | 1 biscuit + ½ cup gravy | $0.79 | $3.00 | $3.50 | 26.2% |
+| French Toast Casserole | Brunch | 1 square (1/12 pan) + syrup | $1.58 | $6.00 | $1.25 | 26.3% |
 | Muffin Tin Omelets | Brunch | 2 mini omelets | $1.16 | $4.50 | $4.50 | 25.8% |
 | Muffins & Breakfast Breads | Brunch | 1 muffin or slice | $0.30 | $2.50 | $2.50 | 12.2% |
 | Seasonal Salad | Salad | 1½ cups | $1.14 | $4.25 | $3.50 | 26.8% |
@@ -24,31 +24,31 @@ How the per-guest prices on the private event estimate page (`js/private-menu-pr
 | Bruschetta | Appetizer | 2 pieces | $0.95 | $3.50 | $2.00 | 27.2% |
 | Pasta Salad | Side | ½ cup | $0.65 | $2.50 | $2.75 | 26.0% |
 | Cole Slaw | Side | ½ cup | $0.45 | $2.50 | $2.25 | 18.1% |
-| Baked Potato Bar | Main | 1 potato + toppings | $1.32 | $5.00 | $4.50 | 26.4% |
-| Macaroni & Cheese | Main | 1 cup | $0.83 | $3.50 | $3.50 | 23.7% |
+| Baked Potato Bar | Main | 1 potato + toppings | $1.26 | $4.75 | $4.50 | 26.5% |
+| Macaroni & Cheese | Main | 1 cup | $0.80 | $3.50 | $3.50 | 22.8% |
 | Chicken | Main | 5 oz cooked | $1.55 | $5.75 | $6.00 | 26.9% |
 | Pulled Pork | Main | 4 oz meat + bun + sauce | $2.04 | $7.50 | $5.00 | 27.2% |
 | Shredded Chicken | Main | 4½ oz meat + bun | $1.15 | $4.25 | $5.75 | 27.0% |
-| Meatballs | Main | 4 meatballs + sauce | $1.52 | $5.75 | $5.50 | 26.4% |
-| Lasagna | Main | 1 square (1/12 pan) | $1.69 | $6.25 | $6.50 | 27.0% |
-| Spaghetti & Meatballs | Main | 1 cup pasta + 3 meatballs | $1.88 | $7.00 | $5.50 | 26.9% |
-| Sloppy Joes | Main | 1 sandwich | $1.31 | $5.00 | $4.25 | 26.2% |
-| Mashed Potatoes | Side | ½ cup | $0.30 | $2.50 | $2.75 | 12.0% |
+| Meatballs | Main | 4 meatballs + sauce | $1.55 | $5.75 | $5.50 | 27.0% |
+| Lasagna | Main | 1 square (1/12 pan) | $1.70 | $6.25 | $6.50 | 27.2% |
+| Spaghetti & Meatballs | Main | 1 cup pasta + 3 meatballs | $1.92 | $7.25 | $5.50 | 26.5% |
+| Sloppy Joes | Main | 1 sandwich | $1.34 | $5.00 | $4.25 | 26.8% |
+| Mashed Potatoes | Side | ½ cup | $0.20 | $2.50 | $2.75 | 8.0% |
 | Brussels Sprouts | Side | 3 oz roasted | $0.76 | $3.00 | $3.75 | 25.5% |
-| Broccoli | Side | 3½ oz | $0.46 | $2.50 | $2.75 | 18.2% |
-| Green Beans | Side | 3½ oz | $0.53 | $2.50 | $2.75 | 21.3% |
-| Carrots | Side | 3½ oz | $0.35 | $2.50 | $2.50 | 13.9% |
+| Broccoli | Side | 3½ oz | $0.42 | $2.50 | $2.75 | 17.0% |
+| Green Beans | Side | 3½ oz | $0.50 | $2.50 | $2.75 | 20.0% |
+| Carrots | Side | 3½ oz | $0.32 | $2.50 | $2.50 | 12.6% |
 | Seasonal Vegetables | Side | 3½ oz | $0.62 | $2.50 | $3.25 | 25.0% |
 | Baked Beans | Side | ½ cup | $0.51 | $2.50 | $2.50 | 20.4% |
-| Potato Salad | Side | ½ cup | $0.48 | $2.50 | $2.75 | 19.2% |
-| Noodles | Side | ½ cup | $0.56 | $2.50 | $2.25 | 22.6% |
+| Potato Salad | Side | ½ cup | $0.41 | $2.50 | $2.75 | 16.2% |
+| Noodles | Side | ½ cup | $0.54 | $2.50 | $2.25 | 21.6% |
 | Hot Dogs | Main | 1 hot dog + bun | $0.79 | $3.50 | $3.00 | 22.6% |
 | Brats | Main | 1 brat + bun | $1.45 | $5.50 | $4.75 | 26.4% |
-| Burgers | Main | ⅓ lb burger + bun | $2.58 | $9.50 | $6.50 | 27.2% |
+| Burgers | Main | ⅓ lb burger + bun | $2.64 | $9.75 | $6.50 | 27.0% |
 | Chicken (picnic) | Main | 5 oz cooked | $1.55 | $5.75 | $6.00 | 26.9% |
-| Brisket | Main | 5 oz sliced | $3.70 | $13.75 | $12.00 | 26.9% |
+| Brisket | Main | 5 oz sliced | $6.52 | $24.00 | $12.00 | 27.1% |
 | Pork Chops | Main | 1 bone-in chop (8 oz) | $1.85 | $7.00 | $8.50 | 26.4% |
-| Steaks | Main | 8 oz sirloin | $4.67 | $17.25 | $16.00 | 27.0% |
+| Steaks | Main | 8 oz sirloin | $7.63 | $28.00 | $16.00 | 27.3% |
 
 ## Recipes
 
@@ -90,7 +90,7 @@ How the per-guest prices on the private event estimate page (`js/private-menu-pr
 
 ## Ingredient prices
 
-R = The Mockingbird's latest purchase in the Command Center (Sept–Nov 2026). E = estimate from typical NW Ohio grocery prices; replace with real purchase prices when you have them.
+R = The Mockingbird's latest purchase in the Command Center (Sept–Nov 2026). M = Meijer Oregon (1725 S Wheeling St, nearest Meijer to 43430) shelf price on Nov 22, 2026: ground beef is the 81/19 3 lb roll, brisket the Certified Angus Beef flat (the only brisket listed), sirloin Certified Angus Beef top sirloin, butter Meijer 1 lb sticks, russets the 5 lb bag. E = estimate from typical NW Ohio grocery prices; replace with real purchase prices when you have them.
 
 | Ingredient | Price | Source |
 |---|---|---|
@@ -123,10 +123,10 @@ R = The Mockingbird's latest purchase in the Command Center (Sept–Nov 2026). E
 | hashbrowns | $1.65/lb | E |
 | cream soup | $1.39/can | E |
 | sour cream | $0.143/oz | E |
-| butter | $4.49/lb | E |
+| butter | $2.49/lb | M |
 | breakfast sausage | $3.99/lb | E |
 | italian sausage | $4.49/lb | E |
-| ground beef | $5.49/lb | E |
+| ground beef | $5.66/lb | M |
 | french bread | $3.49/lb | E |
 | baking powder | $0.05/tbsp | E |
 | blueberries | $1.99/cup | E |
@@ -146,8 +146,8 @@ R = The Mockingbird's latest purchase in the Command Center (Sept–Nov 2026). E
 | olives | $1.99/can | E |
 | slaw mix | $0.142/oz | E |
 | mayo | $0.15/oz | E |
-| baking potato | $0.99/lb | E |
-| russet | $0.8/lb | E |
+| baking potato | $0.99/lb | M |
+| russet | $0.50/lb | M |
 | elbow | $1.39/lb | E |
 | lasagna noodles | $1.89/lb | E |
 | marinara | $0.104/oz | E |
@@ -165,9 +165,9 @@ R = The Mockingbird's latest purchase in the Command Center (Sept–Nov 2026). E
 | hot dog | $0.44/each | E |
 | brat | $1.1/each | E |
 | cheese slice | $0.25/each | E |
-| brisket | $5.49/lb | E |
+| brisket | $9.99/lb | M |
 | pork chop bonein | $3.49/lb | E |
-| sirloin | $8.99/lb | E |
+| sirloin | $14.99/lb | M |
 | seasoning | $1 | E |
 | chives | $1.99/bunch | E |
 | condiments | $0.1/serving | E |
